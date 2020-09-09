@@ -1,12 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getUser, postUser } = require('../controllers/user');
-
-// prettier-ignore
-router
-  .route('/create')
-  .post(postUser);
+const { getUser } = require('../controllers/user');
 
 // prettier-ignore
 router

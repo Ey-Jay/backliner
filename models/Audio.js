@@ -6,6 +6,8 @@ const AudioSchema = new Schema(
   {
     title: String,
     author: { type: ObjectId, ref: 'User' },
+    band: { type: ObjectId, ref: 'Band' },
+    project: { type: ObjectId, ref: 'Project' },
     url: String,
   },
   { timestamps: true }

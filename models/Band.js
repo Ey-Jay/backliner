@@ -9,6 +9,7 @@ const BandSchema = new Schema(
       maxlength: [40, 'Bandname limited to 40 characters'],
     },
     avatar: Number,
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
     members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     google_account: String,
     calendar_id: String,

@@ -8,6 +8,8 @@ const FileSchema = new Schema(
       maxlength: [60, 'Name limited to 60 characters'],
     },
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    band: { type: ObjectId, ref: 'Band' },
+    project: { type: ObjectId, ref: 'Project' },
     url: String,
   },
   { timestamps: true }

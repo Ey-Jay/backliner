@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import PrivateRoute from 'components/PrivateRoute';
 import IndexPage from 'pages/IndexPage';
 import SignInPage from 'pages/SignInPage';
 import DashboardPage from 'pages/DashboardPage';
@@ -15,9 +16,7 @@ function App() {
         <Route path="/signin">
           <SignInPage />
         </Route>
-        <Route path="/protected">
-          <DashboardPage />
-        </Route>
+        <PrivateRoute path="/protected" component={DashboardPage} />
       </Switch>
     </div>
   );

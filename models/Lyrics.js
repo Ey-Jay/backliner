@@ -6,6 +6,8 @@ const LyricsSchema = new Schema(
   {
     title: String,
     author: { type: ObjectId, ref: 'User' },
+    band: { type: ObjectId, ref: 'Band' },
+    project: { type: ObjectId, ref: 'Project' },
     content: String,
   },
   { timestamps: true }

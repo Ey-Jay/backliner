@@ -14,10 +14,6 @@ const ProjectSchema = new Schema(
       ref: 'Band',
       required: true,
     },
-    audios: [{ type: Schema.Types.ObjectId, ref: 'Audio' }],
-    videos: [{ type: Schema.Types.ObjectId, ref: 'Video' }],
-    lyrics: [{ type: Schema.Types.ObjectId, ref: 'Lyrics' }],
-    files: [{ type: Schema.Types.ObjectId, ref: 'File' }],
     active: Boolean,
   },
   { timestamps: true }

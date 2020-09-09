@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const connectDB = require('./dbinit');
 const checkIfAuthenticated = require('./middleware/auth');
-const getDevUserId = require('./middleware/auth');
+const getDevUserId = require('./middleware/devUser');
 const user = require('./routes/user');
 const errorHandler = require('./middleware/error');
 
@@ -17,8 +17,8 @@ connectDB();
 app.use(morgan('dev'));
 if (process.env.NODE_ENV === 'dev') app.use(cors());
 app.use(express.json());
-if (process.env.NODE_ENV === 'dev') app.use(checkIfAuthenticated);
-else app.use(getDevUserId);
+// if (process.env.NODE_ENV !== 'dev') app.use(checkIfAuthenticated);
+app.use(getDevUserId);
 app.use('/user', user);
 app.use(errorHandler);
 
