@@ -23,9 +23,11 @@ const checkIfAuthenticated = async (req, res, next) => {
       req.authToken = null;
     }
 
-    const { authToken } = req;
-    const userInfo = await admin.auth().verifyIdToken(authToken);
+    const userInfo = await admin.auth().verifyIdToken(req.authToken);
+
     req.authId = userInfo.uid;
+    req.userData = userInfo;
+
     return next();
   } catch (e) {
     console.log(e);
