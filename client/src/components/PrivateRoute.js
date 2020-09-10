@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+
+import { AuthContext } from 'context/AuthContext';
+import Spinner from 'components/Spinner';
 
 function PrivateRoute({ component: RouteComponent, ...rest }) {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, isLoading } = useContext(AuthContext);
 
   return (
     <Route
@@ -12,7 +14,7 @@ function PrivateRoute({ component: RouteComponent, ...rest }) {
         currentUser ? (
           <RouteComponent {...routeProps} />
         ) : (
-          <Redirect to="/signin" />
+          <>{isLoading ? <Spinner /> : <Redirect to="/signin" />}</>
         )
       }
     />
