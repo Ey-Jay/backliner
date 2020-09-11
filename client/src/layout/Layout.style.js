@@ -13,14 +13,16 @@ export const NavWrapper = styled.div`
 
 export const Content = styled.main`
   flex: 1;
-  padding: 35px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Header = styled.header`
   display: flex;
   width: 100%;
   align-items: center;
-  margin: 0 0 35px;
+  padding: 35px;
 
   h1 {
     flex: 1;
@@ -36,4 +38,9 @@ export const Header = styled.header`
     display: inline-flex;
     margin-left: 20px;
   }
+`;
+
+export const PageBody = styled.div`
+  flex: 1;
+  overflow: auto;
 `;

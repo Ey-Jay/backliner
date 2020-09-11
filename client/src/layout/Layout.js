@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import firebase from 'fb';
 import Navbar from 'components/Navbar';
 import RoundButton from 'components/RoundButton';
-import { FlexContainer, NavWrapper, Content, Header } from './Layout.style';
+import { FlexContainer, NavWrapper, Content, Header, PageBody } from './Layout.style';
 
 const Layout = ({ children, title }) => {
   const history = useHistory();
@@ -29,7 +29,9 @@ const Layout = ({ children, title }) => {
             <RoundButton icon="logoff" onClick={logoff} />
           </section>
         </Header>
+        <PageBody>
         {children}
+        </PageBody>
       </Content>
     </FlexContainer>
   );

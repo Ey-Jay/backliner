@@ -9,6 +9,7 @@ export const Controls = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 20px;
 
   & > * + * {
     margin-left: 5px;
@@ -46,7 +47,7 @@ export const ViewButton = styled.div`
 
 export const ListView = styled.ul`
   list-style: none;
-  margin: 0;
+  margin: 0 0 35px;
   padding: 0;
 
   & > li + li {
@@ -57,7 +58,7 @@ export const ListView = styled.ul`
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
-  background-color: grey;
+  background-color: rgba(247, 247, 250, 0.14);
   border-radius: 40px;
   height: 80px;
   overflow: hidden;
@@ -66,9 +67,9 @@ export const ListItem = styled.li`
 export const Dot = styled.div`
   width: 70px;
   height: 70px;
-  margin-left: 5px;
+  margin: 5px 15px 5px 5px;
   border-radius: 50%;
-  background-color: red;
+  background-color: #10D164;
 `;
 
 export const Details = styled.div`
@@ -80,10 +81,16 @@ export const Details = styled.div`
 
 export const ItemTitle = styled.h2`
   margin: 0;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
 `;
 
 export const Elements = styled.div`
   display: flex;
+
+  & > * + * {
+    margin-left: 20px;
+  }
 `;
 
 export const Type = styled.div`
@@ -91,14 +98,45 @@ export const Type = styled.div`
   align-items: center;
 `;
 
-export const Icon = styled.div``;
+export const Icon = styled.div`
+  height: 25px;
+  width: 25px;
+  background-color: #10D164;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0,0,0,0.8);
+
+  svg {
+    height: 15px;
+  }
+`;
 
 export const Amount = styled.p`
   margin: 0;
   padding: 0;
+  margin-left: 5px;
 `;
 
 export const ItemSettingsButton = styled.div`
-  width: 60px;
-  background-color: pink;
+  width: 40px;
+  height: 40px;
+  margin: 20px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba(0,0,0,0.14);
+  }
+
+  &:active {
+    transition: all 0.1s;
+    background-color: rgba(0,0,0,0.21);
+  }
 `;
