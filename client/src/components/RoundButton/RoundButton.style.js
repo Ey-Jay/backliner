@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  height: 45px;
-  width: 45px;
+  height: 60px;
+  width: 60px;
   background-color: rgba(247, 247, 250, 0.07);
   color: ${({ color, theme }) =>
     color === 'secondary' ? theme.secondary : 'inherit'};

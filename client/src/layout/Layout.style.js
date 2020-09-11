@@ -34,6 +34,6 @@ export const Header = styled.header`
 
   section > * {
     display: inline-flex;
-    margin-left: 15px;
+    margin-left: 20px;
   }
 `;

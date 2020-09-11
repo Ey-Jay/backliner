@@ -85,6 +85,6 @@ export const BottomButtons = styled.footer`
   justify-content: center;
 
   & > * + * {
-    margin-left: 10px;
+    margin-left: 20px;
   }
 `;

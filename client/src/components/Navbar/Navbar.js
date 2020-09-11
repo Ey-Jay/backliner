@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import firebase from 'fb';
+import { NavLink } from 'react-router-dom';
 
 import bandSrc from 'assets/alpen_fiesta.jpg';
 import memberSrc from 'assets/ospen_schneider.jpg';
@@ -18,14 +17,6 @@ import {
 import RoundButton from 'components/RoundButton';
 
 const Navbar = () => {
-  const history = useHistory();
-  const logoff = () =>
-    firebase
-      .auth()
-      .signOut()
-      .then(() => history.push('/signin'))
-      .catch((e) => console.error(e));
-
   return (
     <Container>
       <BandDisplay>
@@ -69,7 +60,6 @@ const Navbar = () => {
         <RoundButton icon="bell" color="secondary" />
         <RoundButton icon="moon" color="secondary" />
         <RoundButton icon="profile" color="secondary" />
-        <RoundButton icon="logoff" color="secondary" onClick={logoff} />
       </BottomButtons>
     </Container>
   );
