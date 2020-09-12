@@ -4,7 +4,6 @@ const User = require('../models/User');
 const getUser = async (req, res, next) => {
   try {
     const { authId, userData } = req;
-    // 5f565843f0b5220df874ce3b
 
     const user = await User.find(
       { auth_token: authId },
@@ -22,7 +21,7 @@ const getUser = async (req, res, next) => {
 
       res.json({
         success: true,
-        msg: `Create user with name ${newUser.name}`,
+        msg: `Created user with name ${newUser.name}`,
         data: newUser,
       });
     } else {
