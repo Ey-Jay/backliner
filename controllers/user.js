@@ -7,8 +7,10 @@ const getUser = async (req, res, next) => {
 
     const user = await User.find(
       { auth_token: authId },
-      'name avatar theme'
-    ).exec();
+      'name avatar theme bands'
+    )
+      .populate('bands')
+      .exec();
 
     if (R.isEmpty(user) || R.isNil(user)) {
       const newUser = await User.create({

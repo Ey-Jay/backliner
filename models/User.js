@@ -12,4 +12,11 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
+UserSchema.virtual('bands', {
+  ref: 'Band',
+  localField: '_id',
+  foreignField: 'members',
+  justOne: false,
+});
+
 module.exports = mongoose.model('User', UserSchema);
