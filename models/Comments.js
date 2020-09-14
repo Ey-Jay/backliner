@@ -8,7 +8,7 @@ const CommentSchema = new Schema(
       enum: ['Audio', 'Video', 'File', 'Lyrics', 'Project'],
     },
     parent_id: {
-      type: String,
+      type: Schema.Types.ObjectId,
       refPath: 'parent_type',
       required: true,
     },

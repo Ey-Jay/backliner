@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const connectDB = require('./dbinit');
 require('./models/Audio');
-const Band = require('./models/Band');
+require('./models/Band');
 require('./models/Comments');
 require('./models/File');
 require('./models/Lyrics');
@@ -25,17 +25,6 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 connectDB();
-
-// Band.create({
-//   name: 'The Puffy Jiggles',
-//   avatar: 1,
-//   owner: ObjectID('5f5f590cc53c3e15300c1ba7'),
-//   members: [
-//     ObjectID('5f5f590cc53c3e15300c1ba7'),
-//     ObjectID('5f5659cdf0b5220df874ce3c'),
-//   ],
-//   active: true,
-// });
 
 app.use(morgan('dev'));
 if (process.env.NODE_ENV === 'dev') app.use(cors());

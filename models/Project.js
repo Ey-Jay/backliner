@@ -9,6 +9,11 @@ const ProjectSchema = new Schema(
       maxlength: [40, 'Name limited to 40 characters'],
     },
     theme: String,
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     band: {
       type: Schema.Types.ObjectId,
       ref: 'Band',
