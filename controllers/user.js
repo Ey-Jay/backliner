@@ -13,6 +13,7 @@ const getUser = async (req, res, next) => {
       .exec();
 
     if (R.isEmpty(user) || R.isNil(user)) {
+      // User doesn't exist yet, sign them up & return data
       const newUser = await User.create({
         name: userData.name,
         theme: 'dark',
@@ -23,13 +24,14 @@ const getUser = async (req, res, next) => {
 
       res.json({
         success: true,
-        msg: `Created user with name ${newUser.name}`,
+        action: 'create',
         data: newUser,
       });
     } else {
+      // User exists, return data
       res.json({
         success: true,
-        msg: `Get data for user with name ${user.name}`,
+        action: 'get',
         data: user,
       });
     }
