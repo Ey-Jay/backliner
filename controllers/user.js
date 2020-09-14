@@ -10,7 +10,7 @@ const getUser = async (req, res, next) => {
       { auth_token: authId },
       'name avatar theme bands'
     )
-      .populate('bands', '_id name avatar')
+      .populate('bands', '_id name avatar owner')
       .exec();
 
     if (R.isEmpty(user) || R.isNil(user)) {
