@@ -9,7 +9,7 @@ const UserSchema = new Schema(
     auth_token: String,
     active: Boolean,
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
 
 UserSchema.virtual('bands', {
