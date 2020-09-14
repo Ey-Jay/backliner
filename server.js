@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const mongoose = require('mongoose');
 
 const connectDB = require('./dbinit');
 require('./models/Audio');
@@ -13,8 +12,6 @@ require('./models/Lyrics');
 require('./models/Project');
 require('./models/User');
 require('./models/Video');
-
-const ObjectID = mongoose.Types.ObjectId;
 
 const checkIfAuthenticated = require('./middleware/auth');
 const getDevUserId = require('./middleware/devUser');
