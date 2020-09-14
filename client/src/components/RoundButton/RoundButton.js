@@ -1,6 +1,15 @@
 import React from 'react';
 
-import { Bell, Profile, Moon, Search, Plus, LogOff } from './Icons.style';
+import {
+  Bell,
+  Profile,
+  Moon,
+  Search,
+  Plus,
+  LogOff,
+  ChatIcon,
+  BackArrowIcon,
+} from './Icons.style';
 import { Button } from './RoundButton.style';
 
 const RoundButton = ({ icon, color, onClick }) => {
@@ -18,6 +27,10 @@ const RoundButton = ({ icon, color, onClick }) => {
         return <Plus />;
       case 'logoff':
         return <LogOff />;
+      case 'chat':
+        return <ChatIcon />;
+      case 'backarrow':
+        return <BackArrowIcon />;
       default:
         return '🍑';
     }
