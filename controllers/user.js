@@ -5,7 +5,7 @@ const getUser = async (req, res, next) => {
   try {
     const { authId, userData } = req;
 
-    const user = await User.find(
+    const user = await User.findOne(
       { auth_token: authId },
       'name avatar theme bands'
     )

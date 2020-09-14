@@ -9,7 +9,7 @@ const CommentSchema = new Schema(
     },
     parent_id: {
       type: String,
-      ref: this.parent_type,
+      refPath: 'parent_type',
       required: true,
     },
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
