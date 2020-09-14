@@ -12,8 +12,6 @@ const getUser = async (req, res, next) => {
       .populate('bands')
       .exec();
 
-    console.log(user);
-
     if (R.isEmpty(user) || R.isNil(user)) {
       const newUser = await User.create({
         name: userData.name,
