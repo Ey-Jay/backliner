@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import io from 'socket.io-client';
 import { isEmpty } from 'ramda';
 
 import RoundButton from 'components/RoundButton';
@@ -23,9 +24,20 @@ const chatMessages = [
   { message: 'nm and you?', isMine: false },
 ];
 
+const socket = io('http://localhost:3001/');
+
 const ChatBox = ({ isOpen, setIsOpen }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState(chatMessages);
+
+  const messagesRef = useRef(messages);
+  messagesRef.current = messages;
+
+  useEffect(() => {
+    socket.on('new msg', (msg) =>
+      setMessages([...messagesRef.current, { message: msg }])
+    );
+  }, []);
 
   const textBox = useRef();
 
@@ -37,6 +49,7 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
         e.preventDefault();
 
         if (!isEmpty(message.trim())) {
+          socket.emit('chat message', message);
           setMessages([...messages, { message, isMine: true }]);
         }
         e.currentTarget.innerText = '';
@@ -47,6 +60,7 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
 
   const buttonClickHandler = () => {
     if (!isEmpty(message.trim())) {
+      socket.emit('chat message', message);
       setMessages([...messages, { message, isMine: true }]);
     }
     textBox.current.innerText = '';
