@@ -10,7 +10,7 @@ const getUser = async (req, res, next) => {
       { auth_token: authId },
       'name avatar theme bands'
     )
-      .populate('bands', '_id name avatar owner')
+      .populate('bands', 'name avatar owner')
       .exec();
 
     if (R.isEmpty(user) || R.isNil(user)) {
@@ -23,6 +23,7 @@ const getUser = async (req, res, next) => {
         active: true,
       });
 
+      res.status(200);
       res.json({
         success: true,
         action: 'create',
@@ -30,6 +31,7 @@ const getUser = async (req, res, next) => {
       });
     } else {
       // User exists, return data
+      res.status(200);
       res.json({
         success: true,
         action: 'get',

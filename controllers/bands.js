@@ -8,7 +8,7 @@ const getBands = async (req, res, next) => {
 
     const userId = await getUserIdFromAuth(authId);
 
-    const bands = await Band.find({ members: userId }, '_id name avatar owner');
+    const bands = await Band.find({ members: userId }, 'name avatar owner');
 
     res.json({
       success: true,
@@ -27,10 +27,7 @@ const getBandById = async (req, res, next) => {
 
     const userId = await getUserIdFromAuth(authId);
 
-    const band = await Band.findOne(
-      { _id: id },
-      '_id name members avatar owner'
-    );
+    const band = await Band.findOne({ _id: id }, 'name members avatar owner');
 
     if (!R.isEmpty(band) && !R.isNil(band) && !band.members.includes(userId))
       res.json({
