@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from 'context/AuthContext';
 
+import { ReactComponent as GoogleSignInIcon } from 'assets/svg/GoogleSignInIcon.svg';
+import { Container, SignInButton } from './SignInPage.style';
+
 import firebase from 'fb';
 
 const SignInPage = () => {
@@ -18,10 +21,14 @@ const SignInPage = () => {
   if (currentUser) return <Redirect to="/projects" />;
 
   return (
-    <>
-      <h1>Sign In</h1>
-      <button onClick={onClickHandler}>Google</button>
-    </>
+    <Container>
+      <div>
+        <h1>Welcome to Backliner</h1>
+        <SignInButton onClick={onClickHandler}>
+          <GoogleSignInIcon /> Sign in with Google
+        </SignInButton>
+      </div>
+    </Container>
   );
 };
 
