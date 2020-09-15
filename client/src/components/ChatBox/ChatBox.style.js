@@ -9,11 +9,17 @@ export const ChatHeader = styled.div`
   }
 `;
 
+//? style or remove scrollbar?
+
 export const ChatBody = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
   flex: 1;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `;
 
 export const ChatItem = styled.li`
