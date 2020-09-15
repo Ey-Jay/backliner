@@ -4,6 +4,7 @@ export const FlexContainer = styled.div`
   display: flex;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 `;
 
 export const NavWrapper = styled.div`
@@ -40,7 +41,25 @@ export const Header = styled.header`
   }
 `;
 
+/* 
+  TODO: look into scrollbar again.
+  * currently it is hidden by setting its width to 0
+*/
+
 export const PageBody = styled.div`
   flex: 1;
   overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+`;
+
+export const ChatWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 0 15px 15px;
+  background-color: ${({ theme }) => theme.backgroundColorDark};
+  margin-right: ${({ isOpen }) => (isOpen ? 'initial' : '-300px')};
+  transition: all 0.4s;
 `;

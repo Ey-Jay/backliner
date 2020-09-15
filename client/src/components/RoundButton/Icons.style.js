@@ -191,4 +191,115 @@ const LogOff = styled.i`
   }
 `;
 
-export { Bell, Profile, Moon, Search, Plus, LogOff };
+const ChatIcon = styled.i`
+  & {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 16px;
+    border: 2px solid;
+    border-bottom: 0;
+    box-shadow: -6px 8px 0 -6px, 6px 8px 0 -6px;
+  }
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 8px;
+  }
+  &::before {
+    border: 2px solid;
+    border-top-color: transparent;
+    border-bottom-left-radius: 20px;
+    right: 4px;
+    bottom: -6px;
+    height: 6px;
+  }
+  &::after {
+    height: 2px;
+    background: currentColor;
+    box-shadow: 0 4px 0 0;
+    left: 4px;
+    top: 4px;
+  }
+`;
+
+const BackArrowIcon = styled.i`
+  & {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    box-shadow: inset 0 0 0 2px;
+    width: 24px;
+    height: 6px;
+  }
+  &::after {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    transform: rotate(45deg);
+    right: 0;
+    bottom: -2px;
+  }
+`;
+
+const AirplaneIcon = styled.i`
+  & {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 18px;
+    height: 18px;
+    transform: scale(var(--ggs, 1));
+    background: linear-gradient(to left, currentColor 22px, transparent 0)
+        no-repeat center/16px 2px,
+      radial-gradient(circle, currentColor 60%, transparent 40%) no-repeat right
+        center/2px 2px;
+  }
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    width: 10px;
+    height: 8px;
+    border-right: 4px solid;
+  }
+  &::before {
+    border-top-right-radius: 2px;
+    top: 0;
+    transform: perspective(10px) rotateX(10deg) skewX(30deg);
+    box-shadow: -4px 3px 0 -2px;
+  }
+  &::after {
+    border-bottom-right-radius: 2px;
+    bottom: 0;
+    transform: perspective(10px) rotateX(-10deg) skewX(-30deg);
+    box-shadow: -4px -3px 0 -2px;
+  }
+`;
+
+export {
+  Bell,
+  Profile,
+  Moon,
+  Search,
+  Plus,
+  LogOff,
+  ChatIcon,
+  BackArrowIcon,
+  AirplaneIcon,
+};
