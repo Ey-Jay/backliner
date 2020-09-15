@@ -25,7 +25,8 @@
     "firebase-admin": "^9.1.1",
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
-    "ramda": "^0.27.1"
+    "ramda": "^0.27.1",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

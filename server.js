@@ -22,6 +22,9 @@ const errorHandler = require('./middleware/error');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const server = require('http').createServer(app);
+require('./socket')(server);
+
 connectDB();
 
 app.use(morgan('dev'));
@@ -33,4 +36,4 @@ app.use('/user', user);
 app.use('/bands', bands);
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`🤖 Server running on port ${PORT} 🤖`));
+server.listen(PORT, () => console.log(`🤖 Server running on port ${PORT} 🤖`));
