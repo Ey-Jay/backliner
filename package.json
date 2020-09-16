@@ -1,5 +1,5 @@
 {
-  "name": "final-project",
+  "name": "backliner",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MrKnb/FinalProject.git"
+    "url": "git+https://github.com/Ey-Jay/backliner.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MrKnb/FinalProject/issues"
+    "url": "https://github.com/Ey-Jay/backliner/issues"
   },
-  "homepage": "https://github.com/MrKnb/FinalProject#readme",
+  "homepage": "https://github.com/Ey-Jay/backliner/issues#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
