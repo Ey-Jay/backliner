@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { getUser, updateUser, setUserInactive } = require('../controllers/user');
-const { getBands, getBandById } = require('../controllers/bands');
+const { getUser, updateUser, setUserInactive } = require('../controllers');
+const { getBands } = require('../controllers/bands');
+const { getBandById } = require('../controllers/bid');
 const unused = require('../controllers/unused');
 
 // prettier-ignore
