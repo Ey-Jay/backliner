@@ -10,7 +10,11 @@ const getUser = async (req, res, next) => {
       { auth_token: authId },
       'name avatar theme bands'
     )
-      .populate('bands', 'name avatar owner')
+      .populate({
+        path: 'bands',
+        select: 'name avatar owner members',
+        populate: { path: 'members', select: 'name avatar theme' },
+      })
       .exec();
 
     if (R.isEmpty(user) || R.isNil(user)) {

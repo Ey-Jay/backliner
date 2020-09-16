@@ -1,15 +1,21 @@
-const R = require('ramda');
 const Band = require('../models/Band');
 const getUserIdFromAuth = require('../utilities/getUserIdFromAuth');
+const isUserInBand = require('../utilities/isUserInBand');
 
 const getBands = async (req, res, next) => {
   try {
     const { authId } = req;
 
     const userId = await getUserIdFromAuth(authId);
+    const bands = await Band.find(
+      { members: userId },
+      'name avatar members owner'
+    )
+      .populate('owner', 'name avatar active')
+      .populate('members', 'name avatar active')
+      .exec();
 
-    const bands = await Band.find({ members: userId }, 'name avatar owner');
-
+    res.status(200);
     res.json({
       success: true,
       action: 'get',
@@ -23,13 +29,22 @@ const getBands = async (req, res, next) => {
 const getBandById = async (req, res, next) => {
   try {
     const { authId } = req;
-    const { id } = req.params;
+    const { bid } = req.params;
 
-    const userId = await getUserIdFromAuth(authId);
+    const band = await Band.findOne({ _id: bid }, 'name members avatar owner')
+      .populate('owner', 'name avatar active')
+      .populate('members', 'name avatar active')
+      .exec();
 
-    const band = await Band.findOne({ _id: id }, 'name members avatar owner');
-
-    if (!R.isEmpty(band) && !R.isNil(band) && !band.members.includes(userId))
+    if (isUserInBand(authId, bid)) {
+      res.status(200);
+      res.json({
+        success: true,
+        action: 'get',
+        data: band,
+      });
+    } else {
+      res.status(401);
       res.json({
         success: false,
         action: 'get',
@@ -37,12 +52,7 @@ const getBandById = async (req, res, next) => {
         error: true,
         message: 'Permission denied',
       });
-    else
-      res.json({
-        success: true,
-        action: 'get',
-        data: band,
-      });
+    }
   } catch (e) {
     next(e);
   }

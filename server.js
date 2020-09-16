@@ -15,8 +15,7 @@ require('./models/Video');
 
 const checkIfAuthenticated = require('./middleware/auth');
 const getDevUserId = require('./middleware/devUser');
-const user = require('./routes/user');
-const bands = require('./routes/bands');
+const routes = require('./routes');
 const errorHandler = require('./middleware/error');
 
 const app = express();
@@ -32,8 +31,7 @@ if (process.env.NODE_ENV === 'dev') app.use(cors());
 app.use(express.json());
 if (process.env.NODE_ENV === 'dev') app.use(getDevUserId);
 else app.use(checkIfAuthenticated);
-app.use('/user', user);
-app.use('/bands', bands);
+app.use('/', routes);
 app.use(errorHandler);
 
 server.listen(PORT, () => console.log(`🤖 Server running on port ${PORT} 🤖`));

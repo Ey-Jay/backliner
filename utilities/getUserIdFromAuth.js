@@ -1,4 +1,3 @@
-const R = require('ramda');
 const User = require('../models/User');
 
 const getUserIdFromAuth = async (authId) => {
