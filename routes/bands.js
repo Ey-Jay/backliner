@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getBands } = require('../controllers/bands');
+const { getBands, createBand } = require('../controllers/bands');
 const { getBandById } = require('../controllers/bands/bid');
 const unused = require('../controllers/unused');
 
@@ -9,7 +9,7 @@ const unused = require('../controllers/unused');
 router
   .route('/')
   .get(getBands)
-  .post()
+  .post(createBand)
   .put(unused)
   .delete(unused);
 

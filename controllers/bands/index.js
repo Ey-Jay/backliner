@@ -1,5 +1,9 @@
+const mongoose = require('mongoose');
+
 const Band = require('../../models/Band');
 const getUserIdFromAuth = require('../../utilities/getUserIdFromAuth');
+
+const ObjectID = mongoose.Types.ObjectId;
 
 const getBands = async (req, res, next) => {
   try {
@@ -25,4 +29,42 @@ const getBands = async (req, res, next) => {
   }
 };
 
-module.exports = { getBands };
+const createBand = async (req, res, next) => {
+  try {
+    const { authId } = req;
+    const body = req.body;
+
+    const userId = await getUserIdFromAuth(authId);
+    const newBand = await Band.create({
+      name: body.name || 'Untitled Band',
+      avatar: body.avatar || 1,
+      owner: ObjectID(userId),
+      members: [ObjectID(userId)],
+      google_account: null,
+      calendar_id: null,
+      dropbox_account: null,
+      soundcloud_account: null,
+      active: true,
+    });
+
+    await newBand.populate('owner', 'name avatar active').execPopulate();
+    await newBand.populate('members', 'name avatar active').execPopulate();
+
+    res.status(200);
+    res.json({
+      success: true,
+      action: 'create',
+      data: {
+        name: newBand.name,
+        avatar: newBand.avatar,
+        owner: newBand.owner,
+        members: newBand.members,
+        active: newBand.active,
+      },
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { getBands, createBand };
