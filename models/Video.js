@@ -11,6 +11,7 @@ const VideoSchema = new Schema(
     band: { type: Schema.Types.ObjectId, ref: 'Band' },
     project: { type: Schema.Types.ObjectId, ref: 'Project' },
     url: String,
+    active: Boolean,
   },
   { timestamps: true }
 );
