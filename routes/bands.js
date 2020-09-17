@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const { getBands, createBand } = require('../controllers/bands');
-const { getBandById, updateBand } = require('../controllers/bands/bid');
+const {
+  getBandById,
+  updateBand,
+  setBandInactive,
+} = require('../controllers/bands/bid');
 const unused = require('../controllers/unused');
 
 // prettier-ignore
@@ -19,7 +23,7 @@ router
   .get(getBandById)
   .post(unused)
   .put(updateBand)
-  .delete();
+  .delete(setBandInactive);
 
 // prettier-ignore
 router
