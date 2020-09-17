@@ -50,16 +50,19 @@ const createBand = async (req, res, next) => {
     await newBand.populate('owner', 'name avatar active').execPopulate();
     await newBand.populate('members', 'name avatar active').execPopulate();
 
+    const { _id, name, avatar, owner, members, active } = newBand;
+
     res.status(200);
     res.json({
       success: true,
       action: 'create',
       data: {
-        name: newBand.name,
-        avatar: newBand.avatar,
-        owner: newBand.owner,
-        members: newBand.members,
-        active: newBand.active,
+        _id,
+        name,
+        avatar,
+        owner,
+        members,
+        active,
       },
     });
   } catch (e) {
