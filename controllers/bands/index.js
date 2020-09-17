@@ -1,5 +1,5 @@
-const Band = require('../models/Band');
-const getUserIdFromAuth = require('../utilities/getUserIdFromAuth');
+const Band = require('../../models/Band');
+const getUserIdFromAuth = require('../../utilities/getUserIdFromAuth');
 
 const getBands = async (req, res, next) => {
   try {

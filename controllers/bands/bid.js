@@ -1,5 +1,5 @@
-const Band = require('../models/Band');
-const isUserInBand = require('../utilities/isUserInBand');
+const Band = require('../../models/Band');
+const isUserInBand = require('../../utilities/isUserInBand');
 
 const getBandById = async (req, res, next) => {
   try {

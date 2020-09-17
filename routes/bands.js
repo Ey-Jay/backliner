@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { getBands } = require('../controllers/bands');
-const { getBandById } = require('../controllers/bid');
+const { getBandById } = require('../controllers/bands/bid');
 const unused = require('../controllers/unused');
 
 // prettier-ignore

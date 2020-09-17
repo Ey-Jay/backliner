@@ -7,7 +7,7 @@ const unused = require('../controllers/unused');
 router
   .route('/:itemtype')
   .get()
-  .post()
+  .post(unused)
   .put(unused)
   .delete(unused);
 

@@ -8,7 +8,7 @@ const getUser = async (req, res, next) => {
 
     const user = await User.findOne(
       { auth_token: authId },
-      'name avatar theme bands'
+      'name avatar theme bands active'
     )
       .populate({
         path: 'bands',
