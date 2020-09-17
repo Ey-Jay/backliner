@@ -73,14 +73,14 @@ const updateItemById = async (req, res, next) => {
 
       res.json({
         success: true,
-        action: 'get',
+        action: 'update',
         data: updatedDocument,
       });
     } else {
       res.status(401);
       res.json({
         success: false,
-        action: 'get',
+        action: 'update',
         data: null,
         error: true,
         message: 'Not authorized',
@@ -91,4 +91,43 @@ const updateItemById = async (req, res, next) => {
   }
 };
 
-module.exports = { getItemById, updateItemById };
+const setItemInactive = async (req, res, next) => {
+  try {
+    const { authId } = req;
+    const { iid } = req.params;
+    const queries = [];
+
+    queries.push(Project.findById(iid).exec());
+    queries.push(Audio.findById(iid).exec());
+    queries.push(Video.findById(iid).exec());
+    queries.push(File.findById(iid).exec());
+    queries.push(Lyrics.findById(iid).exec());
+
+    const results = await Promise.all(queries);
+    const cleanResult = results.find((item) => !isNil(item) && !isEmpty(item));
+
+    if (isUserInBand(authId, cleanResult.band)) {
+      cleanResult.active = false;
+      const updatedDocument = await cleanResult.save();
+
+      res.json({
+        success: true,
+        action: 'delete',
+        data: updatedDocument,
+      });
+    } else {
+      res.status(401);
+      res.json({
+        success: false,
+        action: 'delete',
+        data: null,
+        error: true,
+        message: 'Not authorized',
+      });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { getItemById, updateItemById, setItemInactive };

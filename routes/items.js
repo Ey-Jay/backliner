@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 
 const { getItemsForUser } = require('../controllers/items');
-const { getItemById, updateItemById } = require('../controllers/items/iid');
+const {
+  getItemById,
+  updateItemById,
+  setItemInactive,
+} = require('../controllers/items/iid');
 const unused = require('../controllers/unused');
 
 // prettier-ignore
@@ -19,7 +23,7 @@ router
   .get(getItemById)
   .post(unused)
   .put(updateItemById)
-  .delete();
+  .delete(setItemInactive);
 
 // prettier-ignore
 router
