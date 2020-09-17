@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 
 const { getItemsForUser } = require('../controllers/items');
+const { getItemById } = require('../controllers/items/iid');
 const unused = require('../controllers/unused');
 
 // prettier-ignore
@@ -15,7 +16,7 @@ router
 // prettier-ignore
 router
   .route('/:iid')
-  .get()
+  .get(getItemById)
   .post(unused)
   .put()
   .delete();

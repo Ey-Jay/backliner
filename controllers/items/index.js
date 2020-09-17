@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const Project = require('../../models/Project');
 const Audio = require('../../models/Audio');
 const Video = require('../../models/Video');
@@ -27,7 +25,7 @@ const getItemsForUser = async (req, res, next) => {
           .exec();
 
         res.json({
-          success: false,
+          success: true,
           action: 'get',
           data: projects,
         });
@@ -44,7 +42,7 @@ const getItemsForUser = async (req, res, next) => {
           .exec();
 
         res.json({
-          success: false,
+          success: true,
           action: 'get',
           data: audios,
         });
@@ -61,7 +59,7 @@ const getItemsForUser = async (req, res, next) => {
           .exec();
 
         res.json({
-          success: false,
+          success: true,
           action: 'get',
           data: videos,
         });
@@ -78,7 +76,7 @@ const getItemsForUser = async (req, res, next) => {
           .exec();
 
         res.json({
-          success: false,
+          success: true,
           action: 'get',
           data: lyrics,
         });
@@ -95,7 +93,7 @@ const getItemsForUser = async (req, res, next) => {
           .exec();
 
         res.json({
-          success: false,
+          success: true,
           action: 'get',
           data: files,
         });
