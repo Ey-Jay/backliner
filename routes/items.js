@@ -1,19 +1,20 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
+const { getItemsForUser } = require('../controllers/items');
 const unused = require('../controllers/unused');
 
 // prettier-ignore
 router
-  .route('/:itemtype')
-  .get()
+  .route('/')
+  .get(getItemsForUser)
   .post(unused)
   .put(unused)
   .delete(unused);
 
 // prettier-ignore
 router
-  .route('/:itemtype/:iid')
+  .route('/:iid')
   .get()
   .post(unused)
   .put()
@@ -21,7 +22,7 @@ router
 
 // prettier-ignore
 router
-  .route('/:itemtype/:iid/comments')
+  .route('/:iid/comments')
   .get()
   .post()
   .put(unused)
@@ -29,7 +30,7 @@ router
 
 // prettier-ignore
 router
-  .route('/:itemtype/:iid/comments/:cid')
+  .route('/:iid/comments/:cid')
   .get()
   .post(unused)
   .put()
