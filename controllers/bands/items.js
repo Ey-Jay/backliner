@@ -19,7 +19,7 @@ const getItemsByBand = async (req, res, next) => {
         case 'projects':
           const projects = await Project.find(
             { band: bid },
-            'name theme author active'
+            'name theme author active createdAt updatedAt'
           )
             .populate('author', 'name avatar active')
             .exec();
@@ -36,7 +36,7 @@ const getItemsByBand = async (req, res, next) => {
         case 'audio':
           const audios = await Audio.find(
             { band: bid },
-            'title author project url'
+            'title author project url createdAt updatedAt'
           )
             .populate('author', 'name avatar active')
             .populate('project', 'name theme active')
@@ -54,7 +54,7 @@ const getItemsByBand = async (req, res, next) => {
         case 'video':
           const videos = await Video.find(
             { band: bid },
-            'title author project url'
+            'title author project url createdAt updatedAt'
           )
             .populate('author', 'name avatar active')
             .populate('project', 'name theme active')
@@ -72,7 +72,7 @@ const getItemsByBand = async (req, res, next) => {
         case 'files':
           const files = await File.find(
             { band: bid },
-            'title author project url'
+            'title author project url createdAt updatedAt'
           )
             .populate('author', 'name avatar active')
             .populate('project', 'name theme active')
@@ -90,7 +90,7 @@ const getItemsByBand = async (req, res, next) => {
         case 'lyrics':
           const lyrics = await Lyrics.find(
             { band: bid },
-            'title author project url'
+            'title author project url createdAt updatedAt'
           )
             .populate('author', 'name avatar active')
             .populate('project', 'name theme active')
