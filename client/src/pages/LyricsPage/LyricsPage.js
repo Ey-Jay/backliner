@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Layout from 'layout';
+
 const LyricsPage = () => {
-  return <div>LyricsPage</div>;
+  return <Layout title="Lyrics"></Layout>;
 };
 
 export default LyricsPage;
