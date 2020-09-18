@@ -9,7 +9,6 @@ export const EditorContainer = styled.div`
   min-height: 100%;
   margin: 0 auto;
   padding: 15px;
-  width: 90%;
   max-width: 850px;
   border: 1px solid ${({ theme }) => theme.color};
   cursor: text;
@@ -31,4 +30,12 @@ export const Control = styled.button`
   padding: 5px;
   border: none;
   cursor: pointer;
+`;
+
+export const SaveButton = styled.button`
+  margin-top: 10px;
+  background-color: transparent;
+  padding: 10px;
+  color: ${({ theme }) => theme.color};
+  border: 1px solid ${({ theme }) => theme.color};
 `;
