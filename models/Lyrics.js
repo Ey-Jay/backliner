@@ -9,6 +9,7 @@ const LyricsSchema = new Schema(
     band: { type: ObjectId, ref: 'Band' },
     project: { type: ObjectId, ref: 'Project' },
     content: String,
+    active: Boolean,
   },
   { timestamps: true }
 );

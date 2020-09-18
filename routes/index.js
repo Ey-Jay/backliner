@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getUser, updateUser, setUserInactive } = require('../controllers/user');
+const { getUser, updateUser, setUserInactive } = require('../controllers');
 
 // prettier-ignore
 router
@@ -10,5 +10,8 @@ router
   .post(getUser)
   .put(updateUser)
   .delete(setUserInactive);
+
+router.use('/bands', require('./bands'));
+router.use('/:itemtype', require('./items'));
 
 module.exports = router;

@@ -8,9 +8,13 @@ const getUser = async (req, res, next) => {
 
     const user = await User.findOne(
       { auth_token: authId },
-      'name avatar theme bands'
+      'name avatar theme bands active'
     )
-      .populate('bands', 'name avatar owner')
+      .populate({
+        path: 'bands',
+        select: 'name avatar owner members',
+        populate: { path: 'members', select: 'name avatar theme' },
+      })
       .exec();
 
     if (R.isEmpty(user) || R.isNil(user)) {
