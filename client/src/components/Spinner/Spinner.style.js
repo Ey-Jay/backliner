@@ -12,3 +12,9 @@ export const SpinnerContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const PageSpinnerContainer = styled.div`
+  height: calc(100% - 130px);
+  display: flex;
+  align-items: center;
+  justify-content: center;`;

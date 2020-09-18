@@ -10,9 +10,8 @@ const useGetAPI = (path) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    firebase
-      .auth()
-      .currentUser?.getIdToken()
+    firebase.auth()
+      .currentUser.getIdToken()
       .then((token) => {
         axios
           .get(`${apiUrl}${path}`, {

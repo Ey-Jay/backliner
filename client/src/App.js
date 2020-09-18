@@ -10,7 +10,6 @@ import AudioPage from 'pages/AudioPage';
 import VideoPage from 'pages/VideoPage';
 import FilesPage from 'pages/FilesPage';
 import CalendarPage from 'pages/CalendarPage';
-import ChatPage from 'pages/ChatPage';
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
       <PrivateRoute path="/video" component={VideoPage} />
       <PrivateRoute path="/files" component={FilesPage} />
       <PrivateRoute path="/calendar" component={CalendarPage} />
-      <PrivateRoute path="/chat" component={ChatPage} />
       <Redirect to="/signin" />
     </Switch>
   );
