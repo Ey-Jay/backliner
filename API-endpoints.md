@@ -60,7 +60,7 @@ Update properties on the user document.
 
 **Expected Body:**
 
-```json
+```js
 {
   "name": "Value", // expects a string
   "theme": "dark", // expects "light" or "dark"
@@ -161,7 +161,7 @@ Create a new band, set the current user as its owner.
 
 **Expected Body:**
 
-```json
+```js
 {
   "name": "Value", // name of the new band
   "avatar": 42 // expects a number
@@ -251,7 +251,7 @@ Update properties of a band.
 
 **Expected Body:**
 
-```json
+```js
 {
   "name": "Value", // name of the new band
   "avatar": 42, // expects number
@@ -387,7 +387,7 @@ Post a new item of type `:itemtype` that belongs to the band with id `:bid`.
 
 **Expected Body:**
 
-```json
+```js
 // for projects
 {
   "name": "Value",
@@ -547,7 +547,7 @@ Update properties for item of type `:itemtype` with id `:iid`.
 
 **Expected Body:**
 
-```json
+```js
 // for projects
 {
   "name": "Value",
