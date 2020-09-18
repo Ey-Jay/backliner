@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import axios from 'axios';
+import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 import Layout from 'layout';
@@ -8,6 +9,7 @@ import {
   EditorContainer,
   EditorControls,
   Control,
+  SaveButton,
 } from './LyricsEditor.style';
 import { ReactComponent as ItalicIcon } from 'assets/svg/Lyrics_Editor_Icons/Italic.svg';
 import { ReactComponent as UnderlineIcon } from 'assets/svg/Lyrics_Editor_Icons/Underline.svg';
@@ -35,6 +37,19 @@ const LyricsEditor = () => {
       return 'handled';
     }
     return 'not-handled';
+  };
+
+  const saveDocument = () => {
+    const document = JSON.stringify(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    axios
+      .post('http://localhost:3001/api/bands/5f5f5da1a3a332170b4305f5/lyrics', {
+        title: "Erick's First Lyrics Test",
+        content: document,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
   };
 
   const editorRef = useRef();
@@ -124,6 +139,7 @@ const LyricsEditor = () => {
             placeholder="May the creative juices start flowing..."
           />
         </EditorContainer>
+        <SaveButton onClick={saveDocument}>Save</SaveButton>
       </Container>
     </Layout>
   );
