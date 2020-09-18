@@ -8,6 +8,15 @@ The return data will always have properties for `success`, `action` and `data`. 
 
 All properties for request bodies are always optional, you don't need to provide everything with every call.
 
+## Table of Contents
+
+* [/api/](#api)
+* [/api/bands](#apibands)
+* [/api/bands/:bid](#apibandsbid)
+* [/api/bands/:bid/:itemtype](#apibandsbiditemtype)
+* [/api/:itemtype](#apiitemtype)
+* [/api/:itemtype/:iid](#apiitemtypeiid)
+
 ## `/api/`
 
 ### GET / POST
