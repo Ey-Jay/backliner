@@ -5,6 +5,7 @@ import PrivateRoute from 'components/PrivateRoute';
 import SignInPage from 'pages/SignInPage';
 import ProjectsPage from 'pages/ProjectsPage';
 import LyricsPage from 'pages/LyricsPage';
+import LyricsEditor from 'pages/LyricsEditor';
 import AudioPage from 'pages/AudioPage';
 import VideoPage from 'pages/VideoPage';
 import FilesPage from 'pages/FilesPage';
@@ -19,6 +20,7 @@ function App() {
       </Route>
       <PrivateRoute exact path="/" component={ProjectsPage} />
       <PrivateRoute path="/projects" component={ProjectsPage} />
+      <PrivateRoute path="/lyrics-editor" component={LyricsEditor} />
       <PrivateRoute path="/lyrics" component={LyricsPage} />
       <PrivateRoute path="/audio" component={AudioPage} />
       <PrivateRoute path="/video" component={VideoPage} />
