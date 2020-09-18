@@ -46,7 +46,6 @@ const updateBand = async (req, res, next) => {
     if (body.name) updates.name = body.name;
     if (body.avatar) updates.avatar = body.avatar;
     if (body.owner) updates.owner = body.owner;
-    if (body.members) updates.members = body.members;
     if (body.google_account) updates.google_account = body.google_account;
     if (body.calendar_id) updates.calendar_id = body.calendar_id;
     if (body.dropbox_account) updates.dropbox_account = body.dropbox_account;

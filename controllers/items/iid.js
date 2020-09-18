@@ -65,6 +65,7 @@ const updateItemById = async (req, res, next) => {
       if (body.title) cleanResult.title = body.title;
       if (body.project) cleanResult.project = ObjectID(body.project);
       if (body.url) cleanResult.url = body.url;
+      if (body.content) cleanResult.content = body.content;
       if (body.name) cleanResult.name = body.name;
       if (body.active) cleanResult.active = body.active;
       if (body.theme) cleanResult.theme = body.theme;
