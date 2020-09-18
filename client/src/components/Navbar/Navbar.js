@@ -51,9 +51,6 @@ const Navbar = () => {
           <NavLink to="/calendar">
             <li>Calendar</li>
           </NavLink>
-          <NavLink to="/chat">
-            <li>Chat</li>
-          </NavLink>
         </ul>
       </Menu>
       <BottomButtons>

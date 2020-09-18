@@ -22,8 +22,8 @@ export const ViewButton = styled.div`
     height: 50px;
     width: 50px;
     background-color: ${active
-      ? 'rgba(247, 247, 250, 0.28)'
-      : 'rgba(247, 247, 250, 0.07)'};
+      ? "rgba(247, 247, 250, 0.28)"
+      : "rgba(247, 247, 250, 0.07)"};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,9 +47,6 @@ export const ViewButton = styled.div`
 `;
 
 export const FileView = styled.div`
-  /* display: flex;
-  justify-content: center;
-  flex-wrap: wrap; */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 `;
@@ -71,7 +68,32 @@ export const Details = styled.div`
   margin-left: 10px;
 `;
 
+export const FirstRow = styled.div`
+  display: flex;
+`;
+
 export const ProjectName = styled.p``;
+
+export const ItemSettingsButton = styled.div`
+  position: relative;
+  margin-left: 70px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.14);
+  }
+
+  &:active {
+    transition: all 0.1s;
+    background-color: rgba(0, 0, 0, 0.21);
+  }
+`;
 
 export const FileName = styled.h3``;
 
