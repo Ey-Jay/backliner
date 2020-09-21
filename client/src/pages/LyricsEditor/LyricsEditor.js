@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
@@ -32,6 +33,8 @@ const LyricsEditor = () => {
   );
   const [lyricsTitle, setLyricsTitle] = useState('');
 
+  const history = useHistory();
+
   const handleKeyCommand = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -50,7 +53,7 @@ const LyricsEditor = () => {
         title: `${lyricsTitle}`,
         content: document,
       })
-      .then((res) => console.log(res))
+      .then((res) => history.push(`/lyrics/${res.data.data._id}`))
       .catch((err) => console.error(err));
   };
 
