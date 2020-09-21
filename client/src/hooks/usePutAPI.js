@@ -4,7 +4,7 @@ import axios from 'axios';
 import { apiUrl } from 'config/constants';
 import firebase from 'fb';
 
-const useGetAPI = (path) => {
+const useGetAPI = (path, data) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,8 +15,11 @@ const useGetAPI = (path) => {
       .currentUser.getIdToken()
       .then((token) => {
         axios
-          .get(`${apiUrl}${path}`, {
+          .put(`${apiUrl}${path}`, {
             headers: { authorization: `Bearer ${token}` },
+            data: {
+              ...data,
+            },
           })
           .then((res) => {
             setData(res);
