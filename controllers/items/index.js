@@ -18,10 +18,14 @@ const getItemsForUser = async (req, res, next) => {
       case 'projects':
         const projects = await Project.find(
           { band: { $in: bids } },
-          'name theme author band active createdAt updatedAt'
+          'name theme author band active createdAt updatedAt audios videos files lyrics'
         )
           .populate('author', 'name avatar active')
           .populate('band', 'name avatar active owner members')
+          .populate('audios')
+          .populate('videos')
+          .populate('files')
+          .populate('lyrics')
           .exec();
 
         res.json({

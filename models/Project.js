@@ -21,7 +21,35 @@ const ProjectSchema = new Schema(
     },
     active: Boolean,
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
+
+ProjectSchema.virtual('audios', {
+  ref: 'Audio',
+  localField: '_id',
+  foreignField: 'project',
+  justOne: false,
+});
+
+ProjectSchema.virtual('videos', {
+  ref: 'Video',
+  localField: '_id',
+  foreignField: 'project',
+  justOne: false,
+});
+
+ProjectSchema.virtual('files', {
+  ref: 'File',
+  localField: '_id',
+  foreignField: 'project',
+  justOne: false,
+});
+
+ProjectSchema.virtual('lyrics', {
+  ref: 'Lyrics',
+  localField: '_id',
+  foreignField: 'project',
+  justOne: false,
+});
 
 module.exports = mongoose.model('Project', ProjectSchema);
