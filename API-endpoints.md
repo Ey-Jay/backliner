@@ -10,12 +10,12 @@ All properties for request bodies are always optional, you don't need to provide
 
 ## Table of Contents
 
-* [/api/](#api)
-* [/api/bands](#apibands)
-* [/api/bands/:bid](#apibandsbid)
-* [/api/bands/:bid/:itemtype](#apibandsbiditemtype)
-* [/api/:itemtype](#apiitemtype)
-* [/api/:itemtype/:iid](#apiitemtypeiid)
+- [/api/](#api)
+- [/api/bands](#apibands)
+- [/api/bands/:bid](#apibandsbid)
+- [/api/bands/:bid/:itemtype](#apibandsbiditemtype)
+- [/api/:itemtype](#apiitemtype)
+- [/api/:itemtype/:iid](#apiitemtypeiid)
 
 ## `/api/`
 
@@ -630,5 +630,48 @@ None.
     "__v": 0,
     "active": false
   }
+}
+```
+
+## `/api/:itemtype/:iid/comments`
+
+### GET
+
+Get an Array of all comments for item of type `:itemtype` with id `:iid` inactive.
+
+`:itemtype` can be `projects`, `audio`, `video`, `lyrics` or `files`. However, the value is arbitrary for this request, since the query will look through all collections for the `:iid`.
+
+**Expected Body:**
+
+None.
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "action": "update",
+  "data": [
+    {
+      "_id": "5f5f77cfa070e51a835ad9d1",
+      "parent_type": "Video",
+      "parent_id": {
+        "_id": "5f5f76700434c31a273ac9f3",
+        "title": "Video A",
+        "author": "5f5f590cc53c3e15300c1ba7",
+        "band": "5f5f5da1a3a332170b4305f5",
+        "project": "5f5f74230cc89c198a4d47b7",
+        "url": "https://www.youtube.com/watch?v=wMehItNQKAA",
+        "createdAt": "2020-09-14T13:56:00.739Z",
+        "updatedAt": "2020-09-14T13:56:00.739Z",
+        "__v": 0
+      },
+      "author": "5f5f590cc53c3e15300c1ba7",
+      "content": "LOL ok bro",
+      "createdAt": "2020-09-14T14:01:51.230Z",
+      "updatedAt": "2020-09-14T14:01:51.230Z",
+      "__v": 0
+    }
+  ]
 }
 ```
