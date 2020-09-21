@@ -21,7 +21,7 @@ const ProjectSchema = new Schema(
     },
     active: Boolean,
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
 
 ProjectSchema.virtual('audios', {
