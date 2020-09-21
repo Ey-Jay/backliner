@@ -4,7 +4,9 @@ import { EditorState, convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
 import useGetAPI from 'hooks/useGetAPI';
+import Spinner from 'components/Spinner';
 import Layout from 'layout';
+import { Container } from './SingleLyricsPage.style';
 
 const SingleLyricsPage = () => {
   const { id } = useParams();
@@ -18,14 +20,27 @@ const SingleLyricsPage = () => {
       setEditorState(convertFromRaw(JSON.parse(data.data.data.content)));
   }, [data]);
 
-  if (error) return <div>Error happened</div>;
-  if (loading) return <div>Loading..</div>;
+  if (error) {
+    return (
+      <Layout title={error.code}>
+        <div>{error.message}</div>
+      </Layout>
+    );
+  }
+
+  if (loading) {
+    return (
+      <Layout>
+        <Spinner type="page" />
+      </Layout>
+    );
+  }
 
   const html = stateToHTML(editorState);
 
   return (
-    <Layout>
-      <div dangerouslySetInnerHTML={{ __html: html }}></div>
+    <Layout title={data.data.data.title}>
+      <Container dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
   );
 };
