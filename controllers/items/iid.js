@@ -15,7 +15,7 @@ const getItemById = async (req, res, next) => {
     const { iid } = req.params;
     const queries = [];
 
-    queries.push(Project.findById(iid).lean().exec());
+    queries.push(Project.findById(iid).populate('audios').exec());
     queries.push(Audio.findById(iid).lean().exec());
     queries.push(Video.findById(iid).lean().exec());
     queries.push(File.findById(iid).lean().exec());

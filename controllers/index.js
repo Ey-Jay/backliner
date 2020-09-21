@@ -17,7 +17,7 @@ const getUser = async (req, res, next) => {
       })
       .exec();
 
-    if (R.isEmpty(user) || R.isNil(user)) {
+    if (R.isEmpty(user) || R.isNil(user) || !user._id) {
       // User doesn't exist yet, sign them up & return data
       const newUser = await User.create({
         name: userData.name,

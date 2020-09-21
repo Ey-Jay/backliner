@@ -22,6 +22,10 @@ const getItemsForUser = async (req, res, next) => {
         )
           .populate('author', 'name avatar active')
           .populate('band', 'name avatar active owner members')
+          .populate('audios')
+          .populate('videos')
+          .populate('files')
+          .populate('lyrics')
           .exec();
 
         res.json({
