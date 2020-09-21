@@ -15,7 +15,7 @@ const useGetAPI = (path) => {
       .currentUser.getIdToken()
       .then((token) => {
         axios
-          .get(`${apiUrl}${path}`, {
+          .delete(`${apiUrl}${path}`, {
             headers: { authorization: `Bearer ${token}` },
           })
           .then((res) => {
