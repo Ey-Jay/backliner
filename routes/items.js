@@ -7,6 +7,12 @@ const {
   updateItemById,
   setItemInactive,
 } = require('../controllers/items/iid');
+const { getComments, createComment } = require('../controllers/items/comments');
+const {
+  getCommentById,
+  updateCommentById,
+  setCommentInactiveById,
+} = require('../controllers/items/cid');
 const unused = require('../controllers/unused');
 
 // prettier-ignore
@@ -28,17 +34,17 @@ router
 // prettier-ignore
 router
   .route('/:iid/comments')
-  .get()
-  .post()
+  .get(getComments)
+  .post(createComment)
   .put(unused)
   .delete(unused);
 
 // prettier-ignore
 router
   .route('/:iid/comments/:cid')
-  .get()
+  .get(getCommentById)
   .post(unused)
-  .put()
-  .delete();
+  .put(updateCommentById)
+  .delete(setCommentInactiveById);
 
 module.exports = router;
