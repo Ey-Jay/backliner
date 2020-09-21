@@ -125,4 +125,61 @@ const updateCommentById = async (req, res, next) => {
   }
 };
 
-module.exports = { getCommentById, updateCommentById };
+const setCommentInactiveById = async (req, res, next) => {
+  try {
+    const { authId } = req;
+    const { cid, iid } = req.params;
+
+    const queries = [];
+
+    queries.push(Project.findById(iid).lean().exec());
+    queries.push(Audio.findById(iid).lean().exec());
+    queries.push(Video.findById(iid).lean().exec());
+    queries.push(File.findById(iid).lean().exec());
+    queries.push(Lyrics.findById(iid).lean().exec());
+
+    const results = await Promise.all(queries);
+    const cleanResult = results.find((item) => !isNil(item) && !isEmpty(item));
+
+    if (isUserInBand(authId, cleanResult.band)) {
+      const comment = await Comments.findById(cid)
+        .populate('parent_id')
+        .populate('author', 'name avatar active')
+        .exec();
+
+      if (comment.parent_id._id.toString() === iid.toString()) {
+        comment.active = false;
+
+        const updatedComment = await comment.save();
+
+        res.json({
+          success: true,
+          action: 'delete',
+          data: updatedComment,
+        });
+      } else {
+        res.status(400);
+        res.json({
+          success: false,
+          action: 'delete',
+          data: null,
+          error: true,
+          message: 'Bad request',
+        });
+      }
+    } else {
+      res.status(401);
+      res.json({
+        success: false,
+        action: 'delete',
+        data: null,
+        error: true,
+        message: 'Not authorized',
+      });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { getCommentById, updateCommentById, setCommentInactiveById };

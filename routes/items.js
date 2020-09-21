@@ -11,6 +11,7 @@ const { getComments, createComment } = require('../controllers/items/comments');
 const {
   getCommentById,
   updateCommentById,
+  setCommentInactiveById,
 } = require('../controllers/items/cid');
 const unused = require('../controllers/unused');
 
@@ -44,6 +45,6 @@ router
   .get(getCommentById)
   .post(unused)
   .put(updateCommentById)
-  .delete();
+  .delete(setCommentInactiveById);
 
 module.exports = router;
