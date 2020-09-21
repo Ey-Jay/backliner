@@ -720,3 +720,154 @@ Create a comment for item of type `:itemtype` with id `:iid`.
   ]
 }
 ```
+
+## `/api/:itemtype/:iid/comments/:cid`
+
+### GET
+
+Get a comment with comment id `:cid` for item of type `:itemtype` with item id `:iid`.
+
+`:itemtype` can be `projects`, `audio`, `video`, `lyrics` or `files`. However, the value is arbitrary for this request, since the query will look through all collections for the `:iid`.
+
+**Expected Body:**
+
+None.
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "action": "get",
+  "data": {
+    "_id": "5f5f77cfa070e51a835ad9d1",
+    "parent_type": "Video",
+    "parent_id": {
+      "_id": "5f5f76700434c31a273ac9f3",
+      "title": "Video A",
+      "author": "5f5f590cc53c3e15300c1ba7",
+      "band": "5f5f5da1a3a332170b4305f5",
+      "project": "5f5f74230cc89c198a4d47b7",
+      "url": "https://www.youtube.com/watch?v=wMehItNQKAA",
+      "createdAt": "2020-09-14T13:56:00.739Z",
+      "updatedAt": "2020-09-14T13:56:00.739Z",
+      "__v": 0
+    },
+    "author": {
+      "_id": "5f5f590cc53c3e15300c1ba7",
+      "name": "Jigglypuff",
+      "avatar": 1,
+      "active": true,
+      "id": "5f5f590cc53c3e15300c1ba7"
+    },
+    "content": "LOL ok bro",
+    "createdAt": "2020-09-14T14:01:51.230Z",
+    "updatedAt": "2020-09-14T14:01:51.230Z",
+    "__v": 0
+  }
+}
+```
+
+### POST
+
+No functionality.
+
+### PUT
+
+Update a comment with comment id `:cid` for item of type `:itemtype` with item id `:iid`.
+
+`:itemtype` can be `projects`, `audio`, `video`, `lyrics` or `files`. However, the value is arbitrary for this request, since the query will look through all collections for the `:iid`.
+
+**Expected Body:**
+
+```js
+{
+  "parent_type": "Audio",
+  "parent_id": "5f5f76700434c31a273ac9f3",
+  "author": "5f5f590cc53c3e15300c1ba7",
+  "content": "it works woohoo",
+  "active": true // does not work with false
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "action": "update",
+  "data": {
+    "_id": "5f5f77cfa070e51a835ad9d1",
+    "parent_type": "Video",
+    "parent_id": {
+      "_id": "5f5f76700434c31a273ac9f3",
+      "title": "Video A",
+      "author": "5f5f590cc53c3e15300c1ba7",
+      "band": "5f5f5da1a3a332170b4305f5",
+      "project": "5f5f74230cc89c198a4d47b7",
+      "url": "https://www.youtube.com/watch?v=wMehItNQKAA",
+      "createdAt": "2020-09-14T13:56:00.739Z",
+      "updatedAt": "2020-09-14T13:56:00.739Z",
+      "__v": 0
+    },
+    "author": {
+      "_id": "5f5f590cc53c3e15300c1ba7",
+      "name": "Jigglypuff",
+      "avatar": 1,
+      "active": true,
+      "id": "5f5f590cc53c3e15300c1ba7"
+    },
+    "content": "it works woohoo",
+    "createdAt": "2020-09-14T14:01:51.230Z",
+    "updatedAt": "2020-09-21T15:06:41.476Z",
+    "__v": 0,
+    "active": true
+  }
+}
+```
+
+### DELETE
+
+Delete a comment with comment id `:cid` for item of type `:itemtype` with item id `:iid`.
+
+`:itemtype` can be `projects`, `audio`, `video`, `lyrics` or `files`. However, the value is arbitrary for this request, since the query will look through all collections for the `:iid`.
+
+**Expected Body:**
+
+None.
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "action": "delete",
+  "data": {
+    "_id": "5f5f77cfa070e51a835ad9d1",
+    "parent_type": "Video",
+    "parent_id": {
+      "_id": "5f5f76700434c31a273ac9f3",
+      "title": "Video A",
+      "author": "5f5f590cc53c3e15300c1ba7",
+      "band": "5f5f5da1a3a332170b4305f5",
+      "project": "5f5f74230cc89c198a4d47b7",
+      "url": "https://www.youtube.com/watch?v=wMehItNQKAA",
+      "createdAt": "2020-09-14T13:56:00.739Z",
+      "updatedAt": "2020-09-14T13:56:00.739Z",
+      "__v": 0
+    },
+    "author": {
+      "_id": "5f5f590cc53c3e15300c1ba7",
+      "name": "Jigglypuff",
+      "avatar": 1,
+      "active": true,
+      "id": "5f5f590cc53c3e15300c1ba7"
+    },
+    "content": "it works woohoo",
+    "createdAt": "2020-09-14T14:01:51.230Z",
+    "updatedAt": "2020-09-21T15:12:23.141Z",
+    "__v": 0,
+    "active": false
+  }
+}
+```
