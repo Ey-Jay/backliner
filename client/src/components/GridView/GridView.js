@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import moment from "moment";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 
 import {
   Container,
@@ -15,31 +16,32 @@ import {
   Icon,
   Author,
   Timestamp,
-} from "./GridView.style";
-import { ReactComponent as GridViewIcon } from "assets/svg/GridViewIcon.svg";
-import { ReactComponent as ListViewIcon } from "assets/svg/ListViewIcon.svg";
-import { ReactComponent as LyricsIcon } from "assets/svg/LyricsIcon.svg";
-import { ReactComponent as MicIcon } from "assets/svg/MicIcon.svg";
-import { ReactComponent as VideoIcon } from "assets/svg/VideoIcon.svg";
-import { ReactComponent as ImageIcon } from "assets/svg/ImageIcon.svg";
-import { ReactComponent as FileIcon } from "assets/svg/FileIcon.svg";
-import { ReactComponent as ThreeDotsIcon } from "assets/svg/ThreeDotsIcon.svg";
+} from './GridView.style';
+import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
+import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
+import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
+import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
+import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
+import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
+import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
+import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
 const GridView = ({ data, type }) => {
-  const [view, setView] = useState("grid");
+  const history = useHistory();
+  const [view, setView] = useState('grid');
 
   let thumbnail = <FileIcon />;
 
   switch (type) {
-    case "audio":
+    case 'audio':
       thumbnail = <MicIcon />;
       break;
 
-    case "video":
+    case 'video':
       thumbnail = <VideoIcon />;
       break;
 
-    case "lyrics":
+    case 'lyrics':
       thumbnail = <LyricsIcon />;
       break;
 
@@ -50,20 +52,23 @@ const GridView = ({ data, type }) => {
   return (
     <Container>
       <Controls>
-        <ViewButton active={view === "list"} onClick={() => setView("list")}>
+        <ViewButton active={view === 'list'} onClick={() => setView('list')}>
           <ListViewIcon />
         </ViewButton>
-        <ViewButton active={view === "grid"} onClick={() => setView("grid")}>
+        <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
           <GridViewIcon />
         </ViewButton>
       </Controls>
       <FileView>
         {data.map((item) => (
-          <SingleFile key={item._id}>
+          <SingleFile
+            key={item._id}
+            onClick={() => history.push(`/lyrics/${item._id}`)}
+          >
             <Details>
               <FirstRow>
                 <ProjectName>
-                  {item.project ? item.project.name : "No Project"}{" "}
+                  {item.project ? item.project.name : 'No Project'}{' '}
                 </ProjectName>
                 <ItemSettingsButton>
                   <ThreeDotsIcon />
@@ -73,7 +78,7 @@ const GridView = ({ data, type }) => {
               <Icon>{thumbnail}</Icon>
               <Author>{item.author.name}</Author>
               <Timestamp>
-                {moment(item.createdAt).format("DD/MM/YYYY")}
+                {moment(item.createdAt).format('DD/MM/YYYY')}
               </Timestamp>
             </Details>
           </SingleFile>
