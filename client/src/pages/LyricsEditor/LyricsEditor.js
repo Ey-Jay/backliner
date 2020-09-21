@@ -6,6 +6,7 @@ import 'draft-js/dist/Draft.css';
 import Layout from 'layout';
 import {
   Container,
+  TitleInput,
   EditorContainer,
   EditorControls,
   Control,
@@ -29,6 +30,7 @@ const LyricsEditor = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const [lyricsTitle, setLyricsTitle] = useState('');
 
   const handleKeyCommand = (command, editorState) => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -45,7 +47,7 @@ const LyricsEditor = () => {
     );
     axios
       .post('http://localhost:3001/api/bands/5f5f5da1a3a332170b4305f5/lyrics', {
-        title: "Erick's First Lyrics Test",
+        title: `${lyricsTitle}`,
         content: document,
       })
       .then((res) => console.log(res))
@@ -57,6 +59,11 @@ const LyricsEditor = () => {
   return (
     <Layout title="Lyrics Editor">
       <Container>
+        <TitleInput
+          type="text"
+          placeholder="Please enter title..."
+          onChange={(e) => setLyricsTitle(e.target.value)}
+        />
         <EditorContainer onClick={() => editorRef.current.focus()}>
           <EditorControls onClick={(e) => e.stopPropagation()}>
             <Control

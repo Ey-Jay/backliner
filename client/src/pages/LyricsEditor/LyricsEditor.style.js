@@ -5,6 +5,15 @@ export const Container = styled.div`
   height: 90%;
 `;
 
+export const TitleInput = styled.input`
+  background-color: transparent;
+  border: none;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.color};
+  outline: none;
+`;
+
 export const EditorContainer = styled.div`
   min-height: 100%;
   margin: 0 auto;
