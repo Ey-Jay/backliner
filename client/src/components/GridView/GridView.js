@@ -63,7 +63,7 @@ const GridView = ({ data, type }) => {
         {data.map((item) => (
           <SingleFile
             key={item._id}
-            onClick={() => history.push(`/lyrics/${item._id}`)}
+            onClick={() => history.push(`/${type}/${item._id}`)}
           >
             <Details>
               <FirstRow>

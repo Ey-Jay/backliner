@@ -155,13 +155,13 @@ const createItem = async (req, res, next) => {
             .populate('author', 'name avatar active')
             .execPopulate();
 
-          const { name, theme, author, band, active } = newProject;
+          const { _id, name, theme, author, band, active } = newProject;
 
           res.status(200);
           res.json({
             success: true,
             action: 'create',
-            data: { name, theme, author, band, active },
+            data: { _id, name, theme, author, band, active },
           });
 
           break;
@@ -297,6 +297,7 @@ const createItem = async (req, res, next) => {
             success: true,
             action: 'create',
             data: {
+              _id: newLyrics._id,
               title: newLyrics.title,
               content: newLyrics.content,
               author: newLyrics.author,
