@@ -12,7 +12,7 @@ import {
   EditorControls,
   Control,
   SaveButton,
-} from './LyricsEditor.style';
+} from './NewLyricsEditor.style';
 import { ReactComponent as ItalicIcon } from 'assets/svg/Lyrics_Editor_Icons/Italic.svg';
 import { ReactComponent as UnderlineIcon } from 'assets/svg/Lyrics_Editor_Icons/Underline.svg';
 import { ReactComponent as UppercaseIcon } from 'assets/svg/Lyrics_Editor_Icons/Uppercase.svg';
@@ -27,7 +27,7 @@ const styleMap = {
   },
 };
 
-const LyricsEditor = () => {
+const NewLyricsEditor = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -60,7 +60,7 @@ const LyricsEditor = () => {
   const editorRef = useRef();
 
   return (
-    <Layout title="Lyrics Editor">
+    <Layout title="New Lyrics">
       <Container>
         <TitleInput
           type="text"
@@ -155,4 +155,4 @@ const LyricsEditor = () => {
   );
 };
 
-export default LyricsEditor;
+export default NewLyricsEditor;
