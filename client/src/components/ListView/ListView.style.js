@@ -108,13 +108,13 @@ export const FileName = styled.h3`
 
 export const Author = styled.p`
   font-style: italic;
-  font-size: 2vh;
+  font-size: 0.8rem;
   margin: 0;
 `;
 
 export const Timestamp = styled.p`
   font-style: italic;
-  font-size: 2vh;
+  font-size: 0.8rem;
   margin: 0 0 0 10px;
 `;
 

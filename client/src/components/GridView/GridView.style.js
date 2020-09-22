@@ -74,13 +74,14 @@ export const FirstRow = styled.div`
 
 export const ProjectName = styled.p`
 padding: 5px;
+width: 100px;
 background-color: salmon;
 border-radius: 3px;
 `;
 
 export const ItemSettingsButton = styled.div`
   position: relative;
-  margin-left: 70px;
+  margin-left: 50px;
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -117,10 +118,10 @@ export const Icon = styled.div`
 
 export const Author = styled.p`
   font-style: italic;
-  font-size: 2vh;
+  font-size: 0.8rem;
 `;
 
 export const Timestamp = styled.p`
   font-style: italic;
-  font-size: 2vh;
+  font-size: 0.8rem;
 `;
