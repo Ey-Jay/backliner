@@ -379,6 +379,50 @@ None.
 }
 ```
 
+### POST
+
+Add a member to the band with id `:bid`.
+
+**Expected Body:**
+
+```js
+{
+  "member_id": "5f565843f0b5220df874ce3b"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "action": "post",
+  "data": [
+    {
+      "_id": "5f5f590cc53c3e15300c1ba7",
+      "name": "Jigglypuff",
+      "avatar": 1,
+      "active": true,
+      "id": "5f5f590cc53c3e15300c1ba7"
+    },
+    {
+      "_id": "5f5659cdf0b5220df874ce3c",
+      "name": "EriJo",
+      "avatar": 10,
+      "active": true,
+      "id": "5f5659cdf0b5220df874ce3c"
+    },
+    {
+      "_id": "5f565843f0b5220df874ce3b",
+      "name": "Glurak",
+      "avatar": 3,
+      "active": true,
+      "id": "5f565843f0b5220df874ce3b"
+    }
+  ]
+}
+```
+
 ## `/api/bands/:bid/:itemtype`
 
 ### GET
