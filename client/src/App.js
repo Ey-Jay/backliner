@@ -12,6 +12,7 @@ import AudioPage from 'pages/AudioPage';
 import VideoPage from 'pages/VideoPage';
 import FilesPage from 'pages/FilesPage';
 import CalendarPage from 'pages/CalendarPage';
+import CheckInPage from 'pages/CheckInPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <SignInPage />
       </Route>
       <PrivateRoute exact path="/" component={ProjectsPage} />
+      <PrivateRoute path="/checkin" component={CheckInPage} />
       <PrivateRoute path="/projects" component={ProjectsPage} />
       <PrivateRoute path="/new-lyrics" component={NewLyricsEditor} />
       <PrivateRoute path="/edit-lyrics/:id" component={EditLyricsEditor} />

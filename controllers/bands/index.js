@@ -33,7 +33,7 @@ const createBand = async (req, res, next) => {
   try {
     const { authId } = req;
     const body = req.body;
-
+    console.log(body);
     const userId = await getUserIdFromAuth(authId);
     const newBand = await Band.create({
       name: body.name || 'Untitled Band',

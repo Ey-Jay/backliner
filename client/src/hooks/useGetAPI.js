@@ -4,7 +4,7 @@ import axios from 'axios';
 import { apiUrl } from 'config/constants';
 import firebase from 'fb';
 
-const useGetAPI = (path) => {
+const useGetAPI = (path, condition) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ const useGetAPI = (path) => {
           .catch((e) => setError(e));
       })
       .catch((e) => setError(e));
-  }, []);
+  }, [condition]);
 
   return { data, loading, error };
 };
