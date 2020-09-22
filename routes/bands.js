@@ -8,6 +8,7 @@ const {
   setBandInactive,
 } = require('../controllers/bands/bid');
 const { getItemsByBand, createItem } = require('../controllers/bands/items');
+const { getMembersFromBand } = require('../controllers/bands/members');
 const unused = require('../controllers/unused');
 
 // prettier-ignore
@@ -25,6 +26,14 @@ router
   .post(unused)
   .put(updateBand)
   .delete(setBandInactive);
+
+// prettier-ignore
+router
+  .route('/:bid/members')
+  .get(getMembersFromBand)
+  .post()
+  .put()
+  .delete();
 
 // prettier-ignore
 router

@@ -344,6 +344,41 @@ None.
 }
 ```
 
+## `/api/bands/:bid/members`
+
+### GET
+
+Get data for all the members that belong to the band with id `:bid`.
+
+**Expected Body:**
+
+None.
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "action": "get",
+  "data": [
+    {
+      "_id": "5f5f590cc53c3e15300c1ba7",
+      "name": "Jigglypuff",
+      "avatar": 1,
+      "active": true,
+      "id": "5f5f590cc53c3e15300c1ba7"
+    },
+    {
+      "_id": "5f5659cdf0b5220df874ce3c",
+      "name": "EriJo",
+      "avatar": 10,
+      "active": true,
+      "id": "5f5659cdf0b5220df874ce3c"
+    }
+  ]
+}
+```
+
 ## `/api/bands/:bid/:itemtype`
 
 ### GET
