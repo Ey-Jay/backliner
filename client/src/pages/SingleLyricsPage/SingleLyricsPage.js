@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { EditorState, convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
 import useGetAPI from 'hooks/useGetAPI';
 import Spinner from 'components/Spinner';
 import Layout from 'layout';
-import { Container } from './SingleLyricsPage.style';
+import { Container, EditButton } from './SingleLyricsPage.style';
 
 const SingleLyricsPage = () => {
   const { id } = useParams();
@@ -14,6 +14,8 @@ const SingleLyricsPage = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+
+  const history = useHistory();
 
   useEffect(() => {
     if (data.data)
@@ -40,6 +42,9 @@ const SingleLyricsPage = () => {
 
   return (
     <Layout title={data.data.data.title}>
+      <EditButton onClick={() => history.push(`/edit-lyrics/${id}`)}>
+        edit
+      </EditButton>
       <Container dangerouslySetInnerHTML={{ __html: html }} />
     </Layout>
   );
