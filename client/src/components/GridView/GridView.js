@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+
+import { GlobalContext } from 'context/GlobalContext';
 
 import {
   Container,
@@ -22,13 +24,13 @@ import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
-import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
+// import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
 const GridView = ({ data, type }) => {
   const history = useHistory();
-  const [view, setView] = useState('grid');
+  const { view, setView } = useContext(GlobalContext);
 
   let thumbnail = <FileIcon />;
 

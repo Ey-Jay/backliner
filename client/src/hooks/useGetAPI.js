@@ -10,22 +10,23 @@ const useGetAPI = (path, condition) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    firebase
-      .auth()
-      .currentUser.getIdToken()
-      .then((token) => {
-        axios
-          .get(`${apiUrl}${path}`, {
-            headers: { authorization: `Bearer ${token}` },
-          })
-          .then((res) => {
-            setData(res);
-            setLoading(false);
-          })
-          .catch((e) => setError(e));
-      })
-      .catch((e) => setError(e));
-  }, [condition]);
+    if (firebase.auth().currentUser)
+      firebase
+        .auth()
+        .currentUser.getIdToken()
+        .then((token) => {
+          axios
+            .get(`${apiUrl}${path}`, {
+              headers: { authorization: `Bearer ${token}` },
+            })
+            .then((res) => {
+              setData(res);
+              setLoading(false);
+            })
+            .catch((e) => setError(e));
+        })
+        .catch((e) => setError(e));
+  }, [path, condition]);
 
   return { data, loading, error };
 };

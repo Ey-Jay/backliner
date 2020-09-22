@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import fb from 'fb';
 
-export const AuthContext = React.createContext({ currentUser: null });
+export const GlobalContext = React.createContext({ currentUser: null });
 
-export const AuthProvider = ({ children }) => {
+export const GlobalContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [view, setView] = useState('list');
 
   useEffect(() => {
     fb.auth().onAuthStateChanged((user) => {
@@ -15,8 +16,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, isLoading }}>
+    <GlobalContext.Provider value={{ currentUser, isLoading, view, setView }}>
       {children}
-    </AuthContext.Provider>
+    </GlobalContext.Provider>
   );
 };

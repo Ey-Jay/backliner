@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { AuthContext } from 'context/AuthContext';
+import { GlobalContext } from 'context/GlobalContext';
 import Spinner from 'components/Spinner';
 
 function PrivateRoute({ component: RouteComponent, ...rest }) {
-  const { currentUser, isLoading } = useContext(AuthContext);
+  const { currentUser, isLoading } = useContext(GlobalContext);
 
   return (
     <Route

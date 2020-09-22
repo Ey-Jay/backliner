@@ -6,18 +6,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'styled-components';
 
-import { AuthProvider } from 'context/AuthContext';
+import { GlobalContextProvider } from 'context/GlobalContext';
 import { theme, GlobalStyles } from 'theme';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <AuthProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <GlobalContextProvider>
           <App />
-        </BrowserRouter>
-      </AuthProvider>
+        </GlobalContextProvider>
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
