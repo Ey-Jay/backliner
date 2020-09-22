@@ -55,7 +55,10 @@ const CheckInPage = () => {
     }
   };
 
-  const handleModalCancel = () => setIsModalVisible(false);
+  const handleModalCancel = () => {
+    setNameFieldValue('');
+    setIsModalVisible(false);
+  };
 
   const handlePlusButton = () => setIsModalVisible(true);
 
