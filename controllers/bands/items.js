@@ -22,6 +22,10 @@ const getItemsByBand = async (req, res, next) => {
             'name theme author active createdAt updatedAt'
           )
             .populate('author', 'name avatar active')
+            .populate('audios')
+            .populate('videos')
+            .populate('lyrics')
+            .populate('files')
             .exec();
 
           res.status(200);

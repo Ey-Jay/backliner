@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from 'react';
 
-import useGetAPI from "hooks/useGetAPI";
-import Layout from "layout";
-import GridView from "components/GridView";
-import Spinner from "components/Spinner";
+import { GlobalContext } from 'context/GlobalContext';
+
+import useGetAPI from 'hooks/useGetAPI';
+import Layout from 'layout';
+import GridView from 'components/GridView';
+import ListView from 'components/ListView';
+import Spinner from 'components/Spinner';
 
 const VideoPage = () => {
+  const { view } = useContext(GlobalContext);
   const { data, loading, error } = useGetAPI(
-    "/bands/5f5f5da1a3a332170b4305f5/video"
+    '/bands/5f5f5da1a3a332170b4305f5/video'
   );
 
   if (loading)
@@ -26,7 +30,11 @@ const VideoPage = () => {
 
   return (
     <Layout title="Video">
-      <GridView data={data.data.data} type="video" />
+      {view === 'list' ? (
+        <ListView data={data.data.data} type="video" />
+      ) : (
+        <GridView data={data.data.data} type="video" />
+      )}
     </Layout>
   );
 };

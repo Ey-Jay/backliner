@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
+import { GlobalContext } from 'context/GlobalContext';
+import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
+import Spinner from 'components/Spinner';
 import {
   Container,
   Controls,
@@ -24,7 +27,24 @@ import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
 
 const DashboardPage = () => {
-  const [view, setView] = useState('list');
+  const { view, setView } = useContext(GlobalContext);
+  const { data, loading, error } = useGetAPI(
+    '/bands/5f5f5da1a3a332170b4305f5/projects'
+  );
+
+  if (error)
+    return (
+      <Layout title="Projects">
+        <p>{JSON.stringify(error)}</p>
+      </Layout>
+    );
+
+  if (loading)
+    return (
+      <Layout title="Projects">
+        <Spinner type="page" />
+      </Layout>
+    );
 
   return (
     <Layout title="Projects">
@@ -38,528 +58,37 @@ const DashboardPage = () => {
           </ViewButton>
         </Controls>
         <ListView>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-          <ListItem>
-            <Dot />
-            <Details>
-              <ItemTitle>ItemTitle</ItemTitle>
-              <Elements>
-                <Type>
-                  <Icon>
-                    <LyricsIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <MicIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-                <Type>
-                  <Icon>
-                    <VideoIcon />
-                  </Icon>
-                  <Amount>1</Amount>
-                </Type>
-              </Elements>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
+          {data.data.data.map((item) => (
+            <ListItem key={item._id}>
+              <Dot />
+              <Details>
+                <ItemTitle>{item.name}</ItemTitle>
+                <Elements>
+                  <Type>
+                    <Icon>
+                      <LyricsIcon />
+                    </Icon>
+                    <Amount>{item.lyrics.length}</Amount>
+                  </Type>
+                  <Type>
+                    <Icon>
+                      <MicIcon />
+                    </Icon>
+                    <Amount>{item.audios.length}</Amount>
+                  </Type>
+                  <Type>
+                    <Icon>
+                      <VideoIcon />
+                    </Icon>
+                    <Amount>{item.videos.length}</Amount>
+                  </Type>
+                </Elements>
+              </Details>
+              <ItemSettingsButton>
+                <ThreeDotsIcon />
+              </ItemSettingsButton>
+            </ListItem>
+          ))}
         </ListView>
       </Container>
     </Layout>

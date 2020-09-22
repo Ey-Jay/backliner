@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { AuthContext } from 'context/AuthContext';
+import { GlobalContext } from 'context/GlobalContext';
 
 import { ReactComponent as GoogleSignInIcon } from 'assets/svg/GoogleSignInIcon.svg';
 import { Container, SignInButton } from './SignInPage.style';
@@ -8,7 +8,7 @@ import { Container, SignInButton } from './SignInPage.style';
 import firebase from 'fb';
 
 const SignInPage = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(GlobalContext);
 
   const provider = new firebase.auth.GoogleAuthProvider();
   const onClickHandler = () => {
