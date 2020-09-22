@@ -7,6 +7,7 @@ export const theme = {
   color: '#F7F7FA',
   backgroundColor: '#141C2E',
   backgroundColorDark: '#0e1324',
+  backgroundColorLight: '#304066',
 };
 
 export const GlobalStyles = createGlobalStyle`
