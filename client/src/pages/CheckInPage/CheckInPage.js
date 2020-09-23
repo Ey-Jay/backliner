@@ -43,10 +43,13 @@ const CheckInPage = () => {
 
     const token = await firebase.auth().currentUser.getIdToken();
 
-    const response = await axios.post(`${apiUrl}/bands`, {
-      headers: { authorization: `Bearer ${token}` },
-      name: nameFieldValue,
-    });
+    const response = await axios.post(
+      `${apiUrl}/bands`,
+      {
+        name: nameFieldValue,
+      },
+      { authorization: `Bearer ${token}` }
+    );
 
     if (response.data.success) {
       setNameFieldValue('');
