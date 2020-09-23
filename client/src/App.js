@@ -20,17 +20,17 @@ function App() {
       <Route path="/signin">
         <SignInPage />
       </Route>
-      <PrivateRoute exact path="/" component={ProjectsPage} />
       <PrivateRoute path="/checkin" component={CheckInPage} />
-      <PrivateRoute path="/projects" component={ProjectsPage} />
-      <PrivateRoute path="/new-lyrics" component={NewLyricsEditor} />
-      <PrivateRoute path="/edit-lyrics/:id" component={EditLyricsEditor} />
-      <PrivateRoute path="/lyrics/:id" component={SingleLyricsPage} />
-      <PrivateRoute path="/lyrics" component={LyricsPage} />
-      <PrivateRoute path="/audio" component={AudioPage} />
-      <PrivateRoute path="/video" component={VideoPage} />
-      <PrivateRoute path="/files" component={FilesPage} />
-      <PrivateRoute path="/calendar" component={CalendarPage} />
+      <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
+      <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
+      <PrivateRoute path="/:bid/new-lyrics" component={NewLyricsEditor} />
+      <PrivateRoute path="/:bid/edit-lyrics/:id" component={EditLyricsEditor} />
+      <PrivateRoute path="/:bid/lyrics/:id" component={SingleLyricsPage} />
+      <PrivateRoute path="/:bid/lyrics" component={LyricsPage} />
+      <PrivateRoute path="/:bid/audio" component={AudioPage} />
+      <PrivateRoute path="/:bid/video" component={VideoPage} />
+      <PrivateRoute path="/:bid/files" component={FilesPage} />
+      <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
       <Redirect to="/signin" />
     </Switch>
   );

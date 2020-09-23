@@ -26,11 +26,14 @@ import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
 
-const DashboardPage = () => {
+const DashboardPage = ({
+  match: {
+    params: { bid },
+  },
+}) => {
+  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
+
   const { view, setView } = useContext(GlobalContext);
-  const { data, loading, error } = useGetAPI(
-    '/bands/5f5f5da1a3a332170b4305f5/projects'
-  );
 
   if (error)
     return (

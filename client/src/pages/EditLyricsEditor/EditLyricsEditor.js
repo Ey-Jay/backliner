@@ -11,6 +11,7 @@ import {
 import 'draft-js/dist/Draft.css';
 
 import useGetAPI from 'hooks/useGetAPI';
+import { apiUrl } from 'config/constants';
 import Spinner from 'components/Spinner';
 import Layout from 'layout';
 import {
@@ -36,7 +37,7 @@ const styleMap = {
 };
 
 const EditLyricsEditor = () => {
-  const { id } = useParams();
+  const { id, bid } = useParams();
   const { data, loading, error } = useGetAPI(`/lyrics/${id}`);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [lyricsTitle, setLyricsTitle] = useState('');
@@ -69,11 +70,11 @@ const EditLyricsEditor = () => {
       convertToRaw(editorState.getCurrentContent())
     );
     axios
-      .put(`http://localhost:3001/api/lyrics/${data.data.data._id}`, {
+      .put(`${apiUrl}/lyrics/${data.data.data._id}`, {
         title: `${lyricsTitle}`,
         content: document,
       })
-      .then((res) => history.push(`/lyrics/${res.data.data._id}`))
+      .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
       .catch((err) => console.error(err));
   };
 

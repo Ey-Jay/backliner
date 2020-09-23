@@ -8,11 +8,13 @@ import GridView from 'components/GridView';
 import ListView from 'components/ListView';
 import Spinner from 'components/Spinner';
 
-const VideoPage = () => {
+const VideoPage = ({
+  match: {
+    params: { bid },
+  },
+}) => {
   const { view } = useContext(GlobalContext);
-  const { data, loading, error } = useGetAPI(
-    '/bands/5f5f5da1a3a332170b4305f5/video'
-  );
+  const { data, loading, error } = useGetAPI(`/bands/${bid}/video`);
 
   if (loading)
     return (

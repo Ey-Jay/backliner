@@ -7,11 +7,13 @@ import ListView from 'components/ListView';
 import GridView from 'components/GridView';
 import Spinner from 'components/Spinner';
 
-const FilesPage = () => {
+const FilesPage = ({
+  match: {
+    params: { bid },
+  },
+}) => {
   const { view } = useContext(GlobalContext);
-  const { data, loading, error } = useGetAPI(
-    '/bands/5f5f5da1a3a332170b4305f5/files'
-  );
+  const { data, loading, error } = useGetAPI(`/bands/${bid}/files`);
 
   if (loading)
     return (

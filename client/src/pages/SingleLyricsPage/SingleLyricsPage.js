@@ -8,7 +8,11 @@ import Spinner from 'components/Spinner';
 import Layout from 'layout';
 import { Container, EditButton } from './SingleLyricsPage.style';
 
-const SingleLyricsPage = () => {
+const SingleLyricsPage = ({
+  match: {
+    params: { bid },
+  },
+}) => {
   const { id } = useParams();
   const { data, loading, error } = useGetAPI(`/lyrics/${id}`);
   const [editorState, setEditorState] = useState(() =>
@@ -42,7 +46,7 @@ const SingleLyricsPage = () => {
 
   return (
     <Layout title={data.data.data.title}>
-      <EditButton onClick={() => history.push(`/edit-lyrics/${id}`)}>
+      <EditButton onClick={() => history.push(`/${bid}/edit-lyrics/${id}`)}>
         edit
       </EditButton>
       <Container dangerouslySetInnerHTML={{ __html: html }} />

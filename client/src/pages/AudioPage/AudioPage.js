@@ -7,11 +7,13 @@ import GridView from 'components/GridView';
 import ListView from 'components/ListView';
 import Spinner from 'components/Spinner';
 
-const AudioPage = () => {
+const AudioPage = ({
+  match: {
+    params: { bid },
+  },
+}) => {
   const { view } = useContext(GlobalContext);
-  const { data, loading, error } = useGetAPI(
-    '/bands/5f5f5da1a3a332170b4305f5/audio'
-  );
+  const { data, loading, error } = useGetAPI(`/bands/${bid}/audio`);
 
   if (loading)
     return (

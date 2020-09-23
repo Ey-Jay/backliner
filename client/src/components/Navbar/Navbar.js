@@ -16,39 +16,38 @@ import {
 } from './Navbar.style';
 import RoundButton from 'components/RoundButton';
 
-const Navbar = () => {
+const Navbar = ({ band }) => {
   return (
     <Container>
       <BandDisplay>
         <BandAvatarImg src={bandSrc} />
         <BandDescription>
-          <BandName>Die Ospen</BandName>
+          <BandName>{band.name}</BandName>
           <MembersContainer>
-            <MemberPortraitImg src={memberSrc} />
-            <MemberPortraitImg src={memberSrc} />
-            <MemberPortraitImg src={memberSrc} />
-            <MemberPortraitImg src={memberSrc} />
+            {band.members.map((member) => (
+              <MemberPortraitImg key={member._id} src={memberSrc} />
+            ))}
           </MembersContainer>
         </BandDescription>
       </BandDisplay>
       <Menu>
         <ul>
-          <NavLink to="/projects">
+          <NavLink to={`/${band._id}/projects`}>
             <li>Projects</li>
           </NavLink>
-          <NavLink to="/lyrics">
+          <NavLink to={`/${band._id}/lyrics`}>
             <li>Lyrics</li>
           </NavLink>
-          <NavLink to="/audio">
+          <NavLink to={`/${band._id}/audio`}>
             <li>Audio</li>
           </NavLink>
-          <NavLink to="/video">
+          <NavLink to={`/${band._id}/video`}>
             <li>Video</li>
           </NavLink>
-          <NavLink to="/files">
+          <NavLink to={`/${band._id}/files`}>
             <li>Files</li>
           </NavLink>
-          <NavLink to="/calendar">
+          <NavLink to={`/${band._id}/calendar`}>
             <li>Calendar</li>
           </NavLink>
         </ul>
