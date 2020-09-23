@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
+import { GlobalContext } from 'context/GlobalContext';
 import Layout from 'layout';
 import { apiUrl } from 'config/constants';
 import {
@@ -33,6 +34,7 @@ const NewLyricsEditor = ({
     params: { bid },
   },
 }) => {
+  const { currentUser } = useContext(GlobalContext);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -49,15 +51,22 @@ const NewLyricsEditor = ({
     return 'not-handled';
   };
 
-  const saveDocument = () => {
+  const saveDocument = async () => {
     const document = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
+    const token = await currentUser.getIdToken();
     axios
-      .post(`${apiUrl}/bands/${bid}/lyrics`, {
-        title: `${lyricsTitle}`,
-        content: document,
-      })
+      .post(
+        `${apiUrl}/bands/${bid}/lyrics`,
+        {
+          title: `${lyricsTitle}`,
+          content: document,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
       .catch((err) => console.error(err));
   };

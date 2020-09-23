@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -10,6 +10,7 @@ import {
 } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
+import { GlobalContext } from 'context/GlobalContext';
 import useGetAPI from 'hooks/useGetAPI';
 import { apiUrl } from 'config/constants';
 import Spinner from 'components/Spinner';
@@ -37,6 +38,7 @@ const styleMap = {
 };
 
 const EditLyricsEditor = () => {
+  const { currentUser } = useContext(GlobalContext);
   const { id, bid } = useParams();
   const { data, loading, error } = useGetAPI(`/lyrics/${id}`);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -65,15 +67,23 @@ const EditLyricsEditor = () => {
     return 'not-handled';
   };
 
-  const saveDocument = () => {
+  const saveDocument = async () => {
     const document = JSON.stringify(
       convertToRaw(editorState.getCurrentContent())
     );
+    const token = await currentUser.getIdToken();
+
     axios
-      .put(`${apiUrl}/lyrics/${data.data.data._id}`, {
-        title: `${lyricsTitle}`,
-        content: document,
-      })
+      .put(
+        `${apiUrl}/lyrics/${data.data.data._id}`,
+        {
+          title: `${lyricsTitle}`,
+          content: document,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
       .catch((err) => console.error(err));
   };
