@@ -1,3 +1,4 @@
+const { auth } = require('firebase-admin');
 const admin = require('../authInit');
 
 const checkIfAuthenticated = async (req, res, next) => {
