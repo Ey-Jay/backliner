@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import firebase from 'fb';
+import useGetAPI from 'hooks/useGetAPI';
 import Navbar from 'components/Navbar';
 import ChatBox from 'components/ChatBox';
 import RoundButton from 'components/RoundButton';
@@ -15,6 +16,9 @@ import {
 } from './Layout.style';
 
 const Layout = ({ children, title }) => {
+  const { bid } = useParams();
+  const band = useGetAPI(`/bands/${bid}`);
+
   const [isOpen, setIsOpen] = useState(true);
   const history = useHistory();
   const logoff = () =>
@@ -24,10 +28,12 @@ const Layout = ({ children, title }) => {
       .then(() => history.push('/signin'))
       .catch((e) => console.error(e));
 
+  if (band.loading) return <p>Loading ...</p>;
+
   return (
     <FlexContainer>
       <NavWrapper>
-        <Navbar />
+        <Navbar band={band.data.data.data} />
       </NavWrapper>
       <Content>
         <Header>
@@ -44,7 +50,11 @@ const Layout = ({ children, title }) => {
         <PageBody>{children}</PageBody>
       </Content>
       <ChatWrapper isOpen={isOpen}>
-        <ChatBox isOpen={isOpen} setIsOpen={setIsOpen} />
+        <ChatBox
+          band={band.data.data.data}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       </ChatWrapper>
     </FlexContainer>
   );

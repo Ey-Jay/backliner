@@ -18,7 +18,7 @@ const SignInPage = () => {
       .catch((e) => console.error(e));
   };
 
-  if (currentUser) return <Redirect to="/projects" />;
+  if (currentUser) return <Redirect to="/checkin" />;
 
   return (
     <Container>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import firebase from 'fb';
@@ -100,19 +100,23 @@ const CheckInPage = () => {
         </Controls>
         <BandList>
           {data.data.data.map((band) => (
-            <Band key={band._id}>
-              <Picture>
-                <img src={BandImageSrc} alt="" />
-              </Picture>
-              <Description>
-                <Name>{band.name}</Name>
-                <Members>
-                  {band.members.map((member) => (
-                    <Member key={member._id} src={MemberImageSrc} />
-                  ))}
-                </Members>
-              </Description>
-            </Band>
+            <div key={band._id}>
+              <Link to={`/${band._id}/projects`}>
+                <Band>
+                  <Picture>
+                    <img src={BandImageSrc} alt="" />
+                  </Picture>
+                  <Description>
+                    <Name>{band.name}</Name>
+                    <Members>
+                      {band.members.map((member) => (
+                        <Member key={member._id} src={MemberImageSrc} />
+                      ))}
+                    </Members>
+                  </Description>
+                </Band>
+              </Link>
+            </div>
           ))}
         </BandList>
       </Container>

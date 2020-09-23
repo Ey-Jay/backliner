@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import { GlobalContext } from 'context/GlobalContext';
@@ -29,6 +29,7 @@ import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
 const GridView = ({ data, type }) => {
+  const { bid } = useParams();
   const history = useHistory();
   const { view, setView } = useContext(GlobalContext);
 
@@ -65,7 +66,7 @@ const GridView = ({ data, type }) => {
         {data.map((item) => (
           <SingleFile
             key={item._id}
-            onClick={() => history.push(`/${type}/${item._id}`)}
+            onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
           >
             <Details>
               <FirstRow>

@@ -5,6 +5,7 @@ import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 import Layout from 'layout';
+import { apiUrl } from 'config/constants';
 import {
   Container,
   TitleInput,
@@ -27,7 +28,11 @@ const styleMap = {
   },
 };
 
-const NewLyricsEditor = () => {
+const NewLyricsEditor = ({
+  match: {
+    params: { bid },
+  },
+}) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -49,11 +54,11 @@ const NewLyricsEditor = () => {
       convertToRaw(editorState.getCurrentContent())
     );
     axios
-      .post('http://localhost:3001/api/bands/5f5f5da1a3a332170b4305f5/lyrics', {
+      .post(`${apiUrl}/bands/${bid}/lyrics`, {
         title: `${lyricsTitle}`,
         content: document,
       })
-      .then((res) => history.push(`/lyrics/${res.data.data._id}`))
+      .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
       .catch((err) => console.error(err));
   };
 
