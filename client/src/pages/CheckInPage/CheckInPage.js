@@ -48,7 +48,9 @@ const CheckInPage = () => {
       {
         name: nameFieldValue,
       },
-      { authorization: `Bearer ${token}` }
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
     );
 
     if (response.data.success) {
