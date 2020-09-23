@@ -31,6 +31,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'dev') app.use(getDevUserId);
 else app.use(checkIfAuthenticated);
 app.use('/api/', require('./routes'));
+app.use('/', express.static('client/build'));
 app.use(errorHandler);
 
 server.listen(PORT, () => console.log(`🤖 Server running on port ${PORT} 🤖`));
