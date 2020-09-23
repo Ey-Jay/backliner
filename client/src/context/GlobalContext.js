@@ -14,11 +14,13 @@ export const GlobalContextProvider = ({ children }) => {
   useEffect(() => {
     fb.auth().onAuthStateChanged((user) => {
       if (user) {
-        axios
-          .get(apiUrl, {
-            headers: { authorization: `Bearer ${user.getIdToken()}` },
-          })
-          .then((res) => setDbUser(res.data.data));
+        user.getIdToken().then((token) => {
+          axios
+            .get(apiUrl, {
+              headers: { authorization: `Bearer ${token}` },
+            })
+            .then((res) => setDbUser(res.data.data));
+        });
       }
 
       setCurrentUser(user);
