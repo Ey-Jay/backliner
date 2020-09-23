@@ -29,7 +29,7 @@ app.use(morgan('dev'));
 if (process.env.NODE_ENV === 'dev') app.use(cors());
 app.use(express.json());
 if (process.env.NODE_ENV === 'dev') app.use(getDevUserId);
-else app.use(checkIfAuthenticated);
+else app.use('/api/', checkIfAuthenticated);
 app.use('/api/', require('./routes'));
 app.use('/', express.static('client/build'));
 app.use(errorHandler);
