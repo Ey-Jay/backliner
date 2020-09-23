@@ -32,7 +32,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'dev') app.use(getDevUserId);
 else app.use('/api/', checkIfAuthenticated);
 app.use('/api/', require('./routes'));
-// app.all('*', express.static('./client/build'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
