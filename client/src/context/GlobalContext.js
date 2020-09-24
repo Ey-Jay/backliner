@@ -10,6 +10,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [dbUser, setDbUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState('list');
+  const [rerender, setRerender] = useState(new Date());
 
   useEffect(() => {
     fb.auth().onAuthStateChanged((user) => {
@@ -30,7 +31,15 @@ export const GlobalContextProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider
-      value={{ currentUser, dbUser, isLoading, view, setView }}
+      value={{
+        currentUser,
+        dbUser,
+        isLoading,
+        view,
+        setView,
+        rerender,
+        setRerender,
+      }}
     >
       {children}
     </GlobalContext.Provider>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import { GlobalContext } from 'context/GlobalContext';
 import firebase from 'fb';
 import { apiUrl } from 'config/constants';
 import {
@@ -17,6 +18,7 @@ import {
 
 const AddModal = ({ type, setShowAddModal }) => {
   const { bid } = useParams();
+  const { setRerender } = useContext(GlobalContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [titleValue, setTitleValue] = useState('');
@@ -79,6 +81,7 @@ const AddModal = ({ type, setShowAddModal }) => {
       setUrlValue('');
       setProjectValue('');
       setProjectColor('#0074D9');
+      setRerender(new Date());
       setShowAddModal(false);
     } catch (e) {
       console.error(e);

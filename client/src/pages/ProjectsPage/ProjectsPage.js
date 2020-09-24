@@ -31,9 +31,8 @@ const DashboardPage = ({
     params: { bid },
   },
 }) => {
-  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
-
   const { view, setView } = useContext(GlobalContext);
+  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
 
   if (error)
     return (
