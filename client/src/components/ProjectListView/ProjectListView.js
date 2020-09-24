@@ -13,12 +13,10 @@ import {
   Icon,
   Details,
   Row,
-  ProjectName,
   FileName,
   Author,
   Timestamp,
   ItemSettingsButton,
-  NewButton,
   EmptyList,
 } from './ProjectListView.style';
 

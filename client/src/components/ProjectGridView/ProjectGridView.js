@@ -10,15 +10,11 @@ import {
   ViewButton,
   FileView,
   SingleFile,
-  FirstRow,
   Details,
-  ProjectName,
-  ItemSettingsButton,
   FileName,
   Icon,
   Author,
   Timestamp,
-  NewButton,
   EmptyList,
 } from './ProjectGridView.style';
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
