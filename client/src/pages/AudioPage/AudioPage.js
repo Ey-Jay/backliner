@@ -17,20 +17,20 @@ const AudioPage = ({
 
   if (loading)
     return (
-      <Layout title="Audio">
+      <Layout title="Audio" type="audio">
         <Spinner type="page" />
       </Layout>
     );
 
   if (error)
     return (
-      <Layout title="Audio">
+      <Layout title="Audio" type="audio">
         <p>{JSON.stringify(error)}</p>
       </Layout>
     );
 
   return (
-    <Layout title="Audio">
+    <Layout title="Audio" type="audio">
       {view === 'list' ? (
         <ListView data={data.data.data} type="audio" />
       ) : (

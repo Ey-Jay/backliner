@@ -37,20 +37,20 @@ const DashboardPage = ({
 
   if (error)
     return (
-      <Layout title="Projects">
+      <Layout title="Projects" type="project">
         <p>{JSON.stringify(error)}</p>
       </Layout>
     );
 
   if (loading)
     return (
-      <Layout title="Projects">
+      <Layout title="Projects" type="project">
         <Spinner type="page" />
       </Layout>
     );
 
   return (
-    <Layout title="Projects">
+    <Layout title="Projects" type="project">
       <Container>
         <Controls>
           <ViewButton active={view === 'list'} onClick={() => setView('list')}>
