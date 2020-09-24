@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
   max-width: 1250px;
@@ -22,8 +22,8 @@ export const ViewButton = styled.div`
     height: 50px;
     width: 50px;
     background-color: ${active
-      ? "rgba(247, 247, 250, 0.28)"
-      : "rgba(247, 247, 250, 0.07)"};
+      ? 'rgba(247, 247, 250, 0.28)'
+      : 'rgba(247, 247, 250, 0.07)'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,10 +73,10 @@ export const FirstRow = styled.div`
 `;
 
 export const ProjectName = styled.p`
-padding: 5px;
-width: 100px;
-background-color: salmon;
-border-radius: 3px;
+  padding: 5px;
+  width: 100px;
+  background-color: ${({ color }) => color || '#666'};
+  border-radius: 3px;
 `;
 
 export const ItemSettingsButton = styled.div`

@@ -97,7 +97,7 @@ export const Row = styled.div`
 
 export const ProjectName = styled.p`
   padding: 5px;
-  background-color: salmon;
+  background-color: ${({ color }) => color || '#666'};
   border-radius: 3px;
   margin: 0 0 0 10px;
 `;
