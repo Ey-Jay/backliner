@@ -7,12 +7,39 @@ export const Container = styled.main`
 
 export const Controls = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
 
   & > * + * {
     margin-left: 5px;
+  }
+`;
+
+export const NewButton = styled.button`
+  height: 50px;
+  line-height: 50px;
+  background-color: ${({ theme }) => theme.secondary};
+  border: none;
+  color: inherit;
+  border-radius: 10px;
+  padding: 0 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  outline: none;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondaryDark};
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
   }
 `;
 
@@ -23,7 +50,8 @@ export const ViewButton = styled.div`
     background-color: ${active
       ? 'rgba(247, 247, 250, 0.28)'
       : 'rgba(247, 247, 250, 0.07)'};
-    display: flex;
+    display: inline-flex;
+    margin-left: 5px;
     align-items: center;
     justify-content: center;
     border-radius: 10px;

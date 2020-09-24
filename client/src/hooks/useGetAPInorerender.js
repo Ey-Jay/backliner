@@ -26,6 +26,7 @@ const useGetAPInorerender = (path) => {
             .catch((e) => setError(e));
         })
         .catch((e) => setError(e));
+    // eslint-disable-next-line
   }, []);
 
   return { data, loading, error };

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
+import { GlobalContext } from 'context/GlobalContext';
 import firebase from 'fb';
 import useGetAPI from 'hooks/useGetAPI';
 import Navbar from 'components/Navbar';
@@ -20,7 +21,7 @@ const Layout = ({ children, title, type }) => {
   const { bid } = useParams();
   const band = useGetAPI(`/bands/${bid}`);
 
-  const [showAddModal, setShowAddModal] = useState(false);
+  const { showAddModal, setShowAddModal } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(true);
   const history = useHistory();
 
@@ -61,9 +62,7 @@ const Layout = ({ children, title, type }) => {
           />
         </ChatWrapper>
       </FlexContainer>
-      {showAddModal ? (
-        <AddModal type={type} setShowAddModal={setShowAddModal} />
-      ) : null}
+      {showAddModal ? <AddModal type={type} /> : null}
     </>
   );
 };
