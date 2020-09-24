@@ -73,6 +73,16 @@ export const ViewButton = styled.div`
   `}
 `;
 
+export const EmptyList = styled.li`
+  background-color: rgba(255, 255, 255, 0.07);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 10px;
+  list-style-type: none;
+`;
+
 export const FileView = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

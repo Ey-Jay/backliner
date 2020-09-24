@@ -83,6 +83,15 @@ export const ListView = styled.ul`
   }
 `;
 
+export const EmptyList = styled.li`
+  background-color: rgba(255, 255, 255, 0.07);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 10px;
+`;
+
 export const ListItem = styled.li`
   display: flex;
   align-items: center;

@@ -19,6 +19,7 @@ import {
   Amount,
   ItemSettingsButton,
   NewButton,
+  EmptyList,
 } from './ProjectsPage.style';
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
 import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
@@ -105,6 +106,7 @@ const DashboardPage = ({
               </ItemSettingsButton>
             </ListItem>
           ))}
+          {data.data.data.length === 0 && <EmptyList>No Projects</EmptyList>}
         </ListView>
       </Container>
     </Layout>

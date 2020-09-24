@@ -19,6 +19,7 @@ import {
   Author,
   Timestamp,
   NewButton,
+  EmptyList,
 } from './GridView.style';
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
 import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
@@ -93,6 +94,7 @@ const GridView = ({ data, type }) => {
           </SingleFile>
         ))}
       </FileView>
+      {data.length === 0 && <EmptyList>No Items</EmptyList>}
     </Container>
   );
 };

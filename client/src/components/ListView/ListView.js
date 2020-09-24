@@ -19,6 +19,7 @@ import {
   Timestamp,
   ItemSettingsButton,
   NewButton,
+  EmptyList,
 } from './ListView.style';
 
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
@@ -99,6 +100,7 @@ const ListView = ({ data, type }) => {
             </ItemSettingsButton>
           </ListItem>
         ))}
+        {data.length === 0 && <EmptyList>No Items</EmptyList>}
       </List>
     </Container>
   );
