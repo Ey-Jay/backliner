@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const path = require('path');
 
 const connectDB = require('./dbinit');
 require('./models/Audio');
@@ -27,15 +26,11 @@ require('./socket')(server);
 connectDB();
 
 app.use(morgan('dev'));
-if (process.env.NODE_ENV === 'dev') app.use(cors());
+app.use(cors());
 app.use(express.json());
 if (process.env.NODE_ENV === 'dev') app.use(getDevUserId);
 else app.use('/api/', checkIfAuthenticated);
 app.use('/api/', require('./routes'));
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
 app.use(errorHandler);
 
 server.listen(PORT, () => console.log(`🤖 Server running on port ${PORT} 🤖`));
