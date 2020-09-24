@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
-  max-width: 700px;
+  max-width: 1250px;
   margin: 0 auto;
 `;
 
 export const Controls = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 20px;
   margin-right: 10px;
@@ -73,16 +73,6 @@ export const ViewButton = styled.div`
   `}
 `;
 
-export const ListView = styled.ul`
-  list-style: none;
-  margin: 0 0 35px;
-  padding: 0;
-
-  & > li + li {
-    margin-top: 15px;
-  }
-`;
-
 export const EmptyList = styled.li`
   background-color: rgba(255, 255, 255, 0.07);
   text-align: center;
@@ -90,81 +80,49 @@ export const EmptyList = styled.li`
   padding: 20px;
   border-radius: 10px;
   margin: 0 10px;
+  list-style-type: none;
 `;
 
-export const ListItem = styled.li`
+export const FileView = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+`;
+
+export const SingleFile = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px 10px 10px 10px;
   background-color: rgba(247, 247, 250, 0.14);
-  border-radius: 40px;
-  height: 80px;
-  overflow: hidden;
+  border-radius: 5%;
   cursor: pointer;
-`;
-
-export const Dot = styled.div`
-  width: 70px;
-  height: 70px;
-  margin: 5px 15px 5px 5px;
-  border-radius: 50%;
-  background-color: ${({ color = '#111111' }) => color};
+  &:hover {
+    background-color: rgba(247, 247, 250, 0.35);
+  }
 `;
 
 export const Details = styled.div`
-  flex: 1;
+  margin-left: 10px;
+`;
+
+export const FirstRow = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
 `;
 
-export const ItemTitle = styled.h2`
-  margin: 0;
-  font-size: 1.3rem;
-  margin-bottom: 5px;
-`;
-
-export const Elements = styled.div`
-  display: flex;
-
-  & > * + * {
-    margin-left: 20px;
-  }
-`;
-
-export const Type = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const Icon = styled.div`
-  height: 25px;
-  width: 25px;
-  background-color: #10d164;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(0, 0, 0, 0.8);
-
-  svg {
-    height: 15px;
-  }
-`;
-
-export const Amount = styled.p`
-  margin: 0;
-  padding: 0;
-  margin-left: 5px;
+export const ProjectName = styled.p`
+  padding: 5px;
+  width: 100px;
+  background-color: ${({ color }) => color || '#666'};
+  border-radius: 3px;
 `;
 
 export const ItemSettingsButton = styled.div`
-  width: 40px;
-  height: 40px;
-  margin: 20px;
+  position: relative;
+  margin-left: 50px;
   background-color: transparent;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s;
@@ -177,4 +135,30 @@ export const ItemSettingsButton = styled.div`
     transition: all 0.1s;
     background-color: rgba(0, 0, 0, 0.21);
   }
+`;
+
+export const FileName = styled.h3``;
+
+export const Icon = styled.div`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+
+  svg {
+    height: 25px;
+  }
+`;
+
+export const Author = styled.p`
+  font-style: italic;
+  font-size: 0.8rem;
+`;
+
+export const Timestamp = styled.p`
+  font-style: italic;
+  font-size: 0.8rem;
 `;

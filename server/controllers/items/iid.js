@@ -17,10 +17,22 @@ const getItemById = async (req, res, next) => {
 
     queries.push(
       Project.findById(iid)
-        .populate('audios')
-        .populate('videos')
-        .populate('files')
-        .populate('lyrics')
+        .populate({
+          path: 'audios',
+          populate: { path: 'author', select: 'name' },
+        })
+        .populate({
+          path: 'videos',
+          populate: { path: 'author', select: 'name' },
+        })
+        .populate({
+          path: 'files',
+          populate: { path: 'author', select: 'name' },
+        })
+        .populate({
+          path: 'lyrics',
+          populate: { path: 'author', select: 'name' },
+        })
         .exec()
     );
     queries.push(Audio.findById(iid).lean().exec());

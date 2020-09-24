@@ -14,6 +14,7 @@ import FilesPage from 'pages/FilesPage';
 import CalendarPage from 'pages/CalendarPage';
 import CheckInPage from 'pages/CheckInPage';
 import SettingsPage from 'pages/SettingsPage';
+import SingleProjectPage from 'pages/SingleProjectPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       </Route>
       <PrivateRoute path="/checkin" component={CheckInPage} />
       <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
+      <PrivateRoute path="/:bid/project/:pid" component={SingleProjectPage} />
       <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
       <PrivateRoute path="/:bid/new-lyrics" component={NewLyricsEditor} />
       <PrivateRoute path="/:bid/edit-lyrics/:id" component={EditLyricsEditor} />

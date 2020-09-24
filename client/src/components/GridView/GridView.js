@@ -78,7 +78,7 @@ const GridView = ({ data, type }) => {
             <Details>
               <FirstRow>
                 <ProjectName color={item.project ? item.project.theme : null}>
-                  {item.project ? item.project.name : 'No Project'}{' '}
+                  {item.project.name ? item.project.name : 'No Project'}
                 </ProjectName>
                 <ItemSettingsButton>
                   <ThreeDotsIcon />
