@@ -63,7 +63,7 @@ const DashboardPage = ({
         <ListView>
           {data.data.data.map((item) => (
             <ListItem key={item._id}>
-              <Dot />
+              <Dot color={item.theme} />
               <Details>
                 <ItemTitle>{item.name}</ItemTitle>
                 <Elements>
