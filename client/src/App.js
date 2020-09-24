@@ -15,6 +15,7 @@ import CalendarPage from 'pages/CalendarPage';
 import CheckInPage from 'pages/CheckInPage';
 import SettingsPage from 'pages/SettingsPage';
 import SingleProjectPage from 'pages/SingleProjectPage';
+import EditItemPage from 'pages/EditItemPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <PrivateRoute path="/:bid/audio" component={AudioPage} />
       <PrivateRoute path="/:bid/video" component={VideoPage} />
       <PrivateRoute path="/:bid/files" component={FilesPage} />
+      <PrivateRoute path="/:bid/edit-audio/:id" component={() => <EditItemPage type="audio"/>} />
       <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
       <PrivateRoute path="/:bid/settings" component={SettingsPage} />
       <Redirect to="/signin" />
