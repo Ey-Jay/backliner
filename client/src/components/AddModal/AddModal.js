@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -26,7 +26,7 @@ const AddModal = ({ type }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [titleValue, setTitleValue] = useState('');
   const [urlValue, setUrlValue] = useState('');
-  const [projectValue, setProjectValue] = useState('5f5f74230cc89c198a4d47b7');
+  const [projectValue, setProjectValue] = useState('');
   const [projectColor, setProjectColor] = useState('#0074D9');
 
   if (isLoading || projectsAPI.loading)
