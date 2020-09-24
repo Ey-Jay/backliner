@@ -79,9 +79,6 @@ const ProjectListView = ({ data, type }) => {
             <Details>
               <Row>
                 <FileName>{item.title}</FileName>
-                <ProjectName color={item.project ? item.project.theme : null}>
-                  {item.project.name ? item.project.name : 'No Project'}{' '}
-                </ProjectName>
               </Row>
               <Row>
                 <Author>{item.author.name}</Author>
