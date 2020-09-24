@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
-import useGetAPI from 'hooks/useGetAPI';
+import useGetAPInorerender from 'hooks/useGetAPInorerender';
 import firebase from 'fb';
 import { apiUrl } from 'config/constants';
 import {
@@ -21,7 +21,7 @@ const AddModal = ({ type, setShowAddModal }) => {
   const { bid } = useParams();
   const { setRerender } = useContext(GlobalContext);
 
-  const projectsAPI = useGetAPI(`/bands/${bid}/projects`);
+  const projectsAPI = useGetAPInorerender(`/bands/${bid}/projects`);
 
   const [isLoading, setIsLoading] = useState(false);
   const [titleValue, setTitleValue] = useState('');
