@@ -35,7 +35,12 @@ const SingleProjectPage = ({
 
   const { audios, videos, files, lyrics } = data.data.data;
 
-  const allItems = [...audios, ...videos, ...files, ...lyrics];
+  const allItems = [
+    ...audios.map((i) => ({ ...i, type: 'audio' })),
+    ...videos.map((i) => ({ ...i, type: 'video' })),
+    ...files.map((i) => ({ ...i, type: 'file' })),
+    ...lyrics.map((i) => ({ ...i, type: 'lyrics' })),
+  ];
 
   return (
     <Layout title="Project">

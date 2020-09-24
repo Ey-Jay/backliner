@@ -33,26 +33,7 @@ import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 const ProjectGridView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
-  const { view, setView, setShowAddModal } = useContext(GlobalContext);
-
-  let thumbnail = <FileIcon />;
-
-  switch (type) {
-    case 'audio':
-      thumbnail = <MicIcon />;
-      break;
-
-    case 'video':
-      thumbnail = <VideoIcon />;
-      break;
-
-    case 'lyrics':
-      thumbnail = <LyricsIcon />;
-      break;
-
-    default:
-      thumbnail = <FileIcon />;
-  }
+  const { view, setView } = useContext(GlobalContext);
 
   return (
     <Container>
@@ -72,7 +53,12 @@ const ProjectGridView = ({ data, type }) => {
           >
             <Details>
               <FileName>{item.title}</FileName>
-              <Icon>{thumbnail}</Icon>
+              <Icon>
+                {item.type === 'audio' && <MicIcon />}
+                {item.type === 'video' && <VideoIcon />}
+                {item.type === 'lyrics' && <LyricsIcon />}
+                {item.type === 'file' && <FileIcon />}
+              </Icon>
               <Author>{item.author.name}</Author>
               <Timestamp>
                 {moment(item.createdAt).format('DD/MM/YYYY')}
