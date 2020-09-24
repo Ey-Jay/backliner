@@ -34,7 +34,7 @@ import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 const ProjectListView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
-  const { view, setView, setShowAddModal } = useContext(GlobalContext);
+  const { view, setView } = useContext(GlobalContext);
 
   let thumbnail = <FileIcon />;
 
@@ -75,7 +75,12 @@ const ProjectListView = ({ data, type }) => {
             key={item._id}
             onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
           >
-            <Icon>{thumbnail}</Icon>
+            <Icon>
+              {item.type === 'audio' && <MicIcon />}
+              {item.type === 'video' && <VideoIcon />}
+              {item.type === 'lyrics' && <LyricsIcon />}
+              {item.type === 'file' && <FileIcon />}
+            </Icon>
             <Details>
               <Row>
                 <FileName>{item.title}</FileName>
