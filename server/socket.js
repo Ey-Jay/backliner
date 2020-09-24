@@ -5,6 +5,10 @@ module.exports = (server) => {
     socket.on('chat message', (msg) => {
       socket.broadcast.emit('new msg', msg);
     });
+
+    socket.on('end', function () {
+      socket.disconnect(0);
+    });
   });
 
   return io;

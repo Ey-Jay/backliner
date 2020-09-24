@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
+import useGetAPI from 'hooks/useGetAPI';
 import firebase from 'fb';
 import { apiUrl } from 'config/constants';
 import {
@@ -20,13 +21,15 @@ const AddModal = ({ type, setShowAddModal }) => {
   const { bid } = useParams();
   const { setRerender } = useContext(GlobalContext);
 
+  const projectsAPI = useGetAPI(`/bands/${bid}/projects`);
+
   const [isLoading, setIsLoading] = useState(false);
   const [titleValue, setTitleValue] = useState('');
   const [urlValue, setUrlValue] = useState('');
   const [projectValue, setProjectValue] = useState('5f5f74230cc89c198a4d47b7');
   const [projectColor, setProjectColor] = useState('#0074D9');
 
-  if (isLoading)
+  if (isLoading || projectsAPI.loading)
     return (
       <ModalBackground>
         <Modal>Loading ...</Modal>
@@ -162,7 +165,11 @@ const AddModal = ({ type, setShowAddModal }) => {
             onChange={(e) => setProjectValue(e.currentTarget.value)}
           >
             <option value="">No Project</option>
-            <option value="5f5f74230cc89c198a4d47b7">Project A</option>
+            {projectsAPI.data.data.data.map((proj) => (
+              <option value={proj._id} key={proj._id}>
+                {proj.name}
+              </option>
+            ))}
           </select>
         </Form>
         <Controls>

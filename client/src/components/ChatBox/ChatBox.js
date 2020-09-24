@@ -37,6 +37,8 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
     socket.on('new msg', (msg) =>
       setMessages([...messagesRef.current, { message: msg }])
     );
+
+    return () => socket.emit('end');
   }, []);
 
   const textBox = useRef();
