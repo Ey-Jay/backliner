@@ -18,6 +18,8 @@ import {
   Icon,
   Author,
   Timestamp,
+  NewButton,
+  EmptyList,
 } from './GridView.style';
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
 import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
@@ -31,7 +33,7 @@ import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 const GridView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
-  const { view, setView } = useContext(GlobalContext);
+  const { view, setView, setShowAddModal } = useContext(GlobalContext);
 
   let thumbnail = <FileIcon />;
 
@@ -55,12 +57,17 @@ const GridView = ({ data, type }) => {
   return (
     <Container>
       <Controls>
-        <ViewButton active={view === 'list'} onClick={() => setView('list')}>
-          <ListViewIcon />
-        </ViewButton>
-        <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
-          <GridViewIcon />
-        </ViewButton>
+        <section>
+          <NewButton onClick={() => setShowAddModal(true)}>New Item</NewButton>
+        </section>
+        <section>
+          <ViewButton active={view === 'list'} onClick={() => setView('list')}>
+            <ListViewIcon />
+          </ViewButton>
+          <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
+            <GridViewIcon />
+          </ViewButton>
+        </section>
       </Controls>
       <FileView>
         {data.map((item) => (
@@ -87,6 +94,7 @@ const GridView = ({ data, type }) => {
           </SingleFile>
         ))}
       </FileView>
+      {data.length === 0 && <EmptyList>No Items</EmptyList>}
     </Container>
   );
 };

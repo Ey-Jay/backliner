@@ -12,7 +12,6 @@ import {
   MembersContainer,
   MemberPortraitImg,
   Menu,
-  BottomButtons,
 } from './Navbar.style';
 import RoundButton from 'components/RoundButton';
 
@@ -50,13 +49,11 @@ const Navbar = ({ band }) => {
           <NavLink to={`/${band._id}/calendar`}>
             <li>Calendar</li>
           </NavLink>
+          <NavLink to={`/${band._id}/settings`}>
+            <li>Settings</li>
+          </NavLink>
         </ul>
       </Menu>
-      <BottomButtons>
-        <RoundButton icon="bell" color="secondary" />
-        <RoundButton icon="moon" color="secondary" />
-        <RoundButton icon="profile" color="secondary" />
-      </BottomButtons>
     </Container>
   );
 };

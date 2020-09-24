@@ -3,13 +3,13 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
   padding: 35px;
 `;
 
 export const BandDisplay = styled.header`
   display: flex;
+  margin-bottom: 40px;
 `;
 
 export const BandAvatarImg = styled.img`
@@ -51,6 +51,10 @@ export const MemberPortraitImg = styled.img`
 
 export const Menu = styled.nav`
   ${({ theme }) => css`
+    flex: 1;
+
+    display: flex;
+    align-items: center;
     ul {
       margin: 0;
       padding: 0;
@@ -78,13 +82,4 @@ export const Menu = styled.nav`
       }
     }
   `}
-`;
-
-export const BottomButtons = styled.footer`
-  display: flex;
-  justify-content: center;
-
-  & > * + * {
-    margin-left: 20px;
-  }
 `;

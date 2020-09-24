@@ -18,6 +18,8 @@ import {
   Icon,
   Amount,
   ItemSettingsButton,
+  NewButton,
+  EmptyList,
 } from './ProjectsPage.style';
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
 import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
@@ -31,7 +33,7 @@ const DashboardPage = ({
     params: { bid },
   },
 }) => {
-  const { view, setView } = useContext(GlobalContext);
+  const { view, setView, setShowAddModal } = useContext(GlobalContext);
   const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
 
   if (error)
@@ -52,12 +54,25 @@ const DashboardPage = ({
     <Layout title="Projects" type="project">
       <Container>
         <Controls>
-          <ViewButton active={view === 'list'} onClick={() => setView('list')}>
-            <ListViewIcon />
-          </ViewButton>
-          <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
-            <GridViewIcon />
-          </ViewButton>
+          <section>
+            <NewButton onClick={() => setShowAddModal(true)}>
+              New Item
+            </NewButton>
+          </section>
+          {/* <section>
+            <ViewButton
+              active={view === 'list'}
+              onClick={() => setView('list')}
+            >
+              <ListViewIcon />
+            </ViewButton>
+            <ViewButton
+              active={view === 'grid'}
+              onClick={() => setView('grid')}
+            >
+              <GridViewIcon />
+            </ViewButton>
+          </section> */}
         </Controls>
         <ListView>
           {data.data.data.map((item) => (
@@ -91,6 +106,7 @@ const DashboardPage = ({
               </ItemSettingsButton>
             </ListItem>
           ))}
+          {data.data.data.length === 0 && <EmptyList>No Projects</EmptyList>}
         </ListView>
       </Container>
     </Layout>

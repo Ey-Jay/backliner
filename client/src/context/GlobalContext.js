@@ -10,6 +10,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [dbUser, setDbUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState('list');
+  const [showAddModal, setShowAddModal] = useState(false);
   const [rerender, setRerender] = useState(new Date());
 
   useEffect(() => {
@@ -39,6 +40,8 @@ export const GlobalContextProvider = ({ children }) => {
         setView,
         rerender,
         setRerender,
+        showAddModal,
+        setShowAddModal,
       }}
     >
       {children}

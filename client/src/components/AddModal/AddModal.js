@@ -17,9 +17,9 @@ import {
   ColorOption,
 } from './AddModal.style';
 
-const AddModal = ({ type, setShowAddModal }) => {
+const AddModal = ({ type }) => {
   const { bid } = useParams();
-  const { setRerender } = useContext(GlobalContext);
+  const { setRerender, setShowAddModal } = useContext(GlobalContext);
 
   const projectsAPI = useGetAPInorerender(`/bands/${bid}/projects`);
 
