@@ -10,6 +10,7 @@ import {
   ChatIcon,
   BackArrowIcon,
 } from './Icons.style';
+import { ReactComponent as CheckIn } from 'assets/svg/CheckInIcon.svg';
 import { Button } from './RoundButton.style';
 
 const RoundButton = ({ icon, color, onClick }) => {
@@ -31,6 +32,8 @@ const RoundButton = ({ icon, color, onClick }) => {
         return <ChatIcon />;
       case 'backarrow':
         return <BackArrowIcon />;
+      case 'checkin':
+        return <CheckIn />;
       default:
         return '🍑';
     }
