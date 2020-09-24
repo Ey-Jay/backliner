@@ -69,9 +69,18 @@ const EditItemPage = ({ type }) => {
       .catch((err) => console.error(err));
   };
 
-  // const deleteItem = () => {
-  //   setActive(false);
-  // };
+  const deleteItem = () => {
+    const token = currentUser.getIdToken();
+    axios
+      .delete(
+        `${apiUrl}/${type}/${data.data.data._id}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => history.push(`/${bid}/${type}/${res.data.data._id}`))
+      .catch((err) => console.error(err));
+  };
 
   if (loading || projects.loading)
     return (
@@ -118,7 +127,7 @@ const EditItemPage = ({ type }) => {
           />
         </Form>
         <SaveButton onClick={saveItem}>Save Changes</SaveButton>
-        <DeleteButton>Delete</DeleteButton>
+        <DeleteButton onClick={deleteItem}>Delete</DeleteButton>
       </Container>
     </Layout>
   );
