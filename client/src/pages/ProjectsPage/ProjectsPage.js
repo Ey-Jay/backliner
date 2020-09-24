@@ -31,26 +31,25 @@ const DashboardPage = ({
     params: { bid },
   },
 }) => {
-  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
-
   const { view, setView } = useContext(GlobalContext);
+  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
 
   if (error)
     return (
-      <Layout title="Projects">
+      <Layout title="Projects" type="project">
         <p>{JSON.stringify(error)}</p>
       </Layout>
     );
 
   if (loading)
     return (
-      <Layout title="Projects">
+      <Layout title="Projects" type="project">
         <Spinner type="page" />
       </Layout>
     );
 
   return (
-    <Layout title="Projects">
+    <Layout title="Projects" type="project">
       <Container>
         <Controls>
           <ViewButton active={view === 'list'} onClick={() => setView('list')}>
@@ -63,7 +62,7 @@ const DashboardPage = ({
         <ListView>
           {data.data.data.map((item) => (
             <ListItem key={item._id}>
-              <Dot />
+              <Dot color={item.theme} />
               <Details>
                 <ItemTitle>{item.name}</ItemTitle>
                 <Elements>

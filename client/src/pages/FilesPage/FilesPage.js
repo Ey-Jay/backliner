@@ -17,20 +17,20 @@ const FilesPage = ({
 
   if (loading)
     return (
-      <Layout title="Files">
+      <Layout title="Files" type="file">
         <Spinner type="page" />
       </Layout>
     );
 
   if (error)
     return (
-      <Layout title="Files">
+      <Layout title="Files" type="file">
         <p>{JSON.stringify(error)}</p>
       </Layout>
     );
 
   return (
-    <Layout title="Files">
+    <Layout title="Files" type="file">
       {view === 'list' ? (
         <ListView data={data.data.data} type="audio" />
       ) : (

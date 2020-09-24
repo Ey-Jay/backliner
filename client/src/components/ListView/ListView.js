@@ -77,7 +77,7 @@ const ListView = ({ data, type }) => {
             <Details>
               <Row>
                 <FileName>{item.title}</FileName>
-                <ProjectName>
+                <ProjectName color={item.project ? item.project.theme : null}>
                   {item.project ? item.project.name : 'No Project'}{' '}
                 </ProjectName>
               </Row>

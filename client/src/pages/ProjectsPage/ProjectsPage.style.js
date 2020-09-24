@@ -69,7 +69,7 @@ export const Dot = styled.div`
   height: 70px;
   margin: 5px 15px 5px 5px;
   border-radius: 50%;
-  background-color: #10D164;
+  background-color: ${({ color = '#111111' }) => color};
 `;
 
 export const Details = styled.div`
@@ -101,12 +101,12 @@ export const Type = styled.div`
 export const Icon = styled.div`
   height: 25px;
   width: 25px;
-  background-color: #10D164;
+  background-color: #10d164;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(0,0,0,0.8);
+  color: rgba(0, 0, 0, 0.8);
 
   svg {
     height: 15px;
@@ -132,11 +132,11 @@ export const ItemSettingsButton = styled.div`
   transition: all 0.2s;
 
   &:hover {
-    background-color: rgba(0,0,0,0.14);
+    background-color: rgba(0, 0, 0, 0.14);
   }
 
   &:active {
     transition: all 0.1s;
-    background-color: rgba(0,0,0,0.21);
+    background-color: rgba(0, 0, 0, 0.21);
   }
 `;

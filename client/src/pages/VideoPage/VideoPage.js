@@ -18,20 +18,20 @@ const VideoPage = ({
 
   if (loading)
     return (
-      <Layout title="Video">
+      <Layout title="Video" type="video">
         <Spinner type="page" />
       </Layout>
     );
 
   if (error)
     return (
-      <Layout title="Video">
+      <Layout title="Video" type="video">
         <p>{JSON.stringify(error)}</p>
       </Layout>
     );
 
   return (
-    <Layout title="Video">
+    <Layout title="Video" type="video">
       {view === 'list' ? (
         <ListView data={data.data.data} type="video" />
       ) : (
