@@ -58,7 +58,7 @@ const DashboardPage = ({
               New Item
             </NewButton>
           </section>
-          <section>
+          {/* <section>
             <ViewButton
               active={view === 'list'}
               onClick={() => setView('list')}
@@ -71,7 +71,7 @@ const DashboardPage = ({
             >
               <GridViewIcon />
             </ViewButton>
-          </section>
+          </section> */}
         </Controls>
         <ListView>
           {data.data.data.map((item) => (
