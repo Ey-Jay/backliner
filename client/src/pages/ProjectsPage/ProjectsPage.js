@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { GlobalContext } from 'context/GlobalContext';
 import useGetAPI from 'hooks/useGetAPI';
@@ -33,6 +34,7 @@ const DashboardPage = ({
     params: { bid },
   },
 }) => {
+  const history = useHistory();
   const { view, setView, setShowAddModal } = useContext(GlobalContext);
   const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
 
@@ -76,7 +78,10 @@ const DashboardPage = ({
         </Controls>
         <ListView>
           {data.data.data.map((item) => (
-            <ListItem key={item._id}>
+            <ListItem
+              key={item._id}
+              onClick={() => history.push(`/${bid}/project/${item._id}`)}
+            >
               <Dot color={item.theme} />
               <Details>
                 <ItemTitle>{item.name}</ItemTitle>

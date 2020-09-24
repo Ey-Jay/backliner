@@ -7,7 +7,7 @@ export const Container = styled.main`
 
 export const Controls = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 20px;
   margin-right: 10px;
@@ -73,7 +73,7 @@ export const ViewButton = styled.div`
   `}
 `;
 
-export const ListView = styled.ul`
+export const List = styled.ul`
   list-style: none;
   margin: 0 0 35px;
   padding: 0;
@@ -90,6 +90,7 @@ export const EmptyList = styled.li`
   padding: 20px;
   border-radius: 10px;
   margin: 0 10px;
+  list-style-type: none;
 `;
 
 export const ListItem = styled.li`
@@ -100,61 +101,59 @@ export const ListItem = styled.li`
   height: 80px;
   overflow: hidden;
   cursor: pointer;
+  &:hover {
+    background-color: rgba(247, 247, 250, 0.35);
+  }
 `;
 
-export const Dot = styled.div`
-  width: 70px;
+export const Icon = styled.div`
   height: 70px;
-  margin: 5px 15px 5px 5px;
+  width: 70px;
   border-radius: 50%;
-  background-color: ${({ color = '#111111' }) => color};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+
+  svg {
+    height: 30px;
+  }
 `;
 
 export const Details = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
 `;
 
-export const ItemTitle = styled.h2`
-  margin: 0;
-  font-size: 1.3rem;
-  margin-bottom: 5px;
-`;
-
-export const Elements = styled.div`
+export const Row = styled.div`
   display: flex;
-
-  & > * + * {
-    margin-left: 20px;
-  }
-`;
-
-export const Type = styled.div`
-  display: flex;
+  /* justify-content: space-around; */
   align-items: center;
 `;
 
-export const Icon = styled.div`
-  height: 25px;
-  width: 25px;
-  background-color: #10d164;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(0, 0, 0, 0.8);
-
-  svg {
-    height: 15px;
-  }
+export const ProjectName = styled.p`
+  padding: 5px;
+  background-color: ${({ color }) => color || '#666'};
+  border-radius: 3px;
+  margin: 0 0 0 10px;
 `;
 
-export const Amount = styled.p`
+export const FileName = styled.h3`
   margin: 0;
-  padding: 0;
-  margin-left: 5px;
+`;
+
+export const Author = styled.p`
+  font-style: italic;
+  font-size: 0.8rem;
+  margin: 0;
+`;
+
+export const Timestamp = styled.p`
+  font-style: italic;
+  font-size: 0.8rem;
+  margin: 0 0 0 10px;
 `;
 
 export const ItemSettingsButton = styled.div`

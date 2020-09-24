@@ -20,7 +20,7 @@ import {
   ItemSettingsButton,
   NewButton,
   EmptyList,
-} from './ListView.style';
+} from './ProjectListView.style';
 
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
 import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
@@ -31,7 +31,7 @@ import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
-const ListView = ({ data, type }) => {
+const ProjectListView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
   const { view, setView, setShowAddModal } = useContext(GlobalContext);
@@ -62,17 +62,12 @@ const ListView = ({ data, type }) => {
   return (
     <Container>
       <Controls>
-        <section>
-          <NewButton onClick={() => setShowAddModal(true)}>New Item</NewButton>
-        </section>
-        <section>
-          <ViewButton active={view === 'list'} onClick={() => setView('list')}>
-            <ListViewIcon />
-          </ViewButton>
-          <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
-            <GridViewIcon />
-          </ViewButton>
-        </section>
+        <ViewButton active={view === 'list'} onClick={() => setView('list')}>
+          <ListViewIcon />
+        </ViewButton>
+        <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
+          <GridViewIcon />
+        </ViewButton>
       </Controls>
       <List>
         {data.map((item) => (
@@ -106,4 +101,4 @@ const ListView = ({ data, type }) => {
   );
 };
 
-export default ListView;
+export default ProjectListView;
