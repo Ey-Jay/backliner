@@ -57,6 +57,7 @@ const EditItemPage = ({ type }) => {
       .put(
         `${apiUrl}/${type}/${data.data.data._id}`,
         {
+          project: `${itemProject}`,
           title: `${itemTitle}`,
           url: `${itemURL}`,
         },
