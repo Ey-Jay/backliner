@@ -13,6 +13,7 @@ import VideoPage from 'pages/VideoPage';
 import FilesPage from 'pages/FilesPage';
 import CalendarPage from 'pages/CalendarPage';
 import CheckInPage from 'pages/CheckInPage';
+import SettingsPage from 'pages/SettingsPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <PrivateRoute path="/:bid/video" component={VideoPage} />
       <PrivateRoute path="/:bid/files" component={FilesPage} />
       <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
+      <PrivateRoute path="/:bid/settings" component={SettingsPage} />
       <Redirect to="/signin" />
     </Switch>
   );
