@@ -21,7 +21,7 @@ const Layout = ({ children, title, type }) => {
   const { bid } = useParams();
   const band = useGetAPI(`/bands/${bid}`);
 
-  const { showAddModal, setShowAddModal } = useContext(GlobalContext);
+  const { showAddModal } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
@@ -44,8 +44,12 @@ const Layout = ({ children, title, type }) => {
           <Header>
             <h1>{title}</h1>
             <section>
-              <RoundButton icon="bell" />
-              <RoundButton icon="moon" />
+              {/* <RoundButton icon="bell" />
+              <RoundButton icon="moon" /> */}
+              <RoundButton
+                icon="checkin"
+                onClick={() => history.push('/checkin')}
+              />
               <RoundButton icon="logoff" onClick={logoff} />
               {isOpen ? null : (
                 <RoundButton icon="chat" onClick={() => setIsOpen(!isOpen)} />
