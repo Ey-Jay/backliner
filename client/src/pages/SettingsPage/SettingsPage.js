@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+
+import { GlobalContext } from 'context/GlobalContext';
 
 import firebase from 'fb';
 import Layout from 'layout';
@@ -22,6 +24,7 @@ const SettingsPage = ({
     params: { bid },
   },
 }) => {
+  const { setRerender } = useContext(GlobalContext);
   const [nameField, setNameField] = useState('');
   const [owner, setOwner] = useState(null);
   const [avatar, setAvatar] = useState(null);
@@ -47,11 +50,12 @@ const SettingsPage = ({
       };
 
       const token = await firebase.auth().currentUser.getIdToken();
-      await axios.post(`${apiUrl}/bands/${bid}`, postData, {
+      await axios.put(`${apiUrl}/bands/${bid}`, postData, {
         headers: { authorization: `Bearer ${token}` },
       });
 
       setIsLoading(false);
+      setRerender(new Date());
     } catch (e) {
       console.error(e);
     }
@@ -107,6 +111,7 @@ const SettingsPage = ({
                 key={idx}
                 current={idx === data?.data?.data?.avatar}
                 chosen={idx === avatar}
+                onClick={() => setAvatar(idx)}
               >
                 <img src={ava} alt="" />
               </Avatar>
