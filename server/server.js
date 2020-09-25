@@ -29,8 +29,8 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 if (process.env.NODE_ENV === 'dev') app.use(getDevUserId);
-else app.use('/api/', checkIfAuthenticated);
-app.use('/api/', require('./routes'));
+else app.use('/', checkIfAuthenticated);
+app.use('/', require('./routes'));
 app.use(errorHandler);
 
 server.listen(PORT, () => console.log(`🤖 Server running on port ${PORT} 🤖`));
