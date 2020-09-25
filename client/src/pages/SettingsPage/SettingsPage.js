@@ -7,10 +7,17 @@ import firebase from 'fb';
 import Layout from 'layout';
 import avatars from 'assets/band-avatars';
 import { apiUrl } from 'config/constants';
+import memberSrc from 'assets/ospen_schneider.jpg';
 import {
   Container,
   Members,
   Member,
+  MemberList,
+  MemberItem,
+  AddMemberItem,
+  MemberImage,
+  MemberName,
+  TrashWrapper,
   Avatars,
   Avatar,
   DangerZone,
@@ -18,6 +25,7 @@ import {
   SaveButton,
 } from './SettingsPage.style';
 import useGetAPInorerender from 'hooks/useGetAPInorerender';
+import { ReactComponent as TrashIcon } from 'assets/svg/TrashIcon.svg';
 
 const SettingsPage = ({
   match: {
@@ -27,6 +35,8 @@ const SettingsPage = ({
   const { setRerender } = useContext(GlobalContext);
   const [nameField, setNameField] = useState('');
   const [owner, setOwner] = useState(null);
+  const [members, setMembers] = useState([]);
+  const [addMemberId, setAddMemberId] = useState('');
   const [avatar, setAvatar] = useState(null);
   const { data, loading, error } = useGetAPInorerender(`/bands/${bid}`);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +46,7 @@ const SettingsPage = ({
     if (data) {
       setNameField(data?.data?.data?.name);
       setOwner(data?.data?.data?.owner._id);
+      setMembers(data?.data?.data?.members);
     }
   }, [data]);
 
@@ -103,6 +114,30 @@ const SettingsPage = ({
               </Member>
             ))}
           </Members>
+        </section>
+        <section>
+          <label>Members</label>
+          <MemberList>
+            {members.map((member) => (
+              <MemberItem key={member._id}>
+                <MemberImage>
+                  <img src={memberSrc} alt="" />
+                </MemberImage>
+                <MemberName>{member.name}</MemberName>
+                <TrashWrapper>
+                  <TrashIcon />
+                </TrashWrapper>
+              </MemberItem>
+            ))}
+            <AddMemberItem>
+              <input
+                type="text"
+                value={addMemberId}
+                onChange={(e) => setAddMemberId(e.currentTarget.value)}
+              />
+              <button>Add</button>
+            </AddMemberItem>
+          </MemberList>
         </section>
         <section>
           <label>Avatar</label>

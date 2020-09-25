@@ -31,6 +31,67 @@ export const Members = styled.select``;
 
 export const Member = styled.option``;
 
+export const MemberList = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+`;
+
+export const MemberItem = styled.li`
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+
+  & > * + * {
+    margin-left: 15px;
+  }
+`;
+
+export const AddMemberItem = styled.li`
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+
+  & > * + * {
+    margin-left: 15px;
+  }
+
+  button {
+    margin: 0;
+    height: 50px;
+    width: 100px;
+  }
+`;
+
+export const MemberImage = styled.div`
+  height: 50px;
+  width: 50px;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+`;
+
+export const MemberName = styled.div`
+  flex: 1;
+`;
+
+export const TrashWrapper = styled.div`
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Avatars = styled.div``;
 
 export const Avatar = styled.div`
