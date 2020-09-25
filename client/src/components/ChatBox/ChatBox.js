@@ -24,7 +24,7 @@ const chatMessages = [
   { message: 'nm and you?', isMine: false },
 ];
 
-const socket = io('/');
+const socket = io('http://localhost:3001');
 
 const ChatBox = ({ isOpen, setIsOpen }) => {
   const [message, setMessage] = useState('');
