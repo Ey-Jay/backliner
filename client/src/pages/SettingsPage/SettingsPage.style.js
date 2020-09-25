@@ -62,10 +62,18 @@ export const AddMemberItem = styled.li`
     margin-left: 15px;
   }
 
+  input {
+    height: 50px;
+    border-radius: 0;
+  }
+
   button {
     margin: 0;
     height: 50px;
     width: 100px;
+    border-radius: 0;
+    border: 0;
+    cursor: pointer;
   }
 `;
 

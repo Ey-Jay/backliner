@@ -24,7 +24,7 @@ import {
   DeleteButton,
   SaveButton,
 } from './SettingsPage.style';
-import useGetAPInorerender from 'hooks/useGetAPInorerender';
+import useGetAPI from 'hooks/useGetAPI';
 import { ReactComponent as TrashIcon } from 'assets/svg/TrashIcon.svg';
 
 const SettingsPage = ({
@@ -38,7 +38,7 @@ const SettingsPage = ({
   const [members, setMembers] = useState([]);
   const [addMemberId, setAddMemberId] = useState('');
   const [avatar, setAvatar] = useState(null);
-  const { data, loading, error } = useGetAPInorerender(`/bands/${bid}`);
+  const { data, loading, error } = useGetAPI(`/bands/${bid}`);
   const [isLoading, setIsLoading] = useState(false);
   console.log(data);
 
@@ -66,6 +66,46 @@ const SettingsPage = ({
       });
 
       setAvatar(null);
+      setIsLoading(false);
+      setRerender(new Date());
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const onClickAdd = async () => {
+    try {
+      setIsLoading(true);
+
+      const postData = {
+        member_id: addMemberId,
+      };
+
+      const token = await firebase.auth().currentUser.getIdToken();
+      await axios.post(`${apiUrl}/bands/${bid}/members`, postData, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+
+      setAvatar(null);
+      setAddMemberId('');
+      setIsLoading(false);
+      setRerender(new Date());
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const onClickRemove = async (uid) => {
+    try {
+      setIsLoading(true);
+
+      const token = await firebase.auth().currentUser.getIdToken();
+      await axios.delete(`${apiUrl}/bands/${bid}/members/${uid}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+
+      setAvatar(null);
+      setAddMemberId('');
       setIsLoading(false);
       setRerender(new Date());
     } catch (e) {
@@ -124,7 +164,7 @@ const SettingsPage = ({
                   <img src={memberSrc} alt="" />
                 </MemberImage>
                 <MemberName>{member.name}</MemberName>
-                <TrashWrapper>
+                <TrashWrapper onClick={() => onClickRemove(member._id)}>
                   <TrashIcon />
                 </TrashWrapper>
               </MemberItem>
@@ -135,7 +175,7 @@ const SettingsPage = ({
                 value={addMemberId}
                 onChange={(e) => setAddMemberId(e.currentTarget.value)}
               />
-              <button>Add</button>
+              <button onClick={onClickAdd}>Add</button>
             </AddMemberItem>
           </MemberList>
         </section>

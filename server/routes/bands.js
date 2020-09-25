@@ -37,6 +37,11 @@ router
   .get(getMembersFromBand)
   .post(addMemberToBand)
   .put(unused)
+  .delete(unused);
+
+// prettier-ignore
+router
+  .route('/:bid/members/:mid')
   .delete(removeMemberFromBand);
 
 // prettier-ignore
