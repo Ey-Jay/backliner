@@ -54,6 +54,7 @@ const SettingsPage = ({
         headers: { authorization: `Bearer ${token}` },
       });
 
+      setAvatar(null);
       setIsLoading(false);
       setRerender(new Date());
     } catch (e) {
