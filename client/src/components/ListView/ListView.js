@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 
@@ -30,11 +30,18 @@ import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
 import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
+import ThreeDotsModal from 'components/ThreeDotsModal';
 
 const ListView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
   const { view, setView, setShowAddModal } = useContext(GlobalContext);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const modalHandler = (e) => {
+    e.preventDefault();
+    setModalVisible(true);
+  };
 
   let thumbnail = <FileIcon />;
 
@@ -60,49 +67,60 @@ const ListView = ({ data, type }) => {
   }
 
   return (
-    <Container>
-      <Controls>
-        <section>
-          <NewButton onClick={() => setShowAddModal(true)}>New Item</NewButton>
-        </section>
-        <section>
-          <ViewButton active={view === 'list'} onClick={() => setView('list')}>
-            <ListViewIcon />
-          </ViewButton>
-          <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
-            <GridViewIcon />
-          </ViewButton>
-        </section>
-      </Controls>
-      <List>
-        {data.map((item) => (
-          <ListItem
-            key={item._id}
-            onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
-          >
-            <Icon>{thumbnail}</Icon>
-            <Details>
-              <Row>
-                <FileName>{item.title}</FileName>
-                <ProjectName color={item.project ? item.project.theme : null}>
-                  {item.project?.name ? item.project.name : 'No Project'}{' '}
-                </ProjectName>
-              </Row>
-              <Row>
-                <Author>{item.author.name}</Author>
-                <Timestamp>
-                  {moment(item.createdAt).format('DD/MM/YYYY')}
-                </Timestamp>
-              </Row>
-            </Details>
-            <ItemSettingsButton>
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-        ))}
-        {data.length === 0 && <EmptyList>No Items</EmptyList>}
-      </List>
-    </Container>
+    <>
+      {modalVisible ? <ThreeDotsModal setModalVisible={setModalVisible}/> : <> </>}
+      <Container>
+        <Controls>
+          <section>
+            <NewButton onClick={() => setShowAddModal(true)}>
+              New Item
+            </NewButton>
+          </section>
+          <section>
+            <ViewButton
+              active={view === 'list'}
+              onClick={() => setView('list')}
+            >
+              <ListViewIcon />
+            </ViewButton>
+            <ViewButton
+              active={view === 'grid'}
+              onClick={() => setView('grid')}
+            >
+              <GridViewIcon />
+            </ViewButton>
+          </section>
+        </Controls>
+        <List>
+          {data.map((item) => (
+            <ListItem
+              key={item._id}
+              onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
+            >
+              <Icon>{thumbnail}</Icon>
+              <Details>
+                <Row>
+                  <FileName>{item.title}</FileName>
+                  <ProjectName color={item.project ? item.project.theme : null}>
+                    {item.project?.name ? item.project.name : 'No Project'}{' '}
+                  </ProjectName>
+                </Row>
+                <Row>
+                  <Author>{item.author.name}</Author>
+                  <Timestamp>
+                    {moment(item.createdAt).format('DD/MM/YYYY')}
+                  </Timestamp>
+                </Row>
+              </Details>
+              <ItemSettingsButton>
+                <ThreeDotsIcon onClick={modalHandler} />
+              </ItemSettingsButton>
+            </ListItem>
+          ))}
+          {data.length === 0 && <EmptyList>No Items</EmptyList>}
+        </List>
+      </Container>
+    </>
   );
 };
 
