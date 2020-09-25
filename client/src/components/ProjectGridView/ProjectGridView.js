@@ -24,7 +24,7 @@ import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
 // import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
-import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
+// import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
 const ProjectGridView = ({ data, type }) => {
   const { bid } = useParams();
