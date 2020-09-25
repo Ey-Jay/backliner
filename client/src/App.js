@@ -16,6 +16,7 @@ import CheckInPage from 'pages/CheckInPage';
 import SettingsPage from 'pages/SettingsPage';
 import SingleProjectPage from 'pages/SingleProjectPage';
 import EditItemPage from 'pages/EditItemPage';
+import EditProjectPage from 'pages/EditProjectPage';
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
       <PrivateRoute path="/checkin" component={CheckInPage} />
       <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
       <PrivateRoute path="/:bid/project/:pid" component={SingleProjectPage} />
+      <PrivateRoute
+        path="/:bid/edit-project/:pid"
+        component={EditProjectPage}
+      />
       <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
       <PrivateRoute path="/:bid/new-lyrics" component={NewLyricsEditor} />
       <PrivateRoute path="/:bid/edit-lyrics/:id" component={EditLyricsEditor} />
@@ -34,7 +39,10 @@ function App() {
       <PrivateRoute path="/:bid/audio" component={AudioPage} />
       <PrivateRoute path="/:bid/video" component={VideoPage} />
       <PrivateRoute path="/:bid/files" component={FilesPage} />
-      <PrivateRoute path="/:bid/edit-audio/:id" component={() => <EditItemPage type="audio"/>} />
+      <PrivateRoute
+        path="/:bid/edit-audio/:id"
+        component={() => <EditItemPage type="audio" />}
+      />
       <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
       <PrivateRoute path="/:bid/settings" component={SettingsPage} />
       <Redirect to="/signin" />
