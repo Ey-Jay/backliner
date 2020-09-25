@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-// import EditItemPage from "pages/EditItemPage";
 import { ModalBackground, Modal, ModalControls } from './ThreeDotsModal.style';
-import DeleteModal from "components/DeleteModal";
-
-
+import DeleteModal from 'components/DeleteModal';
 
 const ThreeDotsModal = ({ setModalVisible }) => {
   const history = useHistory();
@@ -12,22 +9,29 @@ const ThreeDotsModal = ({ setModalVisible }) => {
   const [deleteVisible, setDeleteVisible] = useState(false);
 
   const modalHandler = (e) => {
-    e.preventDefault();
     setDeleteVisible(true);
+  };
+
+  const onCloseModal = (e) => {
+    setModalVisible(false);
   };
   return (
     <>
-      {deleteVisible ? <DeleteModal setDeleteVisible={setDeleteVisible}/> : <> </>}
-    <ModalBackground onClick={() => setModalVisible(false)}>
-      <Modal>
-        <ModalControls>
-          <button onClick={() => history.push(`/${bid}/edit-${type}/${id}`)}>
-            Edit
-          </button>
-          <button onClick={modalHandler}>Delete</button>
-        </ModalControls>
-      </Modal>
-    </ModalBackground>
+      {deleteVisible ? (
+        <DeleteModal setDeleteVisible={setDeleteVisible} />
+      ) : (
+        <> </>
+      )}
+      <ModalBackground onClick={onCloseModal}>
+        <Modal onClick={(e) => e.stopPropagation()}>
+          <ModalControls>
+            <button onClick={() => history.push(`/${bid}/edit-${type}/${id}`)}>
+              Edit
+            </button>
+            <button onClick={modalHandler}>Delete</button>
+          </ModalControls>
+        </Modal>
+      </ModalBackground>
     </>
   );
 };
