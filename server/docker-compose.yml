@@ -1,5 +1,6 @@
 app:
-  env_file: -.env
+  env_file: 
+    - .env
   build: .
   command: npm start
   ports:
