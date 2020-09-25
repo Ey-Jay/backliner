@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
+import firebase from 'fb';
+import { apiUrl } from 'config/constants';
 import Layout from 'layout';
 import {
   Container,
@@ -24,11 +28,12 @@ import { ReactComponent as TrashIcon } from 'assets/svg/TrashIcon.svg';
 
 const EditProjectPage = ({
   match: {
-    params: { pid },
+    params: { bid, pid },
   },
 }) => {
+  const history = useHistory();
   const { data, loading, error } = useGetAPInorerender(`/projects/${pid}`);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [nameValue, setNameValue] = useState('');
   const [theme, setTheme] = useState('#0074D9');
 
@@ -39,7 +44,28 @@ const EditProjectPage = ({
     }
   }, [data]);
 
-  if (loading)
+  const onClickSave = async () => {
+    try {
+      setIsLoading(true);
+
+      const postData = {
+        name: nameValue,
+        theme: theme,
+      };
+
+      const token = await firebase.auth().currentUser.getIdToken();
+      await axios.put(`${apiUrl}/projects/${pid}`, postData, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+
+      setIsLoading(false);
+      history.push(`/${bid}/projects`);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  if (loading || isLoading)
     return (
       <Layout title="Edit Project">
         <Container>
@@ -125,7 +151,7 @@ const EditProjectPage = ({
           <DeleteButton>Delete Project</DeleteButton>
         </DangerZone>
         <section>
-          <SaveButton>Save</SaveButton>
+          <SaveButton onClick={onClickSave}>Save</SaveButton>
         </section>
       </Container>
     </Layout>
