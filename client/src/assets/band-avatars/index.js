@@ -16,7 +16,6 @@ import redneon from './14.jpg';
 import saxman from './15.jpg';
 import singer from './16.jpg';
 import street from './17.jpg';
-import studio from './18.jpg';
 
 const avatars = [
   violin,
@@ -37,7 +36,6 @@ const avatars = [
   saxman,
   singer,
   street,
-  studio,
 ];
 
 export default avatars;
