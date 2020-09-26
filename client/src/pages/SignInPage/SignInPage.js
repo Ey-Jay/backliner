@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { GlobalContext } from 'context/GlobalContext';
 
+import { ReactComponent as LogoSVG } from 'assets/svg/Logo.svg';
 import { ReactComponent as GoogleSignInIcon } from 'assets/svg/GoogleSignInIcon.svg';
-import { Container, SignInButton } from './SignInPage.style';
+import { Container, Flex, SignInButton } from './SignInPage.style';
 
 import firebase from 'fb';
 
@@ -23,7 +24,12 @@ const SignInPage = () => {
   return (
     <Container>
       <div>
-        <h1>Welcome to Backliner</h1>
+        <Flex>
+          <div>
+            <LogoSVG />
+          </div>
+          <h1>backliner</h1>
+        </Flex>
         <SignInButton onClick={onClickHandler}>
           <GoogleSignInIcon /> Sign in with Google
         </SignInButton>
