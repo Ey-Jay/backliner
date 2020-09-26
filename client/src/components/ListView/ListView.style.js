@@ -125,6 +125,10 @@ export const Details = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
+
+  & > * + * {
+    margin-top: 5px;
+  }
 `;
 
 export const Row = styled.div`
@@ -134,10 +138,13 @@ export const Row = styled.div`
 `;
 
 export const ProjectName = styled.p`
-  padding: 5px;
+  padding: 5px 8px;
   background-color: ${({ color }) => color || '#666'};
   border-radius: 3px;
   margin: 0 0 0 10px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
 `;
 
 export const FileName = styled.h3`
