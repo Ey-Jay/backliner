@@ -87,19 +87,19 @@ const DashboardPage = ({
                 <ItemTitle>{item.name}</ItemTitle>
                 <Elements>
                   <Type>
-                    <Icon>
+                    <Icon color={item.theme}>
                       <LyricsIcon />
                     </Icon>
                     <Amount>{item.lyrics.length}</Amount>
                   </Type>
                   <Type>
-                    <Icon>
+                    <Icon color={item.theme}>
                       <MicIcon />
                     </Icon>
                     <Amount>{item.audios.length}</Amount>
                   </Type>
                   <Type>
-                    <Icon>
+                    <Icon color={item.theme}>
                       <VideoIcon />
                     </Icon>
                     <Amount>{item.videos.length}</Amount>
