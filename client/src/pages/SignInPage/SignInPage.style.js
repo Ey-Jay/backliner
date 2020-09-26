@@ -23,6 +23,7 @@ export const Flex = styled.div`
 
   svg {
     height: 60px;
+    color: ${({ theme }) => theme.primary};
   }
 `;
 
