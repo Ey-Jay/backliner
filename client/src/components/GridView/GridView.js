@@ -11,13 +11,14 @@ import {
   FileView,
   SingleFile,
   FirstRow,
-  Details,
   ProjectName,
   ItemSettingsButton,
   FileName,
   Icon,
   Author,
   Timestamp,
+  Details,
+  Divider,
   NewButton,
   EmptyList,
 } from './GridView.style';
@@ -75,21 +76,18 @@ const GridView = ({ data, type }) => {
             key={item._id}
             onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
           >
+            <ItemSettingsButton>
+              <ThreeDotsIcon />
+            </ItemSettingsButton>
+            <ProjectName color={item.project ? item.project.theme : null}>
+              {item.project?.name ? item.project.name : 'No Project'}
+            </ProjectName>
+            <FileName>{item.title}</FileName>
+            <Icon>{thumbnail}</Icon>
             <Details>
-              <FirstRow>
-                <ProjectName color={item.project ? item.project.theme : null}>
-                  {item.project?.name ? item.project.name : 'No Project'}
-                </ProjectName>
-                <ItemSettingsButton>
-                  <ThreeDotsIcon />
-                </ItemSettingsButton>
-              </FirstRow>
-              <FileName>{item.title}</FileName>
-              <Icon>{thumbnail}</Icon>
-              <Author>{item.author.name}</Author>
-              <Timestamp>
-                {moment(item.createdAt).format('DD/MM/YYYY')}
-              </Timestamp>
+              {moment(item.createdAt).format('DD/MM/YYYY')}
+              <Divider>·</Divider>
+              {item.author.name}
             </Details>
           </SingleFile>
         ))}
