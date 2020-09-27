@@ -109,6 +109,7 @@ export const ListItem = styled.li`
 export const Icon = styled.div`
   height: 70px;
   width: 70px;
+  margin: 0 10px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -124,16 +125,14 @@ export const Details = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
 
   & > * + * {
-    margin-top: 5px;
+    margin-top: 10px;
   }
 `;
 
 export const Row = styled.div`
   display: flex;
-  /* justify-content: space-around; */
   align-items: center;
 `;
 
@@ -152,15 +151,21 @@ export const FileName = styled.h3`
 `;
 
 export const Author = styled.p`
-  font-style: italic;
   font-size: 0.8rem;
   margin: 0;
+  opacity: 0.6;
+`;
+
+export const Divider = styled.p`
+  font-size: 0.8rem;
+  margin: 0 10px;
+  opacity: 0.6;
 `;
 
 export const Timestamp = styled.p`
-  font-style: italic;
   font-size: 0.8rem;
-  margin: 0 0 0 10px;
+  margin: 0;
+  opacity: 0.6;
 `;
 
 export const ItemSettingsButton = styled.div`

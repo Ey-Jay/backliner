@@ -13,6 +13,7 @@ import {
   Icon,
   Details,
   Row,
+  Divider,
   ProjectName,
   FileName,
   Author,
@@ -89,10 +90,11 @@ const ListView = ({ data, type }) => {
                 </ProjectName>
               </Row>
               <Row>
-                <Author>{item.author.name}</Author>
                 <Timestamp>
                   {moment(item.createdAt).format('DD/MM/YYYY')}
                 </Timestamp>
+                <Divider>·</Divider>
+                <Author>{item.author.name}</Author>
               </Row>
             </Details>
             <ItemSettingsButton>
