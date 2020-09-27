@@ -6,7 +6,7 @@ import { stateToHTML } from 'draft-js-export-html';
 import useGetAPI from 'hooks/useGetAPI';
 import Spinner from 'components/Spinner';
 import Layout from 'layout';
-import { Container, EditButton } from './SingleLyricsPage.style';
+import { Container, EditButton, Lyrics } from './SingleLyricsPage.style';
 
 const SingleLyricsPage = ({
   match: {
@@ -46,10 +46,12 @@ const SingleLyricsPage = ({
 
   return (
     <Layout title={data.data.data.title}>
-      <EditButton onClick={() => history.push(`/${bid}/edit-lyrics/${id}`)}>
-        edit
-      </EditButton>
-      <Container dangerouslySetInnerHTML={{ __html: html }} />
+      <Container>
+        <Lyrics dangerouslySetInnerHTML={{ __html: html }} />
+        <EditButton onClick={() => history.push(`/${bid}/edit-lyrics/${id}`)}>
+          edit
+        </EditButton>
+      </Container>
     </Layout>
   );
 };
