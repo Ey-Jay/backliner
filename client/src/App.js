@@ -37,12 +37,15 @@ function App() {
       <PrivateRoute path="/:bid/lyrics/:id" component={SingleLyricsPage} />
       <PrivateRoute path="/:bid/lyrics" component={LyricsPage} />
       <PrivateRoute path="/:bid/audio" component={AudioPage} />
+      <PrivateRoute path="/:bid/edit-audio/:id" component={() => <EditItemPage type="audio"/>} />
       <PrivateRoute path="/:bid/video" component={VideoPage} />
+      <PrivateRoute path="/:bid/edit-video/:id" component={() => <EditItemPage type="video"/>} />
       <PrivateRoute path="/:bid/files" component={FilesPage} />
       <PrivateRoute
         path="/:bid/edit-audio/:id"
         component={() => <EditItemPage type="audio" />}
       />
+      <PrivateRoute path="/:bid/edit-files/:id" component={() => <EditItemPage type="files"/>} />
       <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
       <PrivateRoute path="/:bid/settings" component={SettingsPage} />
       <Redirect to="/signin" />
