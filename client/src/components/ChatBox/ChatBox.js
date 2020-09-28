@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 import { isEmpty } from 'ramda';
 
@@ -17,6 +17,8 @@ import {
   Message,
 } from './ChatBox.style';
 
+import { GlobalContext } from 'context/GlobalContext';
+
 const chatMessages = [
   { message: 'heelloo', isMine: false },
   { message: 'are you there?', isMine: false },
@@ -24,9 +26,10 @@ const chatMessages = [
   { message: 'nm and you?', isMine: false },
 ];
 
-const socket = io('http://localhost:3001');
+const socket = io(process.env.REACT_APP_API_URL);
 
 const ChatBox = ({ isOpen, setIsOpen }) => {
+  const { bandID } = useContext(GlobalContext);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState(chatMessages);
 
@@ -34,12 +37,17 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
   messagesRef.current = messages;
 
   useEffect(() => {
+    console.log('chat mounted', bandID);
+    socket.emit('join room', bandID);
     socket.on('new msg', (msg) =>
       setMessages([...messagesRef.current, { message: msg }])
     );
 
-    return () => socket.emit('end');
-  }, []);
+    return () => {
+      socket.emit('leave room');
+      socket.off('new msg');
+    };
+  }, [bandID]);
 
   const textBox = useRef();
 

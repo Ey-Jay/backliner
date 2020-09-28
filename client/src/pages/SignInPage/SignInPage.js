@@ -5,6 +5,7 @@ import { GlobalContext } from 'context/GlobalContext';
 import { ReactComponent as LogoSVG } from 'assets/svg/Logo.svg';
 import { ReactComponent as GoogleSignInIcon } from 'assets/svg/GoogleSignInIcon.svg';
 import { Container, Flex, SignInButton } from './SignInPage.style';
+import { apiUrl } from 'config/constants';
 
 import firebase from 'fb';
 

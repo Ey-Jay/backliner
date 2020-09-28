@@ -23,12 +23,14 @@ const Layout = ({ children, title, type }) => {
   const { setBid } = useContext(ModalContext);
   const band = useGetAPI(`/bands/${bid}`);
 
+  const { setBandID } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
     setBid(bid);
-  }, [bid, setBid]);
+    setBandID(bid);
+  }, [bid]);
 
   const logoff = () =>
     firebase

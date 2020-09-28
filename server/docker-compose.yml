@@ -1,7 +1,0 @@
-app:
-  env_file: 
-    - .env
-  build: .
-  command: npm start
-  ports:
-    - '80:3001'
