@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const fs = require('fs');
 const morgan = require('morgan');
 const cors = require('cors');
 
@@ -21,12 +20,7 @@ const errorHandler = require('./middleware/error');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem'),
-};
-
-const server = require('https').createServer(options, app);
+const server = require('http').createServer(options, app);
 require('./socket')(server);
 
 connectDB();
