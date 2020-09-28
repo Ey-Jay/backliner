@@ -45,7 +45,7 @@ const EditItemPage = ({ type }) => {
 
   useEffect(() => {
     if (data) {
-      setItemProject(data?.data?.data?.project._id);
+      setItemProject(data?.data?.data?.project?._id);
       setItemTitle(data?.data?.data?.title);
       setItemURL(data?.data?.data?.url);
     }

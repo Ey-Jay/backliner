@@ -28,7 +28,7 @@ import MemberImageSrc from 'assets/ospen_schneider.jpg';
 
 const CheckInPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isModalLoaing, setIsModalLoading] = useState(false);
+  const [isModalLoading, setIsModalLoading] = useState(false);
   const [nameFieldValue, setNameFieldValue] = useState('');
   const history = useHistory();
   const { data, loading, error } = useGetAPI('/', isModalVisible);
@@ -80,7 +80,7 @@ const CheckInPage = () => {
       {isModalVisible && (
         <ModalBackground>
           <Modal>
-            {isModalLoaing ? (
+            {isModalLoading ? (
               'Loading...'
             ) : (
               <>

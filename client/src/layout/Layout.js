@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { GlobalContext } from 'context/GlobalContext';
+import { ModalContext } from 'context/ModalContext';
+
 import firebase from 'fb';
 import useGetAPI from 'hooks/useGetAPI';
 import Navbar from 'components/Navbar';
 import ChatBox from 'components/ChatBox';
 import RoundButton from 'components/RoundButton';
-import AddModal from 'components/AddModal';
+
 import {
   FlexContainer,
   NavWrapper,
@@ -19,13 +20,15 @@ import {
 
 const Layout = ({ children, title, type }) => {
   const { bid } = useParams();
+  const { setBid } = useContext(ModalContext);
   const band = useGetAPI(`/bands/${bid}`);
 
-  const { showAddModal, setBandID } = useContext(GlobalContext);
+  const { setBandID } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
+    setBid(bid);
     setBandID(bid);
   }, [bid]);
 
@@ -70,7 +73,6 @@ const Layout = ({ children, title, type }) => {
           />
         </ChatWrapper>
       </FlexContainer>
-      {showAddModal ? <AddModal type={type} /> : null}
     </>
   );
 };

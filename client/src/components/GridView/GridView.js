@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { ModalContext } from 'context/ModalContext';
 
 import {
   Container,
@@ -10,13 +11,10 @@ import {
   ViewButton,
   FileView,
   SingleFile,
-  FirstRow,
   ProjectName,
   ItemSettingsButton,
   FileName,
   Icon,
-  Author,
-  Timestamp,
   Details,
   Divider,
   NewButton,
@@ -27,14 +25,14 @@ import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
-// import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
 const GridView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
-  const { view, setView, setShowAddModal } = useContext(GlobalContext);
+  const { view, setView } = useContext(GlobalContext);
+  const { dispatch } = useContext(ModalContext);
 
   let thumbnail = <FileIcon />;
 
@@ -55,11 +53,16 @@ const GridView = ({ data, type }) => {
       thumbnail = <FileIcon />;
   }
 
+  const onClickNewHandler =
+    type === 'lyrics'
+      ? () => history.push(`/${bid}/new-lyrics`)
+      : () => dispatch({ type: 'SHOW_ADDITEM', payload: type });
+
   return (
     <Container>
       <Controls>
         <section>
-          <NewButton onClick={() => setShowAddModal(true)}>New Item</NewButton>
+          <NewButton onClick={onClickNewHandler}>New Item</NewButton>
         </section>
         <section>
           <ViewButton active={view === 'list'} onClick={() => setView('list')}>
