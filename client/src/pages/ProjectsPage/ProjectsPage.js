@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { GlobalContext } from 'context/GlobalContext';
+// import { GlobalContext } from 'context/GlobalContext';
+import { ModalContext } from 'context/ModalContext';
+
 import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import Spinner from 'components/Spinner';
@@ -35,7 +37,8 @@ const DashboardPage = ({
   },
 }) => {
   const history = useHistory();
-  const { /*view, setView,*/ setShowAddModal } = useContext(GlobalContext);
+  // const { view, setView } = useContext(GlobalContext);
+  const { dispatch } = useContext(ModalContext);
   const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
 
   if (error)
@@ -57,7 +60,7 @@ const DashboardPage = ({
       <Container>
         <Controls>
           <section>
-            <NewButton onClick={() => setShowAddModal(true)}>
+            <NewButton onClick={() => dispatch({ type: 'SHOW_ADDPROJECT' })}>
               New Item
             </NewButton>
           </section>
