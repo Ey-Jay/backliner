@@ -119,7 +119,7 @@ const CheckInPage = () => {
                     <Name>{band.name}</Name>
                     <Members>
                       {band.members.map((member) => (
-                        <Member key={member._id} src={MemberImageSrc} />
+                        <Member key={member._id} src={member.avatar} />
                       ))}
                     </Members>
                   </Description>

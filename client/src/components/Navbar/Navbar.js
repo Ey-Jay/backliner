@@ -23,7 +23,7 @@ const Navbar = ({ band }) => {
           <BandName>{band.name}</BandName>
           <MembersContainer>
             {band.members.map((member) => (
-              <MemberPortraitImg key={member._id} src={memberSrc} />
+              <MemberPortraitImg key={member._id} src={member.avatar} />
             ))}
           </MembersContainer>
         </BandDescription>
