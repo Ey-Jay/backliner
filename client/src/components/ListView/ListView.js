@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { ModalContext } from 'context/ModalContext';
 
 import {
   Container,
@@ -28,21 +29,14 @@ import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
-import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
-import ThreeDotsModal from 'components/ThreeDotsModal';
 
 const ListView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
-  const { view, setView, setShowAddModal } = useContext(GlobalContext);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const modalHandler = (e) => {
-    e.preventDefault();
-    setModalVisible(true);
-  };
+  const { view, setView } = useContext(GlobalContext);
+  const { dispatch } = useContext(ModalContext);
 
   let thumbnail = <FileIcon />;
 
@@ -59,27 +53,31 @@ const ListView = ({ data, type }) => {
       thumbnail = <LyricsIcon />;
       break;
 
-    case 'image':
-      thumbnail = <ImageIcon />;
-      break;
-
     default:
       thumbnail = <FileIcon />;
   }
 
+  const onClickNewHandler = () =>
+    dispatch({ type: 'SHOW_ADDITEM', payload: type });
+
   return (
     <>
-      {modalVisible ? <ThreeDotsModal setModalVisible={setModalVisible}/> : <> </>}
       <Container>
         <Controls>
           <section>
-            <NewButton onClick={() => setShowAddModal(true)}>New Item</NewButton>
+            <NewButton onClick={onClickNewHandler}>New Item</NewButton>
           </section>
           <section>
-            <ViewButton active={view === 'list'} onClick={() => setView('list')}>
+            <ViewButton
+              active={view === 'list'}
+              onClick={() => setView('list')}
+            >
               <ListViewIcon />
             </ViewButton>
-            <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
+            <ViewButton
+              active={view === 'grid'}
+              onClick={() => setView('grid')}
+            >
               <GridViewIcon />
             </ViewButton>
           </section>

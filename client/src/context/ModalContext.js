@@ -24,34 +24,40 @@ const modalReducer = (draft, action) => {
   switch (action.type) {
     case 'RESET':
       return initialState;
+
     case 'IS_LOADING':
       draft.isModalSuccess = false;
       draft.isModalError = false;
       draft.isModalLoading = true;
       return draft;
+
     case 'IS_SUCCESS':
       draft.isModalLoading = false;
       draft.modalError = false;
       draft.isModalSuccess = true;
       return draft;
+
     case 'IS_ERROR':
       draft.isModalLoading = false;
       draft.isModalSuccess = false;
       draft.isModalError = true;
       draft.modalError = action.payload;
       return draft;
+
     case 'SHOW_ADDITEM':
       draft = { ...initialState };
       draft.modalType = 'ADDITEM';
       draft.addType = action.payload;
       draft.isModalVisible = true;
       return draft;
+
     case 'SHOW_ADDPROJECT':
       draft = { ...initialState };
       draft.modalType = 'ADDPROJECT';
       draft.addType = 'project';
       draft.isModalVisible = true;
       return draft;
+
     case 'SHOW_DELETE':
       draft = { ...initialState };
       draft.modalType = 'DELETE';
@@ -59,6 +65,7 @@ const modalReducer = (draft, action) => {
       draft.deleteType = action.payload.type;
       draft.isModalVisible = true;
       return draft;
+
     case 'SHOW_THREEDOTS':
       draft = { ...initialState };
       draft.modalType = 'THREEDOTS';
@@ -66,6 +73,7 @@ const modalReducer = (draft, action) => {
       draft.dotsType = action.payload.type;
       draft.isModalVisible = true;
       return draft;
+
     default:
       return draft;
   }
