@@ -6,6 +6,7 @@ import { apiUrl } from 'config/constants';
 export const GlobalContext = React.createContext({ currentUser: null });
 
 export const GlobalContextProvider = ({ children }) => {
+  const [bandID, setBandID] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [dbUser, setDbUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +34,8 @@ export const GlobalContextProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
+        bandID,
+        setBandID,
         currentUser,
         dbUser,
         isLoading,

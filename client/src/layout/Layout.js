@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { GlobalContext } from 'context/GlobalContext';
@@ -21,9 +21,13 @@ const Layout = ({ children, title, type }) => {
   const { bid } = useParams();
   const band = useGetAPI(`/bands/${bid}`);
 
-  const { showAddModal } = useContext(GlobalContext);
+  const { showAddModal, setBandID } = useContext(GlobalContext);
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    setBandID(bid);
+  }, [bid]);
 
   const logoff = () =>
     firebase
