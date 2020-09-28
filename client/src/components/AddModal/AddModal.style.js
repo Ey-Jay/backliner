@@ -18,6 +18,7 @@ export const Modal = styled.div`
   padding: 20px;
   min-width: 300px;
   min-height: 200px;
+  box-shadow: 2px 4px 6px #00000066, 2px 4px 18px #00000066;
 
   h2 {
     margin: 0 0 20px;
@@ -68,29 +69,48 @@ export const Controls = styled.div`
 
 export const SubmitButton = styled.button`
   background-color: ${({ theme }) => theme.primary};
-  border: solid 2px ${({ theme }) => theme.primary};
+  border: none;
   color: inherit;
   padding: 12px 24px;
   border-radius: 6px;
   outline: none;
   font-weight: 700;
   cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: all 0.2s;
 
   &:hover {
     background-color: ${({ theme }) => theme.primaryDark};
-    border: solid 2px ${({ theme }) => theme.primaryDark};
+  }
+
+  &:active  {
+    transition: all 0.1s;
+    transform: scale(0.9);
   }
 `;
 
 export const CancelButton = styled.button`
   background-color: transparent;
-  border: solid 2px #fff;
+  border: none;
   color: inherit;
   padding: 12px 24px;
   border-radius: 6px;
   outline: none;
   font-weight: 700;
   cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.backgroundColor};
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
 `;
 
 export const Colors = styled.div`
@@ -113,7 +133,7 @@ export const ColorOption = styled.section`
   cursor: pointer;
 
   &::after {
-    content: '🤖';
+    content: '✔';
     display: ${({ active }) => (active ? 'block' : 'none')};
     font-size: 0.6rem;
   }

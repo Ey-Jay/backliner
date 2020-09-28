@@ -13,6 +13,7 @@ import {
   Icon,
   Details,
   Row,
+  Divider,
   ProjectName,
   FileName,
   Author,
@@ -85,14 +86,15 @@ const ListView = ({ data, type }) => {
               <Row>
                 <FileName>{item.title}</FileName>
                 <ProjectName color={item.project ? item.project.theme : null}>
-                  {item.project?.name ? item.project.name : 'No Project'}{' '}
+                  {item.project?.name ? item.project.name : 'No Project'}
                 </ProjectName>
               </Row>
               <Row>
-                <Author>{item.author.name}</Author>
                 <Timestamp>
                   {moment(item.createdAt).format('DD/MM/YYYY')}
                 </Timestamp>
+                <Divider>·</Divider>
+                <Author>{item.author.name}</Author>
               </Row>
             </Details>
             <ItemSettingsButton>

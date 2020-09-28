@@ -5,7 +5,12 @@ import useGetAPInorerender from 'hooks/useGetAPInorerender';
 import Layout from 'layout';
 import ProjectGridView from 'components/ProjectGridView';
 import ProjectListView from 'components/ProjectListView';
-import { Container, ProjectName } from './SingleProjectPage.style';
+import {
+  Container,
+  TitleFlex,
+  Dot,
+  ProjectName,
+} from './SingleProjectPage.style';
 
 const SingleProjectPage = ({
   match: {
@@ -45,9 +50,10 @@ const SingleProjectPage = ({
   return (
     <Layout title="Project">
       <Container>
-        <ProjectName bg={data.data.data.theme}>
-          {data.data.data.name}
-        </ProjectName>
+        <TitleFlex>
+          <Dot color={data.data.data.theme} />
+          <ProjectName>{data.data.data.name}</ProjectName>
+        </TitleFlex>
       </Container>
       {view === 'list' ? (
         <ProjectListView data={allItems} type="project" />

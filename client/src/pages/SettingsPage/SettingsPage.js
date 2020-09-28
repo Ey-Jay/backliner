@@ -134,6 +134,7 @@ const SettingsPage = ({
   return (
     <Layout title="Settings">
       <Container>
+        <h2>General</h2>
         <section>
           <label>Band Name</label>
           <input
@@ -156,7 +157,25 @@ const SettingsPage = ({
           </Members>
         </section>
         <section>
-          <label>Members</label>
+          <label>Avatar</label>
+          <Avatars>
+            {avatars.map((ava, idx) => (
+              <Avatar
+                key={idx}
+                current={idx === data?.data?.data?.avatar}
+                chosen={idx === avatar}
+                onClick={() => setAvatar(idx)}
+              >
+                <img src={ava} alt="" />
+              </Avatar>
+            ))}
+          </Avatars>
+        </section>
+        <section style={{ marginBottom: '100px' }}>
+          <SaveButton onClick={onClickSave}>Save</SaveButton>
+        </section>
+        <h2>Members</h2>
+        <section style={{ marginBottom: '100px' }}>
           <MemberList>
             {members.map((member) => (
               <MemberItem key={member._id}>
@@ -174,33 +193,16 @@ const SettingsPage = ({
                 type="text"
                 value={addMemberId}
                 onChange={(e) => setAddMemberId(e.currentTarget.value)}
+                placeholder="Paste User ID here"
               />
               <button onClick={onClickAdd}>Add</button>
             </AddMemberItem>
           </MemberList>
         </section>
-        <section>
-          <label>Avatar</label>
-          <Avatars>
-            {avatars.map((ava, idx) => (
-              <Avatar
-                key={idx}
-                current={idx === data?.data?.data?.avatar}
-                chosen={idx === avatar}
-                onClick={() => setAvatar(idx)}
-              >
-                <img src={ava} alt="" />
-              </Avatar>
-            ))}
-          </Avatars>
-        </section>
         <DangerZone>
           <h2>Danger Zone</h2>
           <DeleteButton>Delete Band</DeleteButton>
         </DangerZone>
-        <section>
-          <SaveButton onClick={onClickSave}>Save</SaveButton>
-        </section>
       </Container>
     </Layout>
   );

@@ -4,6 +4,27 @@ export const Container = styled.div`
   height: 100vh;
   display: grid;
   place-items: center;
+  text-align: center;
+
+  h1 {
+    font-family: 'Baloo Tamma 2', cursive;
+    margin: 0 0 0 20px;
+    position: relative;
+    top: 2px;
+    font-size: 3rem;
+  }
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+
+  svg {
+    height: 60px;
+    color: ${({ theme }) => theme.primary};
+  }
 `;
 
 export const SignInButton = styled.button`

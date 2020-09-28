@@ -67,6 +67,11 @@ export const AddMemberItem = styled.li`
     border-radius: 0;
   }
 
+  input::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
+
   button {
     margin: 0;
     height: 50px;
@@ -74,6 +79,17 @@ export const AddMemberItem = styled.li`
     border-radius: 0;
     border: 0;
     cursor: pointer;
+    background-color: ${({ theme }) => theme.secondary};
+    color: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    outline: none;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.secondaryDark};
+    }
   }
 `;
 
@@ -134,16 +150,60 @@ export const Avatar = styled.div`
   }
 `;
 
-export const SaveButton = styled.button``;
+export const SaveButton = styled.button`
+  background-color: ${({ theme }) => theme.secondary};
+  border: none;
+  color: inherit;
+  padding: 16px 32px;
+  border-radius: 6px;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondaryDark};
+  }
+
+  &:active  {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
+`;
 
 export const DangerZone = styled.div`
   background-color: #ff4136;
   padding: 20px;
   margin-bottom: 40px;
+  border-radius: 10px;
 
   h2 {
     margin-top: 0;
   }
 `;
 
-export const DeleteButton = styled.button``;
+export const DeleteButton = styled.button`
+  background-color: #ffffff;
+  border: none;
+  color: inherit;
+  padding: 12px 24px;
+  border-radius: 6px;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+  color: #ff4136;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active  {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
+`;
