@@ -59,52 +59,44 @@ const GridView = ({ data, type }) => {
       : () => dispatch({ type: 'SHOW_ADDITEM', payload: type });
 
   return (
-    <>
-      <Container>
-        <Controls>
-          <section>
-            <NewButton onClick={onClickNewHandler}>New Item</NewButton>
-          </section>
-          <section>
-            <ViewButton
-              active={view === 'list'}
-              onClick={() => setView('list')}
-            >
-              <ListViewIcon />
-            </ViewButton>
-            <ViewButton
-              active={view === 'grid'}
-              onClick={() => setView('grid')}
-            >
-              <GridViewIcon />
-            </ViewButton>
-          </section>
-        </Controls>
-        <FileView>
-          {data.map((item) => (
-            <SingleFile
-              key={item._id}
-              onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
-            >
-              <ItemSettingsButton>
-                <ThreeDotsIcon />
-              </ItemSettingsButton>
-              <ProjectName color={item.project ? item.project.theme : null}>
-                {item.project?.name ? item.project.name : 'No Project'}
-              </ProjectName>
-              <FileName>{item.title}</FileName>
-              <Icon>{thumbnail}</Icon>
-              <Details>
-                {moment(item.createdAt).format('DD/MM/YYYY')}
-                <Divider>·</Divider>
-                {item.author.name}
-              </Details>
-            </SingleFile>
-          ))}
-        </FileView>
-        {data.length === 0 && <EmptyList>No Items</EmptyList>}
-      </Container>
-    </>
+    <Container>
+      <Controls>
+        <section>
+          <NewButton onClick={onClickNewHandler}>New Item</NewButton>
+        </section>
+        <section>
+          <ViewButton active={view === 'list'} onClick={() => setView('list')}>
+            <ListViewIcon />
+          </ViewButton>
+          <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
+            <GridViewIcon />
+          </ViewButton>
+        </section>
+      </Controls>
+      <FileView>
+        {data.map((item) => (
+          <SingleFile
+            key={item._id}
+            onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
+          >
+            <ItemSettingsButton>
+              <ThreeDotsIcon />
+            </ItemSettingsButton>
+            <ProjectName color={item.project ? item.project.theme : null}>
+              {item.project?.name ? item.project.name : 'No Project'}
+            </ProjectName>
+            <FileName>{item.title}</FileName>
+            <Icon>{thumbnail}</Icon>
+            <Details>
+              {moment(item.createdAt).format('DD/MM/YYYY')}
+              <Divider>·</Divider>
+              {item.author.name}
+            </Details>
+          </SingleFile>
+        ))}
+      </FileView>
+      {data.length === 0 && <EmptyList>No Items</EmptyList>}
+    </Container>
   );
 };
 

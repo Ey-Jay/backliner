@@ -1,38 +1,55 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { ModalBackground, Modal, ModalControls } from './ThreeDotsModal.style';
-import DeleteModal from 'components/DeleteModal';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const ThreeDotsModal = ({ setModalVisible }) => {
+import { ModalContext } from 'context/ModalContext';
+import { Modal, ModalControls } from './ThreeDotsModal.style';
+
+const ThreeDotsModal = () => {
   const history = useHistory();
-  const { bid, type, id } = useParams();
-  const [deleteVisible, setDeleteVisible] = useState(false);
+  const { state, dispatch, bid } = useContext(ModalContext);
 
-  const modalHandler = (e) => {
-    setDeleteVisible(true);
+  if (state.isModalLoading)
+    return (
+      <Modal>
+        <p>Loading...</p>
+      </Modal>
+    );
+
+  if (state.isModalSuccess)
+    return (
+      <Modal>
+        <p>Success!</p>
+      </Modal>
+    );
+
+  if (state.isModalError)
+    return (
+      <Modal>
+        <p>Error!</p>
+      </Modal>
+    );
+
+  const editOptionHandler = () => {
+    history.push(`/${bid}/edit-${state.dotsType}/${state.dotsId}`);
+    dispatch({ type: 'RESET' });
   };
 
-  const onCloseModal = (e) => {
-    setModalVisible(false);
-  };
+  const deleteOptionHandler = () =>
+    dispatch({
+      type: 'SHOW_DELETE',
+      payload: {
+        id: state.dotsId,
+        type: state.dotsType,
+      },
+    });
+
   return (
-    <>
-      {deleteVisible ? (
-        <DeleteModal setDeleteVisible={setDeleteVisible} />
-      ) : (
-        <> </>
-      )}
-      <ModalBackground onClick={onCloseModal}>
-        <Modal onClick={(e) => e.stopPropagation()}>
-          <ModalControls>
-            <button onClick={() => history.push(`/${bid}/edit-${type}/${id}`)}>
-              Edit
-            </button>
-            <button onClick={modalHandler}>Delete</button>
-          </ModalControls>
-        </Modal>
-      </ModalBackground>
-    </>
+    <Modal>
+      <ModalControls>
+        <button onClick={editOptionHandler}>Edit</button>
+        <button onClick={deleteOptionHandler}>Delete</button>
+      </ModalControls>
+    </Modal>
   );
 };
 

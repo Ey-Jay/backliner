@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 
@@ -62,59 +62,58 @@ const ListView = ({ data, type }) => {
       ? () => history.push(`/${bid}/new-lyrics`)
       : () => dispatch({ type: 'SHOW_ADDITEM', payload: type });
 
+  const onClickDotsHandler = (e, iid) => {
+    e.stopPropagation();
+    dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type } });
+  };
+
   return (
-    <>
-      <Container>
-        <Controls>
-          <section>
-            <NewButton onClick={onClickNewHandler}>New Item</NewButton>
-          </section>
-          <section>
-            <ViewButton
-              active={view === 'list'}
-              onClick={() => setView('list')}
+    <Container>
+      <Controls>
+        <section>
+          <NewButton onClick={onClickNewHandler}>New Item</NewButton>
+        </section>
+        <section>
+          <ViewButton active={view === 'list'} onClick={() => setView('list')}>
+            <ListViewIcon />
+          </ViewButton>
+          <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
+            <GridViewIcon />
+          </ViewButton>
+        </section>
+      </Controls>
+      <List>
+        {data.map((item) => (
+          <ListItem
+            key={item._id}
+            onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
+          >
+            <Icon>{thumbnail}</Icon>
+            <Details>
+              <Row>
+                <FileName>{item.title}</FileName>
+                <ProjectName color={item.project ? item.project.theme : null}>
+                  {item.project?.name ? item.project.name : 'No Project'}
+                </ProjectName>
+              </Row>
+              <Row>
+                <Timestamp>
+                  {moment(item.createdAt).format('DD/MM/YYYY')}
+                </Timestamp>
+                <Divider>·</Divider>
+                <Author>{item.author.name}</Author>
+              </Row>
+            </Details>
+            <ItemSettingsButton
+              onClick={(e) => onClickDotsHandler(e, item._id)}
             >
-              <ListViewIcon />
-            </ViewButton>
-            <ViewButton
-              active={view === 'grid'}
-              onClick={() => setView('grid')}
-            >
-              <GridViewIcon />
-            </ViewButton>
-          </section>
-        </Controls>
-        <List>
-          {data.map((item) => (
-            <ListItem
-              key={item._id}
-              onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
-            >
-              <Icon>{thumbnail}</Icon>
-              <Details>
-                <Row>
-                  <FileName>{item.title}</FileName>
-                  <ProjectName color={item.project ? item.project.theme : null}>
-                    {item.project?.name ? item.project.name : 'No Project'}
-                  </ProjectName>
-                </Row>
-                <Row>
-                  <Timestamp>
-                    {moment(item.createdAt).format('DD/MM/YYYY')}
-                  </Timestamp>
-                  <Divider>·</Divider>
-                  <Author>{item.author.name}</Author>
-                </Row>
-              </Details>
-              <ItemSettingsButton>
-                <ThreeDotsIcon />
-              </ItemSettingsButton>
-            </ListItem>
-          ))}
-          {data.length === 0 && <EmptyList>No Items</EmptyList>}
-        </List>
-      </Container>
-    </>
+              <ThreeDotsIcon />
+            </ItemSettingsButton>
+          </ListItem>
+        ))}
+        {data.length === 0 && <EmptyList>No Items</EmptyList>}
+      </List>
+    </Container>
   );
 };
 
