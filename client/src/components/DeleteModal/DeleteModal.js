@@ -1,26 +1,11 @@
 import React, { useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 import { ModalContext } from 'context/ModalContext';
 
-import { apiUrl } from 'config/constants';
-import useGetAPI from 'hooks/useGetAPI';
-import { GlobalContext } from 'context/GlobalContext';
-
-import { ModalBackground, Modal, DeleteButton } from './DeleteModal.style';
+import { Modal, DeleteButton } from './DeleteModal.style';
 
 const DeleteModal = () => {
-  const {
-    id,
-    dispatch,
-    deleteItem,
-    state: { deleteType: type },
-  } = useContext(ModalContext);
-  const { data } = useGetAPI(`/${type}/${id}`);
-  const { currentUser } = useContext(GlobalContext);
-  const history = useHistory();
-
+  const { dispatch, deleteItem } = useContext(ModalContext);
   const onClickDeleteHandler = () => {
     deleteItem();
     dispatch({ type: 'RESET' });

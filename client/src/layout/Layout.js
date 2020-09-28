@@ -28,7 +28,7 @@ const Layout = ({ children, title, type }) => {
 
   useEffect(() => {
     setBid(bid);
-  }, []);
+  }, [bid, setBid]);
 
   const logoff = () =>
     firebase
