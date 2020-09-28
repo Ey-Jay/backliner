@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import bandSrc from 'assets/alpen_fiesta.jpg';
+import avatars from 'assets/band-avatars';
 import memberSrc from 'assets/ospen_schneider.jpg';
 import {
   Container,
@@ -13,13 +13,12 @@ import {
   MemberPortraitImg,
   Menu,
 } from './Navbar.style';
-import RoundButton from 'components/RoundButton';
 
 const Navbar = ({ band }) => {
   return (
     <Container>
       <BandDisplay>
-        <BandAvatarImg src={bandSrc} />
+        <BandAvatarImg src={avatars[band.avatar]} />
         <BandDescription>
           <BandName>{band.name}</BandName>
           <MembersContainer>

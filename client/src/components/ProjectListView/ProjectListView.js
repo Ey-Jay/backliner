@@ -25,7 +25,7 @@ import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
-import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
+// import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
@@ -33,29 +33,6 @@ const ProjectListView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
   const { view, setView } = useContext(GlobalContext);
-
-  let thumbnail = <FileIcon />;
-
-  switch (type) {
-    case 'audio':
-      thumbnail = <MicIcon />;
-      break;
-
-    case 'video':
-      thumbnail = <VideoIcon />;
-      break;
-
-    case 'lyrics':
-      thumbnail = <LyricsIcon />;
-      break;
-
-    case 'image':
-      thumbnail = <ImageIcon />;
-      break;
-
-    default:
-      thumbnail = <FileIcon />;
-  }
 
   return (
     <Container>

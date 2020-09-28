@@ -139,7 +139,7 @@ export const Type = styled.div`
 export const Icon = styled.div`
   height: 25px;
   width: 25px;
-  background-color: #10d164;
+  background-color: ${({ color }) => color};
   border-radius: 50%;
   display: flex;
   align-items: center;

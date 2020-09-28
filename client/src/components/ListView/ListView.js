@@ -13,6 +13,7 @@ import {
   Icon,
   Details,
   Row,
+  Divider,
   ProjectName,
   FileName,
   Author,
@@ -72,21 +73,13 @@ const ListView = ({ data, type }) => {
       <Container>
         <Controls>
           <section>
-            <NewButton onClick={() => setShowAddModal(true)}>
-              New Item
-            </NewButton>
+            <NewButton onClick={() => setShowAddModal(true)}>New Item</NewButton>
           </section>
           <section>
-            <ViewButton
-              active={view === 'list'}
-              onClick={() => setView('list')}
-            >
+            <ViewButton active={view === 'list'} onClick={() => setView('list')}>
               <ListViewIcon />
             </ViewButton>
-            <ViewButton
-              active={view === 'grid'}
-              onClick={() => setView('grid')}
-            >
+            <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
               <GridViewIcon />
             </ViewButton>
           </section>
@@ -102,18 +95,19 @@ const ListView = ({ data, type }) => {
                 <Row>
                   <FileName>{item.title}</FileName>
                   <ProjectName color={item.project ? item.project.theme : null}>
-                    {item.project?.name ? item.project.name : 'No Project'}{' '}
+                    {item.project?.name ? item.project.name : 'No Project'}
                   </ProjectName>
                 </Row>
                 <Row>
-                  <Author>{item.author.name}</Author>
                   <Timestamp>
                     {moment(item.createdAt).format('DD/MM/YYYY')}
                   </Timestamp>
+                  <Divider>·</Divider>
+                  <Author>{item.author.name}</Author>
                 </Row>
               </Details>
               <ItemSettingsButton>
-                <ThreeDotsIcon onClick={modalHandler} />
+                <ThreeDotsIcon />
               </ItemSettingsButton>
             </ListItem>
           ))}

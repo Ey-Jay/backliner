@@ -19,6 +19,8 @@ import {
   ModalBackground,
   Modal,
   ModalControls,
+  AddButton,
+  CancelButton,
 } from './CheckInPage.style';
 
 import BandImageSrc from 'assets/alpen_fiesta.jpg';
@@ -90,8 +92,10 @@ const CheckInPage = () => {
                   onChange={onChangeHandler}
                 />
                 <ModalControls>
-                  <button onClick={handleModalAdd}>Add</button>
-                  <button onClick={handleModalCancel}>Cancel</button>
+                  <AddButton onClick={handleModalAdd}>Add</AddButton>
+                  <CancelButton onClick={handleModalCancel}>
+                    Cancel
+                  </CancelButton>
                 </ModalControls>
               </>
             )}

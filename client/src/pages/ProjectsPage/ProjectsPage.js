@@ -8,7 +8,7 @@ import Spinner from 'components/Spinner';
 import {
   Container,
   Controls,
-  ViewButton,
+  /*ViewButton,*/
   ListView,
   ListItem,
   Dot,
@@ -22,8 +22,8 @@ import {
   NewButton,
   EmptyList,
 } from './ProjectsPage.style';
-import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
-import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
+// import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
+// import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
@@ -35,7 +35,7 @@ const DashboardPage = ({
   },
 }) => {
   const history = useHistory();
-  const { view, setView, setShowAddModal } = useContext(GlobalContext);
+  const { /*view, setView,*/ setShowAddModal } = useContext(GlobalContext);
   const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
 
   if (error)
@@ -87,19 +87,19 @@ const DashboardPage = ({
                 <ItemTitle>{item.name}</ItemTitle>
                 <Elements>
                   <Type>
-                    <Icon>
+                    <Icon color={item.theme}>
                       <LyricsIcon />
                     </Icon>
                     <Amount>{item.lyrics.length}</Amount>
                   </Type>
                   <Type>
-                    <Icon>
+                    <Icon color={item.theme}>
                       <MicIcon />
                     </Icon>
                     <Amount>{item.audios.length}</Amount>
                   </Type>
                   <Type>
-                    <Icon>
+                    <Icon color={item.theme}>
                       <VideoIcon />
                     </Icon>
                     <Amount>{item.videos.length}</Amount>
