@@ -20,7 +20,7 @@ const errorHandler = require('./middleware/error');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const server = require('http').createServer(options, app);
+const server = require('http').createServer(app);
 require('./socket')(server);
 
 connectDB();
