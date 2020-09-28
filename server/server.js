@@ -22,8 +22,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const options = {
-  key: fs.readFile('key.pem'),
-  cert: fs.readFile('cert.pem'),
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem'),
 };
 
 const server = require('https').createServer(options, app);
