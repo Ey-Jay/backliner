@@ -57,8 +57,10 @@ const ListView = ({ data, type }) => {
       thumbnail = <FileIcon />;
   }
 
-  const onClickNewHandler = () =>
-    dispatch({ type: 'SHOW_ADDITEM', payload: type });
+  const onClickNewHandler =
+    type === 'lyrics'
+      ? () => history.push(`/${bid}/new-lyrics`)
+      : () => dispatch({ type: 'SHOW_ADDITEM', payload: type });
 
   return (
     <>
