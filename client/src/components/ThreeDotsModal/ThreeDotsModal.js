@@ -43,11 +43,14 @@ const ThreeDotsModal = () => {
       },
     });
 
+  const cancelOptionHandler = () => dispatch({ type: 'RESET' });
+
   return (
     <Modal>
       <ModalControls>
         <button onClick={editOptionHandler}>Edit</button>
         <button onClick={deleteOptionHandler}>Delete</button>
+        <button onClick={cancelOptionHandler}>Cancel</button>
       </ModalControls>
     </Modal>
   );
