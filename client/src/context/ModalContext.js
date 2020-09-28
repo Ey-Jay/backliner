@@ -122,7 +122,7 @@ export const ModalContextProvider = ({ children }) => {
       dispatch({ type: 'IS_LOADING' });
 
       const token = await firebase.auth().currentUser.getIdToken();
-      const res = await axios.post(`${apiUrl}/bands/${bid}/${path}`, {
+      const res = await axios.delete(`${apiUrl}/${path}/${state.deleteId}`, {
         headers: { authorization: `Bearer ${token}` },
       });
 
