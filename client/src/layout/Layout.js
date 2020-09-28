@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
+import { GlobalContext } from 'context/GlobalContext';
 import { ModalContext } from 'context/ModalContext';
 
 import firebase from 'fb';
