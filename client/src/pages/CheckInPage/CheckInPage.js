@@ -31,7 +31,7 @@ const CheckInPage = () => {
   const [isModalLoaing, setIsModalLoading] = useState(false);
   const [nameFieldValue, setNameFieldValue] = useState('');
   const history = useHistory();
-  const { data, loading, error } = useGetAPI('/bands', isModalVisible);
+  const { data, loading, error } = useGetAPI('/', isModalVisible);
 
   const logoff = () =>
     firebase
@@ -108,7 +108,7 @@ const CheckInPage = () => {
           <RoundButton icon="logoff" onClick={logoff} />
         </Controls>
         <BandList>
-          {data.data.data.map((band) => (
+          {data.data.data.bands.map((band) => (
             <div key={band._id}>
               <Link to={`/${band._id}/projects`}>
                 <Band>

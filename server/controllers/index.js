@@ -21,8 +21,9 @@ const getUser = async (req, res, next) => {
       // User doesn't exist yet, sign them up & return data
       const newUser = await User.create({
         name: userData.name,
+        email: userData.email,
         theme: 'dark',
-        avatar: 1,
+        avatar: userData.picture,
         auth_token: authId,
         active: true,
       });

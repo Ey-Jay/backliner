@@ -13,7 +13,6 @@ const checkIfAuthenticated = async (req, res, next) => {
     }
 
     const userInfo = await admin.auth().verifyIdToken(req.authToken);
-
     req.authId = userInfo.uid;
     req.userData = userInfo;
 
