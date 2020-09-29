@@ -55,9 +55,12 @@ const DashboardPage = ({
       </Layout>
     );
 
-  const onClickDotsHandler = (e, iid) => {
+  const onClickDotsHandler = (e, iid, title) => {
     e.stopPropagation();
-    dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type: 'project' } });
+    dispatch({
+      type: 'SHOW_THREEDOTS',
+      payload: { id: iid, type: 'project', title },
+    });
   };
 
   return (
@@ -115,7 +118,7 @@ const DashboardPage = ({
                 </Elements>
               </Details>
               <ItemSettingsButton
-                onClick={(e) => onClickDotsHandler(e, item._id)}
+                onClick={(e) => onClickDotsHandler(e, item._id, item.name)}
               >
                 <ThreeDotsIcon />
               </ItemSettingsButton>
