@@ -31,17 +31,18 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
   messagesRef.current = messages;
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        user.getIdToken().then((token) => {
+    if (firebase.auth().currentUser)
+      firebase
+        .auth()
+        .currentUser.getIdToken()
+        .then((token) => {
           socket.emit('join room', bandID, token);
           socket.on('history', (history) => setMessages(history));
           socket.on('new msg', (msg) =>
             setMessages([...messagesRef.current, msg])
           );
-        });
-      }
-    });
+        })
+        .catch((err) => console.error(err));
 
     return () => {
       socket.emit('leave room');
