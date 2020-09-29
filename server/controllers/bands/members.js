@@ -10,11 +10,11 @@ const getMembersFromBand = async (req, res, next) => {
     const { authId } = req;
     const { bid } = req.params;
 
-    if (isUserInBand(authId, bid)) {
-      const band = await Band.findById(bid)
-        .populate('members', User.publicFields())
-        .exec();
+    const band = await Band.findById(bid)
+      .populate('members', User.publicFields())
+      .exec();
 
+    if (isUserInBand(authId, bid) && band && band.active) {
       res.status(200);
       res.json({
         success: true,
@@ -42,20 +42,20 @@ const addMemberToBand = async (req, res, next) => {
     const { bid } = req.params;
     const body = req.body;
 
-    if (isUserInBand(authId, bid)) {
-      if (!body.member_id) {
-        res.status(400);
-        res.json({
-          success: false,
-          action: 'post',
-          data: null,
-          error: true,
-          message: 'Bad request',
-        });
-      }
+    if (!body.member_id) {
+      res.status(400);
+      res.json({
+        success: false,
+        action: 'post',
+        data: null,
+        error: true,
+        message: 'Bad request',
+      });
+    }
 
-      const band = await Band.findById(bid);
+    const band = await Band.findById(bid);
 
+    if (isUserInBand(authId, bid) && band.active) {
       band.members.push(ObjectID(body.member_id));
       const updatedBand = await band.save();
 

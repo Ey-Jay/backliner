@@ -20,7 +20,7 @@ const getItemsByBand = async (req, res, next) => {
       switch (itemtype) {
         case 'projects':
           const projects = await Project.find(
-            { band: bid },
+            { band: bid, active: true },
             Project.publicFields()
           )
             .populate('author', User.publicFields())
@@ -40,7 +40,10 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'audio':
-          const audios = await Audio.find({ band: bid }, Audio.publicFields())
+          const audios = await Audio.find(
+            { band: bid, active: true },
+            Audio.publicFields()
+          )
             .populate('author', User.publicFields())
             .populate('project', Project.publicFields())
             .exec();
@@ -55,7 +58,10 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'video':
-          const videos = await Video.find({ band: bid }, Video.publicFields())
+          const videos = await Video.find(
+            { band: bid, active: true },
+            Video.publicFields()
+          )
             .populate('author', User.publicFields())
             .populate('project', Project.publicFields())
             .exec();
@@ -70,7 +76,10 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'files':
-          const files = await File.find({ band: bid }, File.publicFields())
+          const files = await File.find(
+            { band: bid, active: true },
+            File.publicFields()
+          )
             .populate('author', User.publicFields())
             .populate('project', Project.publicFields())
             .exec();
@@ -85,7 +94,10 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'lyrics':
-          const lyrics = await Lyrics.find({ band: bid }, Lyrics.publicFields())
+          const lyrics = await Lyrics.find(
+            { band: bid, active: true },
+            Lyrics.publicFields()
+          )
             .populate('author', User.publicFields())
             .populate('project', Project.publicFields())
             .exec();

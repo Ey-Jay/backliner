@@ -16,7 +16,7 @@ const getComments = async (req, res, next) => {
     const { authId } = req;
     const { iid } = req.params;
 
-    const comments = await Comments.find({ parent_id: iid })
+    const comments = await Comments.find({ parent_id: iid, active: true })
       .populate('parent_id')
       .exec();
 
