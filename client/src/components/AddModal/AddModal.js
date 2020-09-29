@@ -2,8 +2,12 @@ import React, { useState, useContext } from 'react';
 
 import { ModalContext } from 'context/ModalContext';
 import useGetAPInorerender from 'hooks/useGetAPInorerender';
+import Spinner from 'components/Spinner';
+import { ReactComponent as SuccessSVG } from 'assets/svg/Success.svg';
+import { ReactComponent as ErrorSVG } from 'assets/svg/Error.svg';
 import {
   Modal,
+  IconContainer,
   Form,
   SubmitButton,
   CancelButton,
@@ -23,11 +27,29 @@ const AddModal = () => {
   const [projectColor, setProjectColor] = useState('#0074D9');
 
   if (projectsAPI.loading || state.isModalLoading)
-    return <Modal>Loading ...</Modal>;
+    return (
+      <Modal>
+        <Spinner type="modal" />
+      </Modal>
+    );
 
-  if (state.isModalSuccess) return <Modal>Success!</Modal>;
+  if (state.isModalSuccess)
+    return (
+      <Modal>
+        <IconContainer>
+          <SuccessSVG />
+        </IconContainer>
+      </Modal>
+    );
 
-  if (state.isModalError) return <Modal>Error!</Modal>;
+  if (state.isModalError)
+    return (
+      <Modal>
+        <IconContainer>
+          <ErrorSVG />
+        </IconContainer>
+      </Modal>
+    );
 
   let headline = '';
   let itemtype = '';

@@ -62,9 +62,9 @@ const ListView = ({ data, type }) => {
       ? () => history.push(`/${bid}/new-lyrics`)
       : () => dispatch({ type: 'SHOW_ADDITEM', payload: type });
 
-  const onClickDotsHandler = (e, iid) => {
+  const onClickDotsHandler = (e, iid, title) => {
     e.stopPropagation();
-    dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type } });
+    dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type, title } });
   };
 
   return (
@@ -105,7 +105,7 @@ const ListView = ({ data, type }) => {
               </Row>
             </Details>
             <ItemSettingsButton
-              onClick={(e) => onClickDotsHandler(e, item._id)}
+              onClick={(e) => onClickDotsHandler(e, item._id, item.title)}
             >
               <ThreeDotsIcon />
             </ItemSettingsButton>

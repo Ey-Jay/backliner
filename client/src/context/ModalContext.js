@@ -18,6 +18,7 @@ const initialState = {
   deleteType: null,
   dotsId: null,
   dotsType: null,
+  dotsTitle: null,
 };
 
 const modalReducer = (draft, action) => {
@@ -71,6 +72,7 @@ const modalReducer = (draft, action) => {
       draft.modalType = 'THREEDOTS';
       draft.dotsId = action.payload.id;
       draft.dotsType = action.payload.type;
+      draft.dotsTitle = action.payload.title;
       draft.isModalVisible = true;
       return draft;
 

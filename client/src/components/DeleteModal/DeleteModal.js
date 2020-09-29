@@ -1,8 +1,16 @@
 import React, { useContext } from 'react';
 
 import { ModalContext } from 'context/ModalContext';
-
-import { Modal, DeleteButton } from './DeleteModal.style';
+import Spinner from 'components/Spinner';
+import { ReactComponent as SuccessSVG } from 'assets/svg/Success.svg';
+import { ReactComponent as ErrorSVG } from 'assets/svg/Error.svg';
+import {
+  Modal,
+  IconContainer,
+  Controls,
+  DeleteButton,
+  CancelButton,
+} from './DeleteModal.style';
 
 const DeleteModal = () => {
   const { state, dispatch, deleteItem } = useContext(ModalContext);
@@ -10,21 +18,25 @@ const DeleteModal = () => {
   if (state.isModalLoading)
     return (
       <Modal>
-        <p>Loading...</p>
+        <Spinner type="modal" />
       </Modal>
     );
 
   if (state.isModalSuccess)
     return (
       <Modal>
-        <p>Success!</p>
+        <IconContainer>
+          <SuccessSVG />
+        </IconContainer>
       </Modal>
     );
 
   if (state.isModalError)
     return (
       <Modal>
-        <p>Error!</p>
+        <IconContainer>
+          <ErrorSVG />
+        </IconContainer>
       </Modal>
     );
 
@@ -38,9 +50,11 @@ const DeleteModal = () => {
 
   return (
     <Modal>
-      <h2>Confirm Delete</h2>
-      <DeleteButton onClick={onClickDeleteHandler}>Delete</DeleteButton>
-      <button onClick={onClickCancelHandler}>Cancel</button>
+      <h2>Are you sure?</h2>
+      <Controls>
+        <DeleteButton onClick={onClickDeleteHandler}>Delete</DeleteButton>
+        <CancelButton onClick={onClickCancelHandler}>Cancel</CancelButton>
+      </Controls>
     </Modal>
   );
 };
