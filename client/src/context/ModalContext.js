@@ -117,17 +117,22 @@ export const ModalContextProvider = ({ children }) => {
     }
   };
 
-  const deleteItem = async (path) => {
+  const deleteItem = async () => {
     try {
       dispatch({ type: 'IS_LOADING' });
 
       const token = await firebase.auth().currentUser.getIdToken();
-      const res = await axios.delete(`${apiUrl}/${path}/${state.deleteId}`, {
-        headers: { authorization: `Bearer ${token}` },
-      });
+      const res = await axios.delete(
+        `${apiUrl}/${state.deleteType}/${state.deleteId}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
 
-      if (res.data.success) await showSuccess();
-      else await showError();
+      if (res.data.success) {
+        await showSuccess();
+        history.push('/checkin');
+      } else await showError();
     } catch (e) {
       await showError();
     }

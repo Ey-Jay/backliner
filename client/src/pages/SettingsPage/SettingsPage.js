@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { ModalContext } from 'context/ModalContext';
 
 import firebase from 'fb';
 import Layout from 'layout';
@@ -33,6 +34,7 @@ const SettingsPage = ({
   },
 }) => {
   const { setRerender } = useContext(GlobalContext);
+  const { dispatch } = useContext(ModalContext);
   const [nameField, setNameField] = useState('');
   const [owner, setOwner] = useState(null);
   const [members, setMembers] = useState([]);
@@ -111,6 +113,9 @@ const SettingsPage = ({
       console.error(e);
     }
   };
+
+  const onClickDeleteHandler = () =>
+    dispatch({ type: 'SHOW_DELETE', payload: { id: bid, type: 'bands' } });
 
   if (loading || isLoading)
     return (
@@ -200,7 +205,9 @@ const SettingsPage = ({
         </section>
         <DangerZone>
           <h2>Danger Zone</h2>
-          <DeleteButton>Delete Band</DeleteButton>
+          <DeleteButton onClick={onClickDeleteHandler}>
+            Delete Band
+          </DeleteButton>
         </DangerZone>
       </Container>
     </Layout>
