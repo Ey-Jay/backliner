@@ -229,7 +229,7 @@ const SettingsPage = ({
         </DangerZone>
         <Attribution>
           This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
-          <a href="https://remixicon.com">Remic Icons</a>.
+          <a href="https://remixicon.com">Remix Icons</a>.
         </Attribution>
       </Container>
     </Layout>
