@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 import { isEmpty } from 'ramda';
 
+import firebase from 'fb';
 import RoundButton from 'components/RoundButton';
 import TransformText from 'components/TransformText';
 import { AirplaneIcon } from 'components/RoundButton/Icons.style';
@@ -19,29 +20,28 @@ import {
 
 import { GlobalContext } from 'context/GlobalContext';
 
-const chatMessages = [
-  { message: 'heelloo', isMine: false },
-  { message: 'are you there?', isMine: false },
-  { message: 'hey whatsup', isMine: true },
-  { message: 'nm and you?', isMine: false },
-];
-
 const socket = io(process.env.REACT_APP_API_URL);
 
 const ChatBox = ({ isOpen, setIsOpen }) => {
-  const { bandID } = useContext(GlobalContext);
-  const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState(chatMessages);
+  const { bandID, dbUser } = useContext(GlobalContext);
+  const [messageValue, setMessageValue] = useState('');
+  const [messages, setMessages] = useState([]);
 
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
 
   useEffect(() => {
-    console.log('chat mounted', bandID);
-    socket.emit('join room', bandID);
-    socket.on('new msg', (msg) =>
-      setMessages([...messagesRef.current, { message: msg }])
-    );
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        user.getIdToken().then((token) => {
+          socket.emit('join room', bandID, token);
+          socket.on('history', (history) => setMessages(history));
+          socket.on('new msg', (msg) =>
+            setMessages([...messagesRef.current, msg])
+          );
+        });
+      }
+    });
 
     return () => {
       socket.emit('leave room');
@@ -58,24 +58,28 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
       } else {
         e.preventDefault();
 
-        if (!isEmpty(message.trim())) {
-          socket.emit('chat message', message);
-          setMessages([...messages, { message, isMine: true }]);
+        if (!isEmpty(messageValue.trim())) {
+          socket.emit('chat message', {
+            content: messageValue,
+            authorID: dbUser._id,
+          });
         }
         e.currentTarget.innerText = '';
-        setMessage('');
+        setMessageValue('');
       }
     }
   };
 
   const buttonClickHandler = () => {
-    if (!isEmpty(message.trim())) {
-      socket.emit('chat message', message);
-      setMessages([...messages, { message, isMine: true }]);
+    if (!isEmpty(messageValue.trim())) {
+      socket.emit('chat message', {
+        content: messageValue,
+        authorID: dbUser._id,
+      });
     }
     textBox.current.innerText = '';
     textBox.current.focus();
-    setMessage('');
+    setMessageValue('');
   };
 
   return (
@@ -84,11 +88,11 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
         <RoundButton icon="backarrow" onClick={() => setIsOpen(!isOpen)} />
       </ChatHeader>
       <ChatBody>
-        {messages.map((item, idx) => (
-          <ChatItem isMine={item.isMine} key={idx}>
-            {!item.isMine && <SenderImage src={memberSrc} />}
-            <Message isMine={item.isMine}>
-              <TransformText text={item.message.trim()} />
+        {messages.map((item) => (
+          <ChatItem isMine={item.author._id === dbUser._id} key={item._id}>
+            {item.author._id !== dbUser._id && <SenderImage src={memberSrc} />}
+            <Message isMine={item.author._id === dbUser._id}>
+              <TransformText text={item.content.trim()} />
             </Message>
           </ChatItem>
         ))}
@@ -98,7 +102,7 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
           role="textbox"
           contentEditable="true"
           ref={textBox}
-          onInput={(e) => setMessage(e.currentTarget.innerText)}
+          onInput={(e) => setMessageValue(e.currentTarget.innerText)}
           onKeyDown={enterKeyHandler}
         />
         <SendButton onClick={buttonClickHandler}>
