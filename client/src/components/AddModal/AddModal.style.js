@@ -7,9 +7,22 @@ export const Modal = styled.div`
   min-width: 300px;
   min-height: 200px;
   box-shadow: 2px 4px 6px #00000066, 2px 4px 18px #00000066;
+  position: relative;
 
   h2 {
     margin: 0 0 20px;
+  }
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${({ theme }) => theme.primary};
+
+  svg {
+    height: 60px;
   }
 `;
 

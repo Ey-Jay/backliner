@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 
 import { ModalContext } from 'context/ModalContext';
-
+import Spinner from 'components/Spinner';
+import { ReactComponent as SuccessSVG } from 'assets/svg/Success.svg';
+import { ReactComponent as ErrorSVG } from 'assets/svg/Error.svg';
 import {
   Modal,
+  IconContainer,
   Controls,
   DeleteButton,
   CancelButton,
@@ -15,21 +18,25 @@ const DeleteModal = () => {
   if (state.isModalLoading)
     return (
       <Modal>
-        <p>Loading...</p>
+        <Spinner type="modal" />
       </Modal>
     );
 
   if (state.isModalSuccess)
     return (
       <Modal>
-        <p>Success!</p>
+        <IconContainer>
+          <SuccessSVG />
+        </IconContainer>
       </Modal>
     );
 
   if (state.isModalError)
     return (
       <Modal>
-        <p>Error!</p>
+        <IconContainer>
+          <ErrorSVG />
+        </IconContainer>
       </Modal>
     );
 

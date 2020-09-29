@@ -5,12 +5,25 @@ export const Modal = styled.div`
   border-radius: 10px;
   padding: 20px;
   min-width: 200px;
-  min-height: 100px;
+  min-height: 200px;
+  position: relative;
 
   h2 {
     margin: 0 0 20px;
     font-size: 1rem;
     text-align: center;
+  }
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${({ theme }) => theme.primary};
+
+  svg {
+    height: 60px;
   }
 `;
 

@@ -2,7 +2,15 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { ModalContext } from 'context/ModalContext';
-import { Modal, ModalControls, Button } from './ThreeDotsModal.style';
+import Spinner from 'components/Spinner';
+import { ReactComponent as SuccessSVG } from 'assets/svg/Success.svg';
+import { ReactComponent as ErrorSVG } from 'assets/svg/Error.svg';
+import {
+  Modal,
+  IconContainer,
+  ModalControls,
+  Button,
+} from './ThreeDotsModal.style';
 
 const ThreeDotsModal = () => {
   const history = useHistory();
@@ -11,21 +19,25 @@ const ThreeDotsModal = () => {
   if (state.isModalLoading)
     return (
       <Modal>
-        <p>Loading...</p>
+        <Spinner type="modal" />
       </Modal>
     );
 
   if (state.isModalSuccess)
     return (
       <Modal>
-        <p>Success!</p>
+        <IconContainer>
+          <SuccessSVG />
+        </IconContainer>
       </Modal>
     );
 
   if (state.isModalError)
     return (
       <Modal>
-        <p>Error!</p>
+        <IconContainer>
+          <ErrorSVG />
+        </IconContainer>
       </Modal>
     );
 
