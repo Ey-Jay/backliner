@@ -40,7 +40,6 @@ const SettingsPage = ({
   const [avatar, setAvatar] = useState(null);
   const { data, loading, error } = useGetAPI(`/bands/${bid}`);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(data);
 
   useEffect(() => {
     if (data) {
