@@ -131,7 +131,7 @@ export const ModalContextProvider = ({ children }) => {
 
       if (res.data.success) {
         await showSuccess();
-        history.push('/checkin');
+        if (state.deleteType === 'bands') history.push('/checkin');
       } else await showError();
     } catch (e) {
       await showError();
