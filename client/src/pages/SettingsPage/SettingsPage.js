@@ -136,6 +136,18 @@ const SettingsPage = ({
       </Layout>
     );
 
+  if (dbUser._id !== data?.data?.data?.owner._id)
+    return (
+      <Layout title="Settings">
+        <Container>
+          <YourID>
+            <h2>Your Backliner ID</h2>
+            <p>{dbUser._id}</p>
+          </YourID>
+        </Container>
+      </Layout>
+    );
+
   return (
     <Layout title="Settings">
       <Container>
