@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin: 25px;
   height: 90%;
+  padding-bottom: 100px;
 `;
 
 export const TitleInput = styled.input`
@@ -15,7 +16,8 @@ export const TitleInput = styled.input`
 `;
 
 export const EditorContainer = styled.div`
-  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
   margin: 0 auto;
   padding: 15px;
   max-width: 850px;

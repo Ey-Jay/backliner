@@ -15,6 +15,7 @@ import useGetAPI from 'hooks/useGetAPI';
 import { apiUrl } from 'config/constants';
 import Spinner from 'components/Spinner';
 import Layout from 'layout';
+import './styles.css';
 import {
   Container,
   TitleInput,
@@ -197,7 +198,7 @@ const EditLyricsEditor = () => {
             placeholder="May the creative juices start flowing..."
           />
         </EditorContainer>
-        <SaveButton onClick={saveDocument}>Save</SaveButton>
+        <SaveButton onClick={saveDocument}>Save Changes</SaveButton>
       </Container>
     </Layout>
   );
