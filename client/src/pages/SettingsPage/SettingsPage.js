@@ -25,6 +25,7 @@ import {
   DeleteButton,
   SaveButton,
   YourID,
+  Attribution,
 } from './SettingsPage.style';
 import useGetAPI from 'hooks/useGetAPI';
 import { ReactComponent as TrashIcon } from 'assets/svg/TrashIcon.svg';
@@ -226,6 +227,10 @@ const SettingsPage = ({
             Delete Band
           </DeleteButton>
         </DangerZone>
+        <Attribution>
+          This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
+          <a href="https://remixicon.com">Remic Icons</a>.
+        </Attribution>
       </Container>
     </Layout>
   );

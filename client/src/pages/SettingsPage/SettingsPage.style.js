@@ -176,7 +176,7 @@ export const SaveButton = styled.button`
 export const DangerZone = styled.div`
   background-color: #ff4136;
   padding: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   border-radius: 10px;
 
   h2 {
@@ -229,5 +229,20 @@ export const YourID = styled.div`
     opacity: 0.5;
     text-align: center;
     margin: 0;
+  }
+`;
+
+export const Attribution = styled.div`
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 40px;
+
+  a {
+    font-weight: 700;
+    color: ${({ theme }) => theme.primary};
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 `;
