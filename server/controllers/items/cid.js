@@ -9,6 +9,7 @@ const Video = require('../../models/Video');
 const File = require('../../models/File');
 const Lyrics = require('../../models/Lyrics');
 const isUserInBand = require('../../utilities/isUserInBand');
+const User = require('../../models/User');
 
 const getCommentById = async (req, res, next) => {
   try {
@@ -29,7 +30,7 @@ const getCommentById = async (req, res, next) => {
     if (isUserInBand(authId, cleanResult.band)) {
       const comment = await Comments.findById(cid)
         .populate('parent_id')
-        .populate('author', 'name avatar active')
+        .populate('author', User.publicFields())
         .exec();
 
       if (comment.parent_id._id.toString() === iid.toString()) {
@@ -83,7 +84,7 @@ const updateCommentById = async (req, res, next) => {
     if (isUserInBand(authId, cleanResult.band)) {
       const comment = await Comments.findById(cid)
         .populate('parent_id')
-        .populate('author', 'name avatar active')
+        .populate('author', User.publicFields())
         .exec();
 
       if (comment.parent_id._id.toString() === iid.toString()) {

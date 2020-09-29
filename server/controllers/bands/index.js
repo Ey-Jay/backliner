@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Band = require('../../models/Band');
+const User = require('../../models/User');
 const getUserIdFromAuth = require('../../utilities/getUserIdFromAuth');
 
 const ObjectID = mongoose.Types.ObjectId;
@@ -10,12 +11,9 @@ const getBands = async (req, res, next) => {
     const { authId } = req;
 
     const userId = await getUserIdFromAuth(authId);
-    const bands = await Band.find(
-      { members: userId },
-      'name avatar members owner'
-    )
-      .populate('owner', 'name avatar active')
-      .populate('members', 'name avatar active')
+    const bands = await Band.find({ members: userId }, Band.publicFields())
+      .populate('owner', User.publicFields())
+      .populate('members', User.publicFields())
       .exec();
 
     res.status(200);
@@ -47,8 +45,8 @@ const createBand = async (req, res, next) => {
       active: true,
     });
 
-    await newBand.populate('owner', 'name avatar active').execPopulate();
-    await newBand.populate('members', 'name avatar active').execPopulate();
+    await newBand.populate('owner', User.publicFields()).execPopulate();
+    await newBand.populate('members', User.publicFields()).execPopulate();
 
     const { _id, name, avatar, owner, members, active } = newBand;
 

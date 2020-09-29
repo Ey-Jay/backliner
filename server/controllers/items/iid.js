@@ -8,6 +8,7 @@ const Video = require('../../models/Video');
 const File = require('../../models/File');
 const Lyrics = require('../../models/Lyrics');
 const isUserInBand = require('../../utilities/isUserInBand');
+const User = require('../../models/User');
 
 const getItemById = async (req, res, next) => {
   try {
@@ -19,19 +20,23 @@ const getItemById = async (req, res, next) => {
       Project.findById(iid)
         .populate({
           path: 'audios',
-          populate: { path: 'author', select: 'name' },
+          select: Audio.publicFields(),
+          populate: { path: 'author', select: User.publicFields() },
         })
         .populate({
           path: 'videos',
-          populate: { path: 'author', select: 'name' },
+          select: Video.publicFields(),
+          populate: { path: 'author', select: User.publicFields() },
         })
         .populate({
           path: 'files',
-          populate: { path: 'author', select: 'name' },
+          select: File.publicFields(),
+          populate: { path: 'author', select: User.publicFields() },
         })
         .populate({
           path: 'lyrics',
-          populate: { path: 'author', select: 'name' },
+          select: Lyrics.publicFields(),
+          populate: { path: 'author', select: User.publicFields() },
         })
         .exec()
     );

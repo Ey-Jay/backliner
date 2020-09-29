@@ -1,4 +1,5 @@
 const R = require('ramda');
+const Band = require('../models/Band');
 const User = require('../models/User');
 
 // GET & POST
@@ -9,8 +10,8 @@ const getUser = async (req, res, next) => {
     const user = await User.findOne({ auth_token: authId }, User.publicFields())
       .populate({
         path: 'bands',
-        select: 'name avatar owner members',
-        populate: { path: 'members', select: 'name avatar theme' },
+        select: Band.publicFields(),
+        populate: { path: 'members', select: User.publicFields() },
       })
       .exec();
 
