@@ -7,7 +7,10 @@ const getBandById = async (req, res, next) => {
     const { authId } = req;
     const { bid } = req.params;
 
-    const band = await Band.findOne({ _id: bid }, Band.publicFields())
+    const band = await Band.findOne(
+      { _id: bid, active: true },
+      Band.publicFields()
+    )
       .populate('owner', User.publicFields())
       .populate('members', User.publicFields())
       .exec();

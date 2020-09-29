@@ -19,7 +19,7 @@ const getItemsForUser = async (req, res, next) => {
     switch (itemtype) {
       case 'projects':
         const projects = await Project.find(
-          { band: { $in: bids } },
+          { band: { $in: bids }, active: true },
           Project.publicFields()
         )
           .populate('author', User.publicFields())
@@ -39,7 +39,7 @@ const getItemsForUser = async (req, res, next) => {
 
       case 'audio':
         const audios = await Audio.find(
-          { band: { $in: bids } },
+          { band: { $in: bids }, active: true },
           Audio.publicFields()
         )
           .populate('author', User.publicFields())
@@ -56,7 +56,7 @@ const getItemsForUser = async (req, res, next) => {
 
       case 'video':
         const videos = await Video.find(
-          { band: { $in: bids } },
+          { band: { $in: bids }, active: true },
           Video.publicFields()
         )
           .populate('author', User.publicFields())
@@ -73,7 +73,7 @@ const getItemsForUser = async (req, res, next) => {
 
       case 'lyrics':
         const lyrics = await Lyrics.find(
-          { band: { $in: bids } },
+          { band: { $in: bids }, active: true },
           Lyrics.publicFields()
         )
           .populate('author', User.publicFields())
@@ -90,7 +90,7 @@ const getItemsForUser = async (req, res, next) => {
 
       case 'files':
         const files = await File.find(
-          { band: { $in: bids } },
+          { band: { $in: bids }, active: true },
           File.publicFields()
         )
           .populate('author', User.publicFields())

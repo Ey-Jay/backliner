@@ -11,7 +11,10 @@ const getBands = async (req, res, next) => {
     const { authId } = req;
 
     const userId = await getUserIdFromAuth(authId);
-    const bands = await Band.find({ members: userId }, Band.publicFields())
+    const bands = await Band.find(
+      { members: userId, active: true },
+      Band.publicFields()
+    )
       .populate('owner', User.publicFields())
       .populate('members', User.publicFields())
       .exec();
