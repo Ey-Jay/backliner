@@ -207,3 +207,27 @@ export const DeleteButton = styled.button`
     transform: scale(0.9);
   }
 `;
+
+export const YourID = styled.div`
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  margin-bottom: 40px;
+
+  h2 {
+    text-align: center;
+    margin: 0 0 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
+
+  p {
+    background-color: rgba(255, 255, 255, 0.07);
+    padding: 10px;
+    border-radius: 10px;
+    opacity: 0.5;
+    text-align: center;
+    margin: 0;
+  }
+`;

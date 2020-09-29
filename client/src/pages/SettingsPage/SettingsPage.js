@@ -24,6 +24,7 @@ import {
   DangerZone,
   DeleteButton,
   SaveButton,
+  YourID,
 } from './SettingsPage.style';
 import useGetAPI from 'hooks/useGetAPI';
 import { ReactComponent as TrashIcon } from 'assets/svg/TrashIcon.svg';
@@ -33,7 +34,7 @@ const SettingsPage = ({
     params: { bid },
   },
 }) => {
-  const { setRerender } = useContext(GlobalContext);
+  const { setRerender, dbUser } = useContext(GlobalContext);
   const { dispatch } = useContext(ModalContext);
   const [nameField, setNameField] = useState('');
   const [owner, setOwner] = useState(null);
@@ -138,6 +139,10 @@ const SettingsPage = ({
   return (
     <Layout title="Settings">
       <Container>
+        <YourID>
+          <h2>Your Backliner ID</h2>
+          <p>{dbUser._id}</p>
+        </YourID>
         <h2>General</h2>
         <section>
           <label>Band Name</label>
