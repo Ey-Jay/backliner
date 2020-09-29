@@ -6,6 +6,7 @@ const cors = require('cors');
 const connectDB = require('./dbinit');
 require('./models/Audio');
 require('./models/Band');
+require('./models/ChatMessage');
 require('./models/Comments');
 require('./models/File');
 require('./models/Lyrics');
