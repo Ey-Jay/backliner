@@ -6,10 +6,7 @@ const getUser = async (req, res, next) => {
   try {
     const { authId, userData } = req;
 
-    const user = await User.findOne(
-      { auth_token: authId },
-      'name avatar theme bands active'
-    )
+    const user = await User.findOne({ auth_token: authId }, User.publicFields())
       .populate({
         path: 'bands',
         select: 'name avatar owner members',

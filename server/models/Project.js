@@ -52,4 +52,10 @@ ProjectSchema.virtual('lyrics', {
   justOne: false,
 });
 
+ProjectSchema.static(
+  'publicFields',
+  () =>
+    '_id name theme author band audios videos files lyrics createdAt updatedAt'
+);
+
 module.exports = mongoose.model('Project', ProjectSchema);

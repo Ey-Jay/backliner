@@ -19,4 +19,9 @@ const CommentSchema = new Schema(
   { timestamps: true }
 );
 
+CommentSchema.static(
+  'publicFields',
+  () => '_id parent_type parent_id author content createdAt'
+);
+
 module.exports = mongoose.model('Comment', CommentSchema);

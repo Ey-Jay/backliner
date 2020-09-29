@@ -16,4 +16,9 @@ const VideoSchema = new Schema(
   { timestamps: true }
 );
 
+VideoSchema.static(
+  'publicFields',
+  () => '_id title author band project url createdAt updatedAt'
+);
+
 module.exports = mongoose.model('Video', VideoSchema);

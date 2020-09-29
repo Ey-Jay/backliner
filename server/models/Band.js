@@ -20,4 +20,9 @@ const BandSchema = new Schema(
   { timestamps: true }
 );
 
+BandSchema.static(
+  'publicFields',
+  () => '_id name avatar owner members createdAt'
+);
+
 module.exports = mongoose.model('Band', BandSchema);

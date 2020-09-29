@@ -14,4 +14,9 @@ const LyricsSchema = new Schema(
   { timestamps: true }
 );
 
+LyricsSchema.static(
+  'publicFields',
+  () => '_id title author band project content createdAt updatedAt'
+);
+
 module.exports = mongoose.model('Lyrics', LyricsSchema);

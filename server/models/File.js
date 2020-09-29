@@ -16,4 +16,9 @@ const FileSchema = new Schema(
   { timestamps: true }
 );
 
+FileSchema.static(
+  'publicFields',
+  () => '_id title author band project url createdAt updatedAt'
+);
+
 module.exports = mongoose.model('File', FileSchema);
