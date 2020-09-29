@@ -20,4 +20,9 @@ UserSchema.virtual('bands', {
   justOne: false,
 });
 
+UserSchema.static(
+  'publicFields',
+  () => '_id name email theme avatar createdAt'
+);
+
 module.exports = mongoose.model('User', UserSchema);

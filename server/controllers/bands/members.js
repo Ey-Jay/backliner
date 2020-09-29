@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const ObjectID = mongoose.Types.ObjectId;
 
 const Band = require('../../models/Band');
+const User = require('../../models/User');
 const isUserInBand = require('../../utilities/isUserInBand');
 
 const getMembersFromBand = async (req, res, next) => {
@@ -11,7 +12,7 @@ const getMembersFromBand = async (req, res, next) => {
 
     if (isUserInBand(authId, bid)) {
       const band = await Band.findById(bid)
-        .populate('members', 'name avatar active')
+        .populate('members', User.publicFields())
         .exec();
 
       res.status(200);
@@ -58,9 +59,7 @@ const addMemberToBand = async (req, res, next) => {
       band.members.push(ObjectID(body.member_id));
       const updatedBand = await band.save();
 
-      await updatedBand
-        .populate('members', 'name avatar active')
-        .execPopulate();
+      await updatedBand.populate('members', User.publicFields()).execPopulate();
 
       res.status(200);
       res.json({
@@ -94,9 +93,7 @@ const removeMemberFromBand = async (req, res, next) => {
       band.members = band.members.filter((item) => item.toString() !== mid);
       const updatedBand = await band.save();
 
-      await updatedBand
-        .populate('members', 'name avatar active')
-        .execPopulate();
+      await updatedBand.populate('members', User.publicFields()).execPopulate();
 
       res.status(200);
       res.json({

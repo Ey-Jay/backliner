@@ -14,4 +14,9 @@ const AudioSchema = new Schema(
   { timestamps: true }
 );
 
+AudioSchema.static(
+  'publicFields',
+  () => '_id title author band project url createdAt updatedAt'
+);
+
 module.exports = mongoose.model('Audio', AudioSchema);

@@ -1,4 +1,5 @@
 const Band = require('../../models/Band');
+const User = require('../../models/User');
 const isUserInBand = require('../../utilities/isUserInBand');
 
 const getBandById = async (req, res, next) => {
@@ -6,12 +7,9 @@ const getBandById = async (req, res, next) => {
     const { authId } = req;
     const { bid } = req.params;
 
-    const band = await Band.findOne(
-      { _id: bid },
-      'name members avatar owner active'
-    )
-      .populate('owner', 'name avatar active')
-      .populate('members', 'name avatar active')
+    const band = await Band.findOne({ _id: bid }, Band.publicFields())
+      .populate('owner', User.publicFields())
+      .populate('members', User.publicFields())
       .exec();
 
     if (isUserInBand(authId, bid)) {
@@ -61,10 +59,8 @@ const updateBand = async (req, res, next) => {
         }
       );
 
-      await updatedBand.populate('owner', 'name avatar active').execPopulate();
-      await updatedBand
-        .populate('members', 'name avatar active')
-        .execPopulate();
+      await updatedBand.populate('owner', User.publicFields()).execPopulate();
+      await updatedBand.populate('members', User.publicFields()).execPopulate();
 
       const { _id, name, members, avatar, owner, active } = updatedBand;
 
@@ -102,10 +98,8 @@ const setBandInactive = async (req, res, next) => {
         }
       );
 
-      await updatedBand.populate('owner', 'name avatar active').execPopulate();
-      await updatedBand
-        .populate('members', 'name avatar active')
-        .execPopulate();
+      await updatedBand.populate('owner', User.publicFields()).execPopulate();
+      await updatedBand.populate('members', User.publicFields()).execPopulate();
 
       const { _id, name, members, avatar, owner, active } = updatedBand;
 

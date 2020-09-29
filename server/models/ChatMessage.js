@@ -10,4 +10,9 @@ const ChatMessageSchema = new Schema(
   { timestamps: true }
 );
 
+ChatMessageSchema.static(
+  'publicFields',
+  () => '_id content author band createdAt'
+);
+
 module.exports = mongoose.model('ChatMessage', ChatMessageSchema);

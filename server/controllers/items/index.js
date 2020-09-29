@@ -5,6 +5,8 @@ const File = require('../../models/File');
 const Lyrics = require('../../models/Lyrics');
 const getUserIdFromAuth = require('../../utilities/getUserIdFromAuth');
 const getBandsForUser = require('../../utilities/getBandsForUser');
+const User = require('../../models/User');
+const Band = require('../../models/Band');
 
 const getItemsForUser = async (req, res, next) => {
   try {
@@ -18,14 +20,14 @@ const getItemsForUser = async (req, res, next) => {
       case 'projects':
         const projects = await Project.find(
           { band: { $in: bids } },
-          'name theme author band active createdAt updatedAt audios videos files lyrics'
+          Project.publicFields()
         )
-          .populate('author', 'name avatar active')
-          .populate('band', 'name avatar active owner members')
-          .populate('audios')
-          .populate('videos')
-          .populate('files')
-          .populate('lyrics')
+          .populate('author', User.publicFields())
+          .populate('band', Band.publicFields())
+          .populate('audios', Audio.publicFields())
+          .populate('videos', Video.publicFields())
+          .populate('files', File.publicFields())
+          .populate('lyrics', Lyrics.publicFields())
           .exec();
 
         res.json({
@@ -38,11 +40,11 @@ const getItemsForUser = async (req, res, next) => {
       case 'audio':
         const audios = await Audio.find(
           { band: { $in: bids } },
-          'title url author band project active createdAt updatedAt'
+          Audio.publicFields()
         )
-          .populate('author', 'name avatar active')
-          .populate('band', 'name avatar active owner members')
-          .populate('project', 'name avatar active owner members')
+          .populate('author', User.publicFields())
+          .populate('band', Band.publicFields())
+          .populate('project', Project.publicFields())
           .exec();
 
         res.json({
@@ -55,11 +57,11 @@ const getItemsForUser = async (req, res, next) => {
       case 'video':
         const videos = await Video.find(
           { band: { $in: bids } },
-          'title url author band project active createdAt updatedAt'
+          Video.publicFields()
         )
-          .populate('author', 'name avatar active')
-          .populate('band', 'name avatar active owner members')
-          .populate('project', 'name avatar active owner members')
+          .populate('author', User.publicFields())
+          .populate('band', Band.publicFields())
+          .populate('project', Project.publicFields())
           .exec();
 
         res.json({
@@ -72,11 +74,11 @@ const getItemsForUser = async (req, res, next) => {
       case 'lyrics':
         const lyrics = await Lyrics.find(
           { band: { $in: bids } },
-          'title content author band project active createdAt updatedAt'
+          Lyrics.publicFields()
         )
-          .populate('author', 'name avatar active')
-          .populate('band', 'name avatar active owner members')
-          .populate('project', 'name avatar active owner members')
+          .populate('author', User.publicFields())
+          .populate('band', Band.publicFields())
+          .populate('project', Project.publicFields())
           .exec();
 
         res.json({
@@ -89,11 +91,11 @@ const getItemsForUser = async (req, res, next) => {
       case 'files':
         const files = await File.find(
           { band: { $in: bids } },
-          'title url author band project active createdAt updatedAt'
+          File.publicFields()
         )
-          .populate('author', 'name avatar active')
-          .populate('band', 'name avatar active owner members')
-          .populate('project', 'name avatar active owner members')
+          .populate('author', User.publicFields())
+          .populate('band', Band.publicFields())
+          .populate('project', Project.publicFields())
           .exec();
 
         res.json({

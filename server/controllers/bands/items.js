@@ -8,6 +8,8 @@ const File = require('../../models/File');
 const Lyrics = require('../../models/Lyrics');
 const isUserInBand = require('../../utilities/isUserInBand');
 const getUserIdFromAuth = require('../../utilities/getUserIdFromAuth');
+const Band = require('../../models/Band');
+const User = require('../../models/User');
 
 const getItemsByBand = async (req, res, next) => {
   try {
@@ -19,13 +21,13 @@ const getItemsByBand = async (req, res, next) => {
         case 'projects':
           const projects = await Project.find(
             { band: bid },
-            'name theme author active createdAt updatedAt'
+            Project.publicFields()
           )
-            .populate('author', 'name avatar active')
-            .populate('audios')
-            .populate('videos')
-            .populate('lyrics')
-            .populate('files')
+            .populate('author', User.publicFields())
+            .populate('audios', Audio.publicFields())
+            .populate('videos', Video.publicFields())
+            .populate('lyrics', Lyrics.publicFields())
+            .populate('files', File.publicFields())
             .exec();
 
           res.status(200);
@@ -38,12 +40,9 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'audio':
-          const audios = await Audio.find(
-            { band: bid },
-            'title author project url createdAt updatedAt'
-          )
-            .populate('author', 'name avatar active')
-            .populate('project', 'name theme active')
+          const audios = await Audio.find({ band: bid }, Audio.publicFields())
+            .populate('author', User.publicFields())
+            .populate('project', Project.publicFields())
             .exec();
 
           res.status(200);
@@ -56,12 +55,9 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'video':
-          const videos = await Video.find(
-            { band: bid },
-            'title author project url createdAt updatedAt'
-          )
-            .populate('author', 'name avatar active')
-            .populate('project', 'name theme active')
+          const videos = await Video.find({ band: bid }, Video.publicFields())
+            .populate('author', User.publicFields())
+            .populate('project', Project.publicFields())
             .exec();
 
           res.status(200);
@@ -74,12 +70,9 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'files':
-          const files = await File.find(
-            { band: bid },
-            'title author project url createdAt updatedAt'
-          )
-            .populate('author', 'name avatar active')
-            .populate('project', 'name theme active')
+          const files = await File.find({ band: bid }, File.publicFields())
+            .populate('author', User.publicFields())
+            .populate('project', Project.publicFields())
             .exec();
 
           res.status(200);
@@ -92,12 +85,9 @@ const getItemsByBand = async (req, res, next) => {
           break;
 
         case 'lyrics':
-          const lyrics = await Lyrics.find(
-            { band: bid },
-            'title author project url createdAt updatedAt'
-          )
-            .populate('author', 'name avatar active')
-            .populate('project', 'name theme active')
+          const lyrics = await Lyrics.find({ band: bid }, Lyrics.publicFields())
+            .populate('author', User.publicFields())
+            .populate('project', Project.publicFields())
             .exec();
 
           res.status(200);
@@ -152,11 +142,9 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
+          await newProject.populate('band', Band.publicFields()).execPopulate();
           await newProject
-            .populate('band', 'name avatar owner members active')
-            .execPopulate();
-          await newProject
-            .populate('author', 'name avatar active')
+            .populate('author', User.publicFields())
             .execPopulate();
 
           const { _id, name, theme, author, band, active } = newProject;
@@ -180,14 +168,10 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
+          await newAudio.populate('band', Band.publicFields()).execPopulate();
+          await newAudio.populate('author', User.publicFields()).execPopulate();
           await newAudio
-            .populate('band', 'name avatar owner members active')
-            .execPopulate();
-          await newAudio
-            .populate('author', 'name avatar active')
-            .execPopulate();
-          await newAudio
-            .populate('project', 'name theme author active')
+            .populate('project', Project.publicFields())
             .execPopulate();
 
           res.status(200);
@@ -216,14 +200,10 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
+          await newVideo.populate('band', Band.publicFields()).execPopulate();
+          await newVideo.populate('author', User.publicFields()).execPopulate();
           await newVideo
-            .populate('band', 'name avatar owner members active')
-            .execPopulate();
-          await newVideo
-            .populate('author', 'name avatar active')
-            .execPopulate();
-          await newVideo
-            .populate('project', 'name theme author active')
+            .populate('project', Project.publicFields())
             .execPopulate();
 
           res.status(200);
@@ -252,12 +232,10 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
+          await newFile.populate('band', Band.publicFields()).execPopulate();
+          await newFile.populate('author', User.publicFields()).execPopulate();
           await newFile
-            .populate('band', 'name avatar owner members active')
-            .execPopulate();
-          await newFile.populate('author', 'name avatar active').execPopulate();
-          await newFile
-            .populate('project', 'name theme author active')
+            .populate('project', Project.publicFields())
             .execPopulate();
 
           res.status(200);
@@ -286,14 +264,12 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
+          await newLyrics.populate('band', Band.publicFields()).execPopulate();
           await newLyrics
-            .populate('band', 'name avatar owner members active')
+            .populate('author', User.publicFields())
             .execPopulate();
           await newLyrics
-            .populate('author', 'name avatar active')
-            .execPopulate();
-          await newLyrics
-            .populate('project', 'name theme author active')
+            .populate('project', Project.publicFields())
             .execPopulate();
 
           res.status(200);
