@@ -2,7 +2,12 @@ import React, { useContext } from 'react';
 
 import { ModalContext } from 'context/ModalContext';
 
-import { Modal, DeleteButton } from './DeleteModal.style';
+import {
+  Modal,
+  Controls,
+  DeleteButton,
+  CancelButton,
+} from './DeleteModal.style';
 
 const DeleteModal = () => {
   const { state, dispatch, deleteItem } = useContext(ModalContext);
@@ -38,9 +43,11 @@ const DeleteModal = () => {
 
   return (
     <Modal>
-      <h2>Confirm Delete</h2>
-      <DeleteButton onClick={onClickDeleteHandler}>Delete</DeleteButton>
-      <button onClick={onClickCancelHandler}>Cancel</button>
+      <h2>Are you sure?</h2>
+      <Controls>
+        <DeleteButton onClick={onClickDeleteHandler}>Delete</DeleteButton>
+        <CancelButton onClick={onClickCancelHandler}>Cancel</CancelButton>
+      </Controls>
     </Modal>
   );
 };
