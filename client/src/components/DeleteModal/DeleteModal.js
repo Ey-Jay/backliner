@@ -5,10 +5,31 @@ import { ModalContext } from 'context/ModalContext';
 import { Modal, DeleteButton } from './DeleteModal.style';
 
 const DeleteModal = () => {
-  const { dispatch, deleteItem } = useContext(ModalContext);
+  const { state, dispatch, deleteItem } = useContext(ModalContext);
+
+  if (state.isModalLoading)
+    return (
+      <Modal>
+        <p>Loading...</p>
+      </Modal>
+    );
+
+  if (state.isModalSuccess)
+    return (
+      <Modal>
+        <p>Success!</p>
+      </Modal>
+    );
+
+  if (state.isModalError)
+    return (
+      <Modal>
+        <p>Error!</p>
+      </Modal>
+    );
+
   const onClickDeleteHandler = () => {
     deleteItem();
-    dispatch({ type: 'RESET' });
   };
 
   const onClickCancelHandler = () => {
