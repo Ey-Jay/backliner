@@ -145,7 +145,7 @@ const setCommentInactiveById = async (req, res, next) => {
     if (isUserInBand(authId, cleanResult.band)) {
       const comment = await Comments.findById(cid)
         .populate('parent_id')
-        .populate('author', 'name avatar active')
+        .populate('author', User.publicFields())
         .exec();
 
       if (comment.parent_id._id.toString() === iid.toString()) {
