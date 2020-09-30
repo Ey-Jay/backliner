@@ -18,16 +18,14 @@ module.exports = (server) => {
   io.on('connection', async (socket) => {
     try {
       socket.on('join room', async (room, authToken) => {
-        if (process.env.NODE_ENV !== 'dev') {
-          if (!authToken) return () => kickUser();
+        if (!authToken) return () => kickUser();
 
-          const userInfo = await admin.auth().verifyIdToken(authToken);
-          if (!userInfo) return () => kickUser();
+        const userInfo = await admin.auth().verifyIdToken(authToken);
+        if (!userInfo) return () => kickUser();
 
-          const dbBand = await Band.findById(room);
-          const dbUser = await User.findOne({ auth_token: userInfo.uid });
-          if (!dbBand.members.includes(dbUser._id)) return () => kickUser();
-        }
+        const dbBand = await Band.findById(room);
+        const dbUser = await User.findOne({ auth_token: userInfo.uid });
+        if (!dbBand.members.includes(dbUser._id)) return () => kickUser();
 
         socket.leave(socket.room);
         socket.join(room);
