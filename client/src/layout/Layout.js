@@ -9,6 +9,7 @@ import useGetAPI from 'hooks/useGetAPI';
 import Navbar from 'components/Navbar';
 import ChatBox from 'components/ChatBox';
 import RoundButton from 'components/RoundButton';
+import Spinner from 'components/Spinner';
 
 import {
   FlexContainer,
@@ -40,7 +41,7 @@ const Layout = ({ children, title, type }) => {
       .then(() => history.push('/signin'))
       .catch((e) => console.error(e));
 
-  if (band.loading) return <p>Loading ...</p>;
+  if (band.loading) return <p>Loading111 ...</p>;
 
   return (
     <>
