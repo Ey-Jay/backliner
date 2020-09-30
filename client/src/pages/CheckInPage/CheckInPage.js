@@ -22,9 +22,7 @@ import {
   AddButton,
   CancelButton,
 } from './CheckInPage.style';
-
-import BandImageSrc from 'assets/alpen_fiesta.jpg';
-import MemberImageSrc from 'assets/ospen_schneider.jpg';
+import avatars from 'assets/band-avatars';
 
 const CheckInPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -113,7 +111,7 @@ const CheckInPage = () => {
               <Link to={`/${band._id}/projects`}>
                 <Band>
                   <Picture>
-                    <img src={BandImageSrc} alt="" />
+                    <img src={avatars[band.avatar]} alt="" />
                   </Picture>
                   <Description>
                     <Name>{band.name}</Name>
