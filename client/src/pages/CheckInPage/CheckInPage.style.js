@@ -8,10 +8,26 @@ export const Container = styled.div`
 export const Controls = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.14);
+  padding: 10px;
+  border-radius: 40px;
 
   & > * + * {
     margin-left: 20px;
+  }
+`;
+
+export const UserPicture = styled.div`
+  height: 60px;
+  flex: 1;
+
+  img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 `;
 

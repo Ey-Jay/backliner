@@ -21,6 +21,7 @@ import {
   ModalControls,
   AddButton,
   CancelButton,
+  UserPicture,
 } from './CheckInPage.style';
 import avatars from 'assets/band-avatars';
 
@@ -102,6 +103,9 @@ const CheckInPage = () => {
       )}
       <Container>
         <Controls>
+          <UserPicture>
+            <img src={data.data.data.avatar} alt="" />
+          </UserPicture>
           <RoundButton icon="plus" onClick={handlePlusButton} />
           <RoundButton icon="logoff" onClick={logoff} />
         </Controls>
