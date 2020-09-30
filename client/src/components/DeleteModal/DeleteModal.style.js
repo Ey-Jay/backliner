@@ -7,6 +7,7 @@ export const Modal = styled.div`
   min-width: 300px;
   min-height: 150px;
   position: relative;
+  box-shadow: 2px 4px 6px #00000066, 2px 4px 18px #00000066;
 
   h2 {
     margin: 0 0 40px;
