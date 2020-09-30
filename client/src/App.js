@@ -25,12 +25,12 @@ import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 
 function App() {
-  const { state } = useContext(ModalContext);
+  const { state, dispatch } = useContext(ModalContext);
 
   return (
     <>
       {state.isModalVisible && (
-        <ModalBackground>
+        <ModalBackground onClick={() => dispatch({ type: 'RESET' })}>
           {state.modalType === 'ADDITEM' && <AddModal />}
           {state.modalType === 'ADDPROJECT' && <AddModal />}
           {state.modalType === 'DELETE' && <DeleteModal />}

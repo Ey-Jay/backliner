@@ -18,14 +18,14 @@ const ThreeDotsModal = () => {
 
   if (state.isModalLoading)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <Spinner type="modal" />
       </Modal>
     );
 
   if (state.isModalSuccess)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <IconContainer>
           <SuccessSVG />
         </IconContainer>
@@ -34,7 +34,7 @@ const ThreeDotsModal = () => {
 
   if (state.isModalError)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <IconContainer>
           <ErrorSVG />
         </IconContainer>
@@ -58,7 +58,7 @@ const ThreeDotsModal = () => {
   const cancelOptionHandler = () => dispatch({ type: 'RESET' });
 
   return (
-    <Modal>
+    <Modal onClick={(e) => e.stopPropagation()}>
       <h2>{state.dotsTitle}</h2>
       <ModalControls>
         <Button onClick={editOptionHandler}>Edit</Button>
