@@ -32,7 +32,7 @@ export const UserPicture = styled.div`
 `;
 
 export const BandList = styled.ul`
-  margin: 0;
+  margin: 0 0 40px;
   padding: 0;
 `;
 
@@ -203,5 +203,31 @@ export const CancelButton = styled.button`
   &:active {
     transition: all 0.1s;
     transform: scale(0.9);
+  }
+`;
+
+export const YourID = styled.div`
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 20px;
+  margin: 0 40px;
+  border-radius: 10px;
+  opacity: 0.6;
+
+  h2 {
+    margin: 0 0 20px;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
+
+  p {
+    text-align: center;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.14);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    opacity: 0.6;
   }
 `;

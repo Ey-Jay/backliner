@@ -22,6 +22,7 @@ import {
   AddButton,
   CancelButton,
   UserPicture,
+  YourID,
 } from './CheckInPage.style';
 import avatars from 'assets/band-avatars';
 
@@ -130,6 +131,10 @@ const CheckInPage = () => {
             </div>
           ))}
         </BandList>
+        <YourID>
+          <h2>Your Backliner ID</h2>
+          <p>{data.data.data._id}</p>
+        </YourID>
       </Container>
     </>
   );
