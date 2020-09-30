@@ -29,8 +29,7 @@ connectDB();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-if (process.env.NODE_ENV === 'dev') app.use(getDevUserId);
-else app.use('/', checkIfAuthenticated);
+app.use('/', checkIfAuthenticated);
 app.use('/', require('./routes'));
 app.use(errorHandler);
 
