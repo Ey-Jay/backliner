@@ -28,14 +28,14 @@ const AddModal = () => {
 
   if (projectsAPI.loading || state.isModalLoading)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <Spinner type="modal" />
       </Modal>
     );
 
   if (state.isModalSuccess)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <IconContainer>
           <SuccessSVG />
         </IconContainer>
@@ -44,7 +44,7 @@ const AddModal = () => {
 
   if (state.isModalError)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <IconContainer>
           <ErrorSVG />
         </IconContainer>
@@ -89,7 +89,7 @@ const AddModal = () => {
   const cancelHandler = () => dispatch({ type: 'RESET' });
 
   return state.addType === 'project' ? (
-    <Modal>
+    <Modal onClick={(e) => e.stopPropagation()}>
       <h2>Add Project</h2>
       <Form>
         <label htmlFor="title">Title</label>
@@ -130,7 +130,7 @@ const AddModal = () => {
       </Controls>
     </Modal>
   ) : (
-    <Modal>
+    <Modal onClick={(e) => e.stopPropagation()}>
       <h2>{headline}</h2>
       <Form>
         <label htmlFor="title">Title</label>

@@ -17,14 +17,14 @@ const DeleteModal = () => {
 
   if (state.isModalLoading)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <Spinner type="modal" />
       </Modal>
     );
 
   if (state.isModalSuccess)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <IconContainer>
           <SuccessSVG />
         </IconContainer>
@@ -33,7 +33,7 @@ const DeleteModal = () => {
 
   if (state.isModalError)
     return (
-      <Modal>
+      <Modal onClick={(e) => e.stopPropagation()}>
         <IconContainer>
           <ErrorSVG />
         </IconContainer>
@@ -49,7 +49,7 @@ const DeleteModal = () => {
   };
 
   return (
-    <Modal>
+    <Modal onClick={(e) => e.stopPropagation()}>
       <h2>Are you sure?</h2>
       <Controls>
         <DeleteButton onClick={onClickDeleteHandler}>Delete</DeleteButton>
