@@ -32,8 +32,8 @@ module.exports = (server) => {
         socket.room = room;
 
         const history = await ChatMessage.find({ band: room })
-          .populate('author', '_id name avatar')
-          .populate('band')
+          .populate('author', User.publicFields())
+          .populate('band', Band.publicFields())
           .exec();
         socket.emit('history', history);
       });
@@ -45,8 +45,8 @@ module.exports = (server) => {
           band: ObjectID(socket.room),
         });
 
-        await msg.populate('author', '_id name avatar').execPopulate();
-        await msg.populate('author').execPopulate();
+        await msg.populate('author', User.publicFields()).execPopulate();
+        await msg.populate('band', Band.publicFields()).execPopulate();
 
         io.to(socket.room).emit('new msg', msg);
       });
