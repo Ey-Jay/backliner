@@ -7,6 +7,33 @@ export const Container = styled.div`
   padding: 35px;
 `;
 
+export const UserDisplay = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 auto 20px;
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 10px;
+  border-radius: 30px;
+`;
+
+export const UserImage = styled.div`
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+`;
+
+export const UserName = styled.div`
+  margin: 0 20px;
+  text-align: right;
+`;
+
 export const BandDisplay = styled.header`
   display: flex;
   margin-bottom: 40px;

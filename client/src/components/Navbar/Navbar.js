@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { GlobalContext } from 'context/GlobalContext';
 import avatars from 'assets/band-avatars';
-import memberSrc from 'assets/ospen_schneider.jpg';
 import {
   Container,
+  UserDisplay,
+  UserImage,
+  UserName,
   BandDisplay,
   BandAvatarImg,
   BandDescription,
@@ -15,8 +18,18 @@ import {
 } from './Navbar.style';
 
 const Navbar = ({ band }) => {
+  const { dbUser } = useContext(GlobalContext);
+
   return (
     <Container>
+      {dbUser && (
+        <UserDisplay>
+          <UserImage>
+            <img src={dbUser.avatar} alt="" />
+          </UserImage>
+          <UserName>{dbUser.name}</UserName>
+        </UserDisplay>
+      )}
       <BandDisplay>
         <BandAvatarImg src={avatars[band.avatar]} />
         <BandDescription>
