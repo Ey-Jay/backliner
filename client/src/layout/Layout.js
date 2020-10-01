@@ -26,7 +26,7 @@ const Layout = ({ children, title, type }) => {
   const band = useGetAPI(`/bands/${bid}`);
 
   const { setBandID } = useContext(GlobalContext);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const history = useHistory();
 
   useEffect(() => {

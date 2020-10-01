@@ -15,6 +15,7 @@ import {
   SendButton,
   SenderImage,
   Message,
+  AuthorName,
 } from './ChatBox.style';
 
 import { GlobalContext } from 'context/GlobalContext';
@@ -94,6 +95,9 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
               <SenderImage src={item.author.avatar} />
             )}
             <Message isMine={item.author._id === dbUser._id}>
+              {item.author._id !== dbUser._id && (
+                <AuthorName>{item.author.name}</AuthorName>
+              )}
               <TransformText text={item.content.trim()} />
             </Message>
           </ChatItem>
