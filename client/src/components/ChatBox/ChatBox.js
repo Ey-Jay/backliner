@@ -6,7 +6,6 @@ import firebase from 'fb';
 import RoundButton from 'components/RoundButton';
 import TransformText from 'components/TransformText';
 import { AirplaneIcon } from 'components/RoundButton/Icons.style';
-import memberSrc from 'assets/ospen_schneider.jpg';
 import {
   ChatHeader,
   ChatBody,
