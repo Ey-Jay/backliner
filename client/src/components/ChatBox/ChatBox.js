@@ -32,6 +32,14 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
 
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(scrollToBottom, [messages]);
+
   useEffect(() => {
     if (firebase.auth().currentUser)
       firebase
@@ -107,6 +115,7 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
             </Message>
           </ChatItem>
         ))}
+        <div ref={messagesEndRef} />
       </ChatBody>
       <ChatInputWrapper>
         <ChatInput
