@@ -6,6 +6,7 @@ const ChatMessageSchema = new Schema(
     content: String,
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     band: { type: Schema.Types.ObjectId, ref: 'Band' },
+    active: Boolean,
   },
   { timestamps: true }
 );

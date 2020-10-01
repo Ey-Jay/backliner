@@ -31,7 +31,10 @@ module.exports = (server) => {
         socket.join(room);
         socket.room = room;
 
-        const history = await ChatMessage.find({ band: room })
+        const history = await ChatMessage.find({
+          band: room,
+          active: true,
+        })
           .populate('author', User.publicFields())
           .populate('band', Band.publicFields())
           .exec();
@@ -43,6 +46,7 @@ module.exports = (server) => {
           content,
           author: ObjectID(authorID),
           band: ObjectID(socket.room),
+          active: true,
         });
 
         await msg.populate('author', User.publicFields()).execPopulate();
