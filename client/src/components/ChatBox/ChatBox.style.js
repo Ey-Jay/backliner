@@ -67,6 +67,7 @@ export const AuthorName = styled.div`
   font-weight: bold;
   color: ${({ theme }) => theme.secondary};
   text-transform: uppercase;
+  white-space: nowrap;
 `;
 
 export const TimeStamp = styled.div`
@@ -75,6 +76,7 @@ export const TimeStamp = styled.div`
   bottom: -0.85rem;
   ${({ isMine }) => (isMine ? `right: 10px` : `left: 10px`)};
   opacity: 0.4;
+  white-space: nowrap;
 `;
 
 export const ChatInputWrapper = styled.div`
