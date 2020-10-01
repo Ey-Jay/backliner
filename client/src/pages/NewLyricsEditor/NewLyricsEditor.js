@@ -5,6 +5,7 @@ import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 import { GlobalContext } from 'context/GlobalContext';
+import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import { apiUrl } from 'config/constants';
 import {
@@ -22,6 +23,7 @@ import { ReactComponent as StrikeIcon } from 'assets/svg/Lyrics_Editor_Icons/Str
 import { ReactComponent as HeadingOneIcon } from 'assets/svg/Lyrics_Editor_Icons/HeadingOne.svg';
 import { ReactComponent as HeadingTwoIcon } from 'assets/svg/Lyrics_Editor_Icons/HeadingTwo.svg';
 import { FiBold as BoldIcon } from 'react-icons/fi';
+import Spinner from 'components/Spinner';
 
 const styleMap = {
   UPPERCASE: {
@@ -34,6 +36,8 @@ const NewLyricsEditor = ({
     params: { bid },
   },
 }) => {
+  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
+  const [selectedProject, setSelectedProject] = useState(null);
   const { currentUser } = useContext(GlobalContext);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -61,6 +65,7 @@ const NewLyricsEditor = ({
         `${apiUrl}/bands/${bid}/lyrics`,
         {
           title: `${lyricsTitle}`,
+          project: selectedProject,
           content: document,
         },
         {
@@ -72,6 +77,13 @@ const NewLyricsEditor = ({
   };
 
   const editorRef = useRef();
+
+  if (loading)
+    return (
+      <Layout title="New Lyrics">
+        <Spinner type="page" />
+      </Layout>
+    );
 
   return (
     <Layout title="New Lyrics">
@@ -163,6 +175,20 @@ const NewLyricsEditor = ({
             placeholder="May the creative juices start flowing..."
           />
         </EditorContainer>
+        <div>
+          <select
+            value={selectedProject}
+            onChange={(e) => setSelectedProject(e.currentTarget.value)}
+          >
+            <option value={null}>No Project</option>
+            {data &&
+              data.data.data.map((proj) => (
+                <option key={proj._id} value={proj._id}>
+                  {proj.name}
+                </option>
+              ))}
+          </select>
+        </div>
         <SaveButton onClick={saveDocument}>Save</SaveButton>
       </Container>
     </Layout>

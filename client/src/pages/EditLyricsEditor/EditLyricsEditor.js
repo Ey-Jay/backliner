@@ -39,8 +39,10 @@ const styleMap = {
 };
 
 const EditLyricsEditor = () => {
-  const { currentUser } = useContext(GlobalContext);
   const { id, bid } = useParams();
+  const projects = useGetAPI(`/bands/${bid}/projects`);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const { currentUser } = useContext(GlobalContext);
   const { data, loading, error } = useGetAPI(`/lyrics/${id}`);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [lyricsTitle, setLyricsTitle] = useState('');
@@ -77,10 +79,16 @@ const EditLyricsEditor = () => {
     axios
       .put(
         `${apiUrl}/lyrics/${data.data.data._id}`,
-        {
-          title: `${lyricsTitle}`,
-          content: document,
-        },
+        selectedProject
+          ? {
+              title: `${lyricsTitle}`,
+              project: selectedProject,
+              content: document,
+            }
+          : {
+              title: `${lyricsTitle}`,
+              content: document,
+            },
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -99,7 +107,7 @@ const EditLyricsEditor = () => {
     );
   }
 
-  if (loading) {
+  if (loading || projects.loading) {
     return (
       <Layout>
         <Spinner type="page" />
@@ -198,6 +206,20 @@ const EditLyricsEditor = () => {
             placeholder="May the creative juices start flowing..."
           />
         </EditorContainer>
+        <div>
+          <select
+            value={selectedProject}
+            onChange={(e) => setSelectedProject(e.currentTarget.value)}
+          >
+            <option value={null}>No Project</option>
+            {projects.data &&
+              projects.data.data.data.map((proj) => (
+                <option key={proj._id} value={proj._id}>
+                  {proj.name}
+                </option>
+              ))}
+          </select>
+        </div>
         <SaveButton onClick={saveDocument}>Save Changes</SaveButton>
       </Container>
     </Layout>
