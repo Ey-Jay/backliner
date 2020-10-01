@@ -5,6 +5,7 @@ import { ModalContext } from 'context/ModalContext';
 import firebase from 'fb';
 import useGetAPI from 'hooks/useGetAPI';
 import RoundButton from 'components/RoundButton';
+import Spinner from 'components/Spinner';
 import {
   Container,
   Controls,
@@ -35,7 +36,7 @@ const CheckInPage = () => {
 
   const handlePlusButton = () => dispatch({ type: 'SHOW_ADDBAND' });
 
-  if (loading) return <p>Loading ...</p>;
+  if (loading) return <Spinner />;
 
   if (error) return <p>{JSON.stringify(error)}</p>;
 
