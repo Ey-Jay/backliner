@@ -36,8 +36,7 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
 
   useEffect(() => {
     const scrollToBottom = async () => {
-      await new Promise((r) => setTimeout(r, 400));
-      if (isOpen) messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      if (isOpen) messagesEndRef.current.scrollIntoView();
     };
     scrollToBottom();
   }, [messages, isOpen]);

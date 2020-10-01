@@ -61,5 +61,4 @@ export const ChatWrapper = styled.div`
   padding: 0 15px 15px;
   background-color: ${({ theme }) => theme.backgroundColorDark};
   margin-right: ${({ isOpen }) => (isOpen ? 'initial' : '-300px')};
-  transition: all 0.4s;
 `;
