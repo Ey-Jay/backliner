@@ -12,7 +12,11 @@ const getMembersFromBand = async (req, res, next) => {
     const { bid } = req.params;
 
     const band = await Band.findById(bid)
-      .populate('members', User.publicFields())
+      .populate({
+        path: 'members',
+        select: User.publicFields(),
+        match: { active: true },
+      })
       .exec();
 
     if (isUserInBand(authId, bid) && band && band.active) {
@@ -79,7 +83,11 @@ const addMemberToBand = async (req, res, next) => {
         const updatedBand = await band.save();
 
         await updatedBand
-          .populate('members', User.publicFields())
+          .populate({
+            path: 'members',
+            select: User.publicFields(),
+            match: { active: true },
+          })
           .execPopulate();
 
         res.status(200);
@@ -115,7 +123,13 @@ const removeMemberFromBand = async (req, res, next) => {
       band.members = band.members.filter((item) => item.toString() !== mid);
       const updatedBand = await band.save();
 
-      await updatedBand.populate('members', User.publicFields()).execPopulate();
+      await updatedBand
+        .populate({
+          path: 'members',
+          select: User.publicFields(),
+          match: { active: true },
+        })
+        .execPopulate();
 
       res.status(200);
       res.json({

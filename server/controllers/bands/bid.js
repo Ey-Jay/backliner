@@ -11,8 +11,16 @@ const getBandById = async (req, res, next) => {
       { _id: bid, active: true },
       Band.publicFields()
     )
-      .populate('owner', User.publicFields())
-      .populate('members', User.publicFields())
+      .populate({
+        path: 'owner',
+        select: User.publicFields(),
+        match: { active: true },
+      })
+      .populate({
+        path: 'members',
+        select: User.publicFields(),
+        match: { active: true },
+      })
       .exec();
 
     if (isUserInBand(authId, bid)) {
@@ -62,8 +70,20 @@ const updateBand = async (req, res, next) => {
         }
       );
 
-      await updatedBand.populate('owner', User.publicFields()).execPopulate();
-      await updatedBand.populate('members', User.publicFields()).execPopulate();
+      await updatedBand
+        .populate({
+          path: 'owner',
+          select: User.publicFields(),
+          match: { active: true },
+        })
+        .execPopulate();
+      await updatedBand
+        .populate({
+          path: 'members',
+          select: User.publicFields(),
+          match: { active: true },
+        })
+        .execPopulate();
 
       const { _id, name, members, avatar, owner, active } = updatedBand;
 
@@ -101,8 +121,20 @@ const setBandInactive = async (req, res, next) => {
         }
       );
 
-      await updatedBand.populate('owner', User.publicFields()).execPopulate();
-      await updatedBand.populate('members', User.publicFields()).execPopulate();
+      await updatedBand
+        .populate({
+          path: 'owner',
+          select: User.publicFields(),
+          match: { active: true },
+        })
+        .execPopulate();
+      await updatedBand
+        .populate({
+          path: 'members',
+          select: User.publicFields(),
+          match: { active: true },
+        })
+        .execPopulate();
 
       const { _id, name, members, avatar, owner, active } = updatedBand;
 

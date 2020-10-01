@@ -29,8 +29,12 @@ const getCommentById = async (req, res, next) => {
 
     if (isUserInBand(authId, cleanResult.band)) {
       const comment = await Comments.findById(cid)
-        .populate('parent_id')
-        .populate('author', User.publicFields())
+        .populate({ path: 'parent_id', match: { active: true } })
+        .populate({
+          path: 'author',
+          select: User.publicFields(),
+          match: { active: true },
+        })
         .exec();
 
       if (comment.parent_id._id.toString() === iid.toString()) {
@@ -83,8 +87,12 @@ const updateCommentById = async (req, res, next) => {
 
     if (isUserInBand(authId, cleanResult.band)) {
       const comment = await Comments.findById(cid)
-        .populate('parent_id')
-        .populate('author', User.publicFields())
+        .populate({ path: 'parent_id', match: { active: true } })
+        .populate({
+          path: 'author',
+          select: User.publicFields(),
+          match: { active: true },
+        })
         .exec();
 
       if (comment.parent_id._id.toString() === iid.toString()) {
@@ -144,8 +152,12 @@ const setCommentInactiveById = async (req, res, next) => {
 
     if (isUserInBand(authId, cleanResult.band)) {
       const comment = await Comments.findById(cid)
-        .populate('parent_id')
-        .populate('author', User.publicFields())
+        .populate({ path: 'parent_id', match: { active: true } })
+        .populate({
+          path: 'author',
+          select: User.publicFields(),
+          match: { active: true },
+        })
         .exec();
 
       if (comment.parent_id._id.toString() === iid.toString()) {

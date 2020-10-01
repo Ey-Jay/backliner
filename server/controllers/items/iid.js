@@ -21,22 +21,42 @@ const getItemById = async (req, res, next) => {
         .populate({
           path: 'audios',
           select: Audio.publicFields(),
-          populate: { path: 'author', select: User.publicFields() },
+          match: { active: true },
+          populate: {
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          },
         })
         .populate({
           path: 'videos',
           select: Video.publicFields(),
-          populate: { path: 'author', select: User.publicFields() },
+          match: { active: true },
+          populate: {
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          },
         })
         .populate({
           path: 'files',
           select: File.publicFields(),
-          populate: { path: 'author', select: User.publicFields() },
+          match: { active: true },
+          populate: {
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          },
         })
         .populate({
           path: 'lyrics',
           select: Lyrics.publicFields(),
-          populate: { path: 'author', select: User.publicFields() },
+          match: { active: true },
+          populate: {
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          },
         })
         .exec()
     );
