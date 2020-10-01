@@ -10,6 +10,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [dbUser, setDbUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isChatVisible, setIsChatVisible] = useState(false);
   const [view, setView] = useState('list');
   const [showAddModal, setShowAddModal] = useState(false);
   const [rerender, setRerender] = useState(new Date());
@@ -45,6 +46,8 @@ export const GlobalContextProvider = ({ children }) => {
         setRerender,
         showAddModal,
         setShowAddModal,
+        isChatVisible,
+        setIsChatVisible,
       }}
     >
       {children}
