@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { ModalContext } from 'context/ModalContext';
 import { ModalBackground } from './App.style';
 import AddModal from 'components/AddModal';
+import AddBandModal from 'components/AddBandModal';
 import DeleteModal from 'components/DeleteModal';
 import ThreeDotsModal from 'components/ThreeDotsModal';
 
@@ -33,6 +34,7 @@ function App() {
         <ModalBackground onClick={() => dispatch({ type: 'RESET' })}>
           {state.modalType === 'ADDITEM' && <AddModal />}
           {state.modalType === 'ADDPROJECT' && <AddModal />}
+          {state.modalType === 'ADDBAND' && <AddBandModal />}
           {state.modalType === 'DELETE' && <DeleteModal />}
           {state.modalType === 'THREEDOTS' && <ThreeDotsModal />}
         </ModalBackground>

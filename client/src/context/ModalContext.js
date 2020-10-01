@@ -76,6 +76,12 @@ const modalReducer = (draft, action) => {
       draft.isModalVisible = true;
       return draft;
 
+    case 'SHOW_ADDBAND':
+      draft = { ...initialState };
+      draft.isModalVisible = true;
+      draft.modalType = 'ADDBAND';
+      return draft;
+
     default:
       return draft;
   }
@@ -149,6 +155,25 @@ export const ModalContextProvider = ({ children }) => {
     dispatch({ type: 'SHOW_DELETE', payload: { id, type } });
   };
 
+  const addBand = async (name) => {
+    dispatch({ type: 'IS_LOADING' });
+    try {
+      const token = await firebase.auth().currentUser.getIdToken();
+      const res = await axios.post(
+        `${apiUrl}/bands`,
+        { name, avatar: 0 },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (res.data.success) await showSuccess();
+      else await showError();
+    } catch (e) {
+      await showError();
+    }
+  };
+
   return (
     <ModalContext.Provider
       value={{
@@ -160,6 +185,7 @@ export const ModalContextProvider = ({ children }) => {
         deleteItem,
         gotoEditItem,
         gotoDeleteItem,
+        addBand,
       }}
     >
       {children}

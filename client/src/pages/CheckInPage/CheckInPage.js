@@ -1,37 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
 
+import { ModalContext } from 'context/ModalContext';
 import firebase from 'fb';
 import useGetAPI from 'hooks/useGetAPI';
-import { apiUrl } from 'config/constants';
 import RoundButton from 'components/RoundButton';
 import {
   Container,
   Controls,
   BandList,
   Band,
+  EmptyBand,
   Picture,
   Description,
   Name,
   Members,
   Member,
-  ModalBackground,
-  Modal,
-  ModalControls,
-  AddButton,
-  CancelButton,
+  UserPicture,
+  YourID,
 } from './CheckInPage.style';
-
-import BandImageSrc from 'assets/alpen_fiesta.jpg';
-import MemberImageSrc from 'assets/ospen_schneider.jpg';
+import avatars from 'assets/band-avatars';
 
 const CheckInPage = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isModalLoading, setIsModalLoading] = useState(false);
-  const [nameFieldValue, setNameFieldValue] = useState('');
+  const { dispatch } = useContext(ModalContext);
   const history = useHistory();
-  const { data, loading, error } = useGetAPI('/', isModalVisible);
+  const { data, loading, error } = useGetAPI('/');
 
   const logoff = () =>
     firebase
@@ -40,36 +33,7 @@ const CheckInPage = () => {
       .then(() => history.push('/signin'))
       .catch((e) => console.error(e));
 
-  const handleModalAdd = async () => {
-    setIsModalLoading(true);
-
-    const token = await firebase.auth().currentUser.getIdToken();
-
-    const response = await axios.post(
-      `${apiUrl}/bands`,
-      {
-        name: nameFieldValue,
-      },
-      {
-        headers: { authorization: `Bearer ${token}` },
-      }
-    );
-
-    if (response.data.success) {
-      setNameFieldValue('');
-      setIsModalLoading(false);
-      setIsModalVisible(false);
-    }
-  };
-
-  const handleModalCancel = () => {
-    setNameFieldValue('');
-    setIsModalVisible(false);
-  };
-
-  const handlePlusButton = () => setIsModalVisible(true);
-
-  const onChangeHandler = (e) => setNameFieldValue(e.currentTarget.value);
+  const handlePlusButton = () => dispatch({ type: 'SHOW_ADDBAND' });
 
   if (loading) return <p>Loading ...</p>;
 
@@ -77,33 +41,11 @@ const CheckInPage = () => {
 
   return (
     <>
-      {isModalVisible && (
-        <ModalBackground>
-          <Modal>
-            {isModalLoading ? (
-              'Loading...'
-            ) : (
-              <>
-                <h2>Add Band</h2>
-                <label>Name</label>
-                <input
-                  type="text"
-                  value={nameFieldValue}
-                  onChange={onChangeHandler}
-                />
-                <ModalControls>
-                  <AddButton onClick={handleModalAdd}>Add</AddButton>
-                  <CancelButton onClick={handleModalCancel}>
-                    Cancel
-                  </CancelButton>
-                </ModalControls>
-              </>
-            )}
-          </Modal>
-        </ModalBackground>
-      )}
       <Container>
         <Controls>
+          <UserPicture>
+            <img src={data.data.data.avatar} alt="" />
+          </UserPicture>
           <RoundButton icon="plus" onClick={handlePlusButton} />
           <RoundButton icon="logoff" onClick={logoff} />
         </Controls>
@@ -113,7 +55,7 @@ const CheckInPage = () => {
               <Link to={`/${band._id}/projects`}>
                 <Band>
                   <Picture>
-                    <img src={BandImageSrc} alt="" />
+                    <img src={avatars[band.avatar]} alt="" />
                   </Picture>
                   <Description>
                     <Name>{band.name}</Name>
@@ -127,7 +69,14 @@ const CheckInPage = () => {
               </Link>
             </div>
           ))}
+          {data.data.data.bands.length === 0 && (
+            <EmptyBand>Create a new workspace at the top</EmptyBand>
+          )}
         </BandList>
+        <YourID>
+          <h2>Your Backliner ID</h2>
+          <p>{data.data.data._id}</p>
+        </YourID>
       </Container>
     </>
   );
