@@ -7,6 +7,7 @@ export const Modal = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 4px 6px #000000, 2px 4px 18px #000000;
+  position: relative;
 
   h2 {
     margin: 0 0 20px;
@@ -39,6 +40,18 @@ export const Modal = styled.div`
   input:active,
   input:focus {
     background-color: rgba(255, 255, 255, 0.21);
+  }
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${({ theme }) => theme.primary};
+
+  svg {
+    height: 60px;
   }
 `;
 

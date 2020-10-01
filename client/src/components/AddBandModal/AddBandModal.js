@@ -3,20 +3,43 @@ import React, { useState, useContext } from 'react';
 import { ModalContext } from 'context/ModalContext';
 import {
   Modal,
+  IconContainer,
   ModalControls,
   AddButton,
   CancelButton,
 } from './AddBandModal.style';
+import Spinner from 'components/Spinner';
+import { ReactComponent as SuccessSVG } from 'assets/svg/Success.svg';
+import { ReactComponent as ErrorSVG } from 'assets/svg/Error.svg';
 
 const AddBandModal = () => {
   const { state, dispatch, addBand } = useContext(ModalContext);
   const [nameFieldValue, setNameFieldValue] = useState('');
 
-  if (state.isModalLoading) return <Modal>Loading ...</Modal>;
+  if (state.isModalLoading)
+    return (
+      <Modal>
+        <Spinner type="modal" />
+      </Modal>
+    );
 
-  if (state.isModalSuccess) return <Modal>Success!</Modal>;
+  if (state.isModalSuccess)
+    return (
+      <Modal>
+        <IconContainer>
+          <SuccessSVG />
+        </IconContainer>
+      </Modal>
+    );
 
-  if (state.isModalError) return <Modal>Error!</Modal>;
+  if (state.isModalError)
+    return (
+      <Modal>
+        <IconContainer>
+          <ErrorSVG />
+        </IconContainer>
+      </Modal>
+    );
 
   const onChangeHandler = (e) => setNameFieldValue(e.currentTarget.value);
 
