@@ -11,7 +11,12 @@ const getUser = async (req, res, next) => {
       .populate({
         path: 'bands',
         select: Band.publicFields(),
-        populate: { path: 'members', select: User.publicFields() },
+        match: { active: true },
+        populate: {
+          path: 'members',
+          select: User.publicFields(),
+          match: { active: true },
+        },
       })
       .exec();
 
