@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const ObjectID = mongoose.Types.ObjectId;
+const { isEmpty, isNil } = require('ramda');
 
 const Band = require('../../models/Band');
 const User = require('../../models/User');
@@ -56,17 +57,38 @@ const addMemberToBand = async (req, res, next) => {
     const band = await Band.findById(bid);
 
     if (isUserInBand(authId, bid) && band.active) {
-      band.members.push(ObjectID(body.member_id));
-      const updatedBand = await band.save();
+      const isAlreadyInBand = band.members.filter(
+        (member) => `${member}` === body.member_id
+      );
 
-      await updatedBand.populate('members', User.publicFields()).execPopulate();
+      console.log(band.members);
 
-      res.status(200);
-      res.json({
-        success: true,
-        action: 'post',
-        data: updatedBand.members,
-      });
+      console.log(isAlreadyInBand);
+
+      if (!isEmpty(isAlreadyInBand)) {
+        res.status(400);
+        res.json({
+          success: false,
+          action: 'post',
+          data: null,
+          error: true,
+          message: 'Bad request',
+        });
+      } else {
+        band.members.push(ObjectID(body.member_id));
+        const updatedBand = await band.save();
+
+        await updatedBand
+          .populate('members', User.publicFields())
+          .execPopulate();
+
+        res.status(200);
+        res.json({
+          success: true,
+          action: 'post',
+          data: updatedBand.members,
+        });
+      }
     } else {
       res.status(401);
       res.json({
