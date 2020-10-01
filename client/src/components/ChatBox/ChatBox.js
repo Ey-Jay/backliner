@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 import { isEmpty } from 'ramda';
+import moment from 'moment';
 
 import firebase from 'fb';
 import RoundButton from 'components/RoundButton';
@@ -16,6 +17,7 @@ import {
   SenderImage,
   Message,
   AuthorName,
+  TimeStamp,
 } from './ChatBox.style';
 
 import { GlobalContext } from 'context/GlobalContext';
@@ -99,6 +101,9 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
                 <AuthorName>{item.author.name}</AuthorName>
               )}
               <TransformText text={item.content.trim()} />
+              <TimeStamp isMine={item.author._id === dbUser._id}>
+                {moment(item.createdAt).format('HH:MM – DD/MM/YY')}
+              </TimeStamp>
             </Message>
           </ChatItem>
         ))}
