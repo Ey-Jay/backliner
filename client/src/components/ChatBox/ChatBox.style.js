@@ -36,7 +36,7 @@ export const SenderImage = styled.img`
   border-radius: 50%;
 `;
 
-export const Message = styled.p`
+export const Message = styled.div`
   display: inline-block;
   margin: ${({ isMine }) => (isMine ? '12px 10px' : '30px 10px 2px')};
   padding: 10px;

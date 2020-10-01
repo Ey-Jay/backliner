@@ -34,11 +34,13 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
 
   const messagesEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(scrollToBottom, [messages]);
+  useEffect(() => {
+    const scrollToBottom = async () => {
+      await new Promise((r) => setTimeout(r, 400));
+      if (isOpen) messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
+    scrollToBottom();
+  }, [messages, isOpen]);
 
   useEffect(() => {
     if (firebase.auth().currentUser)
