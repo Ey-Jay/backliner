@@ -32,3 +32,13 @@ export const EditButton = styled.button`
     transform: scale(0.9);
   }
 `;
+
+export const ProjectName = styled.div`
+  padding: 5px 8px;
+  background-color: ${({ color }) => color || '#666'};
+  border-radius: 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+`;
