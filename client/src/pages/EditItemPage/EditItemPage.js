@@ -4,8 +4,9 @@ import useGetAPI from 'hooks/useGetAPI';
 import Spinner from 'components/Spinner';
 import Layout from 'layout';
 import axios from 'axios';
-import { apiUrl } from 'config/constants';
 
+import firebase from 'fb';
+import { apiUrl } from 'config/constants';
 import {
   Container,
   Form,
@@ -21,7 +22,7 @@ const EditItemPage = ({ type }) => {
   const projects = useGetAPI(`/bands/${bid}/projects`);
   const { currentUser } = useContext(GlobalContext);
 
-  const [itemProject, setItemProject] = useState('');
+  const [itemProject, setItemProject] = useState(null);
   const [itemTitle, setItemTitle] = useState('');
   const [itemURL, setItemURL] = useState('');
 
@@ -51,33 +52,32 @@ const EditItemPage = ({ type }) => {
     }
   }, [data]);
 
-  const saveItem = () => {
-    const token = currentUser.getIdToken();
-    axios
-      .put(
-        `${apiUrl}/${type}/${data.data.data._id}`,
-        {
-          project: `${itemProject}`,
-          title: `${itemTitle}`,
-          url: `${itemURL}`,
-        },
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => history.push(`/${bid}/${type}/${res.data.data._id}`))
-      .catch((err) => console.error(err));
+  const saveItem = async () => {
+    const token = await firebase.auth().currentUser.getIdToken();
+
+    const res = await axios.put(
+      `${apiUrl}/${type}/${data.data.data._id}`,
+      {
+        project: itemProject ? itemProject : null,
+        title: `${itemTitle}`,
+        url: `${itemURL}`,
+      },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+
+    history.push(
+      `/${bid}/${type === 'file' ? 'files' : type}/${res.data.data._id}`
+    );
   };
 
   const deleteItem = () => {
     const token = currentUser.getIdToken();
     axios
-      .delete(
-        `${apiUrl}/${type}/${data.data.data._id}`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      )
+      .delete(`${apiUrl}/${type}/${data.data.data._id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((res) => history.push(`/${bid}/${type}/${res.data.data._id}`))
       .catch((err) => console.error(err));
   };
@@ -106,7 +106,7 @@ const EditItemPage = ({ type }) => {
             value={itemProject}
             onChange={(e) => setItemProject(e.currentTarget.value)}
           >
-            <option value="">No Project</option>
+            <option value={null}>No Project</option>
             {projects.data.data.data.map((item) => (
               <option value={item._id} key={item._id}>
                 {item.name}
