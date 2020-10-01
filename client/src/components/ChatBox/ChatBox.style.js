@@ -36,9 +36,9 @@ export const SenderImage = styled.img`
   border-radius: 50%;
 `;
 
-export const Message = styled.p`
+export const Message = styled.div`
   display: inline-block;
-  margin: 2px 10px;
+  margin: ${({ isMine }) => (isMine ? '12px 10px' : '30px 10px 2px')};
   padding: 10px;
   background-color: ${({ theme, isMine }) =>
     isMine ? theme.secondary : theme.backgroundColor};
@@ -57,6 +57,26 @@ export const Message = styled.p`
     ${({ isMine }) => (isMine ? 'right' : 'left')}: -4px;
     bottom: 8px;
   }
+`;
+
+export const AuthorName = styled.div`
+  position: absolute;
+  font-size: 0.6rem;
+  top: -0.85rem;
+  left: 10px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.secondary};
+  text-transform: uppercase;
+  white-space: nowrap;
+`;
+
+export const TimeStamp = styled.div`
+  position: absolute;
+  font-size: 0.6rem;
+  bottom: -0.85rem;
+  ${({ isMine }) => (isMine ? `right: 10px` : `left: 10px`)};
+  opacity: 0.4;
+  white-space: nowrap;
 `;
 
 export const ChatInputWrapper = styled.div`

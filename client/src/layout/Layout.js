@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { GlobalContext } from 'context/GlobalContext';
@@ -25,8 +25,9 @@ const Layout = ({ children, title, type }) => {
   const { setBid } = useContext(ModalContext);
   const band = useGetAPI(`/bands/${bid}`);
 
-  const { setBandID } = useContext(GlobalContext);
-  const [isOpen, setIsOpen] = useState(false);
+  const { setBandID, isChatVisible, setIsChatVisible } = useContext(
+    GlobalContext
+  );
   const history = useHistory();
 
   useEffect(() => {
@@ -60,18 +61,21 @@ const Layout = ({ children, title, type }) => {
                 onClick={() => history.push('/checkin')}
               />
               <RoundButton icon="logoff" onClick={logoff} />
-              {isOpen ? null : (
-                <RoundButton icon="chat" onClick={() => setIsOpen(!isOpen)} />
+              {isChatVisible ? null : (
+                <RoundButton
+                  icon="chat"
+                  onClick={() => setIsChatVisible(!isChatVisible)}
+                />
               )}
             </section>
           </Header>
           <PageBody>{children}</PageBody>
         </Content>
-        <ChatWrapper isOpen={isOpen}>
+        <ChatWrapper isOpen={isChatVisible}>
           <ChatBox
             band={band.data.data.data}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            isOpen={isChatVisible}
+            setIsOpen={setIsChatVisible}
           />
         </ChatWrapper>
       </FlexContainer>

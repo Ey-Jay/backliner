@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 import { isEmpty } from 'ramda';
+import moment from 'moment';
 
 import firebase from 'fb';
 import RoundButton from 'components/RoundButton';
 import TransformText from 'components/TransformText';
 import { AirplaneIcon } from 'components/RoundButton/Icons.style';
-import memberSrc from 'assets/ospen_schneider.jpg';
 import {
   ChatHeader,
   ChatBody,
@@ -16,6 +16,8 @@ import {
   SendButton,
   SenderImage,
   Message,
+  AuthorName,
+  TimeStamp,
 } from './ChatBox.style';
 
 import { GlobalContext } from 'context/GlobalContext';
@@ -29,6 +31,15 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
 
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
+
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    const scrollToBottom = async () => {
+      if (isOpen) messagesEndRef.current.scrollIntoView();
+    };
+    scrollToBottom();
+  }, [messages, isOpen]);
 
   useEffect(() => {
     if (firebase.auth().currentUser)
@@ -91,12 +102,21 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
       <ChatBody>
         {messages.map((item) => (
           <ChatItem isMine={item.author._id === dbUser._id} key={item._id}>
-            {item.author._id !== dbUser._id && <SenderImage src={memberSrc} />}
+            {item.author._id !== dbUser._id && (
+              <SenderImage src={item.author.avatar} />
+            )}
             <Message isMine={item.author._id === dbUser._id}>
+              {item.author._id !== dbUser._id && (
+                <AuthorName>{item.author.name}</AuthorName>
+              )}
               <TransformText text={item.content.trim()} />
+              <TimeStamp isMine={item.author._id === dbUser._id}>
+                {moment(item.createdAt).format('HH:MM – DD/MM/YY')}
+              </TimeStamp>
             </Message>
           </ChatItem>
         ))}
+        <div ref={messagesEndRef} />
       </ChatBody>
       <ChatInputWrapper>
         <ChatInput
