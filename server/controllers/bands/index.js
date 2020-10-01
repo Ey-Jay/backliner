@@ -15,8 +15,16 @@ const getBands = async (req, res, next) => {
       { members: userId, active: true },
       Band.publicFields()
     )
-      .populate('owner', User.publicFields())
-      .populate('members', User.publicFields())
+      .populate({
+        path: 'owner',
+        select: User.publicFields(),
+        match: { active: true },
+      })
+      .populate({
+        path: 'members',
+        select: User.publicFields(),
+        match: { active: true },
+      })
       .exec();
 
     res.status(200);
@@ -49,7 +57,13 @@ const createBand = async (req, res, next) => {
     });
 
     await newBand.populate('owner', User.publicFields()).execPopulate();
-    await newBand.populate('members', User.publicFields()).execPopulate();
+    await newBand
+      .populate({
+        path: 'members',
+        select: User.publicFields(),
+        match: { active: true },
+      })
+      .execPopulate();
 
     const { _id, name, avatar, owner, members, active } = newBand;
 

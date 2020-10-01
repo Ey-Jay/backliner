@@ -23,11 +23,31 @@ const getItemsByBand = async (req, res, next) => {
             { band: bid, active: true },
             Project.publicFields()
           )
-            .populate('author', User.publicFields())
-            .populate('audios', Audio.publicFields())
-            .populate('videos', Video.publicFields())
-            .populate('lyrics', Lyrics.publicFields())
-            .populate('files', File.publicFields())
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'audios',
+              select: Audio.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'videos',
+              select: Video.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'lyrics',
+              select: Lyrics.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'files',
+              select: File.publicFields(),
+              match: { active: true },
+            })
             .exec();
 
           res.status(200);
@@ -44,8 +64,16 @@ const getItemsByBand = async (req, res, next) => {
             { band: bid, active: true },
             Audio.publicFields()
           )
-            .populate('author', User.publicFields())
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .exec();
 
           res.status(200);
@@ -62,8 +90,16 @@ const getItemsByBand = async (req, res, next) => {
             { band: bid, active: true },
             Video.publicFields()
           )
-            .populate('author', User.publicFields())
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .exec();
 
           res.status(200);
@@ -80,8 +116,16 @@ const getItemsByBand = async (req, res, next) => {
             { band: bid, active: true },
             File.publicFields()
           )
-            .populate('author', User.publicFields())
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .exec();
 
           res.status(200);
@@ -98,8 +142,16 @@ const getItemsByBand = async (req, res, next) => {
             { band: bid, active: true },
             Lyrics.publicFields()
           )
-            .populate('author', User.publicFields())
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .exec();
 
           res.status(200);
@@ -156,7 +208,11 @@ const createItem = async (req, res, next) => {
 
           await newProject.populate('band', Band.publicFields()).execPopulate();
           await newProject
-            .populate('author', User.publicFields())
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
             .execPopulate();
 
           const { _id, name, theme, author, band, active } = newProject;
@@ -180,10 +236,26 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
-          await newAudio.populate('band', Band.publicFields()).execPopulate();
-          await newAudio.populate('author', User.publicFields()).execPopulate();
           await newAudio
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'band',
+              select: Band.publicFields(),
+              match: { active: true },
+            })
+            .execPopulate();
+          await newAudio
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .execPopulate();
+          await newAudio
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .execPopulate();
 
           res.status(200);
@@ -212,10 +284,26 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
-          await newVideo.populate('band', Band.publicFields()).execPopulate();
-          await newVideo.populate('author', User.publicFields()).execPopulate();
           await newVideo
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'band',
+              select: Band.publicFields(),
+              match: { active: true },
+            })
+            .execPopulate();
+          await newVideo
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .execPopulate();
+          await newVideo
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .execPopulate();
 
           res.status(200);
@@ -244,10 +332,26 @@ const createItem = async (req, res, next) => {
             active: true,
           });
 
-          await newFile.populate('band', Band.publicFields()).execPopulate();
-          await newFile.populate('author', User.publicFields()).execPopulate();
           await newFile
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'band',
+              select: Band.publicFields(),
+              match: { active: true },
+            })
+            .execPopulate();
+          await newFile
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
+            .execPopulate();
+          await newFile
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .execPopulate();
 
           res.status(200);
@@ -278,10 +382,18 @@ const createItem = async (req, res, next) => {
 
           await newLyrics.populate('band', Band.publicFields()).execPopulate();
           await newLyrics
-            .populate('author', User.publicFields())
+            .populate({
+              path: 'author',
+              select: User.publicFields(),
+              match: { active: true },
+            })
             .execPopulate();
           await newLyrics
-            .populate('project', Project.publicFields())
+            .populate({
+              path: 'project',
+              select: Project.publicFields(),
+              match: { active: true },
+            })
             .execPopulate();
 
           res.status(200);
