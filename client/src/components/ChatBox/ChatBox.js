@@ -91,7 +91,9 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
       <ChatBody>
         {messages.map((item) => (
           <ChatItem isMine={item.author._id === dbUser._id} key={item._id}>
-            {item.author._id !== dbUser._id && <SenderImage src={memberSrc} />}
+            {item.author._id !== dbUser._id && (
+              <SenderImage src={item.author.avatar} />
+            )}
             <Message isMine={item.author._id === dbUser._id}>
               <TransformText text={item.content.trim()} />
             </Message>
