@@ -42,7 +42,7 @@ const Layout = ({ children, title, type }) => {
       .then(() => history.push('/signin'))
       .catch((e) => console.error(e));
 
-  if (band.loading) return <p>Loading111 ...</p>;
+  if (band.loading) return <Spinner />;
 
   return (
     <>
