@@ -8,7 +8,6 @@ import firebase from 'fb';
 import Layout from 'layout';
 import avatars from 'assets/band-avatars';
 import { apiUrl } from 'config/constants';
-import memberSrc from 'assets/ospen_schneider.jpg';
 import {
   Container,
   Members,
@@ -145,6 +144,23 @@ const SettingsPage = ({
             <h2>Your Backliner ID</h2>
             <p>{dbUser._id}</p>
           </YourID>
+          <h2>Members</h2>
+          <section style={{ marginBottom: '100px' }}>
+            <MemberList>
+              {members.map((member) => (
+                <MemberItem key={member._id}>
+                  <MemberImage>
+                    <img src={member.avatar} alt="" />
+                  </MemberImage>
+                  <MemberName>{member.name}</MemberName>
+                </MemberItem>
+              ))}
+            </MemberList>
+          </section>
+          <Attribution>
+            This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
+            <a href="https://remixicon.com">Remix Icons</a>.
+          </Attribution>
         </Container>
       </Layout>
     );
@@ -202,7 +218,7 @@ const SettingsPage = ({
             {members.map((member) => (
               <MemberItem key={member._id}>
                 <MemberImage>
-                  <img src={memberSrc} alt="" />
+                  <img src={member.avatar} alt="" />
                 </MemberImage>
                 <MemberName>{member.name}</MemberName>
                 <TrashWrapper onClick={() => onClickRemove(member._id)}>
