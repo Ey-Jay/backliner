@@ -17,7 +17,7 @@ const getComments = async (req, res, next) => {
     const { iid } = req.params;
 
     const comments = await Comments.find({ parent_id: iid, active: true })
-      .populate('parent_id')
+      .populate({ path: 'parent_id', match: { active: true } })
       .exec();
 
     if (isUserInBand(authId, comments[0].parent_id.band)) {

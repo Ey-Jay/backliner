@@ -22,12 +22,36 @@ const getItemsForUser = async (req, res, next) => {
           { band: { $in: bids }, active: true },
           Project.publicFields()
         )
-          .populate('author', User.publicFields())
-          .populate('band', Band.publicFields())
-          .populate('audios', Audio.publicFields())
-          .populate('videos', Video.publicFields())
-          .populate('files', File.publicFields())
-          .populate('lyrics', Lyrics.publicFields())
+          .populate({
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'band',
+            select: Band.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'audios',
+            select: Audio.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'videos',
+            select: Video.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'files',
+            select: File.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'lyrics',
+            select: Lyrics.publicFields(),
+            match: { active: true },
+          })
           .exec();
 
         res.json({
@@ -42,9 +66,21 @@ const getItemsForUser = async (req, res, next) => {
           { band: { $in: bids }, active: true },
           Audio.publicFields()
         )
-          .populate('author', User.publicFields())
-          .populate('band', Band.publicFields())
-          .populate('project', Project.publicFields())
+          .populate({
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'band',
+            select: Band.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'project',
+            select: Project.publicFields(),
+            match: { active: true },
+          })
           .exec();
 
         res.json({
@@ -59,9 +95,21 @@ const getItemsForUser = async (req, res, next) => {
           { band: { $in: bids }, active: true },
           Video.publicFields()
         )
-          .populate('author', User.publicFields())
-          .populate('band', Band.publicFields())
-          .populate('project', Project.publicFields())
+          .populate({
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'band',
+            select: Band.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'project',
+            select: Project.publicFields(),
+            match: { active: true },
+          })
           .exec();
 
         res.json({
@@ -76,9 +124,21 @@ const getItemsForUser = async (req, res, next) => {
           { band: { $in: bids }, active: true },
           Lyrics.publicFields()
         )
-          .populate('author', User.publicFields())
-          .populate('band', Band.publicFields())
-          .populate('project', Project.publicFields())
+          .populate({
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'band',
+            select: Band.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'project',
+            select: Project.publicFields(),
+            match: { active: true },
+          })
           .exec();
 
         res.json({
@@ -93,9 +153,21 @@ const getItemsForUser = async (req, res, next) => {
           { band: { $in: bids }, active: true },
           File.publicFields()
         )
-          .populate('author', User.publicFields())
-          .populate('band', Band.publicFields())
-          .populate('project', Project.publicFields())
+          .populate({
+            path: 'author',
+            select: User.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'band',
+            select: Band.publicFields(),
+            match: { active: true },
+          })
+          .populate({
+            path: 'project',
+            select: Project.publicFields(),
+            match: { active: true },
+          })
           .exec();
 
         res.json({
