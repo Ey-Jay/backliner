@@ -32,9 +32,9 @@ const FilesPage = ({
   return (
     <Layout title="Files" type="file">
       {view === 'list' ? (
-        <ListView data={data.data.data} type="audio" />
+        <ListView data={data.data.data} type="file" />
       ) : (
-        <GridView data={data.data.data} type="audio" />
+        <GridView data={data.data.data} type="file" />
       )}
     </Layout>
   );

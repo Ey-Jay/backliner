@@ -70,12 +70,8 @@ function App() {
         />
         <PrivateRoute path="/:bid/files" component={FilesPage} />
         <PrivateRoute
-          path="/:bid/edit-audio/:id"
-          component={() => <EditItemPage type="audio" />}
-        />
-        <PrivateRoute
-          path="/:bid/edit-files/:id"
-          component={() => <EditItemPage type="files" />}
+          path="/:bid/edit-file/:id"
+          component={() => <EditItemPage type="file" />}
         />
         <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
         <PrivateRoute path="/:bid/settings" component={SettingsPage} />
