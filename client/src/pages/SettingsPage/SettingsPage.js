@@ -216,7 +216,10 @@ const SettingsPage = ({
                 <MemberImage>
                   <img src={member.avatar} alt="" />
                 </MemberImage>
-                <MemberName>{member.name}</MemberName>
+                <MemberName>
+                  {member.name}
+                  {member._id === owner ? ' (Owner)' : ''}
+                </MemberName>
                 <TrashWrapper onClick={() => onClickRemove(member._id)}>
                   <TrashIcon />
                 </TrashWrapper>
