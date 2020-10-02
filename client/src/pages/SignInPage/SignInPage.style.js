@@ -5,25 +5,22 @@ export const Container = styled.div`
   display: grid;
   place-items: center;
   text-align: center;
-
-  h1 {
-    font-family: 'Baloo Tamma 2', cursive;
-    margin: 0 0 0 20px;
-    position: relative;
-    top: 2px;
-    font-size: 3rem;
-  }
 `;
 
 export const Flex = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 60px;
+  flex-direction: column;
+  margin-bottom: 80px;
 
-  svg {
-    height: 60px;
-    color: ${({ theme }) => theme.primary};
+  svg:first-child {
+    height: 100px;
+    margin-bottom: 25px;
+  }
+
+  svg:last-child {
+    height: 40px;
   }
 `;
 

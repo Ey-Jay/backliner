@@ -114,6 +114,17 @@ export const TrashWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
 `;
 
 export const Avatars = styled.div``;
