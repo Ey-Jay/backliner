@@ -15,6 +15,7 @@ import {
   EditorControls,
   Control,
   SaveButton,
+  ChooseProject,
 } from './NewLyricsEditor.style';
 import { ReactComponent as ItalicIcon } from 'assets/svg/Lyrics_Editor_Icons/Italic.svg';
 import { ReactComponent as UnderlineIcon } from 'assets/svg/Lyrics_Editor_Icons/Underline.svg';
@@ -36,7 +37,7 @@ const NewLyricsEditor = ({
     params: { bid },
   },
 }) => {
-  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
+  const { data, loading } = useGetAPI(`/bands/${bid}/projects`);
   const [selectedProject, setSelectedProject] = useState(null);
   const { currentUser } = useContext(GlobalContext);
   const [editorState, setEditorState] = useState(() =>
@@ -175,7 +176,8 @@ const NewLyricsEditor = ({
             placeholder="May the creative juices start flowing..."
           />
         </EditorContainer>
-        <div>
+        <ChooseProject>
+          <label>Choose Project</label>
           <select
             value={selectedProject}
             onChange={(e) => setSelectedProject(e.currentTarget.value)}
@@ -188,7 +190,7 @@ const NewLyricsEditor = ({
                 </option>
               ))}
           </select>
-        </div>
+        </ChooseProject>
         <SaveButton onClick={saveDocument}>Save</SaveButton>
       </Container>
     </Layout>

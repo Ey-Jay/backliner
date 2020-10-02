@@ -22,6 +22,7 @@ import {
   EditorContainer,
   EditorControls,
   Control,
+  ChooseProject,
   SaveButton,
 } from './EditLyricsEditor.style';
 import { ReactComponent as ItalicIcon } from 'assets/svg/Lyrics_Editor_Icons/Italic.svg';
@@ -206,7 +207,7 @@ const EditLyricsEditor = () => {
             placeholder="May the creative juices start flowing..."
           />
         </EditorContainer>
-        <div>
+        <ChooseProject>
           <select
             value={selectedProject}
             onChange={(e) => setSelectedProject(e.currentTarget.value)}
@@ -219,7 +220,7 @@ const EditLyricsEditor = () => {
                 </option>
               ))}
           </select>
-        </div>
+        </ChooseProject>
         <SaveButton onClick={saveDocument}>Save Changes</SaveButton>
       </Container>
     </Layout>

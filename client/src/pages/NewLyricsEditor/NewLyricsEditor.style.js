@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin: 25px auto;
+  margin: 25px auto 100px;
   max-width: 650px;
-  height: 90%;
 `;
 
 export const TitleInput = styled.input`
@@ -16,8 +15,8 @@ export const TitleInput = styled.input`
 `;
 
 export const EditorContainer = styled.div`
-  min-height: 100%;
-  margin: 0 auto;
+  min-height: 500px;
+  margin: 0 auto 40px;
   padding: 15px;
   max-width: 850px;
   border: 1px solid ${({ theme }) => theme.color};
@@ -43,9 +42,38 @@ export const Control = styled.button`
 `;
 
 export const SaveButton = styled.button`
-  margin-top: 10px;
-  background-color: transparent;
-  padding: 10px;
-  color: ${({ theme }) => theme.color};
-  border: 1px solid ${({ theme }) => theme.color};
+  background-color: ${({ theme }) => theme.secondary};
+  border: none;
+  color: inherit;
+  padding: 16px 32px;
+  border-radius: 6px;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondaryDark};
+  }
+
+  &:active  {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
+`;
+
+export const ChooseProject = styled.div`
+  margin-bottom: 40px;
+
+  select {
+    background-color: ${({ theme }) => theme.backgroundColorLight};
+    border: none;
+    padding: 16px 20px;
+    color: inherit;
+    width: 100%;
+    border-radius: 6px;
+    outline: none;
+  }
 `;
