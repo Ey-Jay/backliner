@@ -6,6 +6,7 @@ import { ModalContext } from 'context/ModalContext';
 import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import Spinner from 'components/Spinner';
+import Embed from 'components/Embed';
 import {
   Container,
   Details,
@@ -102,7 +103,10 @@ const SingleItemPage = ({ type }) => {
             </AuthorImage>
             <AuthorName>{authorName}</AuthorName>
           </Author>
-          <URL>{fileURL}</URL>
+          <URL>
+            {thumbnail}
+            {fileURL}
+          </URL>
           <Created>
             Created: {moment(data.data.data.createdAt).format('DD/MM/YYYY')}
           </Created>
@@ -122,7 +126,7 @@ const SingleItemPage = ({ type }) => {
             <button onClick={deleteOptionHandler}>Delete</button>
           </Controls>
         </Details>
-        <Icon>{thumbnail}</Icon>
+        <Embed url={fileURL} />
       </Container>
     </Layout>
   );
