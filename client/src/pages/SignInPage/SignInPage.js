@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import { GlobalContext } from 'context/GlobalContext';
-
-import { ReactComponent as LogoSVG } from 'assets/svg/Logo.svg';
-import { ReactComponent as GoogleSignInIcon } from 'assets/svg/GoogleSignInIcon.svg';
-import { Container, Flex, SignInButton } from './SignInPage.style';
-import { apiUrl } from 'config/constants';
 
 import firebase from 'fb';
+import { GlobalContext } from 'context/GlobalContext';
+import { ReactComponent as LogoSVG } from 'assets/svg/signin/Logo.svg';
+import { ReactComponent as TextSVG } from 'assets/svg/signin/Text.svg';
+import { ReactComponent as GoogleSignInIcon } from 'assets/svg/GoogleSignInIcon.svg';
+import { Container, Flex, SignInButton } from './SignInPage.style';
 
 const SignInPage = () => {
   const { currentUser } = useContext(GlobalContext);
@@ -26,10 +25,8 @@ const SignInPage = () => {
     <Container>
       <div>
         <Flex>
-          <div>
-            <LogoSVG />
-          </div>
-          <h1>backliner</h1>
+          <LogoSVG />
+          <TextSVG />
         </Flex>
         <SignInButton onClick={onClickHandler}>
           <GoogleSignInIcon /> Sign in with Google
