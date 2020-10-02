@@ -140,6 +140,11 @@ export const ModalContextProvider = ({ children }) => {
       if (res.data.success) {
         await showSuccess();
         if (state.deleteType === 'bands') history.push('/checkin');
+        if (state.deleteType === 'lyrics') history.push(`/${bid}/lyrics`);
+        if (state.deleteType === 'files') history.push(`/${bid}/files`);
+        if (state.deleteType === 'audio') history.push(`/${bid}/audio`);
+        if (state.deleteType === 'video') history.push(`/${bid}/video`);
+        if (state.deleteType === 'projects') history.push(`/${bid}/projects`);
       } else await showError();
     } catch (e) {
       await showError();

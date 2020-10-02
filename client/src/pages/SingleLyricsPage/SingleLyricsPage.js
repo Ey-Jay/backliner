@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { EditorState, convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
+import { ModalContext } from 'context/ModalContext';
 import useGetAPI from 'hooks/useGetAPI';
 import Spinner from 'components/Spinner';
 import Layout from 'layout';
@@ -11,6 +12,7 @@ import {
   EditButton,
   Lyrics,
   ProjectName,
+  DeleteButton,
 } from './SingleLyricsPage.style';
 
 const SingleLyricsPage = ({
@@ -19,6 +21,7 @@ const SingleLyricsPage = ({
   },
 }) => {
   const { id } = useParams();
+  const { dispatch } = useContext(ModalContext);
   const { data, loading, error } = useGetAPI(`/lyrics/${id}`);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -49,6 +52,15 @@ const SingleLyricsPage = ({
 
   const html = stateToHTML(editorState);
 
+  const onClickDeleteHandler = () =>
+    dispatch({
+      type: 'SHOW_DELETE',
+      payload: {
+        id,
+        type: 'lyrics',
+      },
+    });
+
   return (
     <Layout title={data.data.data.title}>
       <Container>
@@ -59,6 +71,7 @@ const SingleLyricsPage = ({
         <EditButton onClick={() => history.push(`/${bid}/edit-lyrics/${id}`)}>
           edit
         </EditButton>
+        <DeleteButton onClick={onClickDeleteHandler}>Delete</DeleteButton>
       </Container>
     </Layout>
   );

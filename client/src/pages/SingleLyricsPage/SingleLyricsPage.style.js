@@ -6,7 +6,9 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const Lyrics = styled.div``;
+export const Lyrics = styled.div`
+  margin-bottom: 40px;
+`;
 
 export const EditButton = styled.button`
   height: 50px;
@@ -41,4 +43,30 @@ export const ProjectName = styled.div`
   font-weight: 700;
   text-transform: uppercase;
   display: inline-block;
+`;
+
+export const DeleteButton = styled.button`
+  height: 50px;
+  line-height: 50px;
+  background-color: #ff4136;
+  border: none;
+  color: inherit;
+  border-radius: 10px;
+  padding: 0 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  outline: none;
+  margin-left: 20px;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #c92d24;
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
 `;
