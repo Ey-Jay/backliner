@@ -140,12 +140,8 @@ const SettingsPage = ({
     return (
       <Layout title="Settings">
         <Container>
-          <YourID>
-            <h2>Your Backliner ID</h2>
-            <p>{dbUser._id}</p>
-          </YourID>
           <h2>Members</h2>
-          <section style={{ marginBottom: '100px' }}>
+          <section>
             <MemberList>
               {members.map((member) => (
                 <MemberItem key={member._id}>
@@ -157,6 +153,10 @@ const SettingsPage = ({
               ))}
             </MemberList>
           </section>
+          <YourID>
+            <h2>Your Backliner ID</h2>
+            <p>{dbUser._id}</p>
+          </YourID>
           <Attribution>
             This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
             <a href="https://remixicon.com">Remix Icons</a>.
@@ -168,10 +168,6 @@ const SettingsPage = ({
   return (
     <Layout title="Settings">
       <Container>
-        <YourID>
-          <h2>Your Backliner ID</h2>
-          <p>{dbUser._id}</p>
-        </YourID>
         <h2>General</h2>
         <section>
           <label>Band Name</label>
@@ -243,6 +239,10 @@ const SettingsPage = ({
             Delete Band
           </DeleteButton>
         </DangerZone>
+        <YourID>
+          <h2>Your Backliner ID</h2>
+          <p>{dbUser._id}</p>
+        </YourID>
         <Attribution>
           This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
           <a href="https://remixicon.com">Remix Icons</a>.
