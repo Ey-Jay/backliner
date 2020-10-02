@@ -24,6 +24,7 @@ import SettingsPage from 'pages/SettingsPage';
 import SingleProjectPage from 'pages/SingleProjectPage';
 import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
+import SingleItemPage from 'pages/SingleItemPage';
 
 function App() {
   const { state, dispatch } = useContext(ModalContext);
@@ -58,17 +59,26 @@ function App() {
         />
         <PrivateRoute path="/:bid/lyrics/:id" component={SingleLyricsPage} />
         <PrivateRoute path="/:bid/lyrics" component={LyricsPage} />
-        <PrivateRoute path="/:bid/audio" component={AudioPage} />
+        <PrivateRoute exact path="/:bid/audio" component={AudioPage} />
+        <PrivateRoute
+          path="/:bid/audio/:id"
+          component={() => <SingleItemPage type="audio" />}
+        />
         <PrivateRoute
           path="/:bid/edit-audio/:id"
           component={() => <EditItemPage type="audio" />}
         />
-        <PrivateRoute path="/:bid/video" component={VideoPage} />
+        <PrivateRoute exact path="/:bid/video" component={VideoPage} />
+        <PrivateRoute
+          path="/:bid/video/:id"
+          component={() => <SingleItemPage type="video" />}
+        />
         <PrivateRoute
           path="/:bid/edit-video/:id"
           component={() => <EditItemPage type="video" />}
         />
         <PrivateRoute path="/:bid/files" component={FilesPage} />
+        <PrivateRoute path="/:bid/file/:id" component={() => <SingleItemPage type="file" />} />
         <PrivateRoute
           path="/:bid/edit-file/:id"
           component={() => <EditItemPage type="file" />}

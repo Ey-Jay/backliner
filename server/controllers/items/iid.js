@@ -60,10 +60,11 @@ const getItemById = async (req, res, next) => {
         })
         .exec()
     );
-    queries.push(Audio.findById(iid).lean().populate('project'));
-    queries.push(Video.findById(iid).lean().populate('project'));
-    queries.push(File.findById(iid).lean().populate('project'));
-    queries.push(Lyrics.findById(iid).lean().populate('project'));
+    queries.push(Audio.findById(iid).lean().populate('project').populate('author'));
+    queries.push(Video.findById(iid).lean().populate('project').populate('author'));
+    queries.push(File.findById(iid).lean().populate('project').populate('author'));
+    queries.push(Lyrics.findById(iid).lean().populate('project').populate('author'));
+    
 
     const results = await Promise.all(queries);
     const cleanResult = results.find((item) => !isNil(item) && !isEmpty(item));
