@@ -105,7 +105,7 @@ const SingleItemPage = ({ type }) => {
           </Author>
           <URL>
             {thumbnail}
-            {fileURL}
+            <span>{fileURL}</span>
           </URL>
           <Created>
             Created: {moment(data.data.data.createdAt).format('DD/MM/YYYY')}

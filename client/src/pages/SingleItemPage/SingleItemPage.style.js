@@ -68,6 +68,10 @@ export const URL = styled.div`
   overflow: hidden;
   white-space: nowrap;
   font-size: 0.8em;
+
+  span {
+    margin-left: 10px;
+  }
 `;
 
 export const Created = styled.div`
