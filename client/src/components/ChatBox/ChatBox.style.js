@@ -41,7 +41,7 @@ export const Message = styled.div`
   margin: ${({ isMine }) => (isMine ? '12px 10px' : '30px 10px 2px')};
   padding: 10px;
   background-color: ${({ theme, isMine }) =>
-    isMine ? theme.secondary : theme.backgroundColor};
+    isMine ? theme.primary : theme.backgroundColor};
   border-radius: 10px;
   position: relative;
 
@@ -49,7 +49,7 @@ export const Message = styled.div`
     content: '';
     display: 'block';
     background-color: ${({ theme, isMine }) =>
-      isMine ? theme.secondary : theme.backgroundColor};
+      isMine ? theme.primary : theme.backgroundColor};
     height: 10px;
     width: 10px;
     position: absolute;
@@ -65,7 +65,7 @@ export const AuthorName = styled.div`
   top: -0.85rem;
   left: 10px;
   font-weight: bold;
-  color: ${({ theme }) => theme.secondary};
+  color: ${({ theme }) => theme.primary};
   text-transform: uppercase;
   white-space: nowrap;
 `;
@@ -92,7 +92,8 @@ export const ChatInput = styled.div`
   border-radius: 10px;
   overflow: auto;
   outline: none;
-  background-color: ${({ theme }) => theme.backgroundColor};
+  box-shadow: inset 1px 2px 3px #00000033, inset 1px 2px 9px #00000033;
+  background-color: ${({ theme }) => theme.backgroundColorLight};
 `;
 
 export const SendButton = styled.button`
