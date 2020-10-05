@@ -30,6 +30,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 app.use('/', checkIfAuthenticated);
+app.use('/getAuthUrl', require('./routes/oauth'));
 app.use('/', require('./routes'));
 app.use(errorHandler);
 

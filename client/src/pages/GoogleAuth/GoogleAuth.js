@@ -18,9 +18,10 @@ const GoogleAuth = () => {
       .then((token) => {
         axios
           .post(
-            'http://localhost:3001/authURL',
+            'http://localhost:3001/getAuthUrl',
             {
               code: query.get('code'),
+              bid: query.get('state'),
             },
             {
               headers: { authorization: `Bearer ${token}` },
