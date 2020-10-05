@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   text-align: center;
+  padding: 20px;
 `;
 
 export const TitleFlex = styled.div`
@@ -22,4 +23,5 @@ export const ProjectName = styled.h2`
   border-radius: 3px;
   margin: 0 0 0 10px;
   display: inline-block;
+  flex: 1;
 `;

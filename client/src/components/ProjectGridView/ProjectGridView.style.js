@@ -3,11 +3,12 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   max-width: 1250px;
   margin: 0 auto;
+  padding: 0 60px;
 `;
 
 export const Controls = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   margin-right: 10px;
@@ -15,6 +16,18 @@ export const Controls = styled.div`
 
   & > * + * {
     margin-left: 5px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    justify-content: initial;
+
+    section:first-child {
+      flex: 1;
+    }
+
+    section:last-child {
+      display: none;
+    }
   }
 `;
 
@@ -40,6 +53,12 @@ export const NewButton = styled.button`
   &:active {
     transition: all 0.1s;
     transform: scale(0.9);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
   }
 `;
 
@@ -70,6 +89,10 @@ export const ViewButton = styled.div`
       transition: all 0.1s;
       background-color: rgba(247, 247, 250, 0.07);
     }
+
+    @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+      display: none;
+    }
   `}
 `;
 
@@ -92,17 +115,16 @@ export const SingleFile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 10px 10px 10px 10px;
+  margin: 10px;
   background-color: rgba(247, 247, 250, 0.14);
-  border-radius: 5%;
+  border-radius: 10px;
   cursor: pointer;
+  padding: 10px;
+  position: relative;
+
   &:hover {
     background-color: rgba(247, 247, 250, 0.35);
   }
-`;
-
-export const Details = styled.div`
-  margin-left: 10px;
 `;
 
 export const FirstRow = styled.div`
@@ -110,15 +132,23 @@ export const FirstRow = styled.div`
 `;
 
 export const ProjectName = styled.p`
+  margin: 0 0 10px;
   padding: 5px;
-  width: 100px;
+  max-width: 85%;
   background-color: ${({ color }) => color || '#666'};
   border-radius: 3px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const ItemSettingsButton = styled.div`
-  position: relative;
-  margin-left: 50px;
+  position: absolute;
+  top: 10px;
+  right: 5px;
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -137,28 +167,47 @@ export const ItemSettingsButton = styled.div`
   }
 `;
 
-export const FileName = styled.h3``;
+export const FileName = styled.h3`
+  margin: 0 0 15px;
+  flex: 1;
+`;
 
 export const Icon = styled.div`
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.07);
+  height: 80px;
+  width: 100%;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 15px;
 
   svg {
-    height: 25px;
+    height: 35px;
   }
+`;
+
+export const Details = styled.div`
+  font-size: 0.8rem;
+  opacity: 0.6;
 `;
 
 export const Author = styled.p`
   font-style: italic;
   font-size: 0.8rem;
+  margin: 0;
+  display: inline-block;
+`;
+
+export const Divider = styled.p`
+  margin: 0 5px;
+  display: inline-block;
 `;
 
 export const Timestamp = styled.p`
   font-style: italic;
   font-size: 0.8rem;
+  margin: 0;
+  display: inline-block;
 `;

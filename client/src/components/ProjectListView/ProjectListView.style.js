@@ -3,11 +3,15 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   max-width: 700px;
   margin: 0 auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 export const Controls = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   margin-right: 10px;
@@ -109,6 +113,7 @@ export const ListItem = styled.li`
 export const Icon = styled.div`
   height: 70px;
   width: 70px;
+  margin: 0 10px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -124,20 +129,25 @@ export const Details = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+
+  & > * + * {
+    margin-top: 10px;
+  }
 `;
 
 export const Row = styled.div`
   display: flex;
-  /* justify-content: space-around; */
   align-items: center;
 `;
 
 export const ProjectName = styled.p`
-  padding: 5px;
+  padding: 5px 8px;
   background-color: ${({ color }) => color || '#666'};
   border-radius: 3px;
   margin: 0 0 0 10px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
 `;
 
 export const FileName = styled.h3`
@@ -145,15 +155,21 @@ export const FileName = styled.h3`
 `;
 
 export const Author = styled.p`
-  font-style: italic;
   font-size: 0.8rem;
   margin: 0;
+  opacity: 0.6;
+`;
+
+export const Divider = styled.p`
+  font-size: 0.8rem;
+  margin: 0 10px;
+  opacity: 0.6;
 `;
 
 export const Timestamp = styled.p`
-  font-style: italic;
   font-size: 0.8rem;
-  margin: 0 0 0 10px;
+  margin: 0;
+  opacity: 0.6;
 `;
 
 export const ItemSettingsButton = styled.div`
@@ -175,5 +191,13 @@ export const ItemSettingsButton = styled.div`
   &:active {
     transition: all 0.1s;
     background-color: rgba(0, 0, 0, 0.21);
+  }
+`;
+
+export const Mobile = styled.div`
+  display: none;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: block;
   }
 `;

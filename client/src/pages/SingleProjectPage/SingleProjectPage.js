@@ -54,12 +54,12 @@ const SingleProjectPage = ({
           <Dot color={data.data.data.theme} />
           <ProjectName>{data.data.data.name}</ProjectName>
         </TitleFlex>
+        {view === 'list' ? (
+          <ProjectListView data={allItems} type="project" />
+        ) : (
+          <ProjectGridView data={allItems} type="project" />
+        )}
       </Container>
-      {view === 'list' ? (
-        <ProjectListView data={allItems} type="project" />
-      ) : (
-        <ProjectGridView data={allItems} type="project" />
-      )}
     </Layout>
   );
 };
