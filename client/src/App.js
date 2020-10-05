@@ -25,6 +25,7 @@ import SingleProjectPage from 'pages/SingleProjectPage';
 import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
+import GoogleAuth from 'pages/GoogleAuth';
 
 function App() {
   const { state, dispatch } = useContext(ModalContext);
@@ -45,6 +46,7 @@ function App() {
           <SignInPage />
         </Route>
         <PrivateRoute path="/checkin" component={CheckInPage} />
+        <PrivateRoute path="/googleauth" component={GoogleAuth} />
         <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
         <PrivateRoute path="/:bid/project/:pid" component={SingleProjectPage} />
         <PrivateRoute
@@ -78,7 +80,10 @@ function App() {
           component={() => <EditItemPage type="video" />}
         />
         <PrivateRoute path="/:bid/files" component={FilesPage} />
-        <PrivateRoute path="/:bid/file/:id" component={() => <SingleItemPage type="file" />} />
+        <PrivateRoute
+          path="/:bid/file/:id"
+          component={() => <SingleItemPage type="file" />}
+        />
         <PrivateRoute
           path="/:bid/edit-file/:id"
           component={() => <EditItemPage type="file" />}
