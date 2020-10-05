@@ -99,7 +99,7 @@ const getCalendar = async (req, res) => {
         if (err) {
           oauth2Client
             .getTokenInfo(band.google_access_token)
-            .then((res) => console.log(res))
+            .then((resp) => console.log(resp))
             .catch((err) => {
               if (
                 err.response.data.error == 'invalid_token' &&
@@ -110,10 +110,10 @@ const getCalendar = async (req, res) => {
                   .post(
                     `https://oauth2.googleapis.com/token?client_id=${process.env.OAUTH_CLIENT_ID}&client_secret=${process.env.OAUTH_CLIENT_SECRET}&refresh_token=${band.google_refresh_token}&grant_type=refresh_token`
                   )
-                  .then(async (res) => {
+                  .then(async (respo) => {
                     const updatedBand = await Band.findByIdAndUpdate(
                       { _id: bid },
-                      getNewTokens(res.data)
+                      getNewTokens(respo.data)
                     );
                     return res.send('refresh');
                   });

@@ -19,7 +19,7 @@ const CalendarPage = () => {
             headers: { authorization: `Bearer ${token}` },
           })
           .then((res) => {
-            if (!res.data) {
+            if (res.data == 'refresh') {
               setRerender(new Date());
               return;
             }
