@@ -19,6 +19,7 @@ import {
   ItemSettingsButton,
   EmptyList,
   Mobile,
+  Divider,
 } from './ProjectListView.style';
 
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
@@ -66,10 +67,11 @@ const ProjectListView = ({ data, type }) => {
                   <FileName>{item.title}</FileName>
                 </Row>
                 <Row>
-                  <Author>{item.author.name}</Author>
                   <Timestamp>
                     {moment(item.createdAt).format('DD/MM/YYYY')}
                   </Timestamp>
+                  <Divider>·</Divider>
+                  <Author>{item.author.name}</Author>
                 </Row>
               </Details>
               <ItemSettingsButton>

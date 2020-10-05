@@ -8,7 +8,7 @@ export const Container = styled.main`
 
 export const Controls = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 20px;
   margin-right: 10px;
