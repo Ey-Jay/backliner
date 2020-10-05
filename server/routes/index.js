@@ -11,6 +11,7 @@ router
   .put(updateUser)
   .delete(setUserInactive);
 
+router.use('/', require('./calendar'));
 router.use('/bands', require('./bands'));
 router.use('/:itemtype', require('./items'));
 
