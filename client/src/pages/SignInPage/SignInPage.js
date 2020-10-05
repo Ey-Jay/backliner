@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import firebase from 'fb';
 import { GlobalContext } from 'context/GlobalContext';
-import { ReactComponent as LogoSVG } from 'assets/svg/signin/Logo.svg';
+import { ReactComponent as LogoSVG } from 'assets/svg/Logo.svg';
 import { ReactComponent as TextSVG } from 'assets/svg/signin/Text.svg';
 import { ReactComponent as GoogleSignInIcon } from 'assets/svg/GoogleSignInIcon.svg';
 import { Container, Flex, SignInButton } from './SignInPage.style';
