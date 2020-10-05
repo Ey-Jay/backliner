@@ -22,7 +22,7 @@ import {
 const NavMobile = ({ title }) => {
   const location = useLocation();
   const history = useHistory();
-  const { bandID } = useContext(GlobalContext);
+  const { bandID, setIsChatVisible } = useContext(GlobalContext);
 
   return (
     <>
@@ -32,7 +32,7 @@ const NavMobile = ({ title }) => {
           <TopButton onClick={() => history.push(`/${bandID}/settings`)}>
             <SettingsSVG />
           </TopButton>
-          <TopButton>
+          <TopButton onClick={() => setIsChatVisible(true)}>
             <ChatSVG />
           </TopButton>
         </Buttons>
