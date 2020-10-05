@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   max-width: 600px;
   margin: 0 auto;
+  padding: 20px;
 
   label {
     display: block;
@@ -45,7 +46,7 @@ export const Color = styled.div`
   cursor: pointer;
 
   &::after {
-    content: '🤖';
+    content: '✔';
     display: ${({ active }) => (active ? 'block' : 'none')};
   }
 `;
@@ -80,18 +81,72 @@ export const ItemDescription = styled.div`
 
 export const TrashWrapper = styled.div`
   cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
 `;
 
 export const DangerZone = styled.div`
   background-color: #ff4136;
   padding: 20px;
   margin-bottom: 40px;
+  border-radius: 10px;
 
   h2 {
     margin-top: 0;
   }
 `;
 
-export const DeleteButton = styled.button``;
+export const DeleteButton = styled.button`
+  background-color: #ffffff;
+  border: none;
+  color: inherit;
+  padding: 12px 24px;
+  border-radius: 6px;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+  color: #ff4136;
 
-export const SaveButton = styled.button``;
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active  {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
+`;
+
+export const SaveButton = styled.button`
+  background-color: ${({ theme }) => theme.secondary};
+  border: none;
+  color: inherit;
+  padding: 16px 32px;
+  border-radius: 6px;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondaryDark};
+  }
+
+  &:active  {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
+`;
