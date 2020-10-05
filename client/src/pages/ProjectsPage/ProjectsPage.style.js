@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   max-width: 700px;
   margin: 0 auto;
+  padding: 20px;
 `;
 
 export const Controls = styled.div`
@@ -15,6 +16,14 @@ export const Controls = styled.div`
 
   & > * + * {
     margin-left: 5px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    justify-content: initial;
+
+    section:first-child {
+      flex: 1;
+    }
   }
 `;
 
@@ -40,6 +49,12 @@ export const NewButton = styled.button`
   &:active {
     transition: all 0.1s;
     transform: scale(0.9);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
   }
 `;
 
@@ -100,6 +115,13 @@ export const ListItem = styled.li`
   height: 80px;
   overflow: hidden;
   cursor: pointer;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    border-radius: 10px;
+    height: initial;
+    padding: 15px;
+    border-left: solid 10px ${({ color = '#999' }) => color};
+  }
 `;
 
 export const Dot = styled.div`
@@ -108,6 +130,10 @@ export const Dot = styled.div`
   margin: 5px 15px 5px 5px;
   border-radius: 50%;
   background-color: ${({ color = '#111111' }) => color};
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 export const Details = styled.div`
@@ -176,5 +202,9 @@ export const ItemSettingsButton = styled.div`
   &:active {
     transition: all 0.1s;
     background-color: rgba(0, 0, 0, 0.21);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    margin: 0px;
   }
 `;
