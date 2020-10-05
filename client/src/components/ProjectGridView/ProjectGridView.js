@@ -45,7 +45,7 @@ const ProjectGridView = ({ data, type }) => {
         {data.map((item) => (
           <SingleFile
             key={item._id}
-            onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
+            onClick={() => history.push(`/${bid}/${item.type}/${item._id}`)}
           >
             <Details>
               <FileName>{item.title}</FileName>
