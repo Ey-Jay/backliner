@@ -105,5 +105,11 @@ export const SendButton = styled.button`
   outline: none;
   cursor: pointer;
   border-radius: 50%;
+  color: inherit;
   background-color: ${({ theme }) => theme.secondary};
+
+  svg {
+    position: relative;
+    left: -1px;
+  }
 `;

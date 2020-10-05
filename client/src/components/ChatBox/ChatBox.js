@@ -6,7 +6,7 @@ import moment from 'moment';
 import firebase from 'fb';
 import RoundButton from 'components/RoundButton';
 import TransformText from 'components/TransformText';
-import { AirplaneIcon } from 'components/RoundButton/Icons.style';
+import { ReactComponent as ChevronRightSVG } from 'assets/svg/ChevronRight.svg';
 import {
   ChatHeader,
   ChatBody,
@@ -127,7 +127,7 @@ const ChatBox = ({ isOpen, setIsOpen }) => {
           onKeyDown={enterKeyHandler}
         />
         <SendButton onClick={buttonClickHandler}>
-          <AirplaneIcon style={{ color: 'white' }} />
+          <ChevronRightSVG />
         </SendButton>
       </ChatInputWrapper>
     </>
