@@ -33,6 +33,7 @@ const Layout = ({ children, title, type }) => {
   useEffect(() => {
     setBid(bid);
     setBandID(bid);
+    // eslint-disable-next-line
   }, [bid]);
 
   const logoff = () =>
