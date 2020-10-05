@@ -49,6 +49,10 @@ export const TopBar = styled.div`
     white-space: nowrap;
     margin: 0;
   }
+
+  @media (min-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 export const Buttons = styled.div`

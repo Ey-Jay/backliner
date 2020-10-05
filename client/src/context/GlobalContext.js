@@ -10,7 +10,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [dbUser, setDbUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isChatVisible, setIsChatVisible] = useState(false);
+  const [isChatVisible, setIsChatVisible] = useState(true);
   const [view, setView] = useState('list');
   const [showAddModal, setShowAddModal] = useState(false);
   const [rerender, setRerender] = useState(new Date());
