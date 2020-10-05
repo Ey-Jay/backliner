@@ -15,7 +15,7 @@ const CalendarPage = () => {
       .getIdToken()
       .then((token) => {
         axios
-          .get(`http://localhost:3001/${bid}/calendar`, {
+          .get(`https://backliner.app/${bid}/calendar`, {
             headers: { authorization: `Bearer ${token}` },
           })
           .then((res) => {
