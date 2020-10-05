@@ -48,7 +48,7 @@ const ProjectListView = ({ data, type }) => {
         {data.map((item) => (
           <ListItem
             key={item._id}
-            onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
+            onClick={() => history.push(`/${bid}/${item.type}/${item._id}`)}
           >
             <Icon>
               {item.type === 'audio' && <MicIcon />}
