@@ -28,7 +28,7 @@ const CalendarPage = () => {
               setRerender(new Date());
               return;
             }
-            if (res.data == 'calendar not set') {
+            if (res.data === 'calendar not set') {
               setCalendarAuthorized(false);
               return;
             }

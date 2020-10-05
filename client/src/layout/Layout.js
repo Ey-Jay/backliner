@@ -26,9 +26,12 @@ const Layout = ({ children, title, type }) => {
   const { setBid } = useContext(ModalContext);
   const band = useGetAPI(`/bands/${bid}`);
 
-  const { setBandID, isChatVisible, setIsChatVisible } = useContext(
-    GlobalContext
-  );
+  const {
+    setBandID,
+    isChatVisible,
+    setIsChatVisible,
+    setCalendarAuthorized,
+  } = useContext(GlobalContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -36,6 +39,12 @@ const Layout = ({ children, title, type }) => {
     setBandID(bid);
     // eslint-disable-next-line
   }, [bid]);
+
+  useEffect(() => {
+    if (band.data) {
+      setCalendarAuthorized(band?.data?.data?.hasGoogle);
+    }
+  }, [band.data]);
 
   const logoff = () =>
     firebase
