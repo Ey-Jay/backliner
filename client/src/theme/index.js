@@ -1,14 +1,14 @@
 import { createGlobalStyle, css } from 'styled-components';
 
 export const theme = {
-  primary: '#D30C7B',
-  primaryDark: '#AE0A64',
-  secondary: '#5B8FFB',
-  secondaryDark: '#4774d6',
-  color: '#F7F7FA',
-  backgroundColor: '#141C2E',
-  backgroundColorDark: '#0e1324',
-  backgroundColorLight: '#304066',
+  primary: '#FF4136',
+  primaryDark: '#E00B00',
+  secondary: '#888888',
+  secondaryDark: '#777777',
+  color: '#FFFCF9',
+  backgroundColor: '#111111',
+  backgroundColorDark: '#0a0a0a',
+  backgroundColorLight: '#333333',
 };
 
 export const GlobalStyles = createGlobalStyle`
