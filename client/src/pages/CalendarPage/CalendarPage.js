@@ -1,9 +1,15 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from 'context/GlobalContext';
 import axios from 'axios';
 
 import Layout from 'layout';
+
+const localizer = momentLocalizer(moment);
+
+const Events = [{}];
 
 const CalendarPage = () => {
   const {
@@ -14,6 +20,7 @@ const CalendarPage = () => {
     setCalendarAuthorized,
   } = useContext(GlobalContext);
   const { bid } = useParams();
+  const [calendarEvents, setCalendarEvents] = useState(null);
 
   useEffect(() => {
     currentUser
@@ -32,7 +39,8 @@ const CalendarPage = () => {
               setCalendarAuthorized(false);
               return;
             }
-            console.log(res.data);
+            setCalendarEvents(res.data.data.items);
+            console.log(res.data.data.items);
             setCalendarAuthorized(true);
           })
           .catch((err) => {
@@ -45,6 +53,15 @@ const CalendarPage = () => {
   return (
     <Layout title="Calendar">
       {calendarAuthorized ? 'Calendar Set' : 'Calendar NOT set'}
+      {calendarEvents && (
+        <Calendar
+          localizer={localizer}
+          events={Events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 800 }}
+        />
+      )}
     </Layout>
   );
 };
