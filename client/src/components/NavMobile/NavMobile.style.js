@@ -12,7 +12,6 @@ export const Container = styled.div`
     bottom: 0;
     height: 80px;
     z-index: 9999999;
-    /* box-shadow: 0 0 7px #000000aa, 0 0 21px #000000aa; */
     border-top: solid 1px #666;
   }
 `;

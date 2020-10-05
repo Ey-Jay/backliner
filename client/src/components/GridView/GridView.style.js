@@ -17,6 +17,12 @@ export const Controls = styled.div`
   & > * + * {
     margin-left: 5px;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    section:last-child {
+      display: none;
+    }
+  }
 `;
 
 export const NewButton = styled.button`
@@ -70,6 +76,10 @@ export const ViewButton = styled.div`
     &:active {
       transition: all 0.1s;
       background-color: rgba(247, 247, 250, 0.07);
+    }
+
+    @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+      display: none;
     }
   `}
 `;

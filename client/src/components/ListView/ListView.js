@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { GlobalContext } from 'context/GlobalContext';
 import { ModalContext } from 'context/ModalContext';
-
+import GridView from 'components/GridView';
 import {
   Container,
   Controls,
@@ -22,6 +22,7 @@ import {
   ItemSettingsButton,
   NewButton,
   EmptyList,
+  Mobile,
 } from './ListView.style';
 
 import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
@@ -68,52 +69,63 @@ const ListView = ({ data, type }) => {
   };
 
   return (
-    <Container>
-      <Controls>
-        <section>
-          <NewButton onClick={onClickNewHandler}>New Item</NewButton>
-        </section>
-        <section>
-          <ViewButton active={view === 'list'} onClick={() => setView('list')}>
-            <ListViewIcon />
-          </ViewButton>
-          <ViewButton active={view === 'grid'} onClick={() => setView('grid')}>
-            <GridViewIcon />
-          </ViewButton>
-        </section>
-      </Controls>
-      <List>
-        {data.map((item) => (
-          <ListItem
-            key={item._id}
-            onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
-          >
-            <Icon>{thumbnail}</Icon>
-            <Details>
-              <Row>
-                <FileName>{item.title}</FileName>
-                <ProjectName color={item.project ? item.project.theme : null}>
-                  {item.project?.name ? item.project.name : 'No Project'}
-                </ProjectName>
-              </Row>
-              <Row>
-                <Timestamp>
-                  {moment(item.createdAt).format('DD/MM/YYYY')}
-                </Timestamp>
-                <Divider>·</Divider>
-                <Author>{item.author.name}</Author>
-              </Row>
-            </Details>
-            <ItemSettingsButton
-              onClick={(e) => onClickDotsHandler(e, item._id, item.title)}
+    <>
+      <Mobile>
+        <GridView data={data} type={type} />
+      </Mobile>
+      <Container>
+        <Controls>
+          <section>
+            <NewButton onClick={onClickNewHandler}>New Item</NewButton>
+          </section>
+          <section>
+            <ViewButton
+              active={view === 'list'}
+              onClick={() => setView('list')}
             >
-              <ThreeDotsIcon />
-            </ItemSettingsButton>
-          </ListItem>
-        ))}
-        {data.length === 0 && <EmptyList>No Items</EmptyList>}
-      </List>
-    </Container>
+              <ListViewIcon />
+            </ViewButton>
+            <ViewButton
+              active={view === 'grid'}
+              onClick={() => setView('grid')}
+            >
+              <GridViewIcon />
+            </ViewButton>
+          </section>
+        </Controls>
+        <List>
+          {data.map((item) => (
+            <ListItem
+              key={item._id}
+              onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
+            >
+              <Icon>{thumbnail}</Icon>
+              <Details>
+                <Row>
+                  <FileName>{item.title}</FileName>
+                  <ProjectName color={item.project ? item.project.theme : null}>
+                    {item.project?.name ? item.project.name : 'No Project'}
+                  </ProjectName>
+                </Row>
+                <Row>
+                  <Timestamp>
+                    {moment(item.createdAt).format('DD/MM/YYYY')}
+                  </Timestamp>
+                  <Divider>·</Divider>
+                  <Author>{item.author.name}</Author>
+                </Row>
+              </Details>
+              <ItemSettingsButton
+                onClick={(e) => onClickDotsHandler(e, item._id, item.title)}
+              >
+                <ThreeDotsIcon />
+              </ItemSettingsButton>
+            </ListItem>
+          ))}
+          {data.length === 0 && <EmptyList>No Items</EmptyList>}
+        </List>
+      </Container>
+    </>
   );
 };
 

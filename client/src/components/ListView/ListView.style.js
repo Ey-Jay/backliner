@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components';
 export const Container = styled.main`
   max-width: 700px;
   margin: 0 auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 export const Controls = styled.div`
@@ -187,5 +191,13 @@ export const ItemSettingsButton = styled.div`
   &:active {
     transition: all 0.1s;
     background-color: rgba(0, 0, 0, 0.21);
+  }
+`;
+
+export const Mobile = styled.div`
+  display: none;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: block;
   }
 `;
