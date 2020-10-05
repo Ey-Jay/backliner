@@ -10,6 +10,10 @@ export const FlexContainer = styled.div`
 export const NavWrapper = styled.div`
   background-color: ${({ theme }) => theme.backgroundColorDark};
   width: 300px;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 export const Content = styled.main`
