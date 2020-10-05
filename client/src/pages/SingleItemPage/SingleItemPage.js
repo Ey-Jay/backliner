@@ -91,6 +91,11 @@ const SingleItemPage = ({ type }) => {
   return (
     <Layout title={fileName}>
       <Container>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'inline-block' }}>
+            <Embed url={fileURL} />
+          </div>
+        </div>
         <Details>
           <ProjectName
             color={data.data.data.project ? data.data.data.project.theme : null}
@@ -105,7 +110,7 @@ const SingleItemPage = ({ type }) => {
           </Author>
           <URL>
             {thumbnail}
-            <span>{fileURL}</span>
+            <a href={fileURL}>{fileURL}</a>
           </URL>
           <Created>
             Created: {moment(data.data.data.createdAt).format('DD/MM/YYYY')}
@@ -126,7 +131,6 @@ const SingleItemPage = ({ type }) => {
             <button onClick={deleteOptionHandler}>Delete</button>
           </Controls>
         </Details>
-        <Embed url={fileURL} />
       </Container>
     </Layout>
   );
