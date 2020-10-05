@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from 'context/GlobalContext';
 import axios from 'axios';
@@ -6,8 +6,13 @@ import axios from 'axios';
 import Layout from 'layout';
 
 const CalendarPage = () => {
-  const { currentUser, rerender, setRerender } = useContext(GlobalContext);
-  const [calendarAuthorized, setCalendarAuthorized] = useState(false);
+  const {
+    currentUser,
+    rerender,
+    setRerender,
+    calendarAuthorized,
+    setCalendarAuthorized,
+  } = useContext(GlobalContext);
   const { bid } = useParams();
 
   useEffect(() => {

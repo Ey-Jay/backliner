@@ -34,7 +34,9 @@ const SettingsPage = ({
     params: { bid },
   },
 }) => {
-  const { setRerender, dbUser, bandID } = useContext(GlobalContext);
+  const { setRerender, dbUser, bandID, calendarAuthorized } = useContext(
+    GlobalContext
+  );
   const { dispatch } = useContext(ModalContext);
   const [nameField, setNameField] = useState('');
   const [owner, setOwner] = useState(null);
@@ -210,6 +212,7 @@ const SettingsPage = ({
         </section>
         <section style={{ marginBottom: '100px' }}>
           <SaveButton
+            disabled={calendarAuthorized}
             onClick={async () => {
               const token = await firebase.auth().currentUser.getIdToken();
               axios
@@ -221,7 +224,9 @@ const SettingsPage = ({
                 });
             }}
           >
-            Connect Google Calendar
+            {calendarAuthorized
+              ? 'Google Calendar Connected √'
+              : 'Connect Google Calendar'}
           </SaveButton>
         </section>
         <h2>Members</h2>

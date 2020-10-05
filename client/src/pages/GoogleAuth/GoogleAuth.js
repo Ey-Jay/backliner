@@ -10,7 +10,7 @@ function useQuery() {
 
 const GoogleAuth = () => {
   const query = useQuery();
-  const { currentUser } = useContext(GlobalContext);
+  const { currentUser, setCalendarAuthorized } = useContext(GlobalContext);
 
   useEffect(() => {
     currentUser
@@ -29,6 +29,7 @@ const GoogleAuth = () => {
           )
           .then((res) => {
             console.log(res);
+            setCalendarAuthorized(true);
           })
           .catch((err) => {
             console.error(err);

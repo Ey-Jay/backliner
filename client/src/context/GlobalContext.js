@@ -14,6 +14,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [view, setView] = useState('list');
   const [showAddModal, setShowAddModal] = useState(false);
   const [rerender, setRerender] = useState(new Date());
+  const [calendarAuthorized, setCalendarAuthorized] = useState(false);
 
   useEffect(() => {
     fb.auth().onAuthStateChanged((user) => {
@@ -48,6 +49,8 @@ export const GlobalContextProvider = ({ children }) => {
         setShowAddModal,
         isChatVisible,
         setIsChatVisible,
+        calendarAuthorized,
+        setCalendarAuthorized,
       }}
     >
       {children}
