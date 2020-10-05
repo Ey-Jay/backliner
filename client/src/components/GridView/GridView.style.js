@@ -19,6 +19,12 @@ export const Controls = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    justify-content: initial;
+
+    section:first-child {
+      flex: 1;
+    }
+
     section:last-child {
       display: none;
     }
@@ -47,6 +53,12 @@ export const NewButton = styled.button`
   &:active {
     transition: all 0.1s;
     transform: scale(0.9);
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
   }
 `;
 
