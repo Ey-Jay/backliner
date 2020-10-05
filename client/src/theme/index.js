@@ -9,6 +9,7 @@ export const theme = {
   backgroundColor: '#111111',
   backgroundColorDark: '#0a0a0a',
   backgroundColorLight: '#333333',
+  breakpointMobile: '700px',
 };
 
 export const GlobalStyles = createGlobalStyle`

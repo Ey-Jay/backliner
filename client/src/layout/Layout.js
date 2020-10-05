@@ -10,6 +10,7 @@ import Navbar from 'components/Navbar';
 import ChatBox from 'components/ChatBox';
 import RoundButton from 'components/RoundButton';
 import Spinner from 'components/Spinner';
+import NavMobile from 'components/NavMobile';
 
 import {
   FlexContainer,
@@ -47,6 +48,7 @@ const Layout = ({ children, title, type }) => {
 
   return (
     <>
+      <NavMobile title={title} />
       <FlexContainer>
         <NavWrapper>
           <Navbar band={band.data.data.data} />

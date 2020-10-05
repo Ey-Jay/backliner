@@ -10,6 +10,10 @@ export const FlexContainer = styled.div`
 export const NavWrapper = styled.div`
   background-color: ${({ theme }) => theme.backgroundColorDark};
   width: 300px;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 export const Content = styled.main`
@@ -39,6 +43,10 @@ export const Header = styled.header`
     display: inline-flex;
     margin-left: 20px;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 /* 
@@ -52,6 +60,10 @@ export const PageBody = styled.div`
   ::-webkit-scrollbar {
     width: 0;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    padding: 100px 0;
+  }
 `;
 
 export const ChatWrapper = styled.div`
@@ -61,4 +73,14 @@ export const ChatWrapper = styled.div`
   padding: 0 15px 15px;
   background-color: ${({ theme }) => theme.backgroundColorDark};
   margin-right: ${({ isOpen }) => (isOpen ? 'initial' : '-300px')};
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    position: fixed;
+    z-index: 9999999999;
+    top: 0;
+    right: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    width: 100%;
+    height: 100%;
+    transition: all 0.4s;
+  }
 `;
