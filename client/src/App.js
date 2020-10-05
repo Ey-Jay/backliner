@@ -25,6 +25,7 @@ import SingleProjectPage from 'pages/SingleProjectPage';
 import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
+import MobileSettings from 'pages/MobileSettings';
 
 function App() {
   const { state, dispatch } = useContext(ModalContext);
@@ -78,13 +79,17 @@ function App() {
           component={() => <EditItemPage type="video" />}
         />
         <PrivateRoute path="/:bid/files" component={FilesPage} />
-        <PrivateRoute path="/:bid/file/:id" component={() => <SingleItemPage type="file" />} />
+        <PrivateRoute
+          path="/:bid/file/:id"
+          component={() => <SingleItemPage type="file" />}
+        />
         <PrivateRoute
           path="/:bid/edit-file/:id"
           component={() => <EditItemPage type="file" />}
         />
         <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
         <PrivateRoute path="/:bid/settings" component={SettingsPage} />
+        <PrivateRoute path="/:bid/mobile-settings" component={MobileSettings} />
         <Redirect to="/signin" />
       </Switch>
     </>

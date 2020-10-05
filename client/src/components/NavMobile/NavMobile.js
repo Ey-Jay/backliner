@@ -29,7 +29,7 @@ const NavMobile = ({ title }) => {
       <TopBar>
         <h1>{title}</h1>
         <Buttons>
-          <TopButton onClick={() => history.push(`/${bandID}/settings`)}>
+          <TopButton onClick={() => history.push(`/${bandID}/mobile-settings`)}>
             <SettingsSVG />
           </TopButton>
           <TopButton onClick={() => setIsChatVisible(true)}>
