@@ -6,7 +6,7 @@ const axios = require('axios');
 const oauth2Client = new google.auth.OAuth2(
   process.env.OAUTH_CLIENT_ID,
   process.env.OAUTH_CLIENT_SECRET,
-  'http://localhost:3000/googleauth'
+  'https://backliner.app/googleauth'
 );
 
 const getAuthUrl = async (req, res) => {
