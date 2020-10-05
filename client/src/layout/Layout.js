@@ -48,7 +48,7 @@ const Layout = ({ children, title, type }) => {
 
   return (
     <>
-      <NavMobile />
+      <NavMobile title={title} />
       <FlexContainer>
         <NavWrapper>
           <Navbar band={band.data.data.data} />

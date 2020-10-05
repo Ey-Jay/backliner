@@ -43,6 +43,10 @@ export const Header = styled.header`
     display: inline-flex;
     margin-left: 20px;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+  }
 `;
 
 /* 
@@ -55,6 +59,10 @@ export const PageBody = styled.div`
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    padding: 100px 0;
   }
 `;
 
