@@ -55,20 +55,20 @@ export const TextField = styled.textarea`
 `;
 
 export const CommentButton = styled.button`
-  height: 40px;
-  line-height: 40px;
+height: 50px;
+  line-height: 50px;
   background-color: ${({ theme }) => theme.secondary};
   border: none;
   color: inherit;
   border-radius: 10px;
-  padding: 0 12px;
-  margin-right: 15px;
+  padding: 0 24px;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 0.8rem;
   outline: none;
   transition: all 0.2s;
   cursor: pointer;
+  margin-right: 15px;
 
   &:hover {
     background-color: ${({ theme }) => theme.secondaryDark};
