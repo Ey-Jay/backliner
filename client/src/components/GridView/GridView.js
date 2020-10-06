@@ -58,6 +58,11 @@ const GridView = ({ data, type }) => {
       ? () => history.push(`/${bid}/new-lyrics`)
       : () => dispatch({ type: 'SHOW_ADDITEM', payload: type });
 
+  const onClickDotsHandler = (e, iid, title) => {
+    e.stopPropagation();
+    dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type, title } });
+  };
+
   return (
     <Container>
       <Controls>
@@ -79,7 +84,9 @@ const GridView = ({ data, type }) => {
             key={item._id}
             onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
           >
-            <ItemSettingsButton>
+            <ItemSettingsButton
+              onClick={(e) => onClickDotsHandler(e, item._id, item.title)}
+            >
               <ThreeDotsIcon />
             </ItemSettingsButton>
             <ProjectName color={item.project ? item.project.theme : null}>

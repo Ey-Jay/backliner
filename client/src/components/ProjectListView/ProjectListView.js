@@ -3,6 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { ModalContext } from 'context/ModalContext';
+
 import ProjectGridView from 'components/ProjectGridView';
 import {
   Container,
@@ -35,6 +37,12 @@ const ProjectListView = ({ data, type }) => {
   const { bid } = useParams();
   const history = useHistory();
   const { view, setView } = useContext(GlobalContext);
+  const { dispatch } = useContext(ModalContext);
+
+  const onClickDotsHandler = (e, iid, title) => {
+    e.stopPropagation();
+    dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type, title } });
+  };
 
   return (
     <>
@@ -74,7 +82,9 @@ const ProjectListView = ({ data, type }) => {
                   <Author>{item.author.name}</Author>
                 </Row>
               </Details>
-              <ItemSettingsButton>
+              <ItemSettingsButton
+                onClick={(e) => onClickDotsHandler(e, item._id, item.title)}
+              >
                 <ThreeDotsIcon />
               </ItemSettingsButton>
             </ListItem>
