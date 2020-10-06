@@ -4,12 +4,17 @@ export const Container = styled.div`
   width: 80%;
   margin: 0 auto;
   margin-top: 30px;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+  margin: 0;
+  width: 85vw;
+  }
 `;
 
 export const Comments = styled.ul`
   margin: 5px 5px 10px 5px;
   padding: 0;
-`;
+ `;
 
 export const Comment = styled.li`
   list-style: none;
@@ -20,14 +25,29 @@ export const Comment = styled.li`
   margin-bottom: 10px;
   padding: 10px 20px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.07)
+  background-color: rgba(255, 255, 255, 0.07);
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
-export const CommentText = styled.div``;
+export const CommentText = styled.div`
+@media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+   margin-bottom: 15px;
+  }
+`;
 
 export const CommentDetails = styled.div`
   font-size: 0.7em;
   overflow: hidden;
+
+div {
+  display: flex;
+  align-items: center;
+}
+
   img {
     height: 20px;
     width: 20px;
@@ -38,6 +58,7 @@ export const CommentDetails = styled.div`
   span {
     margin-left: 5px;
   }
+
 `;
 
 export const NewComment = styled.div`
@@ -55,7 +76,7 @@ export const TextField = styled.textarea`
 `;
 
 export const CommentButton = styled.button`
-height: 50px;
+  height: 50px;
   line-height: 50px;
   background-color: ${({ theme }) => theme.secondary};
   border: none;
