@@ -144,7 +144,8 @@ export const ModalContextProvider = ({ children }) => {
         if (state.deleteType === 'files') history.push(`/${bid}/files`);
         if (state.deleteType === 'audio') history.push(`/${bid}/audio`);
         if (state.deleteType === 'video') history.push(`/${bid}/video`);
-        if (state.deleteType === 'projects') history.push(`/${bid}/projects`);
+        if (state.deleteType === 'projects' || state.deleteType === 'project')
+          history.push(`/${bid}/projects`);
       } else await showError();
     } catch (e) {
       await showError();

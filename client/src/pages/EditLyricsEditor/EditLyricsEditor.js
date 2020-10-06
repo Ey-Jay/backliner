@@ -50,13 +50,13 @@ const EditLyricsEditor = () => {
 
   useEffect(() => {
     if (data.data) {
-      console.log(data.data);
       setEditorState(
         EditorState.createWithContent(
           convertFromRaw(JSON.parse(data.data.data.content))
         )
       );
       setLyricsTitle(data.data.data.title);
+      setSelectedProject(data.data.data.project._id);
     }
   }, [data]);
 

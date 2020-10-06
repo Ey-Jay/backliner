@@ -25,6 +25,7 @@ import SingleProjectPage from 'pages/SingleProjectPage';
 import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
+import MobileSettings from 'pages/MobileSettings';
 import GoogleAuth from 'pages/GoogleAuth';
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
         />
         <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
         <PrivateRoute path="/:bid/settings" component={SettingsPage} />
+        <PrivateRoute path="/:bid/mobile-settings" component={MobileSettings} />
         <Redirect to="/signin" />
       </Switch>
     </>

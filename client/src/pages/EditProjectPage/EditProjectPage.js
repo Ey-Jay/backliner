@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
+import { ModalContext } from 'context/ModalContext';
 import firebase from 'fb';
 import { apiUrl } from 'config/constants';
 import Layout from 'layout';
@@ -32,6 +33,7 @@ const EditProjectPage = ({
   },
 }) => {
   const history = useHistory();
+  const { dispatch } = useContext(ModalContext);
   const { data, loading, error } = useGetAPInorerender(`/projects/${pid}`);
   const [isLoading, setIsLoading] = useState(false);
   const [nameValue, setNameValue] = useState('');
@@ -148,7 +150,16 @@ const EditProjectPage = ({
         </section>
         <DangerZone>
           <h2>Danger Zone</h2>
-          <DeleteButton>Delete Project</DeleteButton>
+          <DeleteButton
+            onClick={() =>
+              dispatch({
+                type: 'SHOW_DELETE',
+                payload: { id: pid, type: 'project' },
+              })
+            }
+          >
+            Delete Project
+          </DeleteButton>
         </DangerZone>
         <section>
           <SaveButton onClick={onClickSave}>Save</SaveButton>

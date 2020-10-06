@@ -4,6 +4,7 @@ export const Container = styled.div`
   margin: 25px auto 100px;
   max-width: 650px;
   padding-bottom: 100px;
+  padding: 10px;
 `;
 
 export const TitleInput = styled.input`
@@ -13,6 +14,7 @@ export const TitleInput = styled.input`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.color};
   outline: none;
+  width: 100%;
 `;
 
 export const EditorContainer = styled.div`

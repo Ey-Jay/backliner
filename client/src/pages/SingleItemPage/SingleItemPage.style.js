@@ -1,22 +1,27 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* flex-wrap: wrap; */
   padding-top: 50px;
-  padding-left: 35px;
+  padding: 20px;
 `;
 
 export const Details = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2fr, 1fr);
+  grid-template-rows: repeat(3fr, 1fr);
   grid-column-gap: 30px;
-  grid-row-gap: 5px;
+  grid-row-gap: 20px;
   margin-bottom: 50px;
   justify-content: center;
+  max-width: 700px;
+  margin: 40px auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin: 40px 0;
+  }
 `;
 
 export const ProjectName = styled.div`
@@ -25,7 +30,6 @@ export const ProjectName = styled.div`
   span {
     margin: 0 0 10px;
     padding: 5px;
-    max-width: 85%;
     background-color: ${({ color }) => color || '#666'};
     border-radius: 3px;
     text-transform: uppercase;
@@ -33,6 +37,7 @@ export const ProjectName = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    font-size: 0.7rem;
   }
 
   /* Check for padding etc. */
@@ -68,9 +73,11 @@ export const URL = styled.div`
   overflow: hidden;
   white-space: nowrap;
   font-size: 0.8em;
+  max-width: 70%;
 
-  span {
+  a {
     margin-left: 10px;
+    opacity: 0.6;
   }
 `;
 
@@ -115,3 +122,21 @@ export const Controls = styled.div`
 `;
 
 export const Icon = styled.div``;
+
+export const EmbedWrap = styled.div`
+  text-align: center;
+
+  & > div {
+    display: inline-block;
+    max-width: 600px;
+    min-width: 200px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+
+    & > div {
+      display: none;
+    }
+  }
+`;

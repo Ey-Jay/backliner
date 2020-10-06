@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import moment from 'moment';
+import ReactPlayer from 'react-player';
+
 import { ModalContext } from 'context/ModalContext';
 
 import useGetAPI from 'hooks/useGetAPI';
@@ -19,6 +21,7 @@ import {
   Updated,
   Controls,
   Icon,
+  EmbedWrap,
 } from './SingleItemPage.style';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
@@ -91,6 +94,11 @@ const SingleItemPage = ({ type }) => {
   return (
     <Layout title={fileName}>
       <Container>
+        <EmbedWrap>
+          <div>
+            <Embed url={fileURL} />
+          </div>
+        </EmbedWrap>
         <Details>
           <ProjectName
             color={data.data.data.project ? data.data.data.project.theme : null}
@@ -105,7 +113,7 @@ const SingleItemPage = ({ type }) => {
           </Author>
           <URL>
             {thumbnail}
-            <span>{fileURL}</span>
+            <a href={fileURL}>{fileURL}</a>
           </URL>
           <Created>
             Created: {moment(data.data.data.createdAt).format('DD/MM/YYYY')}
@@ -126,7 +134,6 @@ const SingleItemPage = ({ type }) => {
             <button onClick={deleteOptionHandler}>Delete</button>
           </Controls>
         </Details>
-        <Embed url={fileURL} />
       </Container>
     </Layout>
   );

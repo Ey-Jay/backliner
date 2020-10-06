@@ -92,6 +92,7 @@ const DashboardPage = ({
             <ListItem
               key={item._id}
               onClick={() => history.push(`/${bid}/project/${item._id}`)}
+              color={item.theme}
             >
               <Dot color={item.theme} />
               <Details>
