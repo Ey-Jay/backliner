@@ -40,7 +40,6 @@ export const ProjectName = styled.div`
     font-size: 0.7rem;
   }
 
-  /* Check for padding etc. */
 `;
 
 export const Author = styled.div`
@@ -66,9 +65,6 @@ export const AuthorName = styled.div`
 
 export const URL = styled.div`
   grid-area: 3 / 1 / 4 / 2;
-  /* display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical; */
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
