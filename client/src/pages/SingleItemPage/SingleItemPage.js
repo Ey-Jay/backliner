@@ -22,6 +22,8 @@ import {
   Controls,
   Icon,
   EmbedWrap,
+  EditButton,
+  DeleteButton,
 } from './SingleItemPage.style';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
@@ -122,7 +124,7 @@ const SingleItemPage = ({ type }) => {
             Updated: {moment(data.data.data.updatedAt).format('DD/MM/YYYY')}
           </Updated>
           <Controls>
-            <button
+            <EditButton
               onClick={() =>
                 history.push(
                   `/${bid}/edit-${type === 'files' ? 'file' : type}/${id}`
@@ -130,8 +132,8 @@ const SingleItemPage = ({ type }) => {
               }
             >
               Edit
-            </button>
-            <button onClick={deleteOptionHandler}>Delete</button>
+            </EditButton>
+            <DeleteButton onClick={deleteOptionHandler}>Delete</DeleteButton>
           </Controls>
         </Details>
       </Container>
