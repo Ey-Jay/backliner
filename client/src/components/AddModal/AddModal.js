@@ -103,24 +103,24 @@ const AddModal = () => {
         <label>Choose Color</label>
         <Colors>
           <ColorOption
-            color="#0074D9"
-            active={projectColor === '#0074D9'}
-            onClick={() => setProjectColor('#0074D9')}
+            color="#EE964B"
+            active={projectColor === '#EE964B'}
+            onClick={() => setProjectColor('#EE964B')}
           />
           <ColorOption
-            color="#FF4136"
-            active={projectColor === '#FF4136'}
-            onClick={() => setProjectColor('#FF4136')}
+            color="#EF6B7B"
+            active={projectColor === '#EF6B7B'}
+            onClick={() => setProjectColor('#EF6B7B')}
           />
           <ColorOption
-            color="#B10DC9"
-            active={projectColor === '#B10DC9'}
-            onClick={() => setProjectColor('#B10DC9')}
+            color="#1B998B"
+            active={projectColor === '#1B998B'}
+            onClick={() => setProjectColor('#1B998B')}
           />
           <ColorOption
-            color="#3D9970"
-            active={projectColor === '#3D9970'}
-            onClick={() => setProjectColor('#3D9970')}
+            color="#4BB3FD"
+            active={projectColor === '#4BB3FD'}
+            onClick={() => setProjectColor('#4BB3FD')}
           />
         </Colors>
       </Form>

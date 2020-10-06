@@ -3,11 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   max-width: 700px;
   margin: 80px auto;
+  padding: 20px;
 `;
 
 export const Form = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
-  padding: 20px;
+
   h2 {
     margin: 0 0 20px;
   }
@@ -37,6 +38,7 @@ export const Form = styled.div`
     padding: 12px 16px;
     margin-bottom: 30px;
     border: none;
+    border-radius: 6px;
   }
   input:hover {
     background-color: rgba(255, 255, 255, 0.14);
@@ -49,25 +51,52 @@ export const Form = styled.div`
 `;
 
 export const SaveButton = styled.button`
-  background-color: transparent;
-  border: solid 2px #fff;
+  height: 50px;
+  line-height: 50px;
+  background-color: ${({ theme }) => theme.secondary};
+  border: none;
   color: inherit;
-  padding: 12px 24px;
-  margin-left: 20px;
-  border-radius: 6px;
+  border-radius: 10px;
+  padding: 0 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
   outline: none;
-  font-weight: 700;
+  transition: all 0.2s;
   cursor: pointer;
+  margin-right: 15px;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondaryDark};
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
 `;
 
 export const DeleteButton = styled.button`
-  background-color: transparent;
-  border: solid 2px #fff;
+  height: 50px;
+  line-height: 50px;
+  background-color: #ff4136;
+  border: none;
   color: inherit;
-  padding: 12px 24px;
-  margin-left: 10px;
-  border-radius: 6px;
+  border-radius: 10px;
+  padding: 0 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
   outline: none;
-  font-weight: 700;
+  transition: all 0.2s;
   cursor: pointer;
+
+  &:hover {
+    background-color: #c92d24;
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
 `;

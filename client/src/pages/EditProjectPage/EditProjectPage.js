@@ -108,24 +108,24 @@ const EditProjectPage = ({
           <label>Tag Color</label>
           <Colors>
             <Color
-              color="#0074D9"
-              onClick={() => setTheme('#0074D9')}
-              active={theme === '#0074D9'}
+              color="#EE964B"
+              onClick={() => setTheme('#EE964B')}
+              active={theme === '#EE964B'}
             />
             <Color
-              color="#FF4136"
-              onClick={() => setTheme('#FF4136')}
-              active={theme === '#FF4136'}
+              color="#EF6B7B"
+              onClick={() => setTheme('#EF6B7B')}
+              active={theme === '#EF6B7B'}
             />
             <Color
-              color="#B10DC9"
-              onClick={() => setTheme('#B10DC9')}
-              active={theme === '#B10DC9'}
+              color="#1B998B"
+              onClick={() => setTheme('#1B998B')}
+              active={theme === '#1B998B'}
             />
             <Color
-              color="#3D9970"
-              onClick={() => setTheme('#3D9970')}
-              active={theme === '#3D9970'}
+              color="#4BB3FD"
+              onClick={() => setTheme('#4BB3FD')}
+              active={theme === '#4BB3FD'}
             />
           </Colors>
         </section>
