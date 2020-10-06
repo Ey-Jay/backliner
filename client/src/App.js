@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { ModalContext } from 'context/ModalContext';
 import { ModalBackground } from './App.style';
+import CookieConsent from 'react-cookie-consent';
 import AddModal from 'components/AddModal';
 import AddBandModal from 'components/AddBandModal';
 import DeleteModal from 'components/DeleteModal';
@@ -94,6 +95,7 @@ function App() {
         <PrivateRoute path="/:bid/mobile-settings" component={MobileSettings} />
         <Redirect to="/signin" />
       </Switch>
+      <CookieConsent buttonStyle={{background: "#FF4136"}} style={{zIndex: "10000000"}}>This website uses cookies to enhance the user experience.</CookieConsent>
     </>
   );
 }

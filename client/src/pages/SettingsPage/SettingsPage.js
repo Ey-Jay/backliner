@@ -161,7 +161,7 @@ const SettingsPage = ({
           </YourID>
           <Attribution>
             This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
-            <a href="https://remixicon.com">Remix Icons</a>.
+            <a href="https://remixicon.com">Remix Icons</a>. Furthermore, pictures from <a href="https://unsplash.com/">Unsplash</a> are used for the avatars.
           </Attribution>
         </Container>
       </Layout>
