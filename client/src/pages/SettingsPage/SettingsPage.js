@@ -150,7 +150,10 @@ const SettingsPage = ({
                   <MemberImage>
                     <img src={member.avatar} alt="" />
                   </MemberImage>
-                  <MemberName>{member.name}</MemberName>
+                  <MemberName>
+                    {member.name}
+                    {member._id === owner ? ' (Owner)' : ''}
+                  </MemberName>
                 </MemberItem>
               ))}
             </MemberList>
@@ -216,7 +219,7 @@ const SettingsPage = ({
             onClick={async () => {
               const token = await firebase.auth().currentUser.getIdToken();
               axios
-                .get(`http://localhost:3001/getAuthUrl?bid=${bandID}`, {
+                .get(`${apiUrl}/getAuthUrl?bid=${bandID}`, {
                   headers: { authorization: `Bearer ${token}` },
                 })
                 .then((res) => {
