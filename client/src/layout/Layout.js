@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
 import { ModalContext } from 'context/ModalContext';
 
 import firebase from 'fb';
+import { apiUrl } from 'config/constants';
 import useGetAPI from 'hooks/useGetAPI';
 import Navbar from 'components/Navbar';
 import ChatBox from 'components/ChatBox';
@@ -39,12 +41,6 @@ const Layout = ({ children, title, type }) => {
     setBandID(bid);
     // eslint-disable-next-line
   }, [bid]);
-
-  useEffect(() => {
-    if (band.data) {
-      setCalendarAuthorized(band?.data?.data?.hasGoogle);
-    }
-  }, [band.data]);
 
   const logoff = () =>
     firebase

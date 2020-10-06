@@ -11,15 +11,10 @@ import Layout from 'layout';
 const localizer = momentLocalizer(moment);
 
 const CalendarPage = () => {
-  const {
-    currentUser,
-    rerender,
-    setRerender,
-    calendarAuthorized,
-    setCalendarAuthorized,
-  } = useContext(GlobalContext);
+  const { currentUser, rerender, setRerender } = useContext(GlobalContext);
   const { bid } = useParams();
   const [calendarEvents, setCalendarEvents] = useState(null);
+  const [calendarAuthorized, setCalendarAuthorized] = useState(false);
 
   if (calendarEvents) {
     var events = calendarEvents.map((event) => ({

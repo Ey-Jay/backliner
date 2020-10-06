@@ -34,9 +34,7 @@ const SettingsPage = ({
     params: { bid },
   },
 }) => {
-  const { setRerender, dbUser, bandID, calendarAuthorized } = useContext(
-    GlobalContext
-  );
+  const { setRerender, dbUser, bandID } = useContext(GlobalContext);
   const { dispatch } = useContext(ModalContext);
   const [nameField, setNameField] = useState('');
   const [owner, setOwner] = useState(null);
@@ -45,6 +43,8 @@ const SettingsPage = ({
   const [avatar, setAvatar] = useState(null);
   const { data, loading, error } = useGetAPI(`/bands/${bid}`);
   const [isLoading, setIsLoading] = useState(false);
+
+  const hasGoogle = data?.data?.hasGoogle;
 
   useEffect(() => {
     if (data) {
@@ -212,7 +212,7 @@ const SettingsPage = ({
         </section>
         <section style={{ marginBottom: '100px' }}>
           <SaveButton
-            disabled={calendarAuthorized}
+            disabled={hasGoogle}
             onClick={async () => {
               const token = await firebase.auth().currentUser.getIdToken();
               axios
@@ -224,7 +224,7 @@ const SettingsPage = ({
                 });
             }}
           >
-            {calendarAuthorized
+            {hasGoogle
               ? 'Google Calendar Connected √'
               : 'Connect Google Calendar'}
           </SaveButton>
