@@ -20,12 +20,13 @@ const MobileSettings = () => {
   return (
     <Layout title="Menu">
       <Container>
-        <Item onClick={() => history.push(`/${bandID}/settings`)}>
-          Workspace Settings
-        </Item>
         <Item onClick={() => history.push(`/${bandID}/calendar`)}>
           Calendar
         </Item>
+        <Item onClick={() => history.push(`/${bandID}/settings`)}>
+          Workspace Settings
+        </Item>
+        <Item onClick={() => history.push(`/check-in`)}>Change Workspace</Item>
         <Item onClick={logoff}>Sign Out</Item>
       </Container>
     </Layout>
