@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding-top: 50px;
-  padding-left: 35px;
+  padding: 20px;
 `;
 
 export const Details = styled.div`
@@ -15,6 +15,13 @@ export const Details = styled.div`
   justify-content: center;
   max-width: 700px;
   margin: 40px auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin: 40px 0;
+  }
 `;
 
 export const ProjectName = styled.div`
@@ -66,6 +73,7 @@ export const URL = styled.div`
   overflow: hidden;
   white-space: nowrap;
   font-size: 0.8em;
+  max-width: 70%;
 
   a {
     margin-left: 10px;
@@ -114,3 +122,21 @@ export const Controls = styled.div`
 `;
 
 export const Icon = styled.div``;
+
+export const EmbedWrap = styled.div`
+  text-align: center;
+
+  & > div {
+    display: inline-block;
+    max-width: 600px;
+    min-width: 200px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
+    display: none;
+
+    & > div {
+      display: none;
+    }
+  }
+`;

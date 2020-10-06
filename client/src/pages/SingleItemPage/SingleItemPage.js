@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import moment from 'moment';
+import ReactPlayer from 'react-player';
+
 import { ModalContext } from 'context/ModalContext';
 
 import useGetAPI from 'hooks/useGetAPI';
@@ -19,6 +21,7 @@ import {
   Updated,
   Controls,
   Icon,
+  EmbedWrap,
 } from './SingleItemPage.style';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
@@ -91,11 +94,11 @@ const SingleItemPage = ({ type }) => {
   return (
     <Layout title={fileName}>
       <Container>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ display: 'inline-block' }}>
+        <EmbedWrap>
+          <div>
             <Embed url={fileURL} />
           </div>
-        </div>
+        </EmbedWrap>
         <Details>
           <ProjectName
             color={data.data.data.project ? data.data.data.project.theme : null}
