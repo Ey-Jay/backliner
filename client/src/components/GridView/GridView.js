@@ -63,6 +63,10 @@ const GridView = ({ data, type }) => {
     dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type, title } });
   };
 
+  const sortedArray = data.sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+  );
+
   return (
     <Container>
       <Controls>
@@ -79,7 +83,7 @@ const GridView = ({ data, type }) => {
         </section>
       </Controls>
       <FileView>
-        {data.map((item) => (
+        {sortedArray.map((item) => (
           <SingleFile
             key={item._id}
             onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
@@ -102,7 +106,7 @@ const GridView = ({ data, type }) => {
           </SingleFile>
         ))}
       </FileView>
-      {data.length === 0 && <EmptyList>No Items</EmptyList>}
+      {sortedArray.length === 0 && <EmptyList>No Items</EmptyList>}
     </Container>
   );
 };
