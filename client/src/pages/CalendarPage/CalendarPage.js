@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from 'context/GlobalContext';
@@ -8,8 +9,6 @@ import axios from 'axios';
 import Layout from 'layout';
 
 const localizer = momentLocalizer(moment);
-
-const Events = [{}];
 
 const CalendarPage = () => {
   const {
@@ -21,6 +20,16 @@ const CalendarPage = () => {
   } = useContext(GlobalContext);
   const { bid } = useParams();
   const [calendarEvents, setCalendarEvents] = useState(null);
+
+  if (calendarEvents) {
+    var events = calendarEvents.map((event) => ({
+      title: event.summary,
+      start: event.start.dateTime,
+      end: event.end.dateTime,
+    }));
+  }
+
+  console.log(events);
 
   useEffect(() => {
     currentUser
@@ -56,10 +65,9 @@ const CalendarPage = () => {
       {calendarEvents && (
         <Calendar
           localizer={localizer}
-          events={Events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 800 }}
+          events={events}
+          style={{ height: '100%', padding: '40px' }}
+          toolbar={true}
         />
       )}
     </Layout>
