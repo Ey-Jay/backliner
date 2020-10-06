@@ -9,6 +9,7 @@ import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import Spinner from 'components/Spinner';
 import Embed from 'components/Embed';
+import CommentBox from 'components/CommentBox';
 import {
   Container,
   Details,
@@ -134,6 +135,7 @@ const SingleItemPage = ({ type }) => {
             <button onClick={deleteOptionHandler}>Delete</button>
           </Controls>
         </Details>
+        <CommentBox type={type} />
       </Container>
     </Layout>
   );

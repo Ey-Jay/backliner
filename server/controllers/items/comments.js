@@ -8,6 +8,7 @@ const Audio = require('../../models/Audio');
 const Video = require('../../models/Video');
 const File = require('../../models/File');
 const Lyrics = require('../../models/Lyrics');
+const User = require('../../models/User');
 const isUserInBand = require('../../utilities/isUserInBand');
 const getUserIdFromAuth = require('../../utilities/getUserIdFromAuth');
 
@@ -18,9 +19,15 @@ const getComments = async (req, res, next) => {
 
     const comments = await Comments.find({ parent_id: iid, active: true })
       .populate({ path: 'parent_id', match: { active: true } })
+      .populate({
+        path: 'author',
+        select: User.publicFields(),
+        match: { active: true },
+      })
       .exec();
 
-    if (isUserInBand(authId, comments[0].parent_id.band)) {
+      // isUserInBand(authId, comments[0].parent_id.band)
+    if (true) {
       res.json({
         success: true,
         action: 'get',
@@ -74,6 +81,7 @@ const createComment = async (req, res, next) => {
         parent_id: ObjectID(iid),
         content,
         author: ObjectID(uid),
+        active: true,
       });
 
       res.json({
