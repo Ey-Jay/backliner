@@ -63,6 +63,10 @@ const DashboardPage = ({
     });
   };
 
+  const projects = data?.data?.data?.sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+  );
+
   return (
     <Layout title="Projects" type="project">
       <Container>
@@ -88,7 +92,7 @@ const DashboardPage = ({
           </section> */}
         </Controls>
         <ListView>
-          {data.data.data.map((item) => (
+          {projects.map((item) => (
             <ListItem
               key={item._id}
               onClick={() => history.push(`/${bid}/project/${item._id}`)}
@@ -125,7 +129,7 @@ const DashboardPage = ({
               </ItemSettingsButton>
             </ListItem>
           ))}
-          {data.data.data.length === 0 && <EmptyList>No Projects</EmptyList>}
+          {projects.length === 0 && <EmptyList>No Projects</EmptyList>}
         </ListView>
       </Container>
     </Layout>

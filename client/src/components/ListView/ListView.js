@@ -68,6 +68,10 @@ const ListView = ({ data, type }) => {
     dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type, title } });
   };
 
+  const sortedArray = data.sort(
+    (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+  );
+
   return (
     <>
       <Mobile>
@@ -94,7 +98,7 @@ const ListView = ({ data, type }) => {
           </section>
         </Controls>
         <List>
-          {data.map((item) => (
+          {sortedArray.map((item) => (
             <ListItem
               key={item._id}
               onClick={() => history.push(`/${bid}/${type}/${item._id}`)}
@@ -122,7 +126,7 @@ const ListView = ({ data, type }) => {
               </ItemSettingsButton>
             </ListItem>
           ))}
-          {data.length === 0 && <EmptyList>No Items</EmptyList>}
+          {sortedArray.length === 0 && <EmptyList>No Items</EmptyList>}
         </List>
       </Container>
     </>
