@@ -34,7 +34,7 @@ const SettingsPage = ({
     params: { bid },
   },
 }) => {
-  const { setRerender, dbUser } = useContext(GlobalContext);
+  const { setRerender, dbUser, bandID } = useContext(GlobalContext);
   const { dispatch } = useContext(ModalContext);
   const [nameField, setNameField] = useState('');
   const [owner, setOwner] = useState(null);
@@ -43,6 +43,8 @@ const SettingsPage = ({
   const [avatar, setAvatar] = useState(null);
   const { data, loading, error } = useGetAPI(`/bands/${bid}`);
   const [isLoading, setIsLoading] = useState(false);
+
+  const hasGoogle = data?.data?.hasGoogle;
 
   useEffect(() => {
     if (data) {
@@ -207,6 +209,25 @@ const SettingsPage = ({
         </section>
         <section style={{ marginBottom: '100px' }}>
           <SaveButton onClick={onClickSave}>Save</SaveButton>
+        </section>
+        <section style={{ marginBottom: '100px' }}>
+          <SaveButton
+            disabled={hasGoogle}
+            onClick={async () => {
+              const token = await firebase.auth().currentUser.getIdToken();
+              axios
+                .get(`http://localhost:3001/getAuthUrl?bid=${bandID}`, {
+                  headers: { authorization: `Bearer ${token}` },
+                })
+                .then((res) => {
+                  window.location.replace(res.data.url);
+                });
+            }}
+          >
+            {hasGoogle
+              ? 'Google Calendar Connected √'
+              : 'Connect Google Calendar'}
+          </SaveButton>
         </section>
         <h2>Members</h2>
         <section style={{ marginBottom: '100px' }}>

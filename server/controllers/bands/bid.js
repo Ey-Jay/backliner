@@ -7,6 +7,9 @@ const getBandById = async (req, res, next) => {
     const { authId } = req;
     const { bid } = req.params;
 
+    const fullBand = await Band.findOne({ _id: bid, active: true });
+    const hasGoogle = fullBand.google_access_token ? true : false;
+
     const band = await Band.findOne(
       { _id: bid, active: true },
       Band.publicFields()
@@ -29,6 +32,7 @@ const getBandById = async (req, res, next) => {
         success: true,
         action: 'get',
         data: band,
+        hasGoogle,
       });
     } else {
       res.status(401);

@@ -26,6 +26,7 @@ import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
 import MobileSettings from 'pages/MobileSettings';
+import GoogleAuth from 'pages/GoogleAuth';
 
 function App() {
   const { state, dispatch } = useContext(ModalContext);
@@ -46,6 +47,7 @@ function App() {
           <SignInPage />
         </Route>
         <PrivateRoute path="/checkin" component={CheckInPage} />
+        <PrivateRoute path="/googleauth" component={GoogleAuth} />
         <PrivateRoute path="/:bid/projects" component={ProjectsPage} />
         <PrivateRoute path="/:bid/project/:pid" component={SingleProjectPage} />
         <PrivateRoute

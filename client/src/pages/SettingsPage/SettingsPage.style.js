@@ -163,19 +163,21 @@ export const Avatar = styled.div`
 
 export const SaveButton = styled.button`
   background-color: ${({ theme }) => theme.secondary};
+  opacity: ${(props) => (props.disabled ? '.5' : 'none')};
   border: none;
   color: inherit;
   padding: 16px 32px;
   border-radius: 6px;
   outline: none;
   font-weight: 700;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'inherit' : 'pointer')};
   text-transform: uppercase;
   font-size: 0.7rem;
   transition: all 0.2s;
 
   &:hover {
-    background-color: ${({ theme }) => theme.secondaryDark};
+    background-color: ${(props) =>
+      props.disabled ? 'none' : props.theme.secondaryDark};
   }
 
   &:active  {
