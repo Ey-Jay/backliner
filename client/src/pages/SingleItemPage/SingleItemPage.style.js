@@ -93,31 +93,56 @@ export const Updated = styled.div`
 
 export const Controls = styled.div`
   grid-area: 3 / 2 / 4 / 3;
+`;
 
-  button {
-    height: 30px;
-    line-height: 30px;
-    background-color: ${({ theme }) => theme.secondary};
-    border: none;
-    color: inherit;
-    border-radius: 10px;
-    padding: 0 12px;
-    margin-right: 10px;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.8rem;
-    outline: none;
-    transition: all 0.2s;
-    cursor: pointer;
+export const EditButton = styled.button`
+  height: 50px;
+  line-height: 50px;
+  background-color: ${({ theme }) => theme.secondary};
+  border: none;
+  color: inherit;
+  border-radius: 10px;
+  padding: 0 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  outline: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  margin-right: 15px;
 
-    &:hover {
-      background-color: ${({ theme }) => theme.secondaryDark};
-    }
+  &:hover {
+    background-color: ${({ theme }) => theme.secondaryDark};
+  }
 
-    &:active {
-      transition: all 0.1s;
-      transform: scale(0.9);
-    }
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
+`;
+
+export const DeleteButton = styled.button`
+  height: 50px;
+  line-height: 50px;
+  background-color: #ff4136;
+  border: none;
+  color: inherit;
+  border-radius: 10px;
+  padding: 0 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  outline: none;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #c92d24;
+  }
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.9);
   }
 `;
 
