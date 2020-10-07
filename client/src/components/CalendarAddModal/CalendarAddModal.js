@@ -57,6 +57,7 @@ const CalendarAddModal = () => {
         type="text"
         value={titleValue}
         onChange={(e) => setTitleValue(e.currentTarget.value)}
+        autoFocus
       />
       <Label>Start</Label>
       <DatePicker

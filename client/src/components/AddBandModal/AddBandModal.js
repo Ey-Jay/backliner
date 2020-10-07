@@ -51,7 +51,12 @@ const AddBandModal = () => {
     <Modal onClick={(e) => e.stopPropagation()}>
       <h2>Add Band</h2>
       <label>Name</label>
-      <input type="text" value={nameFieldValue} onChange={onChangeHandler} />
+      <input
+        type="text"
+        value={nameFieldValue}
+        onChange={onChangeHandler}
+        autoFocus
+      />
       <ModalControls>
         <AddButton onClick={handleOnClickAdd}>Add</AddButton>
         <CancelButton onClick={handleOnClickCancel}>Cancel</CancelButton>

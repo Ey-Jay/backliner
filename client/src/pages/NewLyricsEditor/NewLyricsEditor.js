@@ -93,6 +93,7 @@ const NewLyricsEditor = ({
           type="text"
           placeholder="Please enter title..."
           onChange={(e) => setLyricsTitle(e.target.value)}
+          autoFocus
         />
         <EditorContainer onClick={() => editorRef.current.focus()}>
           <EditorControls onClick={(e) => e.stopPropagation()}>

@@ -99,6 +99,7 @@ const AddModal = () => {
           type="text"
           value={titleValue}
           onChange={(e) => setTitleValue(e.currentTarget.value)}
+          autoFocus
         />
         <label>Choose Color</label>
         <Colors>
@@ -140,6 +141,7 @@ const AddModal = () => {
           type="text"
           value={titleValue}
           onChange={(e) => setTitleValue(e.currentTarget.value)}
+          autoFocus
         />
         <label htmlFor="url">URL</label>
         <input
