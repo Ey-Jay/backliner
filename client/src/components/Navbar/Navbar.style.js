@@ -110,3 +110,8 @@ export const Menu = styled.nav`
     }
   `}
 `;
+
+export const Policy = styled.div`
+  color: ${({ theme }) => theme.secondaryDark};
+  margin-left: 15px;
+`;

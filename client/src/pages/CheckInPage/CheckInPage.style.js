@@ -149,3 +149,10 @@ export const YourID = styled.div`
     opacity: 0.6;
   }
 `;
+
+export const Policy = styled.div`
+  color: ${({ theme }) => theme.secondaryDark};
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;

@@ -25,3 +25,10 @@ export const Item = styled.li`
     background-color: rgba(255, 255, 255, 0.14);
   }
 `;
+
+export const Policy = styled.div`
+  color: ${({ theme }) => theme.secondaryDark};
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;

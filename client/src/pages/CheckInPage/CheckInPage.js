@@ -19,6 +19,7 @@ import {
   Member,
   UserPicture,
   YourID,
+  Policy,
 } from './CheckInPage.style';
 import avatars from 'assets/band-avatars';
 
@@ -78,6 +79,9 @@ const CheckInPage = () => {
           <h2>Your Backliner ID</h2>
           <p>{data.data.data._id}</p>
         </YourID>
+        <Policy onClick={() => history.push(`/privacy-policy`)}>
+          Privacy Policy
+        </Policy>
       </Container>
     </>
   );
