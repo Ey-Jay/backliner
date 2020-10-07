@@ -51,7 +51,7 @@ const CommentBox = ({ type }) => {
       }
     );
     setContent('');
-    setRerender();
+    setRerender(new Date());
   };
 
   if (loading) return <Spinner type="page" />;
