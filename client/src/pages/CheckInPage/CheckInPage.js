@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 import { ModalContext } from 'context/ModalContext';
 import firebase from 'fb';
@@ -48,8 +49,13 @@ const CheckInPage = () => {
           <UserPicture>
             <img src={data.data.data.avatar} alt="" />
           </UserPicture>
-          <RoundButton icon="plus" onClick={handlePlusButton} />
-          <RoundButton icon="logoff" onClick={logoff} />
+          <ReactTooltip effect="solid" />
+          <span data-tip="Add Band">
+            <RoundButton icon="plus" onClick={handlePlusButton} />
+          </span>
+          <span data-tip="Sign Out">
+            <RoundButton icon="logoff" onClick={logoff} />
+          </span>
         </Controls>
         <BandList>
           {data.data.data.bands.map((band) => (

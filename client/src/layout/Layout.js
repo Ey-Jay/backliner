@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
-import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
 import { ModalContext } from 'context/ModalContext';
