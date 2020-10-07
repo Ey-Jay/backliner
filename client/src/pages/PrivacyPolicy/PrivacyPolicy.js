@@ -1,10 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { Container } from './PrivacyPolicy.style';
+import { Container, BackButton } from './PrivacyPolicy.style';
+import { ReactComponent as Back } from 'assets/svg/ChevronLeft.svg';
 
 const PrivacyPolicy = () => {
+  const history = useHistory();
+
   return (
     <Container>
+      <BackButton onClick={() => history.goBack()}>
+        <Back />
+      </BackButton>
       <h1>Privacy Policy of Backliner</h1>
 
       <p>Backliner operates the https://backliner.app/ website.</p>
@@ -91,7 +98,7 @@ const PrivacyPolicy = () => {
         practices of any third-party sites or services.
       </p>
 
-      <p>Children's Privacy</p>
+      <h2>Children's Privacy</h2>
 
       <p>
         Our Services do not address anyone under the age of 13. We do not
