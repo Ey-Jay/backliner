@@ -90,10 +90,6 @@ const getCalendar = async (req, res) => {
     calendar.events.list(
       {
         calendarId: 'primary',
-        timeMin: new Date().toISOString(),
-        maxResults: 10,
-        singleEvents: true,
-        orderBy: 'startTime',
       },
       (err, response) => {
         if (err) {
@@ -136,4 +132,39 @@ const getCalendar = async (req, res) => {
   }
 };
 
-module.exports = { getAuthUrl, getTokens, getCalendar };
+const addEventCalendar = async (req, res) => {
+  const { authId } = req;
+  const uid = await getUserIdFromAuth(authId);
+  const { bid } = req.params;
+
+  const band = await Band.findById(bid);
+  if (band.members.includes(uid)) {
+    const calendar = await google.calendar({
+      version: 'v3',
+      headers: {
+        Authorization: `Bearer ${band.google_access_token}`,
+      },
+    });
+    calendar.events.insert(
+      {
+        calendarId: 'primary',
+        resource: req.body,
+      },
+      (err, event) => {
+        if (err) {
+          return res.send(err);
+        }
+        res.send(event);
+      }
+    );
+  } else {
+    res.status(401);
+    res.json({
+      success: false,
+      data: null,
+      action: 'post',
+    });
+  }
+};
+
+module.exports = { getAuthUrl, getTokens, getCalendar, addEventCalendar };

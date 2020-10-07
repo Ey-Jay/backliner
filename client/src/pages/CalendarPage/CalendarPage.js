@@ -9,6 +9,7 @@ import { ModalContext } from 'context/ModalContext';
 import axios from 'axios';
 import Spinner from 'components/Spinner';
 import { ThemeContext } from 'styled-components';
+import { apiUrl } from 'config/constants';
 
 import Layout from 'layout';
 import {
@@ -83,7 +84,7 @@ const CalendarPage = () => {
       .getIdToken()
       .then((token) => {
         axios
-          .get(`https://api.backliner.app/${bid}/calendar`, {
+          .get(`${apiUrl}/${bid}/calendar`, {
             headers: { authorization: `Bearer ${token}` },
           })
           .then((res) => {
@@ -96,6 +97,7 @@ const CalendarPage = () => {
               setLoading(false);
               return;
             }
+            console.log(res.data.data);
             setCalendarEvents(res.data.data.items);
             setCalendarAuthorized(true);
             setLoading(false);

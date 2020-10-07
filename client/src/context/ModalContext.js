@@ -191,14 +191,18 @@ export const ModalContextProvider = ({ children }) => {
     try {
       const token = await firebase.auth().currentUser.getIdToken();
       const res = await axios.post(
-        `${apiUrl}/bands/${bid}/calendar`,
-        { title, startDate, endDate },
+        `${apiUrl}/${bid}/calendar`,
+        {
+          summary: title || 'Untitled',
+          start: { dateTime: startDate },
+          end: { dateTime: endDate },
+        },
         {
           headers: { authorization: `Bearer ${token}` },
         }
       );
 
-      if (res.data.success) await showSuccess();
+      if (res.statusText === 'OK') await showSuccess();
       else await showError();
     } catch (e) {
       await showError();
