@@ -23,7 +23,6 @@ import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
-// import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
@@ -33,9 +32,13 @@ const ProjectGridView = ({ data, type }) => {
   const { view, setView } = useContext(GlobalContext);
   const { dispatch } = useContext(ModalContext);
 
-  const onClickDotsHandler = (e, iid, title) => {
+  const onClickDotsHandler = (e, iid, title, itemType) => {
     e.stopPropagation();
-    dispatch({ type: 'SHOW_THREEDOTS', payload: { id: iid, type, title } });
+    console.log(itemType);
+    dispatch({
+      type: 'SHOW_THREEDOTS',
+      payload: { id: iid, type: itemType, title },
+    });
   };
 
   const sortedArray = data.sort(
@@ -59,7 +62,9 @@ const ProjectGridView = ({ data, type }) => {
             onClick={() => history.push(`/${bid}/${item.type}/${item._id}`)}
           >
             <ItemSettingsButton
-              onClick={(e) => onClickDotsHandler(e, item._id, item.title)}
+              onClick={(e) =>
+                onClickDotsHandler(e, item._id, item.title, item.type)
+              }
             >
               <ThreeDotsIcon />
             </ItemSettingsButton>

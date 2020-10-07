@@ -112,6 +112,7 @@ const CalendarPage = () => {
           });
       })
       .catch((err) => console.error(err));
+    // eslint-disable-next-line
   }, [rerender]);
 
   if (loading || band.loading) return <Spinner />;

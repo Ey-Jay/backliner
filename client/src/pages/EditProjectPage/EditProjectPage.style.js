@@ -67,6 +67,7 @@ export const Item = styled.li`
   display: flex;
   align-items: center;
   border-radius: 6px;
+  cursor: pointer;
 
   & > * + * {
     margin-left: 10px;

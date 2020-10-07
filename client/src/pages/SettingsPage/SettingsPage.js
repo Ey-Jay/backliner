@@ -247,9 +247,11 @@ const SettingsPage = ({
                   {member.name}
                   {member._id === owner ? ' (Owner)' : ''}
                 </MemberName>
-                <TrashWrapper onClick={() => onClickRemove(member._id)}>
-                  <TrashIcon />
-                </TrashWrapper>
+                {member._id === owner ? null : (
+                  <TrashWrapper onClick={() => onClickRemove(member._id)}>
+                    <TrashIcon />
+                  </TrashWrapper>
+                )}
               </MemberItem>
             ))}
             <AddMemberItem>
