@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import firebase from 'fb';
 import { GlobalContext } from 'context/GlobalContext';
 import Layout from 'layout';
-import { Container, Item } from './MobileSettings.style';
+import { Container, Item, Policy, } from './MobileSettings.style';
 
 const MobileSettings = () => {
   const history = useHistory();
@@ -29,6 +29,7 @@ const MobileSettings = () => {
         <Item onClick={() => history.push(`/check-in`)}>Change Workspace</Item>
         <Item onClick={logoff}>Sign Out</Item>
       </Container>
+      <Policy onClick={() => history.push(`/privacy-policy`)}>Privacy Policy</Policy>
     </Layout>
   );
 };

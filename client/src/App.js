@@ -27,7 +27,7 @@ import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
 import MobileSettings from 'pages/MobileSettings';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+import PrivacyPolicy from 'pages/PrivacyPolicy';
 import GoogleAuth from 'pages/GoogleAuth';
 
 function App() {
