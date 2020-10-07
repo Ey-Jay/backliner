@@ -97,12 +97,21 @@ function App() {
         <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
         <PrivateRoute path="/:bid/settings" component={SettingsPage} />
         <PrivateRoute path="/:bid/mobile-settings" component={MobileSettings} />
-        <PrivateRoute path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Redirect to="/signin" />
       </Switch>
       <CookieConsent
-        buttonStyle={{ background: '#FF4136' }}
-        style={{ zIndex: '10000000' }}
+        buttonStyle={{ background: '#FF4136', margin:"5px 0 0"}}
+        style={{
+          zIndex: '10000000',
+          maxWidth: '270px',
+          right: '10px',
+          bottom: '10px',
+          left: 'initial',
+          padding: "15px",
+        }}
+        contentStyle={{ overflow: 'hidden', margin: '0', flex: '1 0 240px' }}
+        location="none"
       >
         This website uses cookies to enhance the user experience.
       </CookieConsent>
