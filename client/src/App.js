@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import './options.css';
 import { ModalContext } from 'context/ModalContext';
 import { ModalBackground } from './App.style';
 import CookieConsent from 'react-cookie-consent';
