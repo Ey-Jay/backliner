@@ -32,7 +32,7 @@ import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 
-const ProjectListView = ({ data, type }) => {
+const ProjectListView = ({ data }) => {
   const { bid } = useParams();
   const history = useHistory();
   const { view, setView } = useContext(GlobalContext);

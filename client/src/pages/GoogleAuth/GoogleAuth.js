@@ -36,6 +36,7 @@ const GoogleAuth = () => {
           });
       })
       .catch((err) => console.error(err));
+    // eslint-disable-next-line
   }, []);
 
   return (

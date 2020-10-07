@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
 import { ModalContext } from 'context/ModalContext';

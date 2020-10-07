@@ -12,7 +12,7 @@ import {
   Item,
   IconWrapper,
   ItemDescription,
-  TrashWrapper,
+  // TrashWrapper,
   Colors,
   Color,
   DangerZone,

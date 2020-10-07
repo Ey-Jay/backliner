@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import moment from 'moment';
-import ReactPlayer from 'react-player';
 
 import { ModalContext } from 'context/ModalContext';
 
@@ -21,7 +20,6 @@ import {
   Created,
   Updated,
   Controls,
-  Icon,
   EmbedWrap,
   EditButton,
   DeleteButton,

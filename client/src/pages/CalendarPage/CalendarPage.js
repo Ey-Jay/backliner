@@ -88,7 +88,7 @@ const CalendarPage = () => {
             headers: { authorization: `Bearer ${token}` },
           })
           .then((res) => {
-            if (res.data == 'refresh') {
+            if (res.data === 'refresh') {
               setRerender(new Date());
               return;
             }
@@ -107,6 +107,7 @@ const CalendarPage = () => {
           });
       })
       .catch((err) => console.error(err));
+    // eslint-disable-next-line
   }, [rerender]);
 
   if (loading) return <Spinner />;
