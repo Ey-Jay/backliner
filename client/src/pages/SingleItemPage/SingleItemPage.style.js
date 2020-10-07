@@ -21,6 +21,10 @@ export const Details = styled.div`
     flex-direction: column;
     max-width: 70%;
     margin: 40px 0;
+
+    & > * + * {
+      margin-top: 10px;
+    }
   }
 `;
 
@@ -39,7 +43,6 @@ export const ProjectName = styled.div`
     white-space: nowrap;
     font-size: 0.7rem;
   }
-
 `;
 
 export const Author = styled.div`
