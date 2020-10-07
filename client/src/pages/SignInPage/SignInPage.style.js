@@ -43,4 +43,5 @@ export const Policy = styled.div`
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
+  cursor: pointer;
 `;
