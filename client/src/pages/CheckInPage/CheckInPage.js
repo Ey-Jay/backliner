@@ -27,6 +27,12 @@ const CheckInPage = () => {
   const { dispatch } = useContext(ModalContext);
   const history = useHistory();
   const { data, loading, error } = useGetAPI('/');
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (text) => {
+    copy(text.toString())
+    setCopied(true);
+  }
 
   const logoff = () =>
     firebase
@@ -77,7 +83,7 @@ const CheckInPage = () => {
         </BandList>
         <YourID>
           <h2>Your Backliner ID</h2>
-          <p>{data.data.data._id}</p>
+          <p onClick={handleCopy}>{data.data.data._id}</p>
         </YourID>
         <Policy onClick={() => history.push(`/privacy-policy`)}>
           Privacy Policy
