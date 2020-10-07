@@ -40,7 +40,7 @@ const CommentBox = ({ type }) => {
   const addCommentHandler = async () => {
     const token = await firebase.auth().currentUser.getIdToken();
 
-    const res = await axios.post(
+    await axios.post(
       `${apiUrl}/${type}/${id}/comments`,
       {
         author: `${dbUser._id}`,
@@ -50,6 +50,7 @@ const CommentBox = ({ type }) => {
         headers: { authorization: `Bearer ${token}` },
       }
     );
+    setContent('');
     setRerender();
   };
 
@@ -59,6 +60,7 @@ const CommentBox = ({ type }) => {
 
   return (
     <Container>
+      <h2>Comments</h2>
       <Comments>
         {comments.map((comment) => (
           <Comment key={comment._id}>
@@ -76,6 +78,20 @@ const CommentBox = ({ type }) => {
             </CommentDetails>
           </Comment>
         ))}
+        {comments.length === 0 ? (
+          <Comment
+            style={{
+              justifyContent: 'center',
+              fontWeight: '700',
+              textTransform: 'uppercase',
+              fontSize: '0.7rem',
+              opacity: '0.5',
+              padding: '20px',
+            }}
+          >
+            No comments
+          </Comment>
+        ) : null}
       </Comments>
       <NewComment>
         <TextField

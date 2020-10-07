@@ -3,8 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 80%;
   max-width: 650px;
-  margin: 0 auto;
-  margin-top: 30px;
+  margin: 100px auto;
 
   @media (max-width: ${({ theme }) => theme.breakpointMobile}) {
     margin: 0;
