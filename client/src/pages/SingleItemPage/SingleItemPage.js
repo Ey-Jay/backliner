@@ -106,7 +106,7 @@ const SingleItemPage = ({ type }) => {
           <ProjectName
             color={data.data.data.project ? data.data.data.project.theme : null}
           >
-            <span>{fileProject}</span>
+            <span>{fileProject || 'No Project'}</span>
           </ProjectName>
           <Author>
             <AuthorImage>

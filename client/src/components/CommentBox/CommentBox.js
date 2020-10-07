@@ -23,8 +23,11 @@ import {
 const CommentBox = ({ type }) => {
   const [comments, setComments] = useState([]);
   const { id } = useParams();
-  const { data, loading, error } = useGetAPI(`/${type}/${id}/comments`);
-  const { dbUser, setRerender } = useContext(GlobalContext);
+  const { dbUser, setRerender, rerender } = useContext(GlobalContext);
+  const { data, loading, error } = useGetAPI(
+    `/${type}/${id}/comments`,
+    rerender
+  );
 
   const [content, setContent] = useState('');
 
@@ -45,8 +48,8 @@ const CommentBox = ({ type }) => {
       },
       {
         headers: { authorization: `Bearer ${token}` },
-      },
-    ); 
+      }
+    );
     setRerender();
   };
 
@@ -59,7 +62,9 @@ const CommentBox = ({ type }) => {
       <Comments>
         {comments.map((comment) => (
           <Comment key={comment._id}>
-            <CommentText><TransformText text={comment.content.trim()} /></CommentText>
+            <CommentText>
+              <TransformText text={comment.content.trim()} />
+            </CommentText>
             <CommentDetails>
               <div>
                 <img src={comment.author.avatar} alt="" />
@@ -81,7 +86,9 @@ const CommentBox = ({ type }) => {
           placeholder="Type your comment here..."
           onChange={(e) => setContent(e.currentTarget.value)}
         ></TextField>
-        <CommentButton onClick={addCommentHandler}>Submit</CommentButton>
+        <div>
+          <CommentButton onClick={addCommentHandler}>Submit</CommentButton>
+        </div>
       </NewComment>
     </Container>
   );

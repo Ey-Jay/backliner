@@ -6,7 +6,7 @@ import { GlobalContext } from 'context/GlobalContext';
 import { ModalContext } from 'context/ModalContext';
 
 import firebase from 'fb';
-import { apiUrl } from 'config/constants';
+import GoBackButton from 'components/GoBackButton';
 import useGetAPI from 'hooks/useGetAPI';
 import Navbar from 'components/Navbar';
 import ChatBox from 'components/ChatBox';
@@ -28,12 +28,9 @@ const Layout = ({ children, title, type }) => {
   const { setBid } = useContext(ModalContext);
   const band = useGetAPI(`/bands/${bid}`);
 
-  const {
-    setBandID,
-    isChatVisible,
-    setIsChatVisible,
-    setCalendarAuthorized,
-  } = useContext(GlobalContext);
+  const { setBandID, isChatVisible, setIsChatVisible } = useContext(
+    GlobalContext
+  );
   const history = useHistory();
 
   useEffect(() => {
@@ -60,6 +57,7 @@ const Layout = ({ children, title, type }) => {
         </NavWrapper>
         <Content>
           <Header>
+            <GoBackButton />
             <h1>{title}</h1>
             <section>
               {/* <RoundButton icon="bell" />
