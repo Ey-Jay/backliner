@@ -27,6 +27,7 @@ import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
 import MobileSettings from 'pages/MobileSettings';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import GoogleAuth from 'pages/GoogleAuth';
 
 function App() {
@@ -93,9 +94,15 @@ function App() {
         <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
         <PrivateRoute path="/:bid/settings" component={SettingsPage} />
         <PrivateRoute path="/:bid/mobile-settings" component={MobileSettings} />
+        <PrivateRoute path="/privacy-policy" component={PrivacyPolicy} />
         <Redirect to="/signin" />
       </Switch>
-      <CookieConsent buttonStyle={{background: "#FF4136"}} style={{zIndex: "10000000"}}>This website uses cookies to enhance the user experience.</CookieConsent>
+      <CookieConsent
+        buttonStyle={{ background: '#FF4136' }}
+        style={{ zIndex: '10000000' }}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </>
   );
 }
