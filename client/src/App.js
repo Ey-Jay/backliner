@@ -28,6 +28,7 @@ import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
 import MobileSettings from 'pages/MobileSettings';
 import GoogleAuth from 'pages/GoogleAuth';
+import CalendarAddModal from 'components/CalendarAddModal';
 
 function App() {
   const { state, dispatch } = useContext(ModalContext);
@@ -41,6 +42,7 @@ function App() {
           {state.modalType === 'ADDBAND' && <AddBandModal />}
           {state.modalType === 'DELETE' && <DeleteModal />}
           {state.modalType === 'THREEDOTS' && <ThreeDotsModal />}
+          {state.modalType === 'CALENDAR_ADD' && <CalendarAddModal />}
         </ModalBackground>
       )}
       <Switch>
@@ -95,7 +97,12 @@ function App() {
         <PrivateRoute path="/:bid/mobile-settings" component={MobileSettings} />
         <Redirect to="/signin" />
       </Switch>
-      <CookieConsent buttonStyle={{background: "#FF4136"}} style={{zIndex: "10000000"}}>This website uses cookies to enhance the user experience.</CookieConsent>
+      <CookieConsent
+        buttonStyle={{ background: '#FF4136' }}
+        style={{ zIndex: '10000000' }}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </>
   );
 }
