@@ -216,6 +216,7 @@ const SettingsPage = ({
           <SaveButton onClick={onClickSave}>Save</SaveButton>
         </section>
         <section style={{ marginBottom: '100px' }}>
+          <h2>Google Calendar</h2>
           <SaveButton
             disabled={hasGoogle}
             onClick={async () => {

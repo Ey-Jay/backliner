@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './styles.css';
@@ -10,6 +11,7 @@ import axios from 'axios';
 import Spinner from 'components/Spinner';
 import { ThemeContext } from 'styled-components';
 import { apiUrl } from 'config/constants';
+import useGetAPInorerender from 'hooks/useGetAPInorerender';
 
 import Layout from 'layout';
 import {
@@ -21,13 +23,17 @@ import {
 const localizer = momentLocalizer(moment);
 
 const CalendarPage = () => {
-  const { currentUser, rerender, setRerender } = useContext(GlobalContext);
+  const { currentUser, rerender, setRerender, dbUser } = useContext(
+    GlobalContext
+  );
   const { dispatch } = useContext(ModalContext);
   const { bid } = useParams();
+  const band = useGetAPInorerender(`/bands/${bid}`);
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [calendarAuthorized, setCalendarAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
   const theme = useContext(ThemeContext);
+  const history = useHistory();
 
   let events;
   if (calendarEvents) {
@@ -97,7 +103,6 @@ const CalendarPage = () => {
               setLoading(false);
               return;
             }
-            console.log(res.data.data);
             setCalendarEvents(res.data.data.items);
             setCalendarAuthorized(true);
             setLoading(false);
@@ -110,11 +115,25 @@ const CalendarPage = () => {
     // eslint-disable-next-line
   }, [rerender]);
 
-  if (loading) return <Spinner />;
+  if (loading || band.loading) return <Spinner />;
 
   return (
     <Layout title="Calendar">
-      {calendarAuthorized ? null : 'The Band Owner has not set a calendar yet'}
+      {band.data?.data?.data?.owner?._id === dbUser._id &&
+      !calendarAuthorized ? (
+        <div style={{ textAlign: 'center' }}>
+          <h2>You haven't connected to google calendar yet</h2>
+          <NavigationButton onClick={() => history.push(`/${bid}/settings`)}>
+            Go to Settings
+          </NavigationButton>
+        </div>
+      ) : null}
+      {!calendarAuthorized &&
+      band.data?.data?.data?.owner?._id !== dbUser._id ? (
+        <h2 style={{ textAlign: 'center' }}>
+          The band owner has not set a calendar yet
+        </h2>
+      ) : null}
       {calendarEvents && (
         <Calendar
           localizer={localizer}
