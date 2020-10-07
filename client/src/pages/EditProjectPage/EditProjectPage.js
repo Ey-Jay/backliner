@@ -23,9 +23,7 @@ import useGetAPInorerender from 'hooks/useGetAPInorerender';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
-// import { ReactComponent as ImageIcon } from 'assets/svg/ImageIcon.svg';
 import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
-import { ReactComponent as TrashIcon } from 'assets/svg/TrashIcon.svg';
 
 const EditProjectPage = ({
   match: {
@@ -85,7 +83,8 @@ const EditProjectPage = ({
       </Layout>
     );
 
-  const { audios, videos, files, lyrics } = data.data.data;
+  const { audios, videos, files, lyrics } = data?.data?.data;
+
   const allItems = [
     ...audios.map((i) => ({ ...i, type: 'audio' })),
     ...videos.map((i) => ({ ...i, type: 'video' })),
