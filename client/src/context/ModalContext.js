@@ -82,6 +82,12 @@ const modalReducer = (draft, action) => {
       draft.modalType = 'ADDBAND';
       return draft;
 
+    case 'SHOW_CALENDAR_ADD':
+      draft = { ...initialState };
+      draft.isModalVisible = true;
+      draft.modalType = 'CALENDAR_ADD';
+      return draft;
+
     default:
       return draft;
   }
@@ -180,6 +186,25 @@ export const ModalContextProvider = ({ children }) => {
     }
   };
 
+  const addCalendarEvent = async (title, startDate, endDate) => {
+    dispatch({ type: 'IS_LOADING' });
+    try {
+      const token = await firebase.auth().currentUser.getIdToken();
+      const res = await axios.post(
+        `${apiUrl}/bands/${bid}/calendar`,
+        { title, startDate, endDate },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (res.data.success) await showSuccess();
+      else await showError();
+    } catch (e) {
+      await showError();
+    }
+  };
+
   return (
     <ModalContext.Provider
       value={{
@@ -192,6 +217,7 @@ export const ModalContextProvider = ({ children }) => {
         gotoEditItem,
         gotoDeleteItem,
         addBand,
+        addCalendarEvent,
       }}
     >
       {children}

@@ -5,6 +5,7 @@ import './styles.css';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from 'context/GlobalContext';
+import { ModalContext } from 'context/ModalContext';
 import axios from 'axios';
 import Spinner from 'components/Spinner';
 import { ThemeContext } from 'styled-components';
@@ -20,6 +21,7 @@ const localizer = momentLocalizer(moment);
 
 const CalendarPage = () => {
   const { currentUser, rerender, setRerender } = useContext(GlobalContext);
+  const { dispatch } = useContext(ModalContext);
   const { bid } = useParams();
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [calendarAuthorized, setCalendarAuthorized] = useState(false);
@@ -40,7 +42,9 @@ const CalendarPage = () => {
       <CalendarToolbar>
         <h1>{props.label}</h1>
         <div>
-          <NewEventButton onClick={() => alert('add modal here')}>
+          <NewEventButton
+            onClick={() => dispatch({ type: 'SHOW_CALENDAR_ADD' })}
+          >
             New Event
           </NewEventButton>
           <NavigationButton onClick={() => props.onNavigate('TODAY')}>
