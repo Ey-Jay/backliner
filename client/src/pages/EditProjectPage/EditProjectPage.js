@@ -133,7 +133,10 @@ const EditProjectPage = ({
           <label>Items</label>
           <ItemList>
             {allItems.map((item) => (
-              <Item key={item._id}>
+              <Item
+                key={item._id}
+                onClick={() => history.push(`/${bid}/${item.type}/${item._id}`)}
+              >
                 <IconWrapper>
                   {item.type === 'audio' && <MicIcon />}
                   {item.type === 'video' && <VideoIcon />}
@@ -141,9 +144,16 @@ const EditProjectPage = ({
                   {item.type === 'lyrics' && <LyricsIcon />}
                 </IconWrapper>
                 <ItemDescription>{item.title}</ItemDescription>
-                <TrashWrapper>
+                {/* <TrashWrapper
+                  onClick={() =>
+                    dispatch({
+                      type: 'SHOW_DELETE',
+                      payload: { id: item._id, type: item.type },
+                    })
+                  }
+                >
                   <TrashIcon />
-                </TrashWrapper>
+                </TrashWrapper> */}
               </Item>
             ))}
           </ItemList>
