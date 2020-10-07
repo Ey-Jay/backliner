@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
@@ -62,16 +63,26 @@ const Layout = ({ children, title, type }) => {
             <section>
               {/* <RoundButton icon="bell" />
               <RoundButton icon="moon" /> */}
-              <RoundButton
-                icon="checkin"
-                onClick={() => history.push('/checkin')}
-              />
-              <RoundButton icon="logoff" onClick={logoff} />
-              {isChatVisible ? null : (
+              <ReactTooltip effect="solid" />
+              <span data-tip="Change Band">
                 <RoundButton
-                  icon="chat"
-                  onClick={() => setIsChatVisible(!isChatVisible)}
+                  icon="checkin"
+                  onClick={() => history.push('/checkin')}
                 />
+              </span>
+              <span data-tip="Sign Out">
+                <RoundButton icon="logoff" onClick={logoff} />
+              </span>
+              {isChatVisible ? null : (
+                <>
+                  <ReactTooltip effect="solid" />
+                  <span data-tip="Chat">
+                    <RoundButton
+                      icon="chat"
+                      onClick={() => setIsChatVisible(!isChatVisible)}
+                    />
+                  </span>
+                </>
               )}
             </section>
           </Header>

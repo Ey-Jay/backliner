@@ -164,7 +164,9 @@ const SettingsPage = ({
           </YourID>
           <Attribution>
             This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
-            <a href="https://remixicon.com">Remix Icons</a>. Furthermore, pictures from <a href="https://unsplash.com/">Unsplash</a> are used for the avatars.
+            <a href="https://remixicon.com">Remix Icons</a>. Furthermore,
+            pictures from <a href="https://unsplash.com/">Unsplash</a> are used
+            for the avatars.
           </Attribution>
         </Container>
       </Layout>
@@ -214,6 +216,7 @@ const SettingsPage = ({
           <SaveButton onClick={onClickSave}>Save</SaveButton>
         </section>
         <section style={{ marginBottom: '100px' }}>
+          <h2>Google Calendar</h2>
           <SaveButton
             disabled={hasGoogle}
             onClick={async () => {
