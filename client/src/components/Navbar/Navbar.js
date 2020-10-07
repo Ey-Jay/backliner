@@ -15,6 +15,7 @@ import {
   MembersContainer,
   MemberPortraitImg,
   Menu,
+  Policy,
 } from './Navbar.style';
 
 const Navbar = ({ band }) => {
@@ -64,8 +65,11 @@ const Navbar = ({ band }) => {
           <NavLink to={`/${band._id}/settings`}>
             <li>Settings</li>
           </NavLink>
-        </ul>
-      </Menu>
+          </ul>
+          </Menu>
+          <NavLink to={`/privacy-policy`}>
+            <Policy>Privacy Policy</Policy>
+          </NavLink> 
     </Container>
   );
 };

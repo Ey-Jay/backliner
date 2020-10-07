@@ -34,3 +34,13 @@ export const SignInButton = styled.button`
   margin: 0 auto;
   cursor: pointer;
 `;
+
+export const Policy = styled.div`
+  color: ${({ theme }) => theme.secondaryDark};
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+`;

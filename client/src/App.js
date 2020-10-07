@@ -28,6 +28,7 @@ import EditItemPage from 'pages/EditItemPage';
 import EditProjectPage from 'pages/EditProjectPage';
 import SingleItemPage from 'pages/SingleItemPage';
 import MobileSettings from 'pages/MobileSettings';
+import PrivacyPolicy from 'pages/PrivacyPolicy';
 import GoogleAuth from 'pages/GoogleAuth';
 import CalendarAddModal from 'components/CalendarAddModal';
 
@@ -96,6 +97,7 @@ function App() {
         <PrivateRoute path="/:bid/calendar" component={CalendarPage} />
         <PrivateRoute path="/:bid/settings" component={SettingsPage} />
         <PrivateRoute path="/:bid/mobile-settings" component={MobileSettings} />
+        <PrivateRoute path="/privacy-policy" component={PrivacyPolicy} />
         <Redirect to="/signin" />
       </Switch>
       <CookieConsent
