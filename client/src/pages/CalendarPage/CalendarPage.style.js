@@ -29,3 +29,25 @@ export const NavigationButton = styled.button`
     transform: scale(0.9);
   }
 `;
+
+export const NewEventButton = styled.button`
+  background-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.color};
+  border: none;
+  padding: 10px 15px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba(255, 65, 54, 0.7);
+  }
+
+  &:active  {
+    transition: all 0.1s;
+    transform: scale(0.9);
+  }
+`;

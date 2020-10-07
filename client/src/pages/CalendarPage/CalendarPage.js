@@ -10,7 +10,11 @@ import Spinner from 'components/Spinner';
 import { ThemeContext } from 'styled-components';
 
 import Layout from 'layout';
-import { CalendarToolbar, NavigationButton } from './CalendarPage.style';
+import {
+  CalendarToolbar,
+  NavigationButton,
+  NewEventButton,
+} from './CalendarPage.style';
 
 const localizer = momentLocalizer(moment);
 
@@ -36,6 +40,9 @@ const CalendarPage = () => {
       <CalendarToolbar>
         <h1>{props.label}</h1>
         <div>
+          <NewEventButton onClick={() => alert('add modal here')}>
+            New Event
+          </NewEventButton>
           <NavigationButton onClick={() => props.onNavigate('TODAY')}>
             Today
           </NavigationButton>
@@ -52,7 +59,7 @@ const CalendarPage = () => {
 
   function dayStyleGetter(day) {
     const style = {
-      backgroundColor: 'inherit',
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
     };
     if (moment(Date.now()).isSame(day, 'day')) return { style };
     if (!moment(Date.now()).isSame(day, 'month'))
@@ -108,6 +115,7 @@ const CalendarPage = () => {
           style={{ height: '100%', padding: '40px' }}
           toolbar={true}
           popup={true}
+          views={['month']}
           showMultiDayTimes={true}
           dayPropGetter={dayStyleGetter}
           eventPropGetter={eventStyleGetter}
