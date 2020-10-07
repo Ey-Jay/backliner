@@ -30,6 +30,7 @@ import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
 import { ReactComponent as VideoIcon } from 'assets/svg/VideoIcon.svg';
+import { ReactComponent as FileIcon } from 'assets/svg/FileIcon.svg';
 
 const DashboardPage = ({
   match: {
@@ -119,6 +120,12 @@ const DashboardPage = ({
                       <VideoIcon />
                     </Icon>
                     <Amount>{item.videos.length}</Amount>
+                  </Type>
+                  <Type>
+                    <Icon color={item.theme}>
+                      <FileIcon />
+                    </Icon>
+                    <Amount>{item.files.length}</Amount>
                   </Type>
                 </Elements>
               </Details>
