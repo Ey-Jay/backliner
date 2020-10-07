@@ -164,7 +164,9 @@ const SettingsPage = ({
           </YourID>
           <Attribution>
             This app uses icons from <a href="https://css.gg">css.gg</a> and{' '}
-            <a href="https://remixicon.com">Remix Icons</a>. Furthermore, pictures from <a href="https://unsplash.com/">Unsplash</a> are used for the avatars.
+            <a href="https://remixicon.com">Remix Icons</a>. Furthermore,
+            pictures from <a href="https://unsplash.com/">Unsplash</a> are used
+            for the avatars.
           </Attribution>
         </Container>
       </Layout>
@@ -244,9 +246,11 @@ const SettingsPage = ({
                   {member.name}
                   {member._id === owner ? ' (Owner)' : ''}
                 </MemberName>
-                <TrashWrapper onClick={() => onClickRemove(member._id)}>
-                  <TrashIcon />
-                </TrashWrapper>
+                {member._id === owner ? null : (
+                  <TrashWrapper onClick={() => onClickRemove(member._id)}>
+                    <TrashIcon />
+                  </TrashWrapper>
+                )}
               </MemberItem>
             ))}
             <AddMemberItem>
