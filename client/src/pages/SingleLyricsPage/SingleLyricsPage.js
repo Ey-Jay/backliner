@@ -7,6 +7,7 @@ import { ModalContext } from 'context/ModalContext';
 import useGetAPI from 'hooks/useGetAPI';
 import Spinner from 'components/Spinner';
 import Layout from 'layout';
+import CommentBox from 'components/CommentBox';
 import {
   Container,
   EditButton,
@@ -72,6 +73,7 @@ const SingleLyricsPage = ({
           edit
         </EditButton>
         <DeleteButton onClick={onClickDeleteHandler}>Delete</DeleteButton>
+        <CommentBox type="lyrics" />
       </Container>
     </Layout>
   );
