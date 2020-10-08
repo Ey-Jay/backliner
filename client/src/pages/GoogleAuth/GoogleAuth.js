@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { GlobalContext } from 'context/GlobalContext';
+import { apiUrl } from 'config/constants';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -18,7 +19,7 @@ const GoogleAuth = () => {
       .then((token) => {
         axios
           .post(
-            'http://localhost:3001/getAuthUrl',
+            `${apiUrl}/getAuthUrl`,
             {
               code: query.get('code'),
               bid: query.get('state'),
@@ -28,7 +29,6 @@ const GoogleAuth = () => {
             }
           )
           .then((res) => {
-            console.log(res);
             setCalendarAuthorized(true);
           })
           .catch((err) => {
