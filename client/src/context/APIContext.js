@@ -8,7 +8,7 @@ import { apiUrl } from 'config/constants';
 export const APIContext = React.createContext({ currentUser: null });
 
 export const APIContextProvider = ({ children }) => {
-  const { bandID, dbUser } = useContext(GlobalContext);
+  const { bandID, dbUser, rerender } = useContext(GlobalContext);
   const [isAPILoading, setIsAPILoading] = useState(true);
   const [error, setError] = useState(null);
   const [bandData, setBandData] = useState(null);
@@ -69,6 +69,8 @@ export const APIContextProvider = ({ children }) => {
   const getAllData = async () => {
     try {
       if (firebase.auth().currentUser && bandID) {
+        setIsAPILoading(true);
+
         const token = await firebase.auth().currentUser.getIdToken();
 
         const data = await Promise.all([
@@ -109,6 +111,7 @@ export const APIContextProvider = ({ children }) => {
         audios,
         videos,
         files,
+        getAllData,
       }}
     >
       {children}
