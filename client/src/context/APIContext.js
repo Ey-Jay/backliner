@@ -80,8 +80,6 @@ export const APIContextProvider = ({ children }) => {
           getFiles(token),
         ]);
 
-        console.log(data);
-
         setBandData(data[0]);
         setProjects(data[1]);
         setLyrics(data[2]);
