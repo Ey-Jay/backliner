@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
+import { GlobalContext } from 'context/GlobalContext';
 import { ModalContext } from 'context/ModalContext';
+
 import firebase from 'fb';
-import useGetAPI from 'hooks/useGetAPI';
 import RoundButton from 'components/RoundButton';
 import Spinner from 'components/Spinner';
 import {
@@ -25,9 +26,9 @@ import {
 import avatars from 'assets/band-avatars';
 
 const CheckInPage = () => {
+  const { dbUser } = useContext(GlobalContext);
   const { dispatch } = useContext(ModalContext);
   const history = useHistory();
-  const { data, loading, error } = useGetAPI('/');
 
   const logoff = () =>
     firebase
@@ -38,16 +39,14 @@ const CheckInPage = () => {
 
   const handlePlusButton = () => dispatch({ type: 'SHOW_ADDBAND' });
 
-  if (loading) return <Spinner />;
-
-  if (error) return <p>{JSON.stringify(error)}</p>;
+  if (!dbUser) return <Spinner />;
 
   return (
     <>
       <Container>
         <Controls>
           <UserPicture>
-            <img src={data.data.data.avatar} alt="" />
+            <img src={dbUser.avatar} alt="" />
           </UserPicture>
           <ReactTooltip effect="solid" />
           <span data-tip="Add Band">
@@ -58,7 +57,7 @@ const CheckInPage = () => {
           </span>
         </Controls>
         <BandList>
-          {data.data.data.bands.map((band) => (
+          {dbUser.bands.map((band) => (
             <div key={band._id}>
               <Link to={`/${band._id}/projects`}>
                 <Band>
@@ -77,13 +76,13 @@ const CheckInPage = () => {
               </Link>
             </div>
           ))}
-          {data.data.data.bands.length === 0 && (
+          {dbUser.bands.length === 0 && (
             <EmptyBand>Create a new workspace at the top</EmptyBand>
           )}
         </BandList>
         <YourID>
           <h2>Your Backliner ID</h2>
-          <p>{data.data.data._id}</p>
+          <p>{dbUser._id}</p>
         </YourID>
         <Policy onClick={() => history.push(`/privacy-policy`)}>
           Privacy Policy

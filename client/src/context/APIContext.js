@@ -68,7 +68,7 @@ export const APIContextProvider = ({ children }) => {
 
   const getAllData = async () => {
     try {
-      if (firebase.auth().currentUser) {
+      if (firebase.auth().currentUser && bandID) {
         const token = await firebase.auth().currentUser.getIdToken();
 
         const data = await Promise.all([
