@@ -10,6 +10,7 @@ export const APIContext = React.createContext({ currentUser: null });
 export const APIContextProvider = ({ children }) => {
   const { bandID, dbUser } = useContext(GlobalContext);
   const [isAPILoading, setIsAPILoading] = useState(true);
+  const [error, setError] = useState(null);
   const [bandData, setBandData] = useState(null);
   const [projects, setProjects] = useState(null);
   const [lyrics, setLyrics] = useState(null);
@@ -91,6 +92,7 @@ export const APIContextProvider = ({ children }) => {
       }
     } catch (e) {
       console.error(e);
+      setError(e);
     }
   };
 
@@ -102,6 +104,7 @@ export const APIContextProvider = ({ children }) => {
     <APIContext.Provider
       value={{
         isAPILoading,
+        error,
         bandData,
         projects,
         lyrics,
