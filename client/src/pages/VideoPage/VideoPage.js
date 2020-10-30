@@ -1,22 +1,18 @@
 import React, { useContext } from 'react';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
 
-import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import GridView from 'components/GridView';
 import ListView from 'components/ListView';
 import Spinner from 'components/Spinner';
 
-const VideoPage = ({
-  match: {
-    params: { bid },
-  },
-}) => {
+const VideoPage = () => {
   const { view } = useContext(GlobalContext);
-  const { data, loading, error } = useGetAPI(`/bands/${bid}/video`);
+  const { videos, isAPILoading, error } = useContext(APIContext);
 
-  if (loading)
+  if (isAPILoading)
     return (
       <Layout title="Video" type="video">
         <Spinner type="page" />
@@ -33,9 +29,9 @@ const VideoPage = ({
   return (
     <Layout title="Video" type="video">
       {view === 'list' ? (
-        <ListView data={data.data.data} type="video" />
+        <ListView data={videos} type="video" />
       ) : (
-        <GridView data={data.data.data} type="video" />
+        <GridView data={videos} type="video" />
       )}
     </Layout>
   );
