@@ -15,12 +15,14 @@ import {
 } from './EditItemPage.style';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
 
 const EditItemPage = ({ type }) => {
   const { id, bid } = useParams();
   const { data, loading, error } = useGetAPI(`/${type}/${id}`);
   const projects = useGetAPI(`/bands/${bid}/projects`);
   const { currentUser } = useContext(GlobalContext);
+  const { getAllData } = useContext(APIContext);
 
   const [itemProject, setItemProject] = useState(null);
   const [itemTitle, setItemTitle] = useState('');
@@ -66,6 +68,8 @@ const EditItemPage = ({ type }) => {
         headers: { authorization: `Bearer ${token}` },
       }
     );
+
+    await getAllData();
 
     history.push(
       `/${bid}/${type === 'file' ? 'files' : type}/${res.data.data._id}`

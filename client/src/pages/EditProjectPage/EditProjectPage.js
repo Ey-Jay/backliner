@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { ModalContext } from 'context/ModalContext';
+import { APIContext } from 'context/APIContext';
+
 import firebase from 'fb';
 import { apiUrl } from 'config/constants';
 import Layout from 'layout';
@@ -32,6 +34,7 @@ const EditProjectPage = ({
 }) => {
   const history = useHistory();
   const { dispatch } = useContext(ModalContext);
+  const { getAllData } = useContext(APIContext);
   const { data, loading, error } = useGetAPInorerender(`/projects/${pid}`);
   const [isLoading, setIsLoading] = useState(false);
   const [nameValue, setNameValue] = useState('');
@@ -57,6 +60,8 @@ const EditProjectPage = ({
       await axios.put(`${apiUrl}/projects/${pid}`, postData, {
         headers: { authorization: `Bearer ${token}` },
       });
+
+      await getAllData();
 
       setIsLoading(false);
       history.push(`/${bid}/projects`);

@@ -5,6 +5,8 @@ import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
+
 import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import { apiUrl } from 'config/constants';
@@ -40,6 +42,7 @@ const NewLyricsEditor = ({
   const { data, loading } = useGetAPI(`/bands/${bid}/projects`);
   const [selectedProject, setSelectedProject] = useState(null);
   const { currentUser } = useContext(GlobalContext);
+  const { getAllData } = useContext(APIContext);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -57,12 +60,13 @@ const NewLyricsEditor = ({
   };
 
   const saveDocument = async () => {
-    const document = JSON.stringify(
-      convertToRaw(editorState.getCurrentContent())
-    );
-    const token = await currentUser.getIdToken();
-    axios
-      .post(
+    try {
+      const document = JSON.stringify(
+        convertToRaw(editorState.getCurrentContent())
+      );
+      const token = await currentUser.getIdToken();
+
+      const res = await axios.post(
         `${apiUrl}/bands/${bid}/lyrics`,
         {
           title: `${lyricsTitle}`,
@@ -72,9 +76,14 @@ const NewLyricsEditor = ({
         {
           headers: { authorization: `Bearer ${token}` },
         }
-      )
-      .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
-      .catch((err) => console.error(err));
+      );
+
+      await getAllData();
+
+      history.push(`/${bid}/lyrics/${res.data.data._id}`);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const editorRef = useRef();

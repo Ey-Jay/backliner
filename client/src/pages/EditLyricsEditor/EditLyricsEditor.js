@@ -11,6 +11,8 @@ import {
 import 'draft-js/dist/Draft.css';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
+
 import useGetAPI from 'hooks/useGetAPI';
 import { apiUrl } from 'config/constants';
 import Spinner from 'components/Spinner';
@@ -44,6 +46,7 @@ const EditLyricsEditor = () => {
   const projects = useGetAPI(`/bands/${bid}/projects`);
   const [selectedProject, setSelectedProject] = useState(null);
   const { currentUser } = useContext(GlobalContext);
+  const { getAllData } = useContext(APIContext);
   const { data, loading, error } = useGetAPI(`/lyrics/${id}`);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [lyricsTitle, setLyricsTitle] = useState('');
@@ -72,13 +75,13 @@ const EditLyricsEditor = () => {
   };
 
   const saveDocument = async () => {
-    const document = JSON.stringify(
-      convertToRaw(editorState.getCurrentContent())
-    );
-    const token = await currentUser.getIdToken();
+    try {
+      const document = JSON.stringify(
+        convertToRaw(editorState.getCurrentContent())
+      );
+      const token = await currentUser.getIdToken();
 
-    axios
-      .put(
+      const res = await axios.put(
         `${apiUrl}/lyrics/${data.data.data._id}`,
         selectedProject
           ? {
@@ -93,9 +96,14 @@ const EditLyricsEditor = () => {
         {
           headers: { authorization: `Bearer ${token}` },
         }
-      )
-      .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
-      .catch((err) => console.error(err));
+      );
+
+      await getAllData();
+
+      history.push(`/${bid}/lyrics/${res.data.data._id}`);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const editorRef = useRef();
