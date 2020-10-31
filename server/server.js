@@ -15,7 +15,6 @@ require('./models/User');
 require('./models/Video');
 
 const checkIfAuthenticated = require('./middleware/auth');
-const getDevUserId = require('./middleware/devUser');
 const errorHandler = require('./middleware/error');
 
 const app = express();

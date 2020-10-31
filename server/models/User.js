@@ -3,12 +3,12 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
   {
-    name: String,
-    email: String,
+    name: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
     theme: String,
     avatar: String,
-    auth_token: String,
-    active: Boolean,
+    auth_token: { type: String, unique: true, required: true },
+    active: { type: Boolean, required: true },
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

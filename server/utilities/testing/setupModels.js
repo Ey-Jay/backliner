@@ -1,0 +1,9 @@
+require('../../models/Audio');
+require('../../models/Band');
+require('../../models/ChatMessage');
+require('../../models/Comments');
+require('../../models/File');
+require('../../models/Lyrics');
+require('../../models/Project');
+require('../../models/User');
+require('../../models/Video');

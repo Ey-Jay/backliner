@@ -1,10 +1,18 @@
 const R = require('ramda');
-const Band = require('../models/Band');
-const User = require('../models/User');
+const Band = require('../../../models/Band');
+const User = require('../../../models/User');
 
 const getUser = async (req, res, next) => {
   try {
     const { authId, userData } = req;
+
+    if (!authId || !userData || R.isEmpty(userData)) {
+      res.status(400);
+      return res.json({
+        error: true,
+        message: 'Bad Request: Auth token validation failed',
+      });
+    }
 
     const user = await User.findOne({ auth_token: authId }, User.publicFields())
       .populate({
@@ -31,19 +39,11 @@ const getUser = async (req, res, next) => {
       });
 
       res.status(200);
-      res.json({
-        success: true,
-        action: 'create',
-        data: newUser,
-      });
+      res.json(newUser);
     } else {
       // User exists, return data
       res.status(200);
-      res.json({
-        success: true,
-        action: 'get',
-        data: user,
-      });
+      res.json(user);
     }
   } catch (err) {
     next(err);
