@@ -8,10 +8,11 @@ import { apiUrl } from 'config/constants';
 export const APIContext = React.createContext({ currentUser: null });
 
 export const APIContextProvider = ({ children }) => {
-  const { bandID, dbUser, rerender } = useContext(GlobalContext);
+  const { bandID, dbUser } = useContext(GlobalContext);
   const [isAPILoading, setIsAPILoading] = useState(true);
   const [error, setError] = useState(null);
   const [bandData, setBandData] = useState(null);
+  const [hasGoogle, setHasGoogle] = useState(false);
   const [projects, setProjects] = useState(null);
   const [lyrics, setLyrics] = useState(null);
   const [audios, setAudios] = useState(null);
@@ -22,6 +23,8 @@ export const APIContextProvider = ({ children }) => {
     const data = await axios.get(`${apiUrl}/bands/${bandID}`, {
       headers: { authorization: `Bearer ${token}` },
     });
+
+    setHasGoogle(data.data.hasGoogle);
 
     return data.data.data;
   };
@@ -112,6 +115,7 @@ export const APIContextProvider = ({ children }) => {
         videos,
         files,
         getAllData,
+        hasGoogle,
       }}
     >
       {children}
