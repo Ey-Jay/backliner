@@ -101,6 +101,7 @@ export const APIContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (dbUser) getAllData();
+    // eslint-disable-next-line
   }, [bandID, dbUser]);
 
   return (
