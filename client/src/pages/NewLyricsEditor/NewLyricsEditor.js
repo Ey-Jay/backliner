@@ -7,7 +7,6 @@ import 'draft-js/dist/Draft.css';
 import { GlobalContext } from 'context/GlobalContext';
 import { APIContext } from 'context/APIContext';
 
-import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import { apiUrl } from 'config/constants';
 import {
@@ -39,10 +38,9 @@ const NewLyricsEditor = ({
     params: { bid },
   },
 }) => {
-  const { data, loading } = useGetAPI(`/bands/${bid}/projects`);
   const [selectedProject, setSelectedProject] = useState(null);
   const { currentUser } = useContext(GlobalContext);
-  const { getAllData } = useContext(APIContext);
+  const { getAllData, projects, isAPILoading, error } = useContext(APIContext);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -88,10 +86,17 @@ const NewLyricsEditor = ({
 
   const editorRef = useRef();
 
-  if (loading)
+  if (isAPILoading)
     return (
       <Layout title="New Lyrics">
         <Spinner type="page" />
+      </Layout>
+    );
+
+  if (error)
+    return (
+      <Layout title="New Lyrics">
+        <p>Error: {JSON.stringify(error)}</p>
       </Layout>
     );
 
@@ -193,12 +198,11 @@ const NewLyricsEditor = ({
             onChange={(e) => setSelectedProject(e.currentTarget.value)}
           >
             <option value={null}>No Project</option>
-            {data &&
-              data.data.data.map((proj) => (
-                <option key={proj._id} value={proj._id}>
-                  {proj.name}
-                </option>
-              ))}
+            {projects.map((proj) => (
+              <option key={proj._id} value={proj._id}>
+                {proj.name}
+              </option>
+            ))}
           </select>
         </ChooseProject>
         <SaveButton onClick={saveDocument}>Save</SaveButton>
