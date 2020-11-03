@@ -3,11 +3,11 @@ import { useHistory, useParams } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
 import { ModalContext } from 'context/ModalContext';
 
 import firebase from 'fb';
 import GoBackButton from 'components/GoBackButton';
-import useGetAPI from 'hooks/useGetAPI';
 import Navbar from 'components/Navbar';
 import ChatBox from 'components/ChatBox';
 import RoundButton from 'components/RoundButton';
@@ -23,10 +23,10 @@ import {
   ChatWrapper,
 } from './Layout.style';
 
-const Layout = ({ children, title, type }) => {
+const Layout = ({ children, title }) => {
   const { bid } = useParams();
   const { setBid } = useContext(ModalContext);
-  const band = useGetAPI(`/bands/${bid}`);
+  const { bandData, isAPILoading } = useContext(APIContext);
 
   const { setBandID, isChatVisible, setIsChatVisible } = useContext(
     GlobalContext
@@ -46,14 +46,14 @@ const Layout = ({ children, title, type }) => {
       .then(() => history.push('/signin'))
       .catch((e) => console.error(e));
 
-  if (band.loading) return <Spinner />;
+  if (isAPILoading) return <Spinner />;
 
   return (
     <>
       <NavMobile title={title} />
       <FlexContainer>
         <NavWrapper>
-          <Navbar band={band.data.data.data} />
+          <Navbar band={bandData} />
         </NavWrapper>
         <Content>
           <Header>
@@ -89,7 +89,7 @@ const Layout = ({ children, title, type }) => {
         </Content>
         <ChatWrapper isOpen={isChatVisible}>
           <ChatBox
-            band={band.data.data.data}
+            band={bandData}
             isOpen={isChatVisible}
             setIsOpen={setIsChatVisible}
           />

@@ -1,21 +1,18 @@
 import React, { useContext } from 'react';
 
 import { GlobalContext } from 'context/GlobalContext';
-import useGetAPI from 'hooks/useGetAPI';
+import { APIContext } from 'context/APIContext';
+
 import Layout from 'layout';
 import ListView from 'components/ListView';
 import GridView from 'components/GridView';
 import Spinner from 'components/Spinner';
 
-const FilesPage = ({
-  match: {
-    params: { bid },
-  },
-}) => {
+const FilesPage = () => {
   const { view } = useContext(GlobalContext);
-  const { data, loading, error } = useGetAPI(`/bands/${bid}/files`);
+  const { files, isAPILoading, error } = useContext(APIContext);
 
-  if (loading)
+  if (isAPILoading)
     return (
       <Layout title="Files" type="file">
         <Spinner type="page" />
@@ -32,9 +29,9 @@ const FilesPage = ({
   return (
     <Layout title="Files" type="file">
       {view === 'list' ? (
-        <ListView data={data.data.data} type="file" />
+        <ListView data={files} type="file" />
       ) : (
-        <GridView data={data.data.data} type="file" />
+        <GridView data={files} type="file" />
       )}
     </Layout>
   );

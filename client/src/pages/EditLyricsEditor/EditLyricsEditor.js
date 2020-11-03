@@ -11,6 +11,8 @@ import {
 import 'draft-js/dist/Draft.css';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
+
 import useGetAPI from 'hooks/useGetAPI';
 import { apiUrl } from 'config/constants';
 import Spinner from 'components/Spinner';
@@ -41,9 +43,11 @@ const styleMap = {
 
 const EditLyricsEditor = () => {
   const { id, bid } = useParams();
-  const projects = useGetAPI(`/bands/${bid}/projects`);
   const [selectedProject, setSelectedProject] = useState(null);
   const { currentUser } = useContext(GlobalContext);
+  const { getAllData, projects, isAPILoading, error: errorAPI } = useContext(
+    APIContext
+  );
   const { data, loading, error } = useGetAPI(`/lyrics/${id}`);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [lyricsTitle, setLyricsTitle] = useState('');
@@ -72,13 +76,13 @@ const EditLyricsEditor = () => {
   };
 
   const saveDocument = async () => {
-    const document = JSON.stringify(
-      convertToRaw(editorState.getCurrentContent())
-    );
-    const token = await currentUser.getIdToken();
+    try {
+      const document = JSON.stringify(
+        convertToRaw(editorState.getCurrentContent())
+      );
+      const token = await currentUser.getIdToken();
 
-    axios
-      .put(
+      const res = await axios.put(
         `${apiUrl}/lyrics/${data.data.data._id}`,
         selectedProject
           ? {
@@ -93,22 +97,27 @@ const EditLyricsEditor = () => {
         {
           headers: { authorization: `Bearer ${token}` },
         }
-      )
-      .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
-      .catch((err) => console.error(err));
+      );
+
+      await getAllData();
+
+      history.push(`/${bid}/lyrics/${res.data.data._id}`);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const editorRef = useRef();
 
-  if (error) {
+  if (error || errorAPI) {
     return (
       <Layout title={error.code}>
-        <div>{error.message}</div>
+        <div>Error: {error.message}</div>
       </Layout>
     );
   }
 
-  if (loading || projects.loading) {
+  if (loading || isAPILoading) {
     return (
       <Layout>
         <Spinner type="page" />
@@ -213,12 +222,11 @@ const EditLyricsEditor = () => {
             onChange={(e) => setSelectedProject(e.currentTarget.value)}
           >
             <option value={null}>No Project</option>
-            {projects.data &&
-              projects.data.data.data.map((proj) => (
-                <option key={proj._id} value={proj._id}>
-                  {proj.name}
-                </option>
-              ))}
+            {projects.map((proj) => (
+              <option key={proj._id} value={proj._id}>
+                {proj.name}
+              </option>
+            ))}
           </select>
         </ChooseProject>
         <SaveButton onClick={saveDocument}>Save Changes</SaveButton>

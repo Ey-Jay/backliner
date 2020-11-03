@@ -1,21 +1,18 @@
 import React, { useContext } from 'react';
 
 import { GlobalContext } from 'context/GlobalContext';
-import useGetAPI from 'hooks/useGetAPI';
+import { APIContext } from 'context/APIContext';
+
 import Layout from 'layout';
 import GridView from 'components/GridView';
 import ListView from 'components/ListView';
 import Spinner from 'components/Spinner';
 
-const LyricsPage = ({
-  match: {
-    params: { bid },
-  },
-}) => {
+const LyricsPage = () => {
   const { view } = useContext(GlobalContext);
-  const { data, loading, error } = useGetAPI(`/bands/${bid}/lyrics`);
+  const { lyrics, isAPILoading, error } = useContext(APIContext);
 
-  if (loading)
+  if (isAPILoading)
     return (
       <Layout title="Lyrics">
         <Spinner type="page" />
@@ -32,9 +29,9 @@ const LyricsPage = ({
   return (
     <Layout title="Lyrics">
       {view === 'list' ? (
-        <ListView data={data.data.data} type="lyrics" />
+        <ListView data={lyrics} type="lyrics" />
       ) : (
-        <GridView data={data.data.data} type="lyrics" />
+        <GridView data={lyrics} type="lyrics" />
       )}
     </Layout>
   );

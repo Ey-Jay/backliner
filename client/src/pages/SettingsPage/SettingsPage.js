@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
 import { ModalContext } from 'context/ModalContext';
 
 import firebase from 'fb';
@@ -26,7 +27,6 @@ import {
   YourID,
   Attribution,
 } from './SettingsPage.style';
-import useGetAPI from 'hooks/useGetAPI';
 import { ReactComponent as TrashIcon } from 'assets/svg/TrashIcon.svg';
 
 const SettingsPage = ({
@@ -34,25 +34,27 @@ const SettingsPage = ({
     params: { bid },
   },
 }) => {
-  const { setRerender, dbUser, bandID } = useContext(GlobalContext);
+  const { dbUser } = useContext(GlobalContext);
+  const { bandData, hasGoogle, getAllData, isAPILoading, error } = useContext(
+    APIContext
+  );
   const { dispatch } = useContext(ModalContext);
-  const [nameField, setNameField] = useState('');
+
   const [owner, setOwner] = useState(null);
   const [members, setMembers] = useState([]);
-  const [addMemberId, setAddMemberId] = useState('');
-  const [avatar, setAvatar] = useState(null);
-  const { data, loading, error } = useGetAPI(`/bands/${bid}`);
   const [isLoading, setIsLoading] = useState(false);
 
-  const hasGoogle = data?.data?.hasGoogle;
+  const [avatar, setAvatar] = useState(null);
+  const [nameField, setNameField] = useState('');
+  const [addMemberId, setAddMemberId] = useState('');
 
   useEffect(() => {
-    if (data) {
-      setNameField(data?.data?.data?.name);
-      setOwner(data?.data?.data?.owner._id);
-      setMembers(data?.data?.data?.members);
+    if (bandData) {
+      setNameField(bandData.name);
+      setOwner(bandData.owner._id);
+      setMembers(bandData.members);
     }
-  }, [data]);
+  }, [bandData]);
 
   const onClickSave = async () => {
     try {
@@ -69,9 +71,10 @@ const SettingsPage = ({
         headers: { authorization: `Bearer ${token}` },
       });
 
+      await getAllData();
+
       setAvatar(null);
       setIsLoading(false);
-      setRerender(new Date());
     } catch (e) {
       console.error(e);
     }
@@ -90,10 +93,11 @@ const SettingsPage = ({
         headers: { authorization: `Bearer ${token}` },
       });
 
+      await getAllData();
+
       setAvatar(null);
       setAddMemberId('');
       setIsLoading(false);
-      setRerender(new Date());
     } catch (e) {
       console.error(e);
     }
@@ -108,10 +112,11 @@ const SettingsPage = ({
         headers: { authorization: `Bearer ${token}` },
       });
 
+      await getAllData();
+
       setAvatar(null);
       setAddMemberId('');
       setIsLoading(false);
-      setRerender(new Date());
     } catch (e) {
       console.error(e);
     }
@@ -120,7 +125,7 @@ const SettingsPage = ({
   const onClickDeleteHandler = () =>
     dispatch({ type: 'SHOW_DELETE', payload: { id: bid, type: 'bands' } });
 
-  if (loading || isLoading)
+  if (isAPILoading || isLoading)
     return (
       <Layout title="Settings">
         <Container>
@@ -138,7 +143,7 @@ const SettingsPage = ({
       </Layout>
     );
 
-  if (dbUser._id !== data?.data?.data?.owner._id)
+  if (dbUser._id !== bandData.owner._id)
     return (
       <Layout title="Settings">
         <Container>
@@ -190,7 +195,7 @@ const SettingsPage = ({
             value={owner}
             onChange={(e) => setOwner(e.currentTarget.value)}
           >
-            {data?.data?.data?.members.map((member) => (
+            {bandData.members.map((member) => (
               <Member key={member._id} value={member._id}>
                 {member.name}
               </Member>
@@ -203,7 +208,7 @@ const SettingsPage = ({
             {avatars.map((ava, idx) => (
               <Avatar
                 key={idx}
-                current={idx === data?.data?.data?.avatar}
+                current={idx === bandData.avatar}
                 chosen={idx === avatar}
                 onClick={() => setAvatar(idx)}
               >
@@ -222,7 +227,7 @@ const SettingsPage = ({
             onClick={async () => {
               const token = await firebase.auth().currentUser.getIdToken();
               axios
-                .get(`${apiUrl}/getAuthUrl?bid=${bandID}`, {
+                .get(`${apiUrl}/getAuthUrl?bid=${bid}`, {
                   headers: { authorization: `Bearer ${token}` },
                 })
                 .then((res) => {

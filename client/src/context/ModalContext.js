@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import firebase from 'fb';
 import { apiUrl } from 'config/constants';
-import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
 
 const initialState = {
   modalType: null,
@@ -97,7 +97,7 @@ export const ModalContext = createContext({ ...initialState });
 
 export const ModalContextProvider = ({ children }) => {
   const history = useHistory();
-  const { setRerender } = useContext(GlobalContext);
+  const { getAllData } = useContext(APIContext);
   const [bid, setBid] = useState(null);
   const [state, dispatch] = useImmerReducer(modalReducer, initialState);
 
@@ -107,7 +107,7 @@ export const ModalContextProvider = ({ children }) => {
     dispatch({ type: 'IS_SUCCESS' });
     await sleep(2000);
     dispatch({ type: 'RESET' });
-    setRerender(new Date());
+    getAllData();
   };
 
   const showError = async () => {

@@ -1,16 +1,14 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-// import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
 import { ModalContext } from 'context/ModalContext';
 
-import useGetAPI from 'hooks/useGetAPI';
 import Layout from 'layout';
 import Spinner from 'components/Spinner';
 import {
   Container,
   Controls,
-  /*ViewButton,*/
   ListView,
   ListItem,
   Dot,
@@ -24,8 +22,6 @@ import {
   NewButton,
   EmptyList,
 } from './ProjectsPage.style';
-// import { ReactComponent as GridViewIcon } from 'assets/svg/GridViewIcon.svg';
-// import { ReactComponent as ListViewIcon } from 'assets/svg/ListViewIcon.svg';
 import { ReactComponent as LyricsIcon } from 'assets/svg/LyricsIcon.svg';
 import { ReactComponent as MicIcon } from 'assets/svg/MicIcon.svg';
 import { ReactComponent as ThreeDotsIcon } from 'assets/svg/ThreeDotsIcon.svg';
@@ -38,9 +34,8 @@ const DashboardPage = ({
   },
 }) => {
   const history = useHistory();
-  // const { view, setView } = useContext(GlobalContext);
+  const { projects, isAPILoading, error } = useContext(APIContext);
   const { dispatch } = useContext(ModalContext);
-  const { data, loading, error } = useGetAPI(`/bands/${bid}/projects`);
 
   if (error)
     return (
@@ -49,7 +44,7 @@ const DashboardPage = ({
       </Layout>
     );
 
-  if (loading)
+  if (isAPILoading)
     return (
       <Layout title="Projects" type="project">
         <Spinner type="page" />
@@ -64,7 +59,7 @@ const DashboardPage = ({
     });
   };
 
-  const projects = data?.data?.data?.sort(
+  const sortedProjects = projects.sort(
     (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
   );
 
@@ -77,23 +72,9 @@ const DashboardPage = ({
               New Item
             </NewButton>
           </section>
-          {/* <section>
-            <ViewButton
-              active={view === 'list'}
-              onClick={() => setView('list')}
-            >
-              <ListViewIcon />
-            </ViewButton>
-            <ViewButton
-              active={view === 'grid'}
-              onClick={() => setView('grid')}
-            >
-              <GridViewIcon />
-            </ViewButton>
-          </section> */}
         </Controls>
         <ListView>
-          {projects.map((item) => (
+          {sortedProjects.map((item) => (
             <ListItem
               key={item._id}
               onClick={() => history.push(`/${bid}/project/${item._id}`)}
@@ -136,7 +117,7 @@ const DashboardPage = ({
               </ItemSettingsButton>
             </ListItem>
           ))}
-          {projects.length === 0 && <EmptyList>No Projects</EmptyList>}
+          {sortedProjects.length === 0 && <EmptyList>No Projects</EmptyList>}
         </ListView>
       </Container>
     </Layout>

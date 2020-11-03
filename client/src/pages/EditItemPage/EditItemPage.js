@@ -5,6 +5,9 @@ import Spinner from 'components/Spinner';
 import Layout from 'layout';
 import axios from 'axios';
 
+import { GlobalContext } from 'context/GlobalContext';
+import { APIContext } from 'context/APIContext';
+
 import firebase from 'fb';
 import { apiUrl } from 'config/constants';
 import {
@@ -14,13 +17,13 @@ import {
   DeleteButton,
 } from './EditItemPage.style';
 
-import { GlobalContext } from 'context/GlobalContext';
-
 const EditItemPage = ({ type }) => {
   const { id, bid } = useParams();
   const { data, loading, error } = useGetAPI(`/${type}/${id}`);
-  const projects = useGetAPI(`/bands/${bid}/projects`);
   const { currentUser } = useContext(GlobalContext);
+  const { getAllData, projects, isAPILoading, error: errorAPI } = useContext(
+    APIContext
+  );
 
   const [itemProject, setItemProject] = useState(null);
   const [itemTitle, setItemTitle] = useState('');
@@ -67,6 +70,8 @@ const EditItemPage = ({ type }) => {
       }
     );
 
+    await getAllData();
+
     history.push(
       `/${bid}/${type === 'file' ? 'files' : type}/${res.data.data._id}`
     );
@@ -82,17 +87,17 @@ const EditItemPage = ({ type }) => {
       .catch((err) => console.error(err));
   };
 
-  if (loading || projects.loading)
+  if (loading || isAPILoading)
     return (
       <Layout title={itemTitle}>
         <Spinner type="page" />
       </Layout>
     );
 
-  if (error || projects.error)
+  if (error || errorAPI)
     return (
       <Layout title={itemTitle}>
-        <p>{JSON.stringify(error)}</p>
+        <p>Error: {JSON.stringify(error)}</p>
       </Layout>
     );
 
@@ -107,7 +112,7 @@ const EditItemPage = ({ type }) => {
             onChange={(e) => setItemProject(e.currentTarget.value)}
           >
             <option value={null}>No Project</option>
-            {projects.data.data.data.map((item) => (
+            {projects.map((item) => (
               <option value={item._id} key={item._id}>
                 {item.name}
               </option>

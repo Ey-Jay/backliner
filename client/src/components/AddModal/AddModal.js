@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 
 import { ModalContext } from 'context/ModalContext';
-import useGetAPInorerender from 'hooks/useGetAPInorerender';
+import { APIContext } from 'context/APIContext';
+
 import Spinner from 'components/Spinner';
 import { ReactComponent as SuccessSVG } from 'assets/svg/Success.svg';
 import { ReactComponent as ErrorSVG } from 'assets/svg/Error.svg';
@@ -17,16 +18,15 @@ import {
 } from './AddModal.style';
 
 const AddModal = () => {
-  const { state, dispatch, bid, addItem } = useContext(ModalContext);
-
-  const projectsAPI = useGetAPInorerender(`/bands/${bid}/projects`);
+  const { state, dispatch, addItem } = useContext(ModalContext);
+  const { projects, isAPILoading, error } = useContext(APIContext);
 
   const [titleValue, setTitleValue] = useState('');
   const [urlValue, setUrlValue] = useState('');
   const [projectValue, setProjectValue] = useState('');
   const [projectColor, setProjectColor] = useState('#0074D9');
 
-  if (projectsAPI.loading || state.isModalLoading)
+  if (isAPILoading || state.isModalLoading)
     return (
       <Modal onClick={(e) => e.stopPropagation()}>
         <Spinner type="modal" />
@@ -42,7 +42,7 @@ const AddModal = () => {
       </Modal>
     );
 
-  if (state.isModalError)
+  if (error || state.isModalError)
     return (
       <Modal onClick={(e) => e.stopPropagation()}>
         <IconContainer>
@@ -159,7 +159,7 @@ const AddModal = () => {
           onChange={(e) => setProjectValue(e.currentTarget.value)}
         >
           <option value="">No Project</option>
-          {projectsAPI.data.data.data.map((proj) => (
+          {projects.map((proj) => (
             <option value={proj._id} key={proj._id}>
               {proj.name}
             </option>

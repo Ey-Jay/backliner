@@ -5,7 +5,8 @@ import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
 import { GlobalContext } from 'context/GlobalContext';
-import useGetAPI from 'hooks/useGetAPI';
+import { APIContext } from 'context/APIContext';
+
 import Layout from 'layout';
 import { apiUrl } from 'config/constants';
 import {
@@ -37,9 +38,9 @@ const NewLyricsEditor = ({
     params: { bid },
   },
 }) => {
-  const { data, loading } = useGetAPI(`/bands/${bid}/projects`);
   const [selectedProject, setSelectedProject] = useState(null);
   const { currentUser } = useContext(GlobalContext);
+  const { getAllData, projects, isAPILoading, error } = useContext(APIContext);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -57,12 +58,13 @@ const NewLyricsEditor = ({
   };
 
   const saveDocument = async () => {
-    const document = JSON.stringify(
-      convertToRaw(editorState.getCurrentContent())
-    );
-    const token = await currentUser.getIdToken();
-    axios
-      .post(
+    try {
+      const document = JSON.stringify(
+        convertToRaw(editorState.getCurrentContent())
+      );
+      const token = await currentUser.getIdToken();
+
+      const res = await axios.post(
         `${apiUrl}/bands/${bid}/lyrics`,
         {
           title: `${lyricsTitle}`,
@@ -72,17 +74,29 @@ const NewLyricsEditor = ({
         {
           headers: { authorization: `Bearer ${token}` },
         }
-      )
-      .then((res) => history.push(`/${bid}/lyrics/${res.data.data._id}`))
-      .catch((err) => console.error(err));
+      );
+
+      await getAllData();
+
+      history.push(`/${bid}/lyrics/${res.data.data._id}`);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const editorRef = useRef();
 
-  if (loading)
+  if (isAPILoading)
     return (
       <Layout title="New Lyrics">
         <Spinner type="page" />
+      </Layout>
+    );
+
+  if (error)
+    return (
+      <Layout title="New Lyrics">
+        <p>Error: {JSON.stringify(error)}</p>
       </Layout>
     );
 
@@ -184,12 +198,11 @@ const NewLyricsEditor = ({
             onChange={(e) => setSelectedProject(e.currentTarget.value)}
           >
             <option value={null}>No Project</option>
-            {data &&
-              data.data.data.map((proj) => (
-                <option key={proj._id} value={proj._id}>
-                  {proj.name}
-                </option>
-              ))}
+            {projects.map((proj) => (
+              <option key={proj._id} value={proj._id}>
+                {proj.name}
+              </option>
+            ))}
           </select>
         </ChooseProject>
         <SaveButton onClick={saveDocument}>Save</SaveButton>

@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'styled-components';
 
 import { GlobalContextProvider } from 'context/GlobalContext';
+import { APIContextProvider } from 'context/APIContext';
 import { ModalContextProvider } from 'context/ModalContext';
 import { theme, GlobalStyles } from 'theme';
 
@@ -16,9 +17,11 @@ ReactDOM.render(
       <GlobalStyles />
       <BrowserRouter>
         <GlobalContextProvider>
-          <ModalContextProvider>
-            <App />
-          </ModalContextProvider>
+          <APIContextProvider>
+            <ModalContextProvider>
+              <App />
+            </ModalContextProvider>
+          </APIContextProvider>
         </GlobalContextProvider>
       </BrowserRouter>
     </ThemeProvider>
