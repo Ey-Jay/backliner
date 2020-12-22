@@ -1,15 +1,11 @@
 import Link from 'next/link';
 import parseCookiesServerSide from '../utils/auth/parseCookiesServerSide';
 import { verifyIdToken } from '../utils/auth/firebaseAdmin';
-import redirectTo from '../utils/redirectTo';
 
-const Example = (props) => {
+const Example = ({ userData }) => {
   return (
     <div>
-      <p>
-        This page is static because it does not fetch any data or include the
-        authed user info.
-      </p>
+      <p>{JSON.stringify(userData)}</p>
       <Link href={'/'}>
         <a>Home</a>
       </Link>
@@ -21,10 +17,18 @@ export async function getServerSideProps({ req, res }) {
   const cookies = parseCookiesServerSide(req.headers.cookie);
 
   try {
-    await verifyIdToken(cookies.auth.token);
-    return { props: {} };
+    const user = await verifyIdToken(cookies.auth.token);
+
+    // do DB stuff here and return as props to component
+
+    return { props: { userData: user } };
   } catch (error) {
-    return redirectTo('/', res);
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
   }
 }
 
