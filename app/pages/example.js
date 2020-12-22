@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import parseCookiesServerSide from '../utils/auth/parseCookiesServerSide';
-import { verifyIdToken } from '../utils/auth/firebaseAdmin';
+
+import parseCookiesServerSide from '@utils/auth/parseCookiesServerSide';
+import { verifyIdToken } from '@utils/auth/firebaseAdmin';
 
 const Example = ({ userData }) => {
   return (
