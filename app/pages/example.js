@@ -1,12 +1,15 @@
 import Link from 'next/link';
 
+import dbConnect from '@utils/dbConnect';
+import User from '@models/User';
+
 import parseCookiesServerSide from '@utils/auth/parseCookiesServerSide';
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
 
-const Example = ({ userData }) => {
+const Example = ({ dbUser }) => {
   return (
     <div>
-      <p>{JSON.stringify(userData)}</p>
+      <p>{JSON.stringify(dbUser)}</p>
       <Link href={'/'}>
         <a>Home</a>
       </Link>
@@ -20,9 +23,22 @@ export async function getServerSideProps({ req, res }) {
   try {
     const user = await verifyIdToken(cookies.auth.token);
 
-    // do DB stuff here and return as props to component
+    await dbConnect();
+    const data = await User.find({ auth_token: user.uid }, User.publicFields())
+      .populate({
+        path: 'bands',
+        select: Band.publicFields(),
+        match: { active: true },
+        populate: {
+          path: 'members',
+          select: User.publicFields(),
+          match: { active: true },
+        },
+      })
+      .exec();
+    const parsed = JSON.parse(JSON.stringify(data));
 
-    return { props: { userData: user } };
+    return { props: { dbUser: parsed } };
   } catch (error) {
     return {
       redirect: {
