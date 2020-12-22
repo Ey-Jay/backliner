@@ -1,4 +1,7 @@
-import Link from 'next/link'
+import Link from 'next/link';
+import parseCookiesServerSide from '../utils/auth/parseCookiesServerSide';
+import { verifyIdToken } from '../utils/auth/firebaseAdmin';
+import redirectTo from '../utils/redirectTo';
 
 const Example = (props) => {
   return (
@@ -11,7 +14,18 @@ const Example = (props) => {
         <a>Home</a>
       </Link>
     </div>
-  )
+  );
+};
+
+export async function getServerSideProps({ req, res }) {
+  const cookies = parseCookiesServerSide(req.headers.cookie);
+
+  try {
+    await verifyIdToken(cookies.auth.token);
+    return { props: {} };
+  } catch (error) {
+    return redirectTo('/', res);
+  }
 }
 
-export default Example
+export default Example;

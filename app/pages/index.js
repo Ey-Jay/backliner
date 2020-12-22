@@ -1,20 +1,20 @@
-import useSWR from 'swr'
-import Link from 'next/link'
-import { useUser } from '../utils/auth/useUser'
+import useSWR from 'swr';
+import Link from 'next/link';
+import { useUser } from '../utils/auth/useUser';
 
 const fetcher = (url, token) =>
   fetch(url, {
     method: 'GET',
     headers: new Headers({ 'Content-Type': 'application/json', token }),
     credentials: 'same-origin',
-  }).then((res) => res.json())
+  }).then((res) => res.json());
 
 const Index = () => {
-  const { user, logout } = useUser()
+  const { user, logout } = useUser();
   const { data, error } = useSWR(
     user ? ['/api/getFood', user.token] : null,
     fetcher
-  )
+  );
   if (!user) {
     return (
       <>
@@ -26,7 +26,7 @@ const Index = () => {
           </Link>
         </p>
       </>
-    )
+    );
   }
 
   return (
@@ -57,7 +57,7 @@ const Index = () => {
         <div>Loading...</div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
