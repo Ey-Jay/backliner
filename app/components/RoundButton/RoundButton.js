@@ -8,7 +8,7 @@ import {
   ChatIcon,
   BackArrowIcon,
 } from './Icons.style';
-import { ReactComponent as CheckIn } from '@assets/svg/CheckIn.svg';
+import CheckIn from '@assets/svg/CheckIn.svg';
 import { Button } from './style';
 
 const RoundButton = ({ icon, color, onClick }) => {

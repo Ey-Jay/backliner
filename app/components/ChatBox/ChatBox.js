@@ -6,7 +6,7 @@ import moment from 'moment';
 // import firebase from 'fb';
 import RoundButton from '@components/RoundButton';
 import TransformText from '@components/TransformText';
-import { ReactComponent as ChevronRightSVG } from '@assets/svg/ChevronRight.svg';
+import ChevronRightSVG from '@assets/svg/ChevronRight.svg';
 import {
   ChatHeader,
   ChatBody,

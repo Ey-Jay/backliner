@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 
-import { ReactComponent as FolderSVG } from '@assets/svg/FolderIcon.svg';
-import { ReactComponent as AudioSVG } from '@assets/svg/MicIcon.svg';
-import { ReactComponent as VideoSVG } from '@assets/svg/VideoIcon.svg';
-import { ReactComponent as LyricsSVG } from '@assets/svg/LyricsIcon.svg';
-import { ReactComponent as FileSVG } from '@assets/svg/FileIcon.svg';
-import { ReactComponent as SettingsSVG } from '@assets/svg/SettingsIcon.svg';
-import { ReactComponent as ChatSVG } from '@assets/svg/ChatIcon.svg';
+import FolderSVG from '@assets/svg/FolderIcon.svg';
+import AudioSVG from '@assets/svg/MicIcon.svg';
+import VideoSVG from '@assets/svg/VideoIcon.svg';
+import LyricsSVG from '@assets/svg/LyricsIcon.svg';
+import FileSVG from '@assets/svg/FileIcon.svg';
+import SettingsSVG from '@assets/svg/SettingsIcon.svg';
+import ChatSVG from '@assets/svg/ChatIcon.svg';
 import {
   Container,
   NavButton,
