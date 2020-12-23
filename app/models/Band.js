@@ -26,4 +26,4 @@ BandSchema.static(
   () => '_id name avatar owner members createdAt'
 );
 
-export default mongoose.models.Band || mongoose.model('Band', BandSchema);
+export default mongoose.models?.Band || mongoose.model('Band', BandSchema);

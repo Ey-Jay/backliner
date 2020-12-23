@@ -24,4 +24,4 @@ UserSchema.static(
   () => '_id name email theme avatar createdAt'
 );
 
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+export default mongoose.models?.User || mongoose.model('User', UserSchema);

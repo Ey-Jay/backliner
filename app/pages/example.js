@@ -1,15 +1,16 @@
 import Link from 'next/link';
 
 import dbConnect from '@utils/dbConnect';
-import User from '@models/User';
+import getDbUser from '@utils/getDbUser';
 
 import parseCookiesServerSide from '@utils/auth/parseCookiesServerSide';
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
 
-const Example = ({ dbUser }) => {
+const Example = ({ dbUser, fbUser }) => {
   return (
     <div>
       <p>{JSON.stringify(dbUser)}</p>
+      <p>{JSON.stringify(fbUser)}</p>
       <Link href={'/'}>
         <a>Home</a>
       </Link>
@@ -17,29 +18,18 @@ const Example = ({ dbUser }) => {
   );
 };
 
-export async function getServerSideProps({ req, res }) {
-  const cookies = parseCookiesServerSide(req.headers.cookie);
-
+export async function getServerSideProps({ req }) {
   try {
-    const user = await verifyIdToken(cookies.auth.token);
-
     await dbConnect();
-    const data = await User.find({ auth_token: user.uid }, User.publicFields())
-      .populate({
-        path: 'bands',
-        select: Band.publicFields(),
-        match: { active: true },
-        populate: {
-          path: 'members',
-          select: User.publicFields(),
-          match: { active: true },
-        },
-      })
-      .exec();
-    const parsed = JSON.parse(JSON.stringify(data));
 
-    return { props: { dbUser: parsed } };
+    // Validate user and get their data from FB and DB
+    const cookies = parseCookiesServerSide(req.headers.cookie);
+    const fbUser = await verifyIdToken(cookies.auth.token);
+    const dbUser = await getDbUser(fbUser);
+
+    return { props: { dbUser, fbUser } };
   } catch (error) {
+    // Redirect to index
     return {
       redirect: {
         destination: '/',
