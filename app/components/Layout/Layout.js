@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
     fetcher
   );
 
-  if (!user || ['/', '/signin'].includes(router.pathname))
+  if (!user || ['/', '/signin', '/privacy-policy'].includes(router.pathname))
     return <div>{children}</div>;
 
   return (
