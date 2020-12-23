@@ -1,5 +1,4 @@
 import useSWR from 'swr';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useUser } from '@utils/auth/useUser';
@@ -39,6 +38,7 @@ const Layout = ({ children }) => {
         </p>
       </div>
       {children}
+      <div>{JSON.stringify(data)}</div>
     </div>
   );
 };
