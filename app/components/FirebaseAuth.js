@@ -20,7 +20,6 @@ const firebaseAuthConfig = {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
       const userData = await mapUserData(user);
       setUserCookie(userData);
-      location.reload();
     },
   },
 };
