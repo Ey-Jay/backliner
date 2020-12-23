@@ -1,1 +1,3 @@
-// audio overview
+const AudioPage = () => <div>AudioPage</div>;
+
+export default AudioPage;
