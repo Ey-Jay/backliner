@@ -2,6 +2,20 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
 import { useUser } from '@utils/auth/useUser';
+import GoBackButton from '@components/GoBackButton';
+import Navbar from '@components/Navbar';
+import ChatBox from '@components/ChatBox';
+import RoundButton from '@components/RoundButton';
+import NavMobile from '@components/NavMobile';
+
+import {
+  FlexContainer,
+  NavWrapper,
+  Content,
+  Header,
+  PageBody,
+  ChatWrapper,
+} from './style';
 
 const fetcher = (url, token) =>
   fetch(url, {
@@ -13,33 +27,63 @@ const fetcher = (url, token) =>
 const Layout = ({ children }) => {
   const router = useRouter();
   const { user, logout } = useUser();
-  const { data, error } = useSWR(
-    user ? ['/api/getUser', user.token] : null,
-    fetcher
-  );
+  const { data } = useSWR(user ? ['/api/getUser', user.token] : null, fetcher);
 
-  if (!user || ['/', '/signin', '/privacy-policy'].includes(router.pathname))
+  if (
+    !user ||
+    !router.query.bid ||
+    ['/', '/signin', '/privacy-policy'].includes(router.pathname)
+  )
     return <div>{children}</div>;
 
   return (
-    <div>
-      <div>
-        Layout:{' '}
-        <p
-          style={{
-            display: 'inline-block',
-            color: 'blue',
-            textDecoration: 'underline',
-            cursor: 'pointer',
-          }}
-          onClick={() => logout()}
-        >
-          Log out
-        </p>
-      </div>
-      {children}
-      <div>{JSON.stringify(data)}</div>
-    </div>
+    <>
+      <NavMobile title={title} />
+      <FlexContainer>
+        <NavWrapper>
+          <Navbar band={bandData} />
+        </NavWrapper>
+        <Content>
+          <Header>
+            <GoBackButton />
+            <h1>{title}</h1>
+            <section>
+              {/* <RoundButton icon="bell" />
+              <RoundButton icon="moon" /> */}
+              <ReactTooltip effect="solid" />
+              <span data-tip="Change Band">
+                <RoundButton
+                  icon="checkin"
+                  onClick={() => history.push('/checkin')}
+                />
+              </span>
+              <span data-tip="Sign Out">
+                <RoundButton icon="logoff" onClick={logoff} />
+              </span>
+              {isChatVisible ? null : (
+                <>
+                  <ReactTooltip effect="solid" />
+                  <span data-tip="Chat">
+                    <RoundButton
+                      icon="chat"
+                      onClick={() => setIsChatVisible(!isChatVisible)}
+                    />
+                  </span>
+                </>
+              )}
+            </section>
+          </Header>
+          <PageBody>{children}</PageBody>
+        </Content>
+        <ChatWrapper isOpen={isChatVisible}>
+          <ChatBox
+            band={bandData}
+            isOpen={isChatVisible}
+            setIsOpen={setIsChatVisible}
+          />
+        </ChatWrapper>
+      </FlexContainer>
+    </>
   );
 };
 
