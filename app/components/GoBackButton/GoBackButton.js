@@ -1,4 +1,4 @@
-import { useRouter } from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Button } from './style';
 import ChevronLeftSVG from 'assets/svg/ChevronLeft.svg';

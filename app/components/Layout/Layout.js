@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
@@ -29,6 +30,8 @@ const Layout = ({ children }) => {
   const { user, logout } = useUser();
   const { data } = useSWR(user ? ['/api/getUser', user.token] : null, fetcher);
 
+  const [isChatVisible, setIsChatVisible] = useState(true);
+
   if (
     !user ||
     !router.query.bid ||
@@ -38,19 +41,19 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <NavMobile title={title} />
+      <NavMobile title={router.pathname} setIsChatVisible={setIsChatVisible} />
       <FlexContainer>
         <NavWrapper>
-          <Navbar band={bandData} />
+          <Navbar band={data?.dbUser?.bands[0]} dbUser={data?.dbUser} />
         </NavWrapper>
         <Content>
           <Header>
             <GoBackButton />
-            <h1>{title}</h1>
+            <h1>{router.pathname}</h1>
             <section>
               {/* <RoundButton icon="bell" />
               <RoundButton icon="moon" /> */}
-              <ReactTooltip effect="solid" />
+              {/* <ReactTooltip effect="solid" /> */}
               <span data-tip="Change Band">
                 <RoundButton
                   icon="checkin"
@@ -58,11 +61,11 @@ const Layout = ({ children }) => {
                 />
               </span>
               <span data-tip="Sign Out">
-                <RoundButton icon="logoff" onClick={logoff} />
+                <RoundButton icon="logoff" onClick={logout} />
               </span>
               {isChatVisible ? null : (
                 <>
-                  <ReactTooltip effect="solid" />
+                  {/* <ReactTooltip effect="solid" /> */}
                   <span data-tip="Chat">
                     <RoundButton
                       icon="chat"
@@ -77,7 +80,7 @@ const Layout = ({ children }) => {
         </Content>
         <ChatWrapper isOpen={isChatVisible}>
           <ChatBox
-            band={bandData}
+            band={data?.dbUser?.bands[0]}
             isOpen={isChatVisible}
             setIsOpen={setIsChatVisible}
           />

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import avatars from '@assets/band-avatars';
 import {
@@ -16,23 +17,25 @@ import {
   Policy,
 } from './style';
 
-const Navbar = ({ band, userAvatar, userName }) => {
+const Navbar = ({ band, dbUser }) => {
+  const router = useRouter();
+
   return (
     <Container>
       {dbUser && (
         <UserDisplay>
           <UserImage>
-            <img src={userAvatar} alt="" />
+            <img src={dbUser.avatar} alt="" />
           </UserImage>
-          <UserName>{userName}</UserName>
+          <UserName>{dbUser.name}</UserName>
         </UserDisplay>
       )}
       <BandDisplay>
-        <BandAvatarImg src={avatars[band.avatar]} />
+        <BandAvatarImg src={avatars[band?.avatar || 0]} />
         <BandDescription>
-          <BandName>{band.name}</BandName>
+          <BandName>{band?.name}</BandName>
           <MembersContainer>
-            {band.members.map((member) => (
+            {band?.members.map((member) => (
               <MemberPortraitImg key={member._id} src={member.avatar} />
             ))}
           </MembersContainer>
@@ -40,37 +43,37 @@ const Navbar = ({ band, userAvatar, userName }) => {
       </BandDisplay>
       <Menu>
         <ul>
-          <Link href={`/${band._id}/projects`}>
+          <Link href={`/${router.query.bid}/projects`}>
             <a>
               <li>Projects</li>
             </a>
           </Link>
-          <Link href={`/${band._id}/lyrics`}>
+          <Link href={`/${router.query.bid}/lyrics`}>
             <a>
               <li>Lyrics</li>
             </a>
           </Link>
-          <Link href={`/${band._id}/audio`}>
+          <Link href={`/${router.query.bid}/audio`}>
             <a>
               <li>Audio</li>
             </a>
           </Link>
-          <Link href={`/${band._id}/video`}>
+          <Link href={`/${router.query.bid}/video`}>
             <a>
               <li>Video</li>
             </a>
           </Link>
-          <Link href={`/${band._id}/files`}>
+          <Link href={`/${router.query.bid}/files`}>
             <a>
               <li>Files</li>
             </a>
           </Link>
-          <Link href={`/${band._id}/calendar`}>
+          <Link href={`/${router.query.bid}/calendar`}>
             <a>
               <li>Calendar</li>
             </a>
           </Link>
-          <Link href={`/${band._id}/settings`}>
+          <Link href={`/${router.query.bid}/settings`}>
             <a>
               <li>Settings</li>
             </a>
