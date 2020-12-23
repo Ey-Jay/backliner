@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { useUser } from '@utils/auth/useUser';
 
@@ -11,13 +12,15 @@ const fetcher = (url, token) =>
   }).then((res) => res.json());
 
 const Layout = ({ children }) => {
+  const router = useRouter();
   const { user, logout } = useUser();
   const { data, error } = useSWR(
     user ? ['/api/getUser', user.token] : null,
     fetcher
   );
 
-  if (!user) return <div>{children}</div>;
+  if (!user || ['/', '/signin'].includes(router.pathname))
+    return <div>{children}</div>;
 
   return (
     <div>
