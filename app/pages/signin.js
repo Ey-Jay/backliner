@@ -1,7 +1,17 @@
 import parseCookiesServerSide from '@utils/auth/parseCookiesServerSide';
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
+import FirebaseAuth from '@components/FirebaseAuth';
 
-const IndexPage = () => <div>Loading ...</div>;
+const SignInPage = () => {
+  return (
+    <div>
+      <p>Sign in</p>
+      <div>
+        <FirebaseAuth />
+      </div>
+    </div>
+  );
+};
 
 export async function getServerSideProps({ req }) {
   try {
@@ -17,14 +27,11 @@ export async function getServerSideProps({ req }) {
       },
     };
   } catch (error) {
-    // Redirect to signin
+    // Show sign in
     return {
-      redirect: {
-        destination: '/signin',
-        permanent: false,
-      },
+      props: {},
     };
   }
 }
 
-export default IndexPage;
+export default SignInPage;

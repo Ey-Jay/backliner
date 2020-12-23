@@ -14,12 +14,13 @@ const firebaseAuthConfig = {
   // Auth providers
   // https://github.com/firebase/firebaseui-web#configure-oauth-providers
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '/checkin',
   credentialHelper: 'none',
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
       const userData = await mapUserData(user);
       setUserCookie(userData);
+      location.reload();
     },
   },
 };
