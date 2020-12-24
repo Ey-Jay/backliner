@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import ReactTooltip from 'react-tooltip';
 
 import { useUser } from '@utils/auth/useUser';
 import GoBackButton from '@components/GoBackButton';
@@ -32,7 +33,9 @@ const Layout = ({ children }) => {
 
   const [isChatVisible, setIsChatVisible] = useState(true);
 
+  // TODO: Spinner
   if (
+    !data ||
     !user ||
     !router.query.bid ||
     ['/', '/signin', '/privacy-policy'].includes(router.pathname)
@@ -44,7 +47,7 @@ const Layout = ({ children }) => {
       <NavMobile title={router.pathname} setIsChatVisible={setIsChatVisible} />
       <FlexContainer>
         <NavWrapper>
-          <Navbar band={data?.dbUser?.bands[0]} dbUser={data?.dbUser} />
+          <Navbar band={data?.db?.bands[0]} dbUser={data.db} />
         </NavWrapper>
         <Content>
           <Header>
@@ -53,7 +56,7 @@ const Layout = ({ children }) => {
             <section>
               {/* <RoundButton icon="bell" />
               <RoundButton icon="moon" /> */}
-              {/* <ReactTooltip effect="solid" /> */}
+              <ReactTooltip effect="solid" />
               <span data-tip="Change Band">
                 <RoundButton
                   icon="checkin"
@@ -65,7 +68,7 @@ const Layout = ({ children }) => {
               </span>
               {isChatVisible ? null : (
                 <>
-                  {/* <ReactTooltip effect="solid" /> */}
+                  <ReactTooltip effect="solid" />
                   <span data-tip="Chat">
                     <RoundButton
                       icon="chat"

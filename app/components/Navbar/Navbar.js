@@ -31,7 +31,7 @@ const Navbar = ({ band, dbUser }) => {
         </UserDisplay>
       )}
       <BandDisplay>
-        <BandAvatarImg src={avatars[band?.avatar || 0]} />
+        <BandAvatarImg src={`/band-avatars${avatars[band?.avatar || 0]}`} />
         <BandDescription>
           <BandName>{band?.name}</BandName>
           <MembersContainer>
