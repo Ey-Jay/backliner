@@ -55,7 +55,7 @@ const CheckInPage = ({ dbUser, fbUser }) => {
                 <a>
                   <Band>
                     <Picture>
-                      <img src={avatars[band.avatar]} alt="" />
+                      <img src={`band-avatars${avatars[band.avatar]}`} alt="" />
                     </Picture>
                     <Description>
                       <Name>{band.name}</Name>
