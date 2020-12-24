@@ -8,7 +8,7 @@ import { useUser } from '@utils/auth/useUser';
 
 import LogoSVG from '@assets/svg/Logo.svg';
 import TextSVG from '@assets/svg/Text.svg';
-import { Container, Flex, SignInButton, Policy } from '@style/pages/signin';
+import { Container, Flex, Policy } from '@style/pages/signin';
 
 const SignInPage = () => {
   const { user } = useUser();
@@ -27,7 +27,7 @@ const SignInPage = () => {
         </Flex>
         <FirebaseAuth />
       </div>
-      <Policy onClick={() => history.push(`/privacy-policy`)}>
+      <Policy onClick={() => router.push(`/privacy-policy`)}>
         Privacy Policy
       </Policy>
     </Container>

@@ -22,17 +22,6 @@ export const Flex = styled.div`
   }
 `;
 
-export const SignInButton = styled.button`
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  border: 0;
-  border-radius: 5px;
-  padding: 0 15px 0 0;
-  margin: 0 auto;
-  cursor: pointer;
-`;
-
 export const Policy = styled.div`
   color: ${({ theme }) => theme.secondaryDark};
   display: flex;
