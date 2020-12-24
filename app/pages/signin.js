@@ -6,6 +6,10 @@ import { verifyIdToken } from '@utils/auth/firebaseAdmin';
 import FirebaseAuth from '@components/FirebaseAuth';
 import { useUser } from '@utils/auth/useUser';
 
+import LogoSVG from '@assets/svg/Logo.svg';
+import TextSVG from '@assets/svg/Text.svg';
+import { Container, Flex, SignInButton, Policy } from '@style/pages/signin';
+
 const SignInPage = () => {
   const { user } = useUser();
   const router = useRouter();
@@ -15,12 +19,18 @@ const SignInPage = () => {
   }, [user]);
 
   return (
-    <div>
-      <p>Sign in</p>
+    <Container>
       <div>
+        <Flex>
+          <LogoSVG />
+          <TextSVG />
+        </Flex>
         <FirebaseAuth />
       </div>
-    </div>
+      <Policy onClick={() => history.push(`/privacy-policy`)}>
+        Privacy Policy
+      </Policy>
+    </Container>
   );
 };
 
