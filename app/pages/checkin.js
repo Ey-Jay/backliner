@@ -78,7 +78,7 @@ const CheckInPage = ({ dbUser, fbUser }) => {
           <h2>Your Backliner ID</h2>
           <p>{dbUser._id}</p>
         </YourID>
-        <Policy onClick={() => history.push(`/privacy-policy`)}>
+        <Policy onClick={() => router.push(`/privacy-policy`)}>
           Privacy Policy
         </Policy>
       </Container>
