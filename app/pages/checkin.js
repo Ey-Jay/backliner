@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import ReactTooltip from 'react-tooltip';
 
 import withUserAndDb from '@middleware/withAuthAndDb';
-import getDbUser from '@utils/getDbUser';
-
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
 import { useUser } from '@utils/auth/useUser';
 

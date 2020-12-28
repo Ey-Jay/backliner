@@ -1,6 +1,6 @@
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
-import dbConnect from '@utils/dbConnect';
-import getDbUser from '@utils/getDbUser';
+import dbConnect from '@utils/db/dbConnect';
+import getDbUser from '@utils/db/getDbUser';
 
 const getUser = async (req, res) => {
   const token = req.headers.token;
