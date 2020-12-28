@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
 
   const [isChatVisible, setIsChatVisible] = useState(true);
 
-  // TODO: Spinner
+  // TODO: Spinner for !data and !user
   if (
     !data ||
     !user ||

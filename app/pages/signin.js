@@ -40,7 +40,7 @@ export async function getServerSideProps({ req }) {
     const cookies = parseCookiesServerSide(req.headers.cookie);
     await verifyIdToken(cookies.auth.token);
 
-    // Redirect to checkin
+    // Redirect to /checkin
     return {
       redirect: {
         destination: '/checkin',
@@ -48,7 +48,7 @@ export async function getServerSideProps({ req }) {
       },
     };
   } catch (error) {
-    // Show sign in
+    // Render SignUpPage
     return {
       props: {},
     };
