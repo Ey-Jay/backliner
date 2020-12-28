@@ -93,7 +93,6 @@ export async function getServerSideProps({ req }) {
     return { props: { dbUser, fbUser } };
   } catch (error) {
     // Redirect to index
-    console.log(error);
     return {
       redirect: {
         destination: '/',
