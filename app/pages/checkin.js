@@ -2,10 +2,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ReactTooltip from 'react-tooltip';
 
-import dbConnect from '@utils/dbConnect';
+import withUserAndDb from '@middleware/withAuthAndDb';
 import getDbUser from '@utils/getDbUser';
 
-import parseCookiesServerSide from '@utils/auth/parseCookiesServerSide';
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
 import { useUser } from '@utils/auth/useUser';
 
@@ -88,16 +87,13 @@ const CheckInPage = ({ dbUser, fbUser }) => {
 
 export async function getServerSideProps({ req }) {
   try {
-    await dbConnect();
-
-    // Validate user and get their data from FB and DB
-    const cookies = parseCookiesServerSide(req.headers.cookie);
-    const fbUser = await verifyIdToken(cookies.auth.token);
-    const dbUser = await getDbUser(fbUser);
+    await withUserAndDb(req, verifyIdToken);
+    const { dbUser, fbUser } = req;
 
     return { props: { dbUser, fbUser } };
   } catch (error) {
     // Redirect to index
+    console.log(error);
     return {
       redirect: {
         destination: '/',
