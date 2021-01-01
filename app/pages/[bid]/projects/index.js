@@ -1,5 +1,5 @@
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
-import withUserAndDb from '@middleware/withAuthAndDb';
+import withAuthAndDb from '@middleware/withAuthAndDb';
 import withBandAuth from '@middleware/withBandAuth';
 import getProjectsByBid from '@utils/db/getProjectsByBid';
 
@@ -106,12 +106,13 @@ const ProjectsPage = ({ projects, band }) => {
 export async function getServerSideProps({ req, params }) {
   try {
     // Middlewares
-    await withUserAndDb(req, verifyIdToken);
+    await withAuthAndDb(req, verifyIdToken);
     const band = await withBandAuth(req, params);
 
     // DB
     const projects = await getProjectsByBid(band._id);
 
+    // Response
     const { dbUser, fbUser } = req;
     return { props: { dbUser, fbUser, band, projects } };
   } catch (error) {
