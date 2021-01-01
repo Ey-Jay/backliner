@@ -1,18 +1,15 @@
 import { verifyIdToken } from '@utils/auth/firebaseAdmin';
-import dbConnect from '@utils/db/dbConnect';
-import getDbUser from '@utils/db/getDbUser';
+import withAuthAndDb from '@middleware/withAuthAndDb';
 
 const getUser = async (req, res) => {
-  const token = req.headers.token;
-
   try {
-    const fbUser = await verifyIdToken(token);
+    // Middleware
+    await withAuthAndDb(req, verifyIdToken);
 
-    await dbConnect();
-    const dbUser = await getDbUser(fbUser);
+    // Response
     return res.status(200).json({
-      db: dbUser,
-      fb: fbUser,
+      db: req.dbUser,
+      fb: req.fbUser,
     });
   } catch (error) {
     return res.status(401).send('You are unauthorised');
