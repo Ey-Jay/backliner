@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useImmerReducer } from 'use-immer';
 import { initialState, modalReducer } from './modalReducer';
+import axios from 'axios';
 
 export const ModalStateContext = createContext({ ...initialState });
 export const ModalDispatchContext = createContext();
@@ -83,17 +84,9 @@ export const ModalContextProvider = ({ children }) => {
   const addBand = async (name) => {
     dispatch({ type: 'IS_LOADING' });
     try {
-      // TODO: API CALL TO ADD BAND
-      // const token = await firebase.auth().currentUser.getIdToken();
-      // const res = await axios.post(
-      //   `${apiUrl}/bands`,
-      //   { name, avatar: 0 },
-      //   {
-      //     headers: { authorization: `Bearer ${token}` },
-      //   }
-      // );
+      const res = await axios.post('/api/createBand', { name });
 
-      if (res.data.success) await showSuccess();
+      if (res.data) await showSuccess();
       else await showError();
     } catch (e) {
       await showError();
