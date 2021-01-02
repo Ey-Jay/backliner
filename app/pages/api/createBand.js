@@ -34,7 +34,7 @@ const createBand = async (req, res) => {
 
     // DB
     await Band.create({
-      name: req.body?.name || 'Untitled Band',
+      name: req.body.name,
       owner: req.dbUser._id,
       members: [req.dbUser._id],
       avatar: 1,
